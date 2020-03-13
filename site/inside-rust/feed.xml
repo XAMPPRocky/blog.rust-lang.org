@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <generator uri="https://blog.rust-lang.org/inside-rust/" version="0.1.0">Inside Rust Blog</generator>
+    <link href="https://blog.rust-lang.org/inside-rust/feed.xml" rel="self" type="application/atom+xml" />
+    <link href="https://blog.rust-lang.org/inside-rust/" rel="alternate" type="text/html" />
+    <id>https://blog.rust-lang.org/inside-rust/</id>
+    <title>Inside Rust Blog</title>
+    <subtitle>Want to follow along with Rust development? Curious how you might get involved? Take a look!</subtitle>
+    <author>
+        <name>Maintained by the Rust Teams.</name>
+        <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
+    </author>
+    <updated>2020-03-12T23:20:55Z</updated>
+
+    
+    <entry>
+        <title>Pietro Albini has joined the core team</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/03/12/es-and-ja-translations.html" type="text/html" title="Pietro Albini has joined the core team" />
+        <published>2020-03-12T00:00:00Z</published>
+        <updated>2020-03-12T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/03/12/es-and-ja-translations.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/03/12/es-and-ja-translations.html">&lt;p&gt;We are very happy to announce that &lt;a href=&quot;https://github.com/pietroalbini&quot;&gt;Pietro Albini&lt;/a&gt; has joined the core team. Pietro joined us back on December 24th 2019 (a Christmas present for the core team!), but we have been a bit late in announcing it (sorry Pietro!).&lt;/p&gt;
+&lt;p&gt;Pietro co-leads the infrastructure and docs.rs teams, and is a member of the crates.io and release teams, and the security response working group. He has been instrumental in setting up and maintaining the various services and technology which keeps the Rust project moving quickly and smoothly.&lt;/p&gt;
+&lt;p&gt;Pietro will continue to focus on infrastructure issues, starting with setting up a team to coordinate Rust's web presence - the website, crates.io, docs.rs, etc.&lt;/p&gt;
+&lt;p&gt;Aidan will co-lead the infrastructure team and gradually hand over full leadership to Pietro.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Nick Cameron</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Recent and future pattern matching improvements</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/03/04/recent-future-pattern-matching-improvements.html" type="text/html" title="Recent and future pattern matching improvements" />
+        <published>2020-03-04T00:00:00Z</published>
+        <updated>2020-03-04T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/03/04/recent-future-pattern-matching-improvements.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/03/04/recent-future-pattern-matching-improvements.html">&lt;p&gt;Much of writing software revolves around checking if some data has some shape (&amp;quot;pattern&amp;quot;), extracting information from it, and then reacting if there was a match. To facilitate this, many modern languages, Rust included, support what is known as &amp;quot;pattern matching&amp;quot;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you are new to Rust or want to refresh your knowledge, you may first want to read chapters &lt;a href=&quot;https://doc.rust-lang.org/book/ch06-00-enums.html&quot;&gt;6, Enums and Pattern Matching&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/book/ch18-00-patterns.html&quot;&gt;18, Patterns and Matching&lt;/a&gt; in the book, or read more about &lt;a href=&quot;https://doc.rust-lang.org/reference/expressions/match-expr.html&quot;&gt;&lt;code&gt;match&lt;/code&gt; expressions&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/reference/patterns.html&quot;&gt;patterns&lt;/a&gt; in the reference.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Pattern matching in Rust works by checking if a &lt;a href=&quot;https://doc.rust-lang.org/reference/expressions.html#place-expressions-and-value-expressions&quot;&gt;&lt;em&gt;place&lt;/em&gt;&lt;/a&gt; in memory (the &amp;quot;data&amp;quot;) matches a certain &lt;em&gt;pattern&lt;/em&gt;. In this post, we will look at some recent improvements to patterns soon available in stable Rust as well as some more in already available in nightly.&lt;/p&gt;
+&lt;p&gt;If you are familiar with the nightly features discussed and would like to help out with the efforts to drive them to stable, jump ahead to &lt;a href=&quot;#how-can-i-help?&quot;&gt;*How can I help?&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#subslice-patterns-[head,-tail-@-..]&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;subslice-patterns-[head,-tail-@-..]&quot;&gt;&lt;/a&gt;Subslice patterns, &lt;code&gt;[head, tail @ ..]&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Lists are one of the most basic and common data structures found in software. In Rust, lists are usually a contiguous sequence of elements in memory, or a &lt;em&gt;slice&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Since slices are so commonplace, it is important that working with them is easy. To that end, we stabilized &lt;a href=&quot;https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#basic-slice-patterns&quot;&gt;&lt;em&gt;fixed-length slice patterns&lt;/em&gt; in Rust 1.26.0&lt;/a&gt;. So now it is possible to e.g., write &lt;code&gt;let [a, b, c] = my_array;&lt;/code&gt; to destructure an array of 3 elements. Oftentimes, however, we're working with a slice of unknown length, so given only fixed-length slice patterns, we have to provide a fallback &lt;code&gt;match&lt;/code&gt; arm with e.g. &lt;code&gt;_&lt;/code&gt; as the pattern.&lt;/p&gt;
+&lt;p&gt;In Rust 1.42.0, &lt;a href=&quot;https://github.com/rust-lang/rust/pull/67712&quot;&gt;we are stabilizing &lt;em&gt;subslice patterns&lt;/em&gt;&lt;/a&gt;. To introduce a subslice pattern, we use &lt;code&gt;..&lt;/code&gt; which denotes a variable-length gap, matching as many elements as possible not matched by the patterns before and after the &lt;code&gt;..&lt;/code&gt;. For example, in a parser, we would like to error when a list of attributes, &lt;code&gt;attrs&lt;/code&gt;, is not followed by an item, &lt;a href=&quot;https://doc.rust-lang.org/nightly/nightly-rustc/rustc_parse/parser/struct.Parser.html#method.recover_attrs_no_item&quot;&gt;so we write&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;/// Recover if we parsed attributes and expected an item but there was none.
+fn recover_attrs_no_item(&amp;amp;mut self, attrs: &amp;amp;[Attribute]) -&amp;gt; PResult&amp;lt;'a, ()&amp;gt; {
+    let (start, end) = match attrs {
+        [] =&amp;gt; return Ok(()),
+        [x0] =&amp;gt; (x0, x0),
+        [x0, .., xn] =&amp;gt; (x0, xn),
+    };
+    let msg = if end.is_doc_comment() {
+        &amp;quot;expected item after doc comment&amp;quot;
+    } else {
+        &amp;quot;expected item after attributes&amp;quot;
+    };
+    let mut err = self.struct_span_err(end.span, msg);
+    if end.is_doc_comment() {
+        err.span_label(end.span, &amp;quot;this doc comment doesn't document anything&amp;quot;);
+    }
+    if let [.., penultimate, _] = attrs {
+        err.span_label(start.span.to(penultimate.span), &amp;quot;other attributes here&amp;quot;);
+    }
+    Err(err)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we have two subslice patterns, the first one being &lt;code&gt;[x0, .., xn]&lt;/code&gt;. In this case, the pattern binds &lt;code&gt;x0&lt;/code&gt;, the first element, and &lt;code&gt;xn&lt;/code&gt;, the last element, and ignores everything in the middle, matching a slice with at least two elements in total. Meanwhile, &lt;code&gt;[]&lt;/code&gt; and &lt;code&gt;[x0]&lt;/code&gt; match cases with fewer than two elements, so the compiler knows that we have covered all possibilities. In the latter case, we extract the &lt;code&gt;penultimate&lt;/code&gt; element of the slice, which, as the name suggests, also requires that the slice has at least two elements.&lt;/p&gt;
+&lt;p&gt;We can also bind a subslice to a variable. For example, suppose we want to disallow &lt;code&gt;...&lt;/code&gt; in all but the last parameter of a function. If so, we can write:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;match &amp;amp;*fn_decl.inputs {
+    ... // other arms
+    [ps @ .., _] =&amp;gt; {
+        for Param { ty, span, .. } in ps {
+            if let TyKind::CVarArgs = ty.kind {
+                self.err_handler().span_err(
+                    *span,
+                    &amp;quot;`...` must be the last argument of a C-variadic function&amp;quot;,
+                );
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here, &lt;code&gt;ps @ ..&lt;/code&gt; will bind the initial elements of the slice to &lt;code&gt;ps&lt;/code&gt; and ignore the last element.&lt;/p&gt;
+&lt;p&gt;After more than 7 years of baking in nightly, with many twists and turns, subslice patterns will finally be stable. To get here, we've had to redesign the feature, plug soundness holes in the borrow checker, and substantially refactor the exhaustiveness checker. For more on how we got here, &lt;a href=&quot;https://github.com/rust-lang/rust/pull/67712&quot;&gt;read the stabilization report&lt;/a&gt;, &lt;a href=&quot;https://thomashartmann.dev/blog/feature(slice_patterns)/&quot;&gt;Thomas Hartmann's blog post&lt;/a&gt;, and stay tuned for the 1.42.0 release announcement  on the 12th of March.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#nested-or-patterns&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;nested-or-patterns&quot;&gt;&lt;/a&gt;Nested OR-patterns&lt;/h2&gt;
+&lt;p&gt;When pattern matching on an &lt;code&gt;enum&lt;/code&gt;, the logic for some of the variants may be exactly the same. To avoid repeating ourselves, the &lt;code&gt;|&lt;/code&gt; separator in &lt;code&gt;match&lt;/code&gt;, &lt;code&gt;if let&lt;/code&gt;, or &lt;code&gt;while let&lt;/code&gt; expressions can be used to say that the branch should be taken if any of the &lt;code&gt;|&lt;/code&gt;-separated patterns match. For example, we may write:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;// Any local node that may call something in its body block should be explored.
+fn should_explore(tcx: TyCtxt&amp;lt;'_&amp;gt;, hir_id: hir::HirId) -&amp;gt; bool {
+    match tcx.hir().find(hir_id) {
+        Some(Node::Item(..))
+        | Some(Node::ImplItem(..))
+        | Some(Node::ForeignItem(..))
+        | Some(Node::TraitItem(..))
+        | Some(Node::Variant(..))
+        | Some(Node::AnonConst(..))
+        | Some(Node::Pat(..)) =&amp;gt; true,
+        _ =&amp;gt; false,
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is serviceable, but &lt;code&gt;Some(_)&lt;/code&gt; is still repeated several times. With &lt;a href=&quot;https://github.com/rust-lang/rust/issues/54883&quot;&gt;&lt;code&gt;#![feature(or_patterns)]&lt;/code&gt;&lt;/a&gt;, which recently became usable on nightly, this repetition can be avoided:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;// Any local node that may call something in its body block should be explored.
+fn should_explore(tcx: TyCtxt&amp;lt;'_&amp;gt;, hir_id: hir::HirId) -&amp;gt; bool {
+    match tcx.hir().find(hir_id) {
+        Some(
+            Node::Item(..)
+            | Node::ImplItem(..)
+            | Node::ForeignItem(..)
+            | Node::TraitItem(..)
+            | Node::Variant(..)
+            | Node::AnonConst(..)
+            | Node::Pat(..),
+        ) =&amp;gt; true,
+        _ =&amp;gt; false,
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Previously, when using &lt;code&gt;|&lt;/code&gt; in a &lt;code&gt;match&lt;/code&gt; expression, the &lt;code&gt;|&lt;/code&gt; syntax was part of &lt;code&gt;match&lt;/code&gt; itself. With &lt;code&gt;or_patterns&lt;/code&gt;, this is now part of patterns themselves, so you can nest OR-patterns arbitrarily, and use them in &lt;code&gt;let&lt;/code&gt; statements too:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;let Ok(x) | Err(x) = foo();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;An OR-pattern covers the &lt;em&gt;union&lt;/em&gt; of all the &lt;code&gt;|&lt;/code&gt;-ed (&amp;quot;or-ed&amp;quot;) patterns. To ensure that whatever alternative matched, all bindings are consistent and initialized, each or-ed pattern must include the exact same set of bindings, with the same types, and the same binding modes.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#bindings-after-&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;bindings-after-&quot;&gt;&lt;/a&gt;Bindings after &lt;code&gt;@&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;When matching on a certain substructure, you sometimes want to hold on to the whole. For example, given &lt;code&gt;Some(Expr { .. })&lt;/code&gt;, you would like to bind the outer &lt;code&gt;Some(_)&lt;/code&gt; layer. In Rust, this can be done using e.g., &lt;code&gt;expr @ Some(Expr { .. })&lt;/code&gt;, which binds the matched place to &lt;code&gt;expr&lt;/code&gt; while also ensuring that it matches &lt;code&gt;Some(Expr { .. })&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Suppose also that &lt;code&gt;Expr&lt;/code&gt; has a field &lt;code&gt;span&lt;/code&gt; that you would also use. In ancient times, that is before Rust 1.0, this was possible, but today, it results in an error:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;error[E0303]: pattern bindings are not allowed after an `@`
+ --&amp;gt; src/lib.rs:L:C
+  |
+L |         bar @ Some(Expr { span }) =&amp;gt; {}
+  |                           ^^^^ not allowed after `@`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This was turned into an error in &lt;a href=&quot;https://github.com/rust-lang/rust/pull/16053&quot;&gt;#16053&lt;/a&gt;, mainly due to the difficulties of encoding borrow checking rules in a sound way in the old AST based borrow checker.&lt;/p&gt;
+&lt;p&gt;Since then, we have &lt;a href=&quot;https://github.com/rust-lang/rust/pull/64790&quot;&gt;removed the old borrow checker&lt;/a&gt; in favor of one based on &lt;a href=&quot;https://rust-lang.github.io/rustc-guide/mir/index.html&quot;&gt;MIR&lt;/a&gt;, which is a simpler, and more appropriate data structure for borrow checking. Specifically, in the case of a statement like &lt;code&gt;let ref x @ ref y = a;&lt;/code&gt;, we would get roughly the same MIR as if we had used &lt;code&gt;let x = &amp;amp;a; let y = &amp;amp;a;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So now that having bindings to the right of &lt;code&gt;@&lt;/code&gt; is handled uniformly and correctly by the borrow checker (e.g., the compiler won't allow &lt;code&gt;ref x @ ref mut y&lt;/code&gt;), we have decided to allow them under &lt;a href=&quot;https://github.com/rust-lang/rust/issues/65490&quot;&gt;&lt;code&gt;#![feature(bindings_after_at)]&lt;/code&gt;&lt;/a&gt;, now available on nightly. With the feature gate enabled, you may for example write:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#![feature(bindings_after_at)]
+
+fn main() {
+    if let x @ Some(y) = Some(0) {
+        dbg!(x, y);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Our hope is that with providing this feature, we remove one surprising corner of the language.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#combining-by-move-and-by-ref-bindings&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;combining-by-move-and-by-ref-bindings&quot;&gt;&lt;/a&gt;Combining by-move and by-&lt;code&gt;ref&lt;/code&gt; bindings&lt;/h2&gt;
+&lt;p&gt;For similar reasons as noted in the case of bindings after &lt;code&gt;@&lt;/code&gt;, Rust does not currently allow you to combine normal by-move bindings with those that are by-&lt;code&gt;ref&lt;/code&gt;. For example, should you write...:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn main() {
+    let tup = (&amp;quot;foo&amp;quot;.to_string(), 0);
+    let (x, ref y) = tup;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;... you would get an error:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;error[E0009]: cannot bind by-move and by-ref in the same pattern
+ --&amp;gt; src/main.rs:3:10
+  |
+3 |     let (x, ref y) = tup;
+  |          ^  ----- by-ref pattern here
+  |          |
+  |          by-move pattern here
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;At the same time, however, the compiler is perfectly happy to allow...:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn main() {
+    let tup = (&amp;quot;foo&amp;quot;.to_string(), 0);
+    let x = tup.0;
+    let ref y = tup.1;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;... even though there is no semantic difference between these programs.&lt;/p&gt;
+&lt;p&gt;Now that we have moved to the new borrow checker, as outlined in the previous section, we have relaxed this restriction on nightly as well, so under &lt;a href=&quot;https://github.com/rust-lang/rust/issues/68354&quot;&gt;&lt;code&gt;#![feature(move_ref_pattern)]&lt;/code&gt;&lt;/a&gt;, you may write:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#![feature(move_ref_pattern)]
+
+fn main() {
+    let tup = (&amp;quot;foo&amp;quot;.to_string(), 0);
+    let (x, ref y) = tup;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;&lt;a href=&quot;#how-can-i-help&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-can-i-help&quot;&gt;&lt;/a&gt;How can I help?&lt;/h2&gt;
+&lt;p&gt;To recap, we have three unstable features, all improving pattern matching in different ways:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/issues/54883&quot;&gt;&lt;code&gt;#![feature(or_patterns)]&lt;/code&gt;&lt;/a&gt;, which allows you to arbitrarily nest or-patterns e.g. &lt;code&gt;Some(Foo | Bar)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/issues/65490&quot;&gt;&lt;code&gt;#![feature(bindings_after_at)]&lt;/code&gt;&lt;/a&gt;, which allows e.g., &lt;code&gt;ref x @ Some(ref y)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/issues/68354&quot;&gt;&lt;code&gt;#![feature(move_ref_pattern)]&lt;/code&gt;&lt;/a&gt;, which allows e.g., &lt;code&gt;(x, ref y)&lt;/code&gt; where &lt;code&gt;x&lt;/code&gt; is by-move and &lt;code&gt;y&lt;/code&gt; is by-reference&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To help us transition these features over to stable Rust, we need your help to ensure that they meet the expected quality standards. To help out, consider:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Using the features in your code where applicable, if a nightly compiler is something you are OK with, and reporting any bugs, problems, deficiencies in diagnostics, etc. as issues.&lt;/li&gt;
+&lt;li&gt;Looking through the reported issues under the feature gate labels (e.g., &lt;a href=&quot;https://github.com/rust-lang/rust/labels/F-or_patterns&quot;&gt;&lt;code&gt;F-or_patterns&lt;/code&gt;&lt;/a&gt;) and seeing if you can help out with any of them.
+&lt;ul&gt;
+&lt;li&gt;In particular, if you can help out with writing tests, that is appreciated.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thanks for reading, and happy pattern matching!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mazdak &quot;Centril&quot; Farrokhzad</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Pietro Albini has joined the core team</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/02/27/pietro-joins-core-team.html" type="text/html" title="Pietro Albini has joined the core team" />
+        <published>2020-02-27T00:00:00Z</published>
+        <updated>2020-02-27T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/02/27/pietro-joins-core-team.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/02/27/pietro-joins-core-team.html">&lt;p&gt;We are very happy to announce that &lt;a href=&quot;https://github.com/pietroalbini&quot;&gt;Pietro Albini&lt;/a&gt; has joined the core team. Pietro joined us back on December 24th 2019 (a Christmas present for the core team!), but we have been a bit late in announcing it (sorry Pietro!).&lt;/p&gt;
+&lt;p&gt;Pietro co-leads the infrastructure and docs.rs teams, and is a member of the crates.io and release teams, and the security response working group. He has been instrumental in setting up and maintaining the various services and technology which keeps the Rust project moving quickly and smoothly.&lt;/p&gt;
+&lt;p&gt;Pietro will continue to focus on infrastructure issues, starting with setting up a team to coordinate Rust's web presence - the website, crates.io, docs.rs, etc.&lt;/p&gt;
+&lt;p&gt;Aidan will co-lead the infrastructure team and gradually hand over full leadership to Pietro.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Nick Cameron</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Announcing the first FFI-unwind project design meeting</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/02/27/ffi-unwind-design-meeting.html" type="text/html" title="Announcing the first FFI-unwind project design meeting" />
+        <published>2020-02-27T00:00:00Z</published>
+        <updated>2020-02-27T00:00:01Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/02/27/ffi-unwind-design-meeting.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/02/27/ffi-unwind-design-meeting.html">&lt;p&gt;The FFI-unwind project group, announced in &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2797&quot;&gt;this RFC&lt;/a&gt;, is
+working to extend the language to support unwinding that crosses FFI
+boundaries.&lt;/p&gt;
+&lt;p&gt;We have reached our first technical decision point, on a question we have been
+discussing internally for quite a while. This blog post lays out the arguments
+on each side of the issue and invites the Rust community to join us at an
+upcoming meeting to help finalize our decision, which will be formalized and
+published as our first language-change RFC. This RFC will propose an &amp;quot;MVP&amp;quot;
+specification for well-defined cross-language unwinding.&lt;/p&gt;
+&lt;p&gt;The meeting will be on &lt;a href=&quot;https://arewemeetingyet.com/UTC/2020-03-02/17:00/Lang%20Team%20Design%20Meeting:%20FFI-unwind#eyJ1cmwiOiJodHRwczovL21vemlsbGEuem9vbS51cy9qLzc2ODIzMTc2MCJ9&quot;&gt;March 2nd&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#background-what-is-unwinding?&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;background-what-is-unwinding?&quot;&gt;&lt;/a&gt;Background: what is unwinding?&lt;/h2&gt;
+&lt;p&gt;Exceptions are a familiar control flow mechanism in many programming languages.
+They are particularly commonplace in managed languages such as Java, but they
+are also part of the C++ language, which introduced them to the world of
+unmanaged systems programming.&lt;/p&gt;
+&lt;p&gt;When an exception is thrown, the runtime &lt;em&gt;unwinds&lt;/em&gt; the stack, essentially
+traversing it backwards and calling clean-up or error-recovery code such as
+destructors or &lt;code&gt;catch&lt;/code&gt; blocks.&lt;/p&gt;
+&lt;p&gt;Compilers may implement their own unwinding mechanisms, but in native code such
+as Rust binaries, the mechanism is more commonly provided by the platform ABI.&lt;/p&gt;
+&lt;p&gt;It is well known that Rust does not have exceptions as such. But Rust &lt;em&gt;does&lt;/em&gt;
+support unwinding! There are two scenarios that will cause unwinding to occur:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;By default, Rust's &lt;code&gt;panic!()&lt;/code&gt; unwinds the stack.&lt;/li&gt;
+&lt;li&gt;Using FFI, Rust can call functions in other languages (such as C++) that can
+unwind the stack.
+&lt;ul&gt;
+&lt;li&gt;There are some special cases where C libraries can actually cause
+unwinding.  For instance, on Microsoft platforms, &lt;code&gt;longjmp&lt;/code&gt; is implemented
+as &amp;quot;forced unwinding&amp;quot; (see below)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Currently, when foreign (non-Rust) code invokes Rust code, the behavior of a
+&lt;code&gt;panic!()&lt;/code&gt; unwind that &amp;quot;escapes&amp;quot; from Rust is explicitly undefined. Similarly,
+when Rust calls a foreign function that unwinds, the behavior once the unwind
+operation encounters Rust frames is undefined. The primary reason for this is
+to ensure that Rust implementations may use their own unwinding mechanism,
+which may not be compatible with the platform-provided &amp;quot;native&amp;quot; unwinding
+mechanism. Currently, however, &lt;code&gt;rustc&lt;/code&gt; uses the native mechanism, and there are
+no plans to change this.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#forced-unwinding&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;forced-unwinding&quot;&gt;&lt;/a&gt;Forced unwinding&lt;/h3&gt;
+&lt;p&gt;Platform ABIs can define a special kind of unwinding called &amp;quot;forced unwinding.&amp;quot;
+This type of unwinding works regardless of whether the code being unwound
+supports unwinding or not. However, destructors may not be executed if the
+frames being unwound do not have unwinding support.&lt;/p&gt;
+&lt;p&gt;There are two common examples of forced unwinding:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;On Windows platforms, &lt;code&gt;longjmp&lt;/code&gt; is implemented as a forced unwind.&lt;/li&gt;
+&lt;li&gt;On glibc Linux, &lt;code&gt;pthread_exit&lt;/code&gt; and &lt;code&gt;pthread_cancel&lt;/code&gt; are implemented as a forced unwind.
+&lt;ul&gt;
+&lt;li&gt;In fact, &lt;code&gt;pthread_cancel&lt;/code&gt; can cause all manner of C functions to unwind,
+including common functions like &lt;code&gt;read&lt;/code&gt; and &lt;code&gt;write&lt;/code&gt;.  (For a complete list,
+search for &amp;quot;cancellation points&amp;quot; in the &lt;a href=&quot;http://man7.org/linux/man-pages/man7/pthreads.7.html&quot;&gt;pthreads man page&lt;/a&gt;.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href=&quot;#requirements-for-any-cross-language-unwinding-specification&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;requirements-for-any-cross-language-unwinding-specification&quot;&gt;&lt;/a&gt;Requirements for any cross-language unwinding specification&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Unwinding between Rust functions (and in particular unwinding of Rust panics)
+may not necessarily use the system unwinding mechanism
+&lt;ul&gt;
+&lt;li&gt;In practice, we do use the system mechanism today, but we would like to
+reserve the freedom to change this.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;If you enable &lt;code&gt;-Cpanic=abort&lt;/code&gt;, we are able to optimize the size of binaries
+to remove most code related to unwinding.
+&lt;ul&gt;
+&lt;li&gt;Even with &lt;code&gt;-Cpanic=unwind&lt;/code&gt; it should be possible to optimize away code when
+unwinding is known to never occur.&lt;/li&gt;
+&lt;li&gt;In practice, most &amp;quot;C&amp;quot; functions are never expected to unwind (because they
+are written in C, for example, and not in C++).
+&lt;ul&gt;
+&lt;li&gt;However, because unwinding is now part of most system ABIs, even C
+functions can unwind — most notably cancellation points triggered
+by &lt;code&gt;pthread_cancel&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Changing the behavior from &lt;code&gt;-Cpanic=unwind&lt;/code&gt; to &lt;code&gt;-Cpanic=abort&lt;/code&gt; should not
+cause Undefined Behavior.
+&lt;ul&gt;
+&lt;li&gt;However, this may not be tenable, or at least not without making binaries
+much larger. See the discussion below for more details.&lt;/li&gt;
+&lt;li&gt;It may, of course, cause programs to abort that used to execute
+successfully. This could occur if a panic would've been caught and
+recovered.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;We cannot change the ABI (the &lt;code&gt;&amp;quot;C&amp;quot;&lt;/code&gt; in &lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt;) of functions in the libc
+crate, because this would be a breaking change: function pointers of different
+ABIs have different types.
+&lt;ul&gt;
+&lt;li&gt;This is relevant for the libc functions which may perform forced unwinding
+when &lt;code&gt;pthread_cancel&lt;/code&gt; is called.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href=&quot;#the-primary-question-introduce-a-new-abi,-or-let-the-&quot;c&quot;-abi-permit-unwinding?&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;the-primary-question-introduce-a-new-abi,-or-let-the-&quot;c&quot;-abi-permit-unwinding?&quot;&gt;&lt;/a&gt;The primary question: introduce a new ABI, or let the &lt;code&gt;&amp;quot;C&amp;quot;&lt;/code&gt; ABI permit unwinding?&lt;/h2&gt;
+&lt;p&gt;The core question that we would like to decide is whether the &lt;code&gt;&amp;quot;C&amp;quot;&lt;/code&gt; ABI, as
+defined by Rust, should permit unwinding.&lt;/p&gt;
+&lt;p&gt;This is not a question we expected to be debating. We've long declared that
+unwinding through Rust's &lt;code&gt;&amp;quot;C&amp;quot;&lt;/code&gt; ABI is undefined behavior. In part, this is
+because nobody had spent the time to figure out what the correct behavior would
+be, or how to implement it, although (as we'll see shortly) there are other
+good reasons for this choice.&lt;/p&gt;
+&lt;p&gt;In any case, in PR #65646, @Amanieu proposed that we could, in fact, simply
+define the behavior of unwinding across &lt;code&gt;&amp;quot;C&amp;quot;&lt;/code&gt; boundaries. In discussing this,
+discovered that the question of whether the &lt;code&gt;&amp;quot;C&amp;quot;&lt;/code&gt; ABI should permit unwinding was
+less clear-cut than we had assumed.&lt;/p&gt;
+&lt;p&gt;If the &lt;code&gt;&amp;quot;C&amp;quot;&lt;/code&gt; ABI does not permit unwinding, a new ABI, called &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt;,
+will be introduced specifically to support unwinding.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#three-specific-proposals&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;three-specific-proposals&quot;&gt;&lt;/a&gt;Three specific proposals&lt;/h2&gt;
+&lt;p&gt;The project group has narrowed the design space down to three specific
+proposals. Two of these introduce the new &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; ABI, and one does not.&lt;/p&gt;
+&lt;p&gt;Each proposal specifies the behavior of each type of unwind (Rust &lt;code&gt;panic!&lt;/code&gt;,
+foreign (e.g. C++), and forced (e.g. &lt;code&gt;pthread_exit&lt;/code&gt;)) when it encounters an
+ABI boundary under either the &lt;code&gt;panic=unwind&lt;/code&gt; or &lt;code&gt;panic=abort&lt;/code&gt; compile-mode.&lt;/p&gt;
+&lt;p&gt;Note that currently, &lt;code&gt;catch_unwind&lt;/code&gt; does not intercept foreign unwinding
+(forced or unforced), and our initial RFCs will not change that. We may decide
+at a later date to define a way for Rust code to intercept foreign exceptions.&lt;/p&gt;
+&lt;p&gt;Throughout, the  unwind generated by &lt;code&gt;panic!&lt;/code&gt; will be referred to as
+&lt;code&gt;panic&lt;/code&gt;-unwind.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#proposal-1-introduce-&quot;c-unwind&quot;,-minimal-specification&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;proposal-1-introduce-&quot;c-unwind&quot;,-minimal-specification&quot;&gt;&lt;/a&gt;Proposal 1: Introduce &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt;, minimal specification&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;C&amp;quot;&lt;/code&gt; ABI boundary, &lt;code&gt;panic=&amp;lt;any&amp;gt;&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;panic&lt;/code&gt;-unwind: program aborts&lt;/li&gt;
+&lt;li&gt;forced unwinding, no destructors: unwind behaves normally&lt;/li&gt;
+&lt;li&gt;other foreign unwinding: undefined behavior&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; ABI boundary
+&lt;ul&gt;
+&lt;li&gt;With &lt;code&gt;panic=unwind&lt;/code&gt;: all types of unwinding behave normally&lt;/li&gt;
+&lt;li&gt;With &lt;code&gt;panic=abort&lt;/code&gt;: all types of unwinding abort the program&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This proposal provides 2 ABIs, each suited for different purposes: you would
+generally use &lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt; when interacting with C APIs (making sure to avoid
+destructors where &lt;code&gt;longjmp&lt;/code&gt; might be used), and &lt;code&gt;extern &amp;quot;C unwind&amp;quot;&lt;/code&gt;
+when interacting with C++ APIs. The main advantage of this proposal is that
+switching between &lt;code&gt;panic=unwind&lt;/code&gt; and &lt;code&gt;panic=abort&lt;/code&gt; does not introduce UB if you
+have correctly marked all potential unwinding calls as &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; (your
+program will abort instead).&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#proposal-2-introduce-&quot;c-unwind&quot;,-forced-unwinding-always-permitted&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;proposal-2-introduce-&quot;c-unwind&quot;,-forced-unwinding-always-permitted&quot;&gt;&lt;/a&gt;Proposal 2: Introduce &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt;, forced unwinding always permitted&lt;/h3&gt;
+&lt;p&gt;This is the same as the previous design, except that when compiled with
+&lt;code&gt;panic=abort&lt;/code&gt;, forced unwinding would &lt;em&gt;not&lt;/em&gt; be intercepted at &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; ABI
+boundaries; that is, they would behave normally (though still UB if there are
+any destructors), without causing the program to abort. &lt;code&gt;panic&lt;/code&gt;-unwind and
+non-forced foreign exceptions would still cause the program to abort.&lt;/p&gt;
+&lt;p&gt;The advantage of treating forced unwinding differently is that it reduces
+portability incompatibilities. Specifically, it ensures that using &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt;
+cannot cause &lt;code&gt;longjmp&lt;/code&gt; or &lt;code&gt;pthread_exit&lt;/code&gt; to stop working (abort the program)
+when the target platform and/or compile flags are changed.  With proposal 1,
+&lt;code&gt;longjmp&lt;/code&gt; will be able to cross &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; boundaries &lt;em&gt;except&lt;/em&gt; on Windows
+with MSVC under &lt;code&gt;panic=abort&lt;/code&gt;, and &lt;code&gt;pthread_exit&lt;/code&gt; will work inside &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt;
+functions &lt;em&gt;except&lt;/em&gt; when linked with glibc under &lt;code&gt;panic=abort&lt;/code&gt;. The downside of
+this proposal is that the abort stubs around &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; calls in &lt;code&gt;panic=abort&lt;/code&gt;
+become more complicated since they need to distinguish between different types
+of foreign exceptions.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#proposal-3-no-new-abi&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;proposal-3-no-new-abi&quot;&gt;&lt;/a&gt;Proposal 3: No new ABI&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;panic=unwind&lt;/code&gt;: unwind behaves normally&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;panic=abort&lt;/code&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;panic&lt;/code&gt;-unwind: does not exist; &lt;code&gt;panic!&lt;/code&gt; aborts the program&lt;/li&gt;
+&lt;li&gt;forced unwinding, no destructors: unwind behaves normally&lt;/li&gt;
+&lt;li&gt;other foreign unwinding: undefined behavior&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The main advantage of this proposal is its simplicity: there is only one ABI and
+the behavior of &lt;code&gt;panic=abort&lt;/code&gt; is identical to that of &lt;code&gt;-fno-exceptions&lt;/code&gt; in C++.
+However this comes with the downside that switching to &lt;code&gt;panic=abort&lt;/code&gt; may in some
+cases introduce UB (though only in unsafe code) if FFI calls unwind through Rust
+code.&lt;/p&gt;
+&lt;p&gt;Another advantage is that forced unwinding from existing functions defined in
+the &lt;code&gt;libc&lt;/code&gt; crate such as &lt;code&gt;pthread_exit&lt;/code&gt; and &lt;code&gt;longjmp&lt;/code&gt; will be able to unwind
+frames with destructors when compiled with &lt;code&gt;panic=unwind&lt;/code&gt;, which is not possible
+with the other proposals.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#comparison-table-for-the-proposed-designs&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;comparison-table-for-the-proposed-designs&quot;&gt;&lt;/a&gt;Comparison table for the proposed designs&lt;/h2&gt;
+&lt;p&gt;In this table, &amp;quot;UB&amp;quot; stands for &amp;quot;undefined behavior&amp;quot;. We believe that all of
+these instances of undefined behavior could be detected at runtime, but the
+code to do so would impose an undesirable code-size penalty, entirely negating
+the optimizations made possible by using &lt;code&gt;panic=unwind&lt;/code&gt; or the non-unwinding
+&lt;code&gt;&amp;quot;C&amp;quot;&lt;/code&gt; ABI. This code would therefore only be appropriate for debug builds.
+Additionally, the complexity of implementing such checks may outweight their
+benefits.&lt;/p&gt;
+&lt;p&gt;Note that unwinding through a frame that has destructors without running those
+destructors (e.g. because they have been optimized out by &lt;code&gt;panic=abort&lt;/code&gt;) is
+always undefined behavior.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;code&gt;panic&lt;/code&gt;-unwind&lt;/th&gt;
+&lt;th&gt;Forced unwind, no destructors&lt;/th&gt;
+&lt;th&gt;Forced unwind with destructors&lt;/th&gt;
+&lt;th&gt;Other foreign unwind&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Proposals 1 &amp;amp; 2, &lt;code&gt;&quot;C&quot;&lt;/code&gt; boundary, &lt;code&gt;panic=unwind&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;abort&lt;/td&gt;
+&lt;td&gt;unwind&lt;/td&gt;
+&lt;td&gt;UB&lt;/td&gt;
+&lt;td&gt;UB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proposals 1 &amp;amp; 2, &lt;code&gt;&quot;C&quot;&lt;/code&gt; boundary, &lt;code&gt;panic=abort&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;panic!&lt;/code&gt; aborts (no unwinding occurs)&lt;/td&gt;
+&lt;td&gt;unwind&lt;/td&gt;
+&lt;td&gt;UB&lt;/td&gt;
+&lt;td&gt;UB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proposals 1 &amp;amp; 2, &lt;code&gt;&quot;C unwind&quot;&lt;/code&gt; boundary, &lt;code&gt;panic=unwind&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;unwind&lt;/td&gt;
+&lt;td&gt;unwind&lt;/td&gt;
+&lt;td&gt;unwind&lt;/td&gt;
+&lt;td&gt;unwind&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proposal 1, &lt;code&gt;&quot;C unwind&quot;&lt;/code&gt; boundary, &lt;code&gt;panic=abort&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;panic!&lt;/code&gt; aborts&lt;/td&gt;
+&lt;td&gt;abort&lt;/td&gt;
+&lt;td&gt;abort&lt;/td&gt;
+&lt;td&gt;abort&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proposal 2, &lt;code&gt;&quot;C unwind&quot;&lt;/code&gt; boundary, &lt;code&gt;panic=abort&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;panic!&lt;/code&gt; aborts&lt;/td&gt;
+&lt;td&gt;unwind&lt;/td&gt;
+&lt;td&gt;UB&lt;/td&gt;
+&lt;td&gt;abort&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proposal 3,  &lt;code&gt;&quot;C&quot;&lt;/code&gt; boundary, &lt;code&gt;panic=unwind&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;unwind&lt;/td&gt;
+&lt;td&gt;unwind&lt;/td&gt;
+&lt;td&gt;unwind&lt;/td&gt;
+&lt;td&gt;unwind&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proposal 3, &lt;code&gt;&quot;C&quot;&lt;/code&gt; boundary, &lt;code&gt;panic=abort&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;panic!&lt;/code&gt; aborts&lt;/td&gt;
+&lt;td&gt;unwind&lt;/td&gt;
+&lt;td&gt;UB&lt;/td&gt;
+&lt;td&gt;UB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</content>
+
+        <author>
+            <name>Kyle Strand, Niko Matsakis, and Amanieu d'Antras</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>crates.io incident report for 2020-02-20</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/02/26/crates-io-incident-report.html" type="text/html" title="crates.io incident report for 2020-02-20" />
+        <published>2020-02-26T00:00:00Z</published>
+        <updated>2020-02-26T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/02/26/crates-io-incident-report.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/02/26/crates-io-incident-report.html">&lt;p&gt;On 2020-02-20 at 21:28 UTC we received a report from a user of crates.io that
+their crate was not available on the index even after 10 minutes since the
+upload. This was a bug in the crates.io webapp exposed by a GitHub outage.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#root-cause-of-the-outage&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;root-cause-of-the-outage&quot;&gt;&lt;/a&gt;Root cause of the outage&lt;/h2&gt;
+&lt;p&gt;In some corner cases the code that uploads new commits to the GitHub repository
+of the index was returning a successful status even though the push itself
+failed. The bug caused the job scheduler to think the upload was actually
+successful, causing the job to be removed from the queue and producing a data
+loss.&lt;/p&gt;
+&lt;p&gt;The outage was caused by that bug, triggered by an unexpected response during
+&lt;a href=&quot;https://www.githubstatus.com/incidents/bd29l6zgr43g&quot;&gt;the GitHub outage&lt;/a&gt; happening at the same time.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#resolution&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;resolution&quot;&gt;&lt;/a&gt;Resolution&lt;/h2&gt;
+&lt;p&gt;The team analyzed the code of the background job uploading commits to the
+index, and found a possible cause of the misreported success. A team member
+&lt;a href=&quot;https://github.com/rust-lang/crates.io/pull/2207&quot;&gt;wrote the fix&lt;/a&gt;, another one reviewed it and we then deployed the patch
+directly to production.&lt;/p&gt;
+&lt;p&gt;At the same time, once we saw the index started to be updated again, we removed
+the broken entries in the database manually and asked the reporter to upload
+their crates again.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#affected-crates&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;affected-crates&quot;&gt;&lt;/a&gt;Affected crates&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://crates.io/crates/kaze&quot;&gt;&lt;code&gt;kaze&lt;/code&gt;&lt;/a&gt; 0.1.6&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://crates.io/crates/wasmer-runtime-core&quot;&gt;&lt;code&gt;wasmer-runtime-core&lt;/code&gt;&lt;/a&gt; 0.14.0&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://crates.io/crates/wasmer-win-exception-handler&quot;&gt;&lt;code&gt;wasmer-win-exception-handler&lt;/code&gt;&lt;/a&gt; 0.14.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href=&quot;#postmortem&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;postmortem&quot;&gt;&lt;/a&gt;Postmortem&lt;/h2&gt;
+&lt;p&gt;Deploying the change took way longer than expected: there were changes landed
+in master but waiting to be deployed on production, increasing the length of
+the build process and the risks of the deploy. In the future we should deploy
+hotfixes by branching off the current deployed commit, and cherry-picking the
+fix on top of that. We should also strive to reduce the amount of time PRs sit
+in master without being live.&lt;/p&gt;
+&lt;p&gt;Nobody was paged due to this incident, as our monitoring and alerting system
+wasn’t able to catch the problem: we have monitoring in place for jobs failing
+to execute, but in this case the job was mistakenly marked as correct. We
+should implement periodic checks that ensure the database and the index are
+correctly synchronized.&lt;/p&gt;
+&lt;p&gt;We were lucky that two members of the team with access to both the support
+email and the production environment were online during the outage: without
+paging available we could’ve noticed it way later than we did.&lt;/p&gt;
+&lt;p&gt;During the incident investigation we also found that our logging was not good
+enough to properly diagnose the problem: there is no message logged when a
+commit is pushed to the index, nor when a background job is executed. Also, the
+API call to publish new crates doesn’t include the crate name in its line. We
+should enhance our logging capabilities to find the root cause of issues
+quickly during future incidents.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#timeline-of-events&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;timeline-of-events&quot;&gt;&lt;/a&gt;Timeline of events&lt;/h2&gt;
+&lt;p&gt;It took 1 hour and 31 minutes from the start of the incident to the deploy of
+the fix.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#2020-02-20&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;2020-02-20&quot;&gt;&lt;/a&gt;2020-02-20&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;21:17 UTC: the authors of &lt;code&gt;kaze&lt;/code&gt;, &lt;code&gt;wasmer-runtime-core&lt;/code&gt;
+and &lt;code&gt;wasmer-win-exception-handler&lt;/code&gt; published them on crates.io&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;21:28 UTC: the author of &lt;code&gt;wasmer-runtime-core&lt;/code&gt; and
+&lt;code&gt;wasmer-win-exception-handler&lt;/code&gt; reports the issue to help@crates.io&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;21:31 UTC: GitHub updates their status page to report an outage&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;21:33 UTC: Pietro notices the support mail, pings Sean on Discord, Sean
+starts investigating&lt;/li&gt;
+&lt;li&gt;21:35 UTC: Pietro got back to the author saying that the team was
+investigating&lt;/li&gt;
+&lt;li&gt;21:37 UTC: Sean and Pietro find the symptoms of the incident&lt;/li&gt;
+&lt;li&gt;21:50 UTC: Sean finds a possible cause for the bug&lt;/li&gt;
+&lt;li&gt;22:01 UTC: Sean deletes the affected versions from the database&lt;/li&gt;
+&lt;li&gt;22:09 UTC: Sean opens up &lt;a href=&quot;https://github.com/rust-lang/crates.io/pull/2207&quot;&gt;PR 2207&lt;/a&gt; with the fix&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;22:16 UTC: GitHub updates their status page to say the problem is fixed&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;22:17 UTC: Pietro asks for changes on the PR&lt;/li&gt;
+&lt;li&gt;22:20 UTC: Sean addresses Pietro’s concerns in the PR&lt;/li&gt;
+&lt;li&gt;22:23 UTC: PR merged, Sean deploys it directly to master&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;22:48 UTC: Fix deployed on production&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;#2020-02-21&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;2020-02-21&quot;&gt;&lt;/a&gt;2020-02-21&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;09:27 UTC: the author of &lt;code&gt;kaze&lt;/code&gt; reports their crate was affected to
+help@crates.io&lt;/li&gt;
+&lt;li&gt;12:55 UTC: Pietro deletes the affected version of &lt;code&gt;kaze&lt;/code&gt; from the database
+and gets back to the author of the crate&lt;/li&gt;
+&lt;li&gt;14:10 UTC: Pietro analyzes the crates.io database and finds out no other
+crate was affected&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href=&quot;#action-items&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;action-items&quot;&gt;&lt;/a&gt;Action items&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/crates.io/issues/2226&quot;&gt;#2226&lt;/a&gt;: Add simple logging when we start the index publishing process.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/crates.io/issues/2227&quot;&gt;#2227&lt;/a&gt;: Add a periodic job that checks the index and the database for
+consistency, paging the on-call person if there are any mismatches. The job
+will need to account for the crates not yet published on the index but in the
+queue.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/crates.io/issues/2228&quot;&gt;#2228&lt;/a&gt;: Include the crate name in the HTTP log entry for the publish API
+call.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/crates.io/issues/2229&quot;&gt;#2229&lt;/a&gt;: Add in-depth logging for swirl background jobs, with information
+such as the job name or the parameters.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/crates.io/issues/2230&quot;&gt;#2230&lt;/a&gt;: Investigate whether we want to implement a self-healing feature to
+automatically synchronize the index in cases of mismatch.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Pietro Albini</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Intro to rustc's self profiler</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/02/25/intro-rustc-self-profile.html" type="text/html" title="Intro to rustc's self profiler" />
+        <published>2020-02-25T00:00:00Z</published>
+        <updated>2020-02-25T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/02/25/intro-rustc-self-profile.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/02/25/intro-rustc-self-profile.html">&lt;p&gt;Over the last year, the &lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/self-profile/&quot;&gt;Self-Profile Working Group&lt;/a&gt; has been building tools to profile &lt;code&gt;rustc&lt;/code&gt; because we often hear requests to know where compilation time is being spent.
+This is useful when optimizing the compiler, one of the Compiler Team's ongoing efforts to improve compile times, but it's also useful to users who want to refactor their crate so that it will compile faster.
+We've been working on a new feature that will help with that and this blog post gives a preview of how it works.
+Be warned, though: it is still experimental and we expect the interface to change over time.
+The Rust Unstable Book has &lt;a href=&quot;https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/self-profile.html&quot;&gt;documentation for this feature&lt;/a&gt; and we'll keep that up to date so you can always find the latest instructions there.&lt;/p&gt;
+&lt;p&gt;In this post, we'll look at the tools currently available and use them to profile &lt;code&gt;rustc&lt;/code&gt; while it compiles an example crate.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#setup&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;setup&quot;&gt;&lt;/a&gt;Setup&lt;/h2&gt;
+&lt;p&gt;First, we'll install the tools we're going to use from the &lt;code&gt;measureme&lt;/code&gt; repository to analyze self-profile trace data.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ cargo install --git https://github.com/rust-lang/measureme crox flamegraph summarize
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now that we have our tools, let's download an example crate to profile its build.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ cd ..
+$ git clone https://github.com/rust-lang/regex.git
+$ cd regex
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We'll need to use a recent nightly compiler to get access to unstable &lt;code&gt;-Z&lt;/code&gt; flags.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ rustup override set nightly
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you haven't installed a nightly compiler before, this will download the nightly compiler for you.
+If you have, then update it to make sure you're on a recent version.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ rustup update nightly
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;&lt;a href=&quot;#profiling-the-compiler&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;profiling-the-compiler&quot;&gt;&lt;/a&gt;Profiling the compiler&lt;/h2&gt;
+&lt;p&gt;Now we can build it and tell &lt;code&gt;rustc&lt;/code&gt; to profile the build of the &lt;code&gt;regex&lt;/code&gt; crate.
+This will cause three new files to be created in the working directory which contain the profling data.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ cargo rustc -- -Zself-profile
+$ ls
+CHANGELOG.md        LICENSE-APACHE       UNICODE.md              regex-17088.string_data       regex-syntax         target
+Cargo.lock          LICENSE-MIT          bench                   regex-17088.string_index      rustfmt.toml         test
+Cargo.toml          PERFORMANCE.md       examples                regex-capi                    scripts              tests
+HACKING.md          README.md            regex-17088.events      regex-debug                   src
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The new files follow the format &lt;code&gt;{crate name}-{rustc process id}.{events,string_data,string_index}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We'll use each of the three main tools to analyze the profiling data:&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#summarize&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;summarize&quot;&gt;&lt;/a&gt;&lt;code&gt;summarize&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;As its name suggests, this tool summarizes the data found in the trace files.
+Additionally, &lt;code&gt;summarize&lt;/code&gt; can also show a &amp;quot;diff&amp;quot; between two trace files but we won't be using this mode.&lt;/p&gt;
+&lt;p&gt;Let's run the tool, passing just the file name (but not the extension) for the trace:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ summarize summarize regex-17088
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| Item                                          | Self time | % of total time | Time     | Item count |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| LLVM_module_codegen_emit_obj                  | 4.89s     | 42.752          | 4.89s    | 159        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| codegen_module                                | 1.25s     | 10.967          | 1.37s    | 159        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| LLVM_module_optimize_module_passes            | 1.15s     | 10.022          | 1.15s    | 159        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| LLVM_module_codegen_make_bitcode              | 786.56ms  | 6.875           | 960.73ms | 159        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| typeck_tables_of                              | 565.18ms  | 4.940           | 689.39ms | 848        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| LLVM_module_codegen                           | 408.01ms  | 3.566           | 6.26s    | 159        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| mir_borrowck                                  | 224.03ms  | 1.958           | 543.33ms | 848        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| LLVM_module_codegen_emit_compressed_bitcode   | 174.17ms  | 1.522           | 174.17ms | 159        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| optimized_mir                                 | 157.91ms  | 1.380           | 205.29ms | 1996       |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| evaluate_obligation                           | 146.50ms  | 1.281           | 184.17ms | 8304       |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| codegen_crate                                 | 139.48ms  | 1.219           | 1.58s    | 1          |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| mir_built                                     | 123.88ms  | 1.083           | 168.01ms | 848        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| metadata_decode_entry                         | 88.36ms   | 0.772           | 117.77ms | 55642      |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| incr_comp_copy_cgu_workproducts               | 64.21ms   | 0.561           | 64.21ms  | 1          |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| monomorphization_collector_graph_walk         | 54.11ms   | 0.473           | 344.00ms | 1          |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| link_rlib                                     | 43.21ms   | 0.378           | 43.21ms  | 1          |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| check_impl_item_well_formed                   | 41.36ms   | 0.362           | 77.14ms  | 736        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| codegen_fulfill_obligation                    | 40.36ms   | 0.353           | 51.56ms  | 1759       |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| expand_crate                                  | 37.24ms   | 0.326           | 48.52ms  | 1          |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| symbol_name                                   | 36.31ms   | 0.317           | 39.06ms  | 5513       |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| free_global_ctxt                              | 34.34ms   | 0.300           | 34.34ms  | 1          |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+...
+Total cpu time: 11.440758871s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output is sorted by the self time (time spent in the query or activity but not other queries or activities called by itself).
+As you can see, most of the compilation time is spent in LLVM generating the binary code for the executable.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#flamegraph&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;flamegraph&quot;&gt;&lt;/a&gt;&lt;code&gt;flamegraph&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;As you may have guessed, &lt;code&gt;flamegraph&lt;/code&gt; will produce a &lt;a href=&quot;http://www.brendangregg.com/flamegraphs.html&quot;&gt;flame graph&lt;/a&gt; of the profiling data.
+To run the tool, we'll pass just the filename without a file extension like we did for &lt;code&gt;summarize&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ flamegraph regex-17088
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will create a file called &lt;code&gt;rustc.svg&lt;/code&gt; in the working directory:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png&quot;&gt;&lt;img src=&quot;/images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png&quot; alt=&quot;Image of flamegraph output&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/images/inside-rust/2020-02-25-intro-rustc-self-profile/rustc.svg&quot;&gt;Click here&lt;/a&gt; to try the interactive svg.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#crox&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;crox&quot;&gt;&lt;/a&gt;&lt;code&gt;crox&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;This tool processes self-profiling data into the JSON format that the Chromium profiler understands.
+You can use it to create a graphical timeline showing exactly when various traced events occurred.&lt;/p&gt;
+&lt;p&gt;In this section, we'll cover a few different modes &lt;code&gt;crox&lt;/code&gt; can run in such as profiling an entire crate compilation including dependencies and filtering out small events.
+Let's get started with the basics!&lt;/p&gt;
+&lt;h4&gt;&lt;a href=&quot;#basic-usage&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;basic-usage&quot;&gt;&lt;/a&gt;Basic usage&lt;/h4&gt;
+&lt;p&gt;To run the tool, we'll just pass the filename without a file extension like we've done before:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ crox regex-17088
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This creates a file called &lt;code&gt;chrome_profiler.json&lt;/code&gt; in the working directory.
+To open it, we'll use the regular Chromium performance tools you might already be familiar with:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Open Chrome&lt;/li&gt;
+&lt;li&gt;Open the Developer Tools console by pressing &lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;Shift&lt;/code&gt; + &lt;code&gt;i&lt;/code&gt; (Windows/Linux) or &lt;code&gt;Cmd&lt;/code&gt; + &lt;code&gt;Option&lt;/code&gt; + &lt;code&gt;i&lt;/code&gt; (macOS)&lt;/li&gt;
+&lt;li&gt;Click the Performance tab at the top of the console.&lt;/li&gt;
+&lt;li&gt;Click the &amp;quot;Load profile&amp;quot; button which looks like an arrow pointing up.&lt;/li&gt;
+&lt;li&gt;Select the &lt;code&gt;chrome_profiler.json&lt;/code&gt; file we created.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You should now see something similar to this:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler1.png&quot;&gt;&lt;img src=&quot;/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler1.png&quot; alt=&quot;Image of chrome profiler&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can use the scroll wheel on a mouse or the appropriate gesture on a touchpad to zoom in or out of the timeline.&lt;/p&gt;
+&lt;h4&gt;&lt;a href=&quot;#filtering-short-events&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;filtering-short-events&quot;&gt;&lt;/a&gt;Filtering short events&lt;/h4&gt;
+&lt;p&gt;If the &lt;code&gt;chrome_profiler.json&lt;/code&gt; file gets too large, the normal Chromium performance tools have issues opening the file.
+One easy way to deal with this is to tell &lt;code&gt;crox&lt;/code&gt; to remove events shorter than a chosen duration:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ crox --minimum-duration 2 regex-17088
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Filtering out events less than 2 microseconds shrinks our &lt;code&gt;chrome_profiler.js&lt;/code&gt; file from 27mb to 11mb.&lt;/p&gt;
+&lt;h4&gt;&lt;a href=&quot;#capturing-event-arguments&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;capturing-event-arguments&quot;&gt;&lt;/a&gt;Capturing event arguments&lt;/h4&gt;
+&lt;p&gt;The self-profiler can be configured to record event arguments during compilation.
+For example, queries will include their query key.
+This functionality is turned off by default because it increases the self-profiler overhead.&lt;/p&gt;
+&lt;p&gt;To turn this feature on, we'll need to record a new compilation, passing an additional argument to &lt;code&gt;rustc&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ cargo clean
+$ cargo rustc -- -Zself-profile -Zself-profile-events=default,args
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And then process the new output files:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ crox regex-23649
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now in the Chromium profiler, if you click on a node, you can see additional data about many of the events at the bottom of the screen:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png&quot;&gt;&lt;img src=&quot;/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png&quot; alt=&quot;Image of Chrome profiler details&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Which shows this &lt;code&gt;optimized_mir&lt;/code&gt; query was processing the &lt;code&gt;regex::compile::{{impl}}::new&lt;/code&gt; function body.&lt;/p&gt;
+&lt;h4&gt;&lt;a href=&quot;#profiling-an-entire-crate-graph&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;profiling-an-entire-crate-graph&quot;&gt;&lt;/a&gt;Profiling an entire crate graph&lt;/h4&gt;
+&lt;p&gt;By using the &lt;code&gt;RUSTFLAGS&lt;/code&gt; environment variable, we can profile every &lt;code&gt;rustc&lt;/code&gt; invocation, not just the final crate's.
+&lt;code&gt;crox&lt;/code&gt; can then combine all of the profiles together into one output file.
+Since this will create a lot of files, we'll tell &lt;code&gt;rustc&lt;/code&gt; to create a folder to put all the traces in.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ rm regex-17088.* regex-23649.* # clean up the old trace files since we're done with them
+$ cargo clean
+$ RUSTFLAGS=&amp;quot;-Zself-profile=$(pwd)/profiles -Zself-profile-events=default,args&amp;quot; cargo build
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This creates quite a few trace files in the working directory.
+Now, we'll tell &lt;code&gt;crox&lt;/code&gt; to combine all of the trace files in the current directory together:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ crox --dir profiles
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Opening this file shows all of the crates compiled:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png&quot;&gt;&lt;img src=&quot;/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png&quot; alt=&quot;Image of Chrome profiler with all crates&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Clicking on a crate will expand it to show the threads and event data inside it:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler4.png&quot;&gt;&lt;img src=&quot;/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler4.png&quot; alt=&quot;Image of Chrome profiler with a crate expanded&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Thanks for reading!&lt;/p&gt;
+&lt;p&gt;We've been using these tools extensively ourselves over the last few months and they've helped us tremendously in understanding where the compiler spends its time.
+In the future we'll be adding more features and we'll work on making the tooling easier to use.
+If you have questions or would like to get involved with the Self-Profile Working Group, please check out the &lt;a href=&quot;https://github.com/rust-lang/measureme&quot;&gt;measureme repository&lt;/a&gt; or stop by our &lt;a href=&quot;https://rust-lang.zulipchat.com/#narrow/stream/187831-t-compiler.2Fwg-self-profile&quot;&gt;Zulip stream&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Wesley Wiser</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Please welcome jtgeibel as crates.io team co-lead!</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/02/20/jtgeibel-crates-io-co-lead.html" type="text/html" title="Please welcome jtgeibel as crates.io team co-lead!" />
+        <published>2020-02-20T00:00:00Z</published>
+        <updated>2020-02-20T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/02/20/jtgeibel-crates-io-co-lead.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/02/20/jtgeibel-crates-io-co-lead.html">&lt;p&gt;I'm happy to announce some changes in the leadership of the crates.io
+team. Justin Geibel (&lt;a href=&quot;https://github.com/jtgeibel&quot;&gt;jtgeibel&lt;/a&gt;) will be joining me as co-lead. Justin
+will be replacing Ashley Williams, who has been very busy lately with
+other commitments.&lt;/p&gt;
+&lt;p&gt;Justin has been involved in the crates.io team since the summer
+of 2017. In addition to general &amp;quot;gardening&amp;quot; tasks (Justin has &lt;a href=&quot;https://github.com/rust-lang/crates.io/pulls/jtgeibel&quot;&gt;over
+140 PRs&lt;/a&gt; to the
+crates.io repo!), he has made a number of improvements and changes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Refactoring of error handling logic and the test harness&lt;/li&gt;
+&lt;li&gt;CI improvements to caching behavior and build times&lt;/li&gt;
+&lt;li&gt;Added a boot time option to use hyper as the web server, with the goal of eventually switching over in production&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Please join me in extending a sincere congratulations 🎉 to Justin, as
+well as a big thank you ❤️ to Ashley for all of the work she did
+as co-lead of the team thus far.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Sean Griffin</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Upcoming compiler-team design meetings</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/02/14/upcoming-compiler-team-design-meetings.html" type="text/html" title="Upcoming compiler-team design meetings" />
+        <published>2020-02-14T00:00:00Z</published>
+        <updated>2020-02-14T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/02/14/upcoming-compiler-team-design-meetings.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/02/14/upcoming-compiler-team-design-meetings.html">&lt;p&gt;In our &lt;a href=&quot;https://zulip-archive.rust-lang.org/131828tcompiler/33384planningmeeting20200214.html&quot;&gt;planning meeting on February 14th&lt;/a&gt;, the &lt;a href=&quot;https://www.rust-lang.org/governance/teams/compiler&quot;&gt;compiler team&lt;/a&gt; has scheduled our
+next batch of upcoming design meetings. You can find the exact times
+on the compiler team's &lt;a href=&quot;https://rust-lang.github.io/compiler-team/#meeting-calendar&quot;&gt;meeting calendar&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;On Feb 28th (&lt;a href=&quot;https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=NXY1bWhwYm1tMzRydDNwaWc5dmJjdGNiM3QgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;calendar event&lt;/a&gt;, we will discuss our triage
+procedures and how we can make them more efficient. See
+&lt;a href=&quot;https://github.com/rust-lang/compiler-team/issues/247&quot;&gt;rust-lang/compiler-team#247&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;li&gt;On Mar 6th (&lt;a href=&quot;https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=MXBkOXZtcWxyaTk4bHFpN202bTE5bTg0OWsgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;calendar event&lt;/a&gt;), we will discuss plans to extract
+rustc's representation of types and trait solving into a standalone
+library. See &lt;a href=&quot;https://github.com/rust-lang/compiler-team/issues/234&quot;&gt;rust-lang/compiler-team#234&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;#did-you-know&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;did-you-know&quot;&gt;&lt;/a&gt;Did you know?&lt;/h3&gt;
+&lt;p&gt;Most weeks, the compiler team has some sort of design meeting. These
+meetings take place on Zulip and are open to all. Every 4 weeks, we do
+a planning meeting to pick the next few meetings from the list of open
+proposals. You can find &lt;a href=&quot;https://rust-lang.github.io/compiler-team/about/steering-meeting/&quot;&gt;more details about how the compiler-team
+steering meeting process here&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Governance Working Group Update: Meeting 11 February 2020</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/02/11/Goverance-wg.html" type="text/html" title="Governance Working Group Update: Meeting 11 February 2020" />
+        <published>2020-02-11T00:00:00Z</published>
+        <updated>2020-02-11T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/02/11/Goverance-wg.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/02/11/Goverance-wg.html">&lt;p&gt;Hello everyone!&lt;/p&gt;
+&lt;p&gt;The governance working group meeting of January 28th was canceled due to the Mozilla All Hands that week.
+Therefore, working group next convened on 11 February.
+The following meeting will take place on 27 February.&lt;/p&gt;
+&lt;p&gt;The agenda included&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Discuss project groups description RFC
+https://github.com/rust-lang/rfcs/pull/2856
+Decision: Determine if inactive members in scope; if not in scope, confirm RFC.&lt;/li&gt;
+&lt;li&gt;Review action items from meeting of December 3 2019
+https://github.com/rust-lang/wg-governance/blob/master/minutes/2019.12.03.md#action-items&lt;/li&gt;
+&lt;li&gt;Confirm adjustment of timeslot based on Doodle sent out in Discord channel&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;&lt;a href=&quot;#project-groups&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;project-groups&quot;&gt;&lt;/a&gt;Project groups&lt;/h2&gt;
+&lt;p&gt;You can find the &lt;a href=&quot;https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.02.11.md&quot;&gt;detailed minutes&lt;/a&gt; on the &lt;a href=&quot;https://github.com/rust-lang/wg-governance/&quot;&gt;wg-governance&lt;/a&gt; repository, but here is a quick summary:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Project groups description RFC confirmed complete&lt;/li&gt;
+&lt;li&gt;Next items taken from Dec 3 backlog are access policy (NellShamrell is working on this),
+Discussion of where to discuss the pre-RFC process, and followup about moving (community, devtools, nursery) to rust-lang&lt;/li&gt;
+&lt;li&gt;XAMPPRocky is already working on a compliance bot to simplify administration&lt;/li&gt;
+&lt;li&gt;Timeslot adjusted to 19-20 CET / 1pm-2pm EST / 10-11am PST on Zulip as text chat, with the same biweekly cadence.
+Zoom (video) meetings will be used as needed, e.g. if a big RFC needs to be pushed through.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href=&quot;#next-meeting&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;next-meeting&quot;&gt;&lt;/a&gt;Next meeting&lt;/h2&gt;
+&lt;p&gt;Our next meeting will be 27 February 2020 via Zulip 19-20 CET / 1pm-2pm EST / 10-11am PST.
+Agenda is -&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Access policy - Nell will have something to discuss&lt;/li&gt;
+&lt;li&gt;Pre-RFC process - determine right place to talk about this&lt;/li&gt;
+&lt;li&gt;Follow-up on moving (community, devtools, nursery) to rust-lang&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+
+        <author>
+            <name>Val Grimm</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>2020-02-06 Compiler Team Triage Meeting</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/02/07/compiler-team-meeting.html" type="text/html" title="2020-02-06 Compiler Team Triage Meeting" />
+        <published>2020-02-07T00:00:00Z</published>
+        <updated>2020-02-07T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/02/07/compiler-team-meeting.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/02/07/compiler-team-meeting.html">&lt;p&gt;The compiler team had our weekly triage meeting on 2020-02-06.
+You can find the &lt;a href=&quot;https://rust-lang.github.io/compiler-team/minutes/triage-meeting/2020-02-06/&quot;&gt;minutes&lt;/a&gt; on the &lt;a href=&quot;https://github.com/rust-lang/compiler-team&quot;&gt;compiler-team repository&lt;/a&gt;.
+Each week, we have general announcements from the team followed by check-ins from two of the compiler team working groups.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#announcements&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;announcements&quot;&gt;&lt;/a&gt;Announcements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;There is a design meeting this Friday (2020-02-07) on &lt;a href=&quot;https://github.com/rust-lang/compiler-team/issues/237&quot;&gt;parser-librarification&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/davidtwco&quot;&gt;@davidtwco&lt;/a&gt; has made progress on the polymorphization effort and has posted a &lt;a href=&quot;https://rust-lang.zulipchat.com/#narrow/stream/216091-t-compiler.2Fwg-polymorphization/topic/progress.20updates/near/187461928&quot;&gt;status update&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/michaelwoerister&quot;&gt;@mw&lt;/a&gt; has posted a major change proposal to make &lt;a href=&quot;https://github.com/rust-lang/compiler-team/issues/245&quot;&gt;incremental compilation respect the &lt;code&gt;-Ccodegen-units&lt;/code&gt; setting&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Cargo report future-incompat &lt;a href=&quot;https://github.com/rust-lang/rfcs/issues/2834&quot;&gt;rfc#2834&lt;/a&gt; is on track to get an FCP merge request from the cargo team in the near future.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href=&quot;#working-group-sync&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;working-group-sync&quot;&gt;&lt;/a&gt;Working group sync&lt;/h2&gt;
+&lt;h3&gt;&lt;a href=&quot;#wg-rls-20&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;wg-rls-20&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/rls-2.0/&quot;&gt;wg-rls-2.0&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The Chalk dependency has been updated which dramatically reduced crashes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;cargo check&lt;/code&gt; handling has been moved ino the server so all editors not just VS Code benefit.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/matklad&quot;&gt;@matklad&lt;/a&gt; and &lt;a href=&quot;https://github.com/nikomatsakis&quot;&gt;@nikomatsakis&lt;/a&gt; have been working on an RFC to merge RLS and Rust Analyzer officially.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Work is proceeding on &amp;quot;production readiness&amp;quot;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Binary releases are available on the project's GitHub page.&lt;/li&gt;
+&lt;li&gt;Planning to publish to VS Code extension marketplace &amp;quot;soon&amp;quot;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;#wg-self-profile&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;wg-self-profile&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/self-profile/&quot;&gt;wg-self-profile&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;a href=&quot;https://github.com/rust-lang/rust/issues/58967&quot;&gt;&amp;quot;Minimum Viable Product&amp;quot;&lt;/a&gt; has been completed!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Self-profling is enabled for all perf.rust-lang.org runs and we automatically publish the data. (&lt;a href=&quot;https://perf.rust-lang.org/detailed-query.html?commit=3761dcd3467441f78939ccb3b341b03b6a7558d7&amp;base_commit=ac2f3fa41ac5ae8425b959f955bb7433b7c57aea&amp;benchmark=await-call-tree-debug&amp;run_name=clean&quot;&gt;Example&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/michaelwoerister&quot;&gt;@mw&lt;/a&gt; implemented query-key recording so queries can now be attributed to individual query invocations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;a href=&quot;https://github.com/rust-lang/measureme/tree/master/crox&quot;&gt;&lt;code&gt;crox&lt;/code&gt;&lt;/a&gt; utility, which generates Chromium profiler compatible trace data, can now generate profiles for entire Cargo invocations via the &lt;code&gt;--dir&lt;/code&gt; flag.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This allows inspecting various rustc processes and their individual threads on a common timeline with full query data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Quite a few people have tried &lt;code&gt;-Zself-profile&lt;/code&gt; and have said they found it very useful!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Wesley Wiser</name>
+        </author>
+    </entry>
+    
+</feed>

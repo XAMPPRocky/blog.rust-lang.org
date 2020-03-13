@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust Survey 2019 Results | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust Survey 2019 Results | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust Survey 2019 Results | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/blog.rust-lang.org/styles/vendor.css"/>
+<link rel="stylesheet" href="/blog.rust-lang.org/styles/fonts.css"/>
+<link rel="stylesheet" href="/blog.rust-lang.org/styles/app.css"/>
+<link rel="stylesheet" href="/blog.rust-lang.org/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/blog.rust-lang.org/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/blog.rust-lang.org/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/blog.rust-lang.org/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/blog.rust-lang.org/images/favicon.ico">
+<link rel="manifest" href="/blog.rust-lang.org/images/site.webmanifest">
+<link rel="mask-icon" href="/blog.rust-lang.org/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/blog.rust-lang.org/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/blog.rust-lang.org/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust Survey 2019 Results" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust Survey 2019 Results</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 4, 2020 &middot; The Rust Survey Team
+    
+    </div>
+
+    <div class="post">
+      <p>Greetings Rustaceans!</p>
+<p>We are happy to present the results of our fourth annual survey. The survey was available in <strong>14</strong> different languages and we received <strong>3997</strong> responses.</p>
+<p>Here is the language distribution of the responses we received.</p>
+<ul>
+<li>English: 69.6%</li>
+<li>Chinese: 10.8%</li>
+<li>German: 4.3%</li>
+<li>French: 3.3%</li>
+<li>Japanese: 3.0%</li>
+<li>Polish: 1.2%</li>
+<li>Portuguese: 1.2%</li>
+<li>Spanish: .9%</li>
+<li>Korean: .8%</li>
+<li>Italian: .6%</li>
+<li>Swedish: .5%</li>
+<li>Vietnamese: .2%</li>
+</ul>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/1-Language-Breakdown.png" alt="Rust Survey Language Distribution" /></p>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/6-Have-You-Used-Rust.png" alt="Do You Use Rust" /></p>
+<p>About 75% of users indicated they were actively using Rust.</p>
+<h1><a href="#rust-users" aria-hidden="true" class="anchor" id="rust-users"></a>Rust Users</h1>
+<p>First, let's go over the results for Rust users.</p>
+<h2><a href="#time-with-rust" aria-hidden="true" class="anchor" id="time-with-rust"></a><strong>Time with Rust</strong></h2>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/7-How-Long-Worked-With-Rust.png" alt="How long have you worked in Rust" /></p>
+<p>We asked our users how long they had been working with Rust. The majority had been using Rust for 1-2 years. Overall these numbers were not significantly different from what we saw in 2018.</p>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/8-How-Long-To-Be-Productive.png" alt="How long did it take to be productive" /></p>
+<p>About 37% of Rust users felt productive in Rust in less than a month of use - this is not too different from the percentage last year (40%). Over 70% felt productive in their first year. Unfortunately, like last year, there is still a struggle among users - 21% indicated they did not yet feel productive.</p>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/9-How-Long-Unproductive.png" alt="How long have you been unproductive" /></p>
+<p>Additionally, many users indicated that they were not feeling comfortable in Rust - even after over 3 months of use. We need to find ways to help bridge users to productivity so they don't get stuck.</p>
+<h2><a href="#how-much-do-you-use-rust" aria-hidden="true" class="anchor" id="how-much-do-you-use-rust"></a><strong>How much do you use Rust?</strong></h2>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/10-Size-Of-Summed-projects.png" alt="Size of summed Rust projects" /></p>
+<p>The majority of Rust projects (43%) are 1,000-10,000 lines of code. Rust projects of medium to large size (those totally over 10k and 100k lines of code respectively) continue to trend higher. They have grown from 8.9% in 2016, to 16% in 2017, to 23% in 2018, to <strong>34%</strong> in 2019.</p>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/11-How-Often-Use-Rust.png" alt="How often do you use Rust" /></p>
+<p>Rust daily usage has trended slightly upward at 27.63% (it was just under 25% last year and 17.5% on 2017). Users who use Rust daily or weekly has also continued to rend slight upward. This year it was 68.52%, last year it was 66.4%, and in 2017 it was 60.8%.</p>
+<h2><a href="#rust-expertise" aria-hidden="true" class="anchor" id="rust-expertise"></a><strong>Rust expertise</strong></h2>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/12-How-Rate-Rust-Expertise.png" alt="How would you rate your Rust expertise" /></p>
+<p>We also asked users how they would rate their Rust Expertise - there is a clear peak around &quot;7&quot;.</p>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/13-Rust-Expertise-and-Time-In-Rust.png" alt="How would you rate your Rust expertise" /></p>
+<p>We compared these statistics with time spent using Rust. Rust expertise is highest at and after 1-2 years of experience.</p>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/15-Rust-Concepts-Difficulty.png" alt="How difficult are Rust concepts" /></p>
+<p>When it comes to Rust concepts, the results were similar to last year. Enums, Cargo, and Collections were relatively easy concepts, followed by Pattern Matching, Iterators, Modules, Closures, and Traits, and Concurrency. The most challenging concepts were Ownership, Generics &amp; Trait Bounds, FFI, Async I/O (new this year), Unsafe, Macros, and Lifetimes.</p>
+<h2><a href="#rust-toolchain" aria-hidden="true" class="anchor" id="rust-toolchain"></a><strong>Rust toolchain</strong></h2>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/16-Which-Rust-Version.png" alt="Which Rust version do you use" /></p>
+<p>The vast majority of users use the current stable version of Rust (63%). Surprisingly, the number of users using the Nightly compiler in their workflow is down at 20%. Last year it was at over 56%.</p>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/17-Preferred-Install-Method.png" alt="Preferred install method" /></p>
+<p>We still see a very large percentage of users using <code>rustup</code> to install Rust, followed by Linux distros.</p>
+<p>This year we asked about the upgrade to Rust 2018. 92.8% of our users who responded to the survey are using the 2018 edition of Rust. 85% of users said it took little work do do so.</p>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/18-Comparative-Improvement.png" alt="Comparative improvement" /></p>
+<p>Users indicated that ASYNC improved the most in Rust 2018, while GUI development and learning curve improved the least. Clearly we still have much to do to improve Rust's learning curve.</p>
+<h2><a href="#rust-workflow" aria-hidden="true" class="anchor" id="rust-workflow"></a><strong>Rust workflow</strong></h2>
+<p>==== Add Chart Here ====</p>
+<p><img src="" alt="Which platform are you developing on" /></p>
+<p>51% of Rust users developed on Linux, while 24% developed on Windows, and 23% developed on macOS.</p>
+<p>Linux continues to be a powerhouse among Rust developers, holding on to roughly 80% of Rust developers.  Windows usage has grown slightly from 31% last year to 34% this year, its second year in a row of growth.</p>
+<p>==== Add Chart Here ====</p>
+<p><img src="" alt="Which platforms are you developing for" /></p>
+<p>Linux and Windows continue to dominate as targets for Rust applications - 55% of Rust users targeted Linux and 24.5% targeted Windows. Following close behind Windows are macOS and Web Assembly at 22% each.</p>
+<p>==== Add Chart Here ====</p>
+<p><img src="" alt="What editors do you use" /></p>
+<p>Vim and VSCode continue to be the most popular editors (23.6% and 34.9% respectively) by far.</p>
+<h2><a href="#rust-at-work" aria-hidden="true" class="anchor" id="rust-at-work"></a><strong>Rust at work</strong></h2>
+<p>==== Add Chart Here ====</p>
+<p><img src="" alt="Do you use Rust at work" /></p>
+<p>(Need data)</p>
+<p>==== Add Chart Here ====</p>
+<p><img src="" alt="Is your company evaluating Rust" /></p>
+<p>(Need data)</p>
+<h2><a href="#feeling-welcome" aria-hidden="true" class="anchor" id="feeling-welcome"></a><strong>Feeling welcome</strong></h2>
+<p>==== Add Chart Here ====</p>
+<p><img src="" alt="Do you feel welcome in the Rust community" /></p>
+<p>(Need data)</p>
+<p>==== Add Chart Here ====</p>
+<p><img src="" alt="Are you underrepresented in tech" /></p>
+<p>(Need data)</p>
+<h1><a href="#rust-non-users" aria-hidden="true" class="anchor" id="rust-non-users"></a>Rust Non-Users</h1>
+<p>A big part of a welcoming Rust community is reaching out to non-users as well. As we have in years past, we again asked the reasons why people weren't using Rust.</p>
+<p>For users who had used Rust before but had stopped using it, most had stopped using it within a year of starting.</p>
+<p><img src="/blog.rust-lang.org/images/2020-03-RustSurvey/3-How-Long-Before-Stopped-Rust.png" alt="How long did you use Rust before you stopped?" /></p>
+<p>When we asked why someone had stopped using Rust, the most common response was &quot;My company doesn't use Rust.&quot;</p>
+<p><img src="images/2020-03-RustSurvey/4-Why-Stopped-Rust.png" alt="Why did you stop using Rust?" /></p>
+<p>For users who indicated they had never used Rust before, most indicated either &quot;I haven't learned Rust yet, but I want to&quot; or &quot;My company doesn't use Rust&quot;.</p>
+<p><img src="images/2020-03-RustSurvey/5-Why-Never-Used-Rust.png" alt="Why have you never used Rust?" /></p>
+<h1><a href="#challenges" aria-hidden="true" class="anchor" id="challenges"></a>Challenges</h1>
+<p>As we've done in past years, we asked for your comments in where Rust can improve. This year, we see some familiar themes as well as some new ones in this feedback. The top ten themes for 2019 are:</p>
+<ol>
+<li>Better training/documentation</li>
+<li>More/Better Libraries</li>
+<li>IDE Integration</li>
+<li>Compilation Times</li>
+<li>GUI Development</li>
+<li>Async</li>
+<li>Generics</li>
+<li>Stabilization of Crates</li>
+<li>Web (support for/ focus on)</li>
+<li>Borrow Checker</li>
+</ol>
+<p>(Add additional commentary here)</p>
+<h2><a href="#looking-forward" aria-hidden="true" class="anchor" id="looking-forward"></a>Looking forward</h2>
+<p><img src="images/2020-03-RustSurvey/19-Current-Users-Excited.png" alt="What are you excited about for 2020" /></p>
+<p>Finally, we asked our users what they are excited for in 2020. By fare the most popular option was Async/Await.</p>
+<p>(Add concluding commentary here)</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/blog.rust-lang.org/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/blog.rust-lang.org/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/blog.rust-lang.org/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/blog.rust-lang.org/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/blog.rust-lang.org/scripts/highlight.js"></script>
+
+  </body>
+</html>
