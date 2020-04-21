@@ -26,7 +26,7 @@ We can offer you support and guidance, as well as advertise the event in blog po
 
 [**"Connect and empower Rust’s global community."**]: https://github.com/rust-lang/rfcs/pull/2314/files#diff-1c2d6aba093cfb7e02ac5e1597207c41R13
 
-+++
+---
 
 ### February 1-4: Mozilla Rust Roadshow Brasil 2018
 
