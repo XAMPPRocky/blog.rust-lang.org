@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block nav %}
+
+<nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">{{section.title}}</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+{% endblock nav %}
+
+{% block page %}
+<header class="mt3 mt0-ns mb4-ns">
+  <div class="container flex flex-column flex-row-l justify-between-l">
+    <div class="mw6-l">
+        {{ section.content | safe }}
+    </div>
+  </div>
+  <div class="container flex flex-column flex-row-l justify-between-l">
+    <div class="mw6-l">
+        See Also:
+        <ul>
+        {% for blog in section.subsections | concat(with=section.ancestors) %}
+            {% set blog = get_section(path=blog, metadata_only=true) %}
+            <li><a href="{{ blog.permalink }}">{{blog.title}}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+  </div>
+</header>
+
+<section id="posts" class="posts">
+   <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <table class="post-list collapse w-100 f2-l f2-m f3-s">
+        {% for year, posts in section.pages | sort(attribute="year") | reverse | group_by(attribute="year")  %}
+        <tr>
+            <td class="bn"></td>
+            <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">Posts in {{year}}</h3></td>
+        </tr>
+        {%- for post in posts | reverse -%}
+            <tr>
+                <td class="tr o-60 pr4 pr5-l bn">{{ post.date | date(format="%b. %d") }}</td>
+                <td class="bn"><a href="{{ post.permalink }}">{{ post.title }}</a></td>
+            </tr>
+        {%- endfor -%}
+        {%- endfor %}
+    </table>
+
+  </div>
+</section>
+{% endblock page %}

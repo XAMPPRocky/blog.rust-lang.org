@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block page %}
+<section id="{{page.title}}" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>{{ page.title }}</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">{{ page.date | date(format="%b. %d") }} &middot; {{ page.extra.author }}
+
+    {% if page.extra.team %}
+
+        {# Generates "on behalf of <team>" using team data. #}
+        {% set teams = load_data(url=config.extra.team_url, format="json") %}
+        {% set team = teams | get(key=page.extra.team) %}
+        {% set url = "https://www.rust-lang.org/governance/" %}
+
+        {% if team.subteam_of %}
+            {% set url = url ~ "teams/" %}
+        {% elif team.kind == "working_group" %}
+            {% set url = url ~ "wgs/" %}
+        {% else %}
+            {% set url = url ~ "teams/" %}
+        {% endif %}
+
+        {% if team.subteam_of %}
+            {% set url = url ~ team.subteam_of ~ "#" ~ team.website_data.page %}
+        {% else %}
+            {% set url = url ~ team.website_data.page %}
+        {% endif %}
+
+        on behalf of the <a href="{{ url }}">{{ team.website_data.name }}</a>.
+    {% endif %}
+    </div>
+
+    <div class="post">
+      {{ page.content | safe }}
+    </div>
+  </div>
+</section>
+{% endblock %}

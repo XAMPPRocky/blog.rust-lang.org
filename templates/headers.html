@@ -2,13 +2,13 @@
  <meta name="twitter:card" content="summary">
  <meta name="twitter:site" content="@rustlang">
  <meta name="twitter:creator" content="@rustlang">
- <meta name="twitter:title" content="{{title}}">
- <meta name="twitter:description" content="{{blog.description}}">
+ <meta name="twitter:title" content="{{config.title}}">
+ <meta name="twitter:description" content="{{config.description}}">
 <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
 
 <!-- Facebook OpenGraph -->
-<meta property="og:title" content="{{title}}" />
-<meta property="og:description" content="{{blog.description}}">
+<meta property="og:title" content="{{config.title}}" />
+<meta property="og:description" content="{{config.description}}">
 <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
@@ -24,10 +24,10 @@
 <link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
 
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
-<link rel="stylesheet" href="/styles/highlight.css"/>
+<link rel="stylesheet" href="/styles/skeleton.css"/>
+<link rel="stylesheet" href="/styles/tachyons.css"/>
+<link rel="stylesheet" href="/fonts.css"/>
+<link rel="stylesheet" href="/app.css"/>
 
 <!-- favicon -->
 <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
@@ -40,4 +40,4 @@
 <meta name="theme-color" content="#ffffff">
 
  <!-- atom -->
- <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/{{blog.prefix}}feed.xml" title="{{blog.title}}" />
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="{{config.title}}" />

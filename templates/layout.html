@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ config.title }}</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="description" content="Empowering everyone to build reliable and efficient software.">
+    {% include "headers.html" %}
+  </head>
+  <body>
+      {% block nav %}{% endblock nav %}
+      {% block page %}{% endblock page %}
+      {% include "footer.html" %}
+  </body>
+</html>
