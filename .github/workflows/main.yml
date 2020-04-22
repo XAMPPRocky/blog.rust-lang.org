@@ -17,8 +17,7 @@ jobs:
           owner: getzola
           repo: zola
           token: "${{ secrets.GITHUB_TOKEN }}"
-          install_path: /usr/local/bin/zola
-      - run: zola build
+      - run: /tmp/zola build
       - name: Deploy to GitHub Pages
         run: |
           curl -LsSf https://raw.githubusercontent.com/rust-lang/simpleinfra/master/setup-deploy-keys/src/deploy.rs | rustc - -o /tmp/deploy
