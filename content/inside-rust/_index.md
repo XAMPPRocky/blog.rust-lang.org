@@ -1,5 +1,5 @@
 +++
-title = "The Inside Rust Blog"
+title = "Inside Rust Blog"
 sort_by = "date"
 +++
 

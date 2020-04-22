@@ -1,6 +1,6 @@
 +++
 template = "section.html"
-title = "The Rust Blog"
+title = "Rust Blog"
 sort_by = "date"
 +++
 This is the main Rust blog. The [core team] uses this blog to announce big
