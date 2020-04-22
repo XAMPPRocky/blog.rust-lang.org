@@ -11,19 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Cache cargo
-        uses: actions/cache@v1
+      - uses: XAMPPRocky/get-github-release@v1
         with:
-          path: target
-          key: cargo-build-${{ hashFiles('**/Cargo.lock') }}
-          restore-key: cargo-build-
-      - name: Build Blog
-        run: cargo run
+          matches: linux
+          owner: getzola
+          repo: zola
+          token: "${{ secrets.GITHUB_TOKEN }}"
+          install_path: /usr/bin/env
+      - run: zola build
       - name: Deploy to GitHub Pages
         run: |
-          cp CNAME ./site/
           curl -LsSf https://raw.githubusercontent.com/rust-lang/simpleinfra/master/setup-deploy-keys/src/deploy.rs | rustc - -o /tmp/deploy
-          (cd site/ && /tmp/deploy)
+          (cd public/ && /tmp/deploy)
         env:
           GITHUB_DEPLOY_KEY: ${{ secrets.GITHUB_DEPLOY_KEY }}
         if: github.ref == 'refs/heads/master'
