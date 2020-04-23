@@ -1,6 +1,6 @@
 # The URL the site will be built for
 base_url = "https://blog.rust-lang.org"
-highlight_theme = "base16-ocean-dark"
+highlight_theme = "Tomorrow"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
