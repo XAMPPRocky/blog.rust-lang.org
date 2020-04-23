@@ -11,7 +11,7 @@
       <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
           <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
               <a href="{% block nav_link %}{% endblock nav_link %}">
-                  <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+                  <img class="v-mid ml0-l" alt="Rust Logo" src="{{ get_url(path="images/rust-logo-blk.svg") }}">
                   <span class="dib ml1 ml0-l">{% block nav_title %}{% endblock nav_title %}</span>
               </a>
           </div>
