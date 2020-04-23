@@ -14,28 +14,28 @@
 <meta property="og:locale" content="en_US" />
 
 <!-- fonts -->
-<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/AlfaSlabOne-Regular.ttf") }}">
-<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/FiraSans-ExtraBold.ttf") }}">
-<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/FiraSans-ExtraBoldItalic.ttf") }}">
-<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/FiraSans-Italic.ttf") }}">
-<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/FiraSans-Italic.ttf") }}">
-<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/FiraSans-Regular.ttf") }}">
-<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/FiraSans-SemiBold.ttf") }}">
-<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/FiraSans-SemiBoldItalic.ttf") }}">
+<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/woff2/AlfaSlabOne-Regular.woff2") | safe }}">
+<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/woff2/FiraSans-ExtraBold.woff2") | safe }}">
+<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/woff2/FiraSans-ExtraBoldItalic.woff2") | safe }}">
+<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/woff2/FiraSans-Italic.woff2") | safe }}">
+<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/woff2/FiraSans-Italic.woff2") | safe }}">
+<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/woff2/FiraSans-Regular.woff2") | safe }}">
+<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/woff2/FiraSans-SemiBold.woff2") | safe }}">
+<link rel="preload" as="font" crossorigin href="{{ get_url(path="fonts/woff2/FiraSans-SemiBoldItalic.woff2") | safe }}">
 
 <!-- styles -->
-<link rel="stylesheet" href="{{ get_url(path="styles/skeleton.css") }}"/>
-<link rel="stylesheet" href="{{ get_url(path="styles/tachyons.css") }}"/>
-<link rel="stylesheet" href="{{ config.base_url }}/fonts.css"/>
-<link rel="stylesheet" href="{{ config.base_url }}/app.css"/>
+<link rel="stylesheet" href="{{ get_url(path="styles/skeleton.css") | safe }}"/>
+<link rel="stylesheet" href="{{ get_url(path="styles/tachyons.css") | safe }}"/>
+<link rel="stylesheet" href="{{ config.base_url | safe }}/fonts.css"/>
+<link rel="stylesheet" href="{{ config.base_url | safe }}/app.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path="images/apple-touch-icon.png") }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path="images/favicon-32x32.png") }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path="images/favicon-16x16.png") }}">
-<link rel="shortcut icon" href="{{ get_url(path="images/favicon.ico") }}">
-<link rel="manifest" href="{{ get_url(path="images/site.webmanifest") }}">
-<link rel="mask-icon" color="#5bbad5" href="{{ get_url(path="images/safari-pinned-tab.svg") }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path="images/apple-touch-icon.png") | safe }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path="images/favicon-32x32.png") | safe }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path="images/favicon-16x16.png") | safe }}">
+<link rel="shortcut icon" href="{{ get_url(path="images/favicon.ico") | safe }}">
+<link rel="manifest" href="{{ get_url(path="images/site.webmanifest") | safe }}">
+<link rel="mask-icon" color="#5bbad5" href="{{ get_url(path="images/safari-pinned-tab.svg") | safe }}">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
