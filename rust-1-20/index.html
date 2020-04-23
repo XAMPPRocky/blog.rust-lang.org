@@ -77,8 +77,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
       <p>The Rust team is happy to announce the latest version of Rust, 1.20.0. Rust
 is a systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed, getting Rust 1.20 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1200-2017-08-31">detailed release notes for
@@ -86,16 +86,16 @@ appropriate page on our website, and check out the <a href="https://github.com/r
 <h3 id="what-s-in-1-20-0-stable">What's in 1.20.0 stable</h3>
 <p>In previous Rust versions, you can already define traits, structs, and enums
 that have &quot;associated functions&quot;:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Struct;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Struct;
 
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Struct {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() {
-        println!(&quot;</span><span style="color:#a3be8c;">foo is an associated function of Struct</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Struct {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() {
+        println!(</span><span style="color:#718c00;">&quot;foo is an associated function of Struct&quot;</span><span style="color:#4d4d4c;">);
     }
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
     Struct::foo();
 }
 </span></pre>
@@ -103,15 +103,15 @@ that have &quot;associated functions&quot;:</p>
 associated with the type, that is, they're attached to the type itself, and
 not any particular instance.</p>
 <p>Rust 1.20 adds the ability to define &quot;associated constants&quot; as well:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Struct;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Struct;
 
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Struct {
-    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">ID</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">;
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Struct {
+    </span><span style="color:#8959a8;">const </span><span style="color:#666969;">ID</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">;
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    println!(&quot;</span><span style="color:#a3be8c;">the ID of Struct is: </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, Struct::</span><span style="color:#d08770;">ID</span><span style="color:#c0c5ce;">);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    println!(</span><span style="color:#718c00;">&quot;the ID of Struct is: </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, Struct::</span><span style="color:#666969;">ID</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>That is, the constant <code>ID</code> is associated with <code>Struct</code>. Like functions,
@@ -120,62 +120,62 @@ associated constants work with traits and enums as well.</p>
 extra power. With a trait, you can use an associated constant in the same way
 you'd use an associated type: by declaring it, but not giving it a value. The
 implementor of the trait then declares its value upon implementation:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">trait </span><span style="color:#c0c5ce;">Trait {
-    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">ID</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">trait </span><span style="color:#4d4d4c;">Trait {
+    </span><span style="color:#8959a8;">const </span><span style="color:#666969;">ID</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">;
 }
 
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Struct;
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Struct;
 
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Trait </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">Struct {
-    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">ID</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">;
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Trait </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">Struct {
+    </span><span style="color:#8959a8;">const </span><span style="color:#666969;">ID</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">;
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, Struct::</span><span style="color:#d08770;">ID</span><span style="color:#c0c5ce;">);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, Struct::</span><span style="color:#666969;">ID</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>Before this release, if you wanted to make a trait that represented floating
 point numbers, you'd have to write this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">trait </span><span style="color:#c0c5ce;">Float {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">nan</span><span style="color:#c0c5ce;">() -&gt; </span><span style="color:#b48ead;">Self</span><span style="color:#c0c5ce;">;
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">infinity</span><span style="color:#c0c5ce;">() -&gt; </span><span style="color:#b48ead;">Self</span><span style="color:#c0c5ce;">;
-    ...
-}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">trait </span><span style="color:#4d4d4c;">Float {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">nan</span><span style="color:#4d4d4c;">() -&gt; </span><span style="color:#8959a8;">Self</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">infinity</span><span style="color:#4d4d4c;">() -&gt; </span><span style="color:#8959a8;">Self</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#3e999f;">...
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>This is slightly unwieldy, but more importantly, because they're functions, they
 cannot be used in constant expressions, even though they only return a constant.
 Because of this, a design for <code>Float</code> would also have to include constants as well:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">mod </span><span style="color:#c0c5ce;">f32 {
-    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">NAN</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">f32 </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0.0</span><span style="color:#b48ead;">f32 </span><span style="color:#c0c5ce;">/ </span><span style="color:#d08770;">0.0</span><span style="color:#b48ead;">f32</span><span style="color:#c0c5ce;">;
-    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">INFINITY</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">f32 </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">1.0</span><span style="color:#b48ead;">f32 </span><span style="color:#c0c5ce;">/ </span><span style="color:#d08770;">0.0</span><span style="color:#b48ead;">f32</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">mod </span><span style="color:#4d4d4c;">f32 {
+    </span><span style="color:#8959a8;">const </span><span style="color:#666969;">NAN</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">f32 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">0.0</span><span style="color:#8959a8;">f32 </span><span style="color:#3e999f;">/ </span><span style="color:#f5871f;">0.0</span><span style="color:#8959a8;">f32</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">const </span><span style="color:#666969;">INFINITY</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">f32 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">1.0</span><span style="color:#8959a8;">f32 </span><span style="color:#3e999f;">/ </span><span style="color:#f5871f;">0.0</span><span style="color:#8959a8;">f32</span><span style="color:#4d4d4c;">;
 
-    </span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Float </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">f32 {
-        </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">nan</span><span style="color:#c0c5ce;">() -&gt; </span><span style="color:#b48ead;">Self </span><span style="color:#c0c5ce;">{
-            </span><span style="color:#b48ead;">f32</span><span style="color:#c0c5ce;">::</span><span style="color:#d08770;">NAN
-        </span><span style="color:#c0c5ce;">}
-        </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">infinity</span><span style="color:#c0c5ce;">() -&gt; </span><span style="color:#b48ead;">Self </span><span style="color:#c0c5ce;">{
-            </span><span style="color:#b48ead;">f32</span><span style="color:#c0c5ce;">::</span><span style="color:#d08770;">INFINITY
-        </span><span style="color:#c0c5ce;">}
+    </span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Float </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">f32 {
+        </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">nan</span><span style="color:#4d4d4c;">() -&gt; </span><span style="color:#8959a8;">Self </span><span style="color:#4d4d4c;">{
+            </span><span style="color:#8959a8;">f32</span><span style="color:#4d4d4c;">::</span><span style="color:#666969;">NAN
+        </span><span style="color:#4d4d4c;">}
+        </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">infinity</span><span style="color:#4d4d4c;">() -&gt; </span><span style="color:#8959a8;">Self </span><span style="color:#4d4d4c;">{
+            </span><span style="color:#8959a8;">f32</span><span style="color:#4d4d4c;">::</span><span style="color:#666969;">INFINITY
+        </span><span style="color:#4d4d4c;">}
     }
 }
 </span></pre>
 <p>Associated constants let you do this in a much cleaner way. This trait definition:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">trait </span><span style="color:#c0c5ce;">Float {
-    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">NAN</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">Self</span><span style="color:#c0c5ce;">;
-    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">INFINITY</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">Self</span><span style="color:#c0c5ce;">;
-    ...
-}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">trait </span><span style="color:#4d4d4c;">Float {
+    </span><span style="color:#8959a8;">const </span><span style="color:#666969;">NAN</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">Self</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">const </span><span style="color:#666969;">INFINITY</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">Self</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#3e999f;">...
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>Leads to this implementation:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">mod </span><span style="color:#c0c5ce;">f32 {
-    </span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Float </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">f32 {
-        </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">NAN</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">f32 </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0.0</span><span style="color:#b48ead;">f32 </span><span style="color:#c0c5ce;">/ </span><span style="color:#d08770;">0.0</span><span style="color:#b48ead;">f32</span><span style="color:#c0c5ce;">;
-        </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">INFINITY</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">f32 </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">1.0</span><span style="color:#b48ead;">f32 </span><span style="color:#c0c5ce;">/ </span><span style="color:#d08770;">0.0</span><span style="color:#b48ead;">f32</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">mod </span><span style="color:#4d4d4c;">f32 {
+    </span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Float </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">f32 {
+        </span><span style="color:#8959a8;">const </span><span style="color:#666969;">NAN</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">f32 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">0.0</span><span style="color:#8959a8;">f32 </span><span style="color:#3e999f;">/ </span><span style="color:#f5871f;">0.0</span><span style="color:#8959a8;">f32</span><span style="color:#4d4d4c;">;
+        </span><span style="color:#8959a8;">const </span><span style="color:#666969;">INFINITY</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">f32 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">1.0</span><span style="color:#8959a8;">f32 </span><span style="color:#3e999f;">/ </span><span style="color:#f5871f;">0.0</span><span style="color:#8959a8;">f32</span><span style="color:#4d4d4c;">;
     }
 }
 </span></pre>
@@ -210,16 +210,16 @@ other than using Rust 1.20.</p>
 Stability is a property of sorting algorithms that may or may not matter to you,
 but now you have both options! Here's a brief summary: imagine we had a list
 of words like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rust
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rust
 crate
 package
 cargo
 </span></pre>
 <p>Two of these words, <code>cargo</code> and <code>crate</code>, both start with the letter <code>c</code>. A stable
 sort that sorts only on the first letter must produce this result:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">crate
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">crate
 cargo
 package
 rust
@@ -227,8 +227,8 @@ rust
 <p>That is, because <code>crate</code> came before <code>cargo</code> in the original list, it must also be
 before it in the final list. An unstable sort could provide that result, but could
 also give this answer too:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo
 crate
 package
 rust

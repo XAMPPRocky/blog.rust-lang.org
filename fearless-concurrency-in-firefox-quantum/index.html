@@ -113,8 +113,8 @@ the font size. If the given element is the only element that has a reference to 
 struct, it will just mutate it in place. But if it is not, <code>make_mut()</code> will copy the entire style
 struct into a new, unique reference, which will then be mutated in place and eventually stored on
 the element.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">context.builder.</span><span style="color:#96b5b4;">mutate_font</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">set_font_size</span><span style="color:#c0c5ce;">(computed);
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">context.builder.</span><span style="color:#4271ae;">mutate_font</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">set_font_size</span><span style="color:#4d4d4c;">(computed);
 </span></pre>
 <p>On the other hand, Rust guarantees that it is impossible to mutate the style of the <em>parent</em>
 element, because it is <a href="https://github.com/servo/servo/blob/657b2339a1e68f3a9c4525f35db023d3f149ffac/components/style/properties/properties.mako.rs#L2623-L2627">kept behind an immutable reference</a>. Rayon’s scoped

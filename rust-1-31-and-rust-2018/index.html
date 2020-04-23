@@ -79,8 +79,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 reliable and efficient software.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.31.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/tools/install">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1310-2018-12-06">detailed release notes for
@@ -126,18 +126,18 @@ a cohesive package. This is more than just language features, it also includes</
 </ul>
 <p>We'll be covering all of this and more in this post.</p>
 <p>Let's create a new project with Cargo:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo new foo
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo new foo
 </span></pre>
 <p>Here's the contents of <code>Cargo.toml</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[package]
-</span><span style="color:#bf616a;">name </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">version </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">0.1.0</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">authors </span><span style="color:#c0c5ce;">= [&quot;</span><span style="color:#a3be8c;">Your Name &lt;you@example.com&gt;</span><span style="color:#c0c5ce;">&quot;]
-</span><span style="color:#bf616a;">edition </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">2018</span><span style="color:#c0c5ce;">&quot;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">package</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">name </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;foo&quot;
+</span><span style="color:#c82829;">version </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;0.1.0&quot;
+</span><span style="color:#c82829;">authors </span><span style="color:#4d4d4c;">= [</span><span style="color:#718c00;">&quot;Your Name &lt;you@example.com&gt;&quot;</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">edition </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;2018&quot;
 
-[dependencies]
+</span><span style="color:#4d4d4c;">[</span><span style="color:#c82829;">dependencies</span><span style="color:#4d4d4c;">]
 </span></pre>
 <p>A new key has been added under <code>[package]</code>: <code>edition</code>. Note that it has been
 set to <code>2018</code>. You can also set it to <code>2015</code>, which is the default if the key
@@ -165,18 +165,18 @@ have heard the term &quot;NLL&quot; or &quot;non-lexical lifetimes&quot; thrown 
 jargon, but it has a straightforward translation into simpler terms: the
 borrow checker has gotten smarter, and now accepts some valid code that it
 previously rejected. Consider this example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> x = </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">;
 
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> y = &amp;x;
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> y </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">x;
 
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> z = &amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> x;
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> z </span><span style="color:#3e999f;">= &amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> x;
 }
 </span></pre>
 <p>In older Rust, this is a compile-time error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
  --&gt; src/main.rs:5:18
   |
 4 |     let y = &amp;x;
@@ -192,18 +192,18 @@ though we never use <code>y</code> again. This code is fine, but the borrow chec
 not handle it.</p>
 <p>Today, this code will compile just fine.</p>
 <p>What if we did use <code>y</code>, like this for example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> x = </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">;
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> y = &amp;x;
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> z = &amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> x;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> y </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">x;
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> z </span><span style="color:#3e999f;">= &amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> x;
 
-    println!(&quot;</span><span style="color:#a3be8c;">y: </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, y);
+    println!(</span><span style="color:#718c00;">&quot;y: </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, y);
 }
 </span></pre>
 <p>Older Rust will give you this error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
  --&gt; src/main.rs:5:18
   |
 4 |     let y = &amp;x;
@@ -215,8 +215,8 @@ not handle it.</p>
   | - immutable borrow ends here
 </span></pre>
 <p>With Rust 2018, this error changes for the better:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
  --&gt; src/main.rs:5:13
   |
 4 |     let y = &amp;x;
@@ -257,30 +257,30 @@ for full details.</p>
 <p>Let's talk about a feature that's available in both editions: we've added
 some additional elision rules for <code>impl</code> blocks and function definitions.
 Code like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">impl</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">&gt; Reader </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">BufReader&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">&gt; {
-    </span><span style="color:#65737e;">// methods go here
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">impl</span><span style="color:#4d4d4c;">&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">&gt; Reader </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">BufReader&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">&gt; {
+    </span><span style="color:#999999;">// methods go here
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>can now be written like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Reader </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">BufReader&lt;&#39;_&gt; {
-    </span><span style="color:#65737e;">// methods go here
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Reader </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">BufReader&lt;&#39;</span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">&gt; {
+    </span><span style="color:#999999;">// methods go here
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>The <code>'_</code> lifetime still shows that <code>BufReader</code> takes a parameter, but we
 don't need to create a name for it anymore.</p>
 <p>Lifetimes are still required to be defined in structs. However, we no longer
 require as much boilerplate as before:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// Rust 2015
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Ref&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, T: </span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">&gt; {
-    </span><span style="color:#bf616a;">field</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;"> T
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// Rust 2015
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Ref&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">, T: </span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">&gt; {
+    </span><span style="color:#c82829;">field</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;"> T
 }
 
-</span><span style="color:#65737e;">// Rust 2018
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Ref&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, T&gt; {
-    </span><span style="color:#bf616a;">field</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;"> T
+</span><span style="color:#999999;">// Rust 2018
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Ref&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">, T&gt; {
+    </span><span style="color:#c82829;">field</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;"> T
 }
 </span></pre>
 <p>The <code>: 'a</code> is inferred. You can still be explicit if you prefer. We're
@@ -291,16 +291,16 @@ concrete plans yet.</p>
 <code>fn</code>, an unsafe function with <code>unsafe fn</code>, an external function with <code>extern fn</code>.
 This release adds a new way to qualify a function: <code>const fn</code>. It looks like
 this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">{
-    x + </span><span style="color:#d08770;">1
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">i32 </span><span style="color:#4d4d4c;">{
+    x </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">1
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>A <code>const fn</code> can be called like a regular function, but it can also be used
 in any constant context. When it is, it is evaluated at compile time, rather
 than at run time. As an example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const </span><span style="color:#d08770;">SIX</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">= </span><span style="color:#96b5b4;">foo</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const </span><span style="color:#666969;">SIX</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32 </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">);
 </span></pre>
 <p>This will execute <code>foo</code> at compile time, and set <code>SIX</code> to <code>6</code>.</p>
 <p><code>const fn</code>s cannot do everything that normal <code>fn</code>s can do; they must
@@ -366,12 +366,12 @@ stabilizing something similar: &quot;tool lints,&quot; like
 <code>#[allow(clippy::bool_comparison)]</code> These give a namespace to lints, so that it's
 more clear which tool they're coming from.</p>
 <p>If you previously used Clippy's lints, you can migrate like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// old
-</span><span style="color:#c0c5ce;">#![</span><span style="color:#bf616a;">cfg_attr</span><span style="color:#c0c5ce;">(feature = &quot;</span><span style="color:#a3be8c;">cargo-clippy</span><span style="color:#c0c5ce;">&quot;, </span><span style="color:#bf616a;">allow</span><span style="color:#c0c5ce;">(bool_comparison))]
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// old
+</span><span style="color:#4d4d4c;">#![</span><span style="color:#c82829;">cfg_attr</span><span style="color:#4d4d4c;">(feature </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;cargo-clippy&quot;</span><span style="color:#4d4d4c;">, </span><span style="color:#c82829;">allow</span><span style="color:#4271ae;">(bool_comparison)</span><span style="color:#4d4d4c;">)]
 
-</span><span style="color:#65737e;">// new
-</span><span style="color:#c0c5ce;">#![</span><span style="color:#bf616a;">allow</span><span style="color:#c0c5ce;">(clippy::bool_comparison)]
+</span><span style="color:#999999;">// new
+</span><span style="color:#4d4d4c;">#![</span><span style="color:#c82829;">allow</span><span style="color:#4d4d4c;">(clippy::bool_comparison)]
 </span></pre>
 <p>You don't need <code>cfg_attr</code> anymore! You'll also get warnings that can help you
 update to the new style.</p>
@@ -432,15 +432,15 @@ as well as its mutable and <code>r</code> counterparts (like
 <p>Additionally, now that <code>extern crate</code> is not usually required, it would be
 jarring to do <code>extern crate foo as baz;</code> to rename a crate. As such, you can
 do so in your <code>Cargo.toml</code>, like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[dependencies]
-</span><span style="color:#bf616a;">baz </span><span style="color:#c0c5ce;">= { </span><span style="color:#bf616a;">version </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">0.1</span><span style="color:#c0c5ce;">&quot;, </span><span style="color:#bf616a;">package </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot; }
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">dependencies</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">baz </span><span style="color:#4d4d4c;">= { </span><span style="color:#c82829;">version </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;0.1&quot;</span><span style="color:#4d4d4c;">, </span><span style="color:#c82829;">package </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;foo&quot; </span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>or, the equivalent</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[dependencies.baz]
-</span><span style="color:#bf616a;">version </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">0.1</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">package </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">dependencies.baz</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">version </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;0.1&quot;
+</span><span style="color:#c82829;">package </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;foo&quot;
 </span></pre>
 <p>Now, the <code>foo</code> package will be able to be used via <code>baz</code> in your code.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1310-2018-12-06">detailed release notes</a> for more.</p>

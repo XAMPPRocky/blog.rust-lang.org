@@ -77,8 +77,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
       <p>The Rust team is happy to announce the latest version of Rust, 1.19.0. Rust is a
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed, getting Rust 1.19 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1190-2017-07-20">detailed release notes for
@@ -92,10 +92,10 @@ use Rust, you had to stick with the 2015 tools or use a workaround (such as
 running <code>vcvars.bat</code>). In 1.19.0, <code>rustc</code> now knows how to find the 2017 tools,
 and so they work without a workaround.</p>
 <p>On to new features! Rust 1.19.0 is the first release that supports <a href="https://github.com/rust-lang/rust/pull/42068"><code>union</code>s</a>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">union MyUnion {
-    f1: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">,
-    f2: </span><span style="color:#b48ead;">f32</span><span style="color:#c0c5ce;">,
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">union MyUnion {
+    f1: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">,
+    f2: </span><span style="color:#8959a8;">f32</span><span style="color:#4d4d4c;">,
 }
 </span></pre>
 <p>Unions are kind of like <code>enum</code>s, but they are &quot;untagged&quot;. Enums have a &quot;tag&quot;
@@ -103,20 +103,20 @@ that stores which variant is the correct one at runtime; unions elide this tag.<
 <p>Since we can interpret the data held in the union using the wrong variant and
 Rust can't check this for us, that means reading or writing a union's field is
 unsafe:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> u = MyUnion { f1: </span><span style="color:#d08770;">1 </span><span style="color:#c0c5ce;">};
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> u </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> MyUnion { f1: </span><span style="color:#f5871f;">1 </span><span style="color:#4d4d4c;">};
 
-</span><span style="color:#b48ead;">unsafe </span><span style="color:#c0c5ce;">{ u.f1 = </span><span style="color:#d08770;">5 </span><span style="color:#c0c5ce;">};
+</span><span style="color:#8959a8;">unsafe </span><span style="color:#4d4d4c;">{ u.f1 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">5 </span><span style="color:#4d4d4c;">};
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> value = </span><span style="color:#b48ead;">unsafe </span><span style="color:#c0c5ce;">{ u.f1 };
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> value </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">unsafe </span><span style="color:#4d4d4c;">{ u.f1 };
 </span></pre>
 <p>Pattern matching works too:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">f</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">u</span><span style="color:#c0c5ce;">: MyUnion) {
-    </span><span style="color:#b48ead;">unsafe </span><span style="color:#c0c5ce;">{
-        </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> u {
-            MyUnion { f1: </span><span style="color:#d08770;">10 </span><span style="color:#c0c5ce;">} =&gt; { println!(&quot;</span><span style="color:#a3be8c;">ten</span><span style="color:#c0c5ce;">&quot;); }
-            MyUnion { f2 } =&gt; { println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, f2); }
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">f</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">u</span><span style="color:#4d4d4c;">: MyUnion) {
+    </span><span style="color:#8959a8;">unsafe </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> u {
+            MyUnion { f1: </span><span style="color:#f5871f;">10 </span><span style="color:#4d4d4c;">} </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{ println!(</span><span style="color:#718c00;">&quot;ten&quot;</span><span style="color:#4d4d4c;">); }
+            MyUnion { f2 } </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{ println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, f2); }
         }
     }
 }
@@ -140,17 +140,17 @@ feature was suggested by Josh Triplett, and he <a href="https://youtu.be/U8Gl3RT
 about the process of getting <code>union</code>s into Rust. You should check it out!</p>
 </blockquote>
 <p>In other news, <a href="https://github.com/rust-lang/rust/pull/42016"><code>loop</code>s can now <code>break</code> with a value</a>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// old code
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x;
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// old code
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x;
 
-</span><span style="color:#b48ead;">loop </span><span style="color:#c0c5ce;">{
-    x = </span><span style="color:#d08770;">7</span><span style="color:#c0c5ce;">;
-    </span><span style="color:#b48ead;">break</span><span style="color:#c0c5ce;">;
+</span><span style="color:#8959a8;">loop </span><span style="color:#4d4d4c;">{
+    x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">7</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">break</span><span style="color:#4d4d4c;">;
 }
 
-</span><span style="color:#65737e;">// new code
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = </span><span style="color:#b48ead;">loop </span><span style="color:#c0c5ce;">{ </span><span style="color:#b48ead;">break </span><span style="color:#d08770;">7</span><span style="color:#c0c5ce;">; };
+</span><span style="color:#999999;">// new code
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">loop </span><span style="color:#4d4d4c;">{ </span><span style="color:#8959a8;">break </span><span style="color:#f5871f;">7</span><span style="color:#4d4d4c;">; };
 </span></pre>
 <p>Rust has traditionally positioned itself as an &quot;expression oriented language&quot;, that is,
 most things are expressions that evaluate to a value, rather than statements. <code>loop</code> stuck
@@ -160,8 +160,8 @@ RFC</a>
 for some discussion around the open questions here.</p>
 <p>A smaller feature, closures that do not capture an environment <a href="https://github.com/rust-lang/rust/pull/42162">can now be coerced
 to a function pointer</a>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> f: </span><span style="color:#b48ead;">fn</span><span style="color:#c0c5ce;">(</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">= |</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">| x + </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> f: </span><span style="color:#8959a8;">fn</span><span style="color:#4d4d4c;">(</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">i32 </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">|</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">| x </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>We now produce <a href="https://github.com/rust-lang/rust-installer/pull/57">xz compressed tarballs</a> and prefer them by default,
 making the data transfer smaller and faster. <code>gzip</code>'d tarballs are still produced

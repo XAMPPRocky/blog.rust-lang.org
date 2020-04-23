@@ -79,8 +79,8 @@ programming language that is empowering everyone to build reliable and
 efficient software.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.33.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1330-2019-02-28">detailed release notes for
@@ -101,10 +101,10 @@ field or index operation like <code>x[3] = 42</code>)</li>
 <li>expression statements (e.g. <code>3;</code>)</li>
 </ul>
 <p>You're also <a href="https://github.com/rust-lang/rust/pull/57067/">able to call <code>const unsafe fn</code>s inside a <code>const fn</code></a>, like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const unsafe fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() -&gt; </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">{ </span><span style="color:#d08770;">5 </span><span style="color:#c0c5ce;">}
-</span><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">bar</span><span style="color:#c0c5ce;">() -&gt; </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#b48ead;">unsafe </span><span style="color:#c0c5ce;">{ </span><span style="color:#96b5b4;">foo</span><span style="color:#c0c5ce;">() }
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const unsafe fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() -&gt; </span><span style="color:#8959a8;">i32 </span><span style="color:#4d4d4c;">{ </span><span style="color:#f5871f;">5 </span><span style="color:#4d4d4c;">}
+</span><span style="color:#8959a8;">const fn </span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">() -&gt; </span><span style="color:#8959a8;">i32 </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#8959a8;">unsafe </span><span style="color:#4d4d4c;">{ </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() }
 }
 </span></pre>
 <p>With these additions, many more functions in the standard library are able to
@@ -137,11 +137,11 @@ necessary features at <a href="https://areweasyncyet.rs/">areweasyncyet.rs</a>.<
 <p><a href="https://github.com/rust-lang/rust/pull/56303/">You can now import an item as
 <code>_</code></a>. This allows you to
 import a trait's impls, and not have the name in the namespace. e.g.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::io::Read as _;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::io::Read </span><span style="color:#3e999f;">as _</span><span style="color:#4d4d4c;">;
 
-</span><span style="color:#65737e;">// Allowed as there is only one `Read` in the module.
-</span><span style="color:#b48ead;">pub trait </span><span style="color:#c0c5ce;">Read {}
+</span><span style="color:#999999;">// Allowed as there is only one `Read` in the module.
+</span><span style="color:#8959a8;">pub trait </span><span style="color:#4d4d4c;">Read {}
 </span></pre>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1330-2019-02-28">detailed release notes</a> for more details.</p>
 <h3 id="library-stabilizations">Library stabilizations</h3>

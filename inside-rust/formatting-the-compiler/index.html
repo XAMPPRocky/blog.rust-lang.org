@@ -100,8 +100,8 @@ otherwise once per cycle (coinciding with the bootstrap bump, most likely).</p>
 to change (in particular, merge_derives may be removed in the future), but should be fairly stable.
 Your editor should automatically pick this configuration up inside the rust-lang/rust repository (it
 is located in the <code>rustfmt.toml</code> file in the root).</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">version = &quot;Two&quot;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">version = &quot;Two&quot;
 use_small_heuristics = &quot;Max&quot;
 merge_derives = false
 </span></pre><h2 id="how-to-use-formatting">How to use formatting</h2>
@@ -112,29 +112,29 @@ speed of formatting the entire codebase.</p>
 <h2 id="resolving-conflicts">Resolving conflicts</h2>
 <p>If you have an ongoing branch, you're likely to have merge conflicts. The following should help you
 resolve them:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">#!/bin/bash
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">#!/bin/bash
 
-</span><span style="color:#96b5b4;">set</span><span style="color:#c0c5ce;"> -xeo pipefail
+</span><span style="color:#4271ae;">set -xeo pipefail
 
-</span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[ </span><span style="color:#c0c5ce;">&quot;$</span><span style="color:#bf616a;">1</span><span style="color:#c0c5ce;">&quot; = &quot;</span><span style="color:#a3be8c;">from-rebase</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#96b5b4;">] </span><span style="color:#c0c5ce;">; </span><span style="color:#b48ead;">then
-	</span><span style="color:#bf616a;">git</span><span style="color:#c0c5ce;"> rev-parse HEAD &gt; /tmp/commit
-	</span><span style="color:#bf616a;">git</span><span style="color:#c0c5ce;"> rev-parse HEAD &gt;&gt; /tmp/old.shas
-	</span><span style="color:#bf616a;">./x.py</span><span style="color:#c0c5ce;"> fmt
-	</span><span style="color:#bf616a;">git</span><span style="color:#c0c5ce;"> commit</span><span style="color:#bf616a;"> -a --amend --no-edit
-	git</span><span style="color:#c0c5ce;"> rev-parse HEAD &gt;&gt; /tmp/new.shas
-	</span><span style="color:#bf616a;">git</span><span style="color:#c0c5ce;"> reset</span><span style="color:#bf616a;"> --hard </span><span style="color:#c0c5ce;">$(</span><span style="color:#bf616a;">cat</span><span style="color:#c0c5ce;"> /tmp/commit)
-</span><span style="color:#b48ead;">else
-	</span><span style="color:#bf616a;">rm -f</span><span style="color:#c0c5ce;"> /tmp/old.shas /tmp/commit /tmp/new.shas
-	</span><span style="color:#bf616a;">git</span><span style="color:#c0c5ce;"> rebase 8eb7c58dbb7</span><span style="color:#bf616a;"> --exec </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">../format.sh from-rebase</span><span style="color:#c0c5ce;">&#39;
-	</span><span style="color:#bf616a;">branch</span><span style="color:#c0c5ce;">=$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">git</span><span style="color:#a3be8c;"> rev-parse</span><span style="color:#bf616a;"> --abbrev-ref</span><span style="color:#a3be8c;"> HEAD) </span><span style="color:#65737e;"># get branch name
-	</span><span style="color:#bf616a;">git</span><span style="color:#c0c5ce;"> reset</span><span style="color:#bf616a;"> --hard</span><span style="color:#c0c5ce;"> 8eb7c58dbb7
-	</span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> sha </span><span style="color:#b48ead;">in </span><span style="color:#c0c5ce;">$(</span><span style="color:#bf616a;">cat</span><span style="color:#c0c5ce;"> /tmp/new.shas); </span><span style="color:#b48ead;">do
-		</span><span style="color:#bf616a;">git</span><span style="color:#c0c5ce;"> cherry-pick $</span><span style="color:#bf616a;">sha -Xtheirs
-	</span><span style="color:#b48ead;">done
-  </span><span style="color:#65737e;"># put yourself atop the format the world PR
-</span><span style="color:#c0c5ce;">  git rebase</span><span style="color:#bf616a;"> -Xtheirs</span><span style="color:#c0c5ce;"> a916ac22b9f7f1f0f7aba0a41a789b3ecd765018
-</span><span style="color:#b48ead;">fi
+</span><span style="color:#8959a8;">if </span><span style="color:#4271ae;">[ </span><span style="color:#718c00;">&quot;$</span><span style="color:#c82829;">1</span><span style="color:#718c00;">&quot; </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;from-rebase&quot; </span><span style="color:#4271ae;">] </span><span style="color:#3e999f;">; </span><span style="color:#8959a8;">then
+	</span><span style="color:#c82829;">git</span><span style="color:#4271ae;"> rev-parse HEAD </span><span style="color:#3e999f;">&gt;</span><span style="color:#4271ae;"> /tmp/commit
+	</span><span style="color:#c82829;">git</span><span style="color:#4271ae;"> rev-parse HEAD </span><span style="color:#3e999f;">&gt;&gt;</span><span style="color:#4271ae;"> /tmp/old.shas
+	</span><span style="color:#c82829;">./x.py</span><span style="color:#4271ae;"> fmt
+	</span><span style="color:#c82829;">git</span><span style="color:#4271ae;"> commit</span><span style="color:#f5871f;"> -a --amend --no-edit
+	</span><span style="color:#c82829;">git</span><span style="color:#4271ae;"> rev-parse HEAD </span><span style="color:#3e999f;">&gt;&gt;</span><span style="color:#4271ae;"> /tmp/new.shas
+	</span><span style="color:#c82829;">git</span><span style="color:#4271ae;"> reset</span><span style="color:#f5871f;"> --hard </span><span style="color:#4271ae;">$(</span><span style="color:#c82829;">cat</span><span style="color:#4271ae;"> /tmp/commit)
+</span><span style="color:#8959a8;">else
+	</span><span style="color:#c82829;">rm</span><span style="color:#f5871f;"> -f</span><span style="color:#4271ae;"> /tmp/old.shas /tmp/commit /tmp/new.shas
+	</span><span style="color:#c82829;">git</span><span style="color:#4271ae;"> rebase 8eb7c58dbb7</span><span style="color:#f5871f;"> --exec </span><span style="color:#718c00;">&#39;../format.sh from-rebase&#39;
+	</span><span style="color:#c82829;">branch</span><span style="color:#3e999f;">=</span><span style="color:#718c00;">$(</span><span style="color:#c82829;">git</span><span style="color:#4271ae;"> rev-parse</span><span style="color:#f5871f;"> --abbrev-ref</span><span style="color:#4271ae;"> HEAD</span><span style="color:#718c00;">) </span><span style="color:#999999;"># get branch name
+	</span><span style="color:#c82829;">git</span><span style="color:#4271ae;"> reset</span><span style="color:#f5871f;"> --hard</span><span style="color:#4271ae;"> 8eb7c58dbb7
+	</span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> sha </span><span style="color:#8959a8;">in </span><span style="color:#4d4d4c;">$(</span><span style="color:#c82829;">cat</span><span style="color:#4271ae;"> /tmp/new.shas</span><span style="color:#4d4d4c;">)</span><span style="color:#3e999f;">; </span><span style="color:#8959a8;">do
+		</span><span style="color:#c82829;">git</span><span style="color:#4271ae;"> cherry-pick $</span><span style="color:#c82829;">sha</span><span style="color:#f5871f;"> -Xtheirs
+	</span><span style="color:#8959a8;">done
+  </span><span style="color:#999999;"># put yourself atop the format the world PR
+</span><span style="color:#4271ae;">  git rebase</span><span style="color:#f5871f;"> -Xtheirs</span><span style="color:#4271ae;"> a916ac22b9f7f1f0f7aba0a41a789b3ecd765018
+</span><span style="color:#8959a8;">fi
 </span></pre>
 <p>This script should be saved to <code>format.sh</code> in the parent directory of your Rust
 checkout, and then run <code>git fetch upstream &amp;&amp; ../format.sh</code>. <code>upstream</code> should

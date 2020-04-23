@@ -143,13 +143,13 @@ scope. Values that are still owned when a scope ends are automatically
 destroyed at that point.</p>
 <p>Let's look at some simple examples. Suppose we create a vector and
 push some elements onto it:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">make_vec</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> vec = Vec::new(); </span><span style="color:#65737e;">// owned by make_vec&#39;s scope
-</span><span style="color:#c0c5ce;">    vec.</span><span style="color:#96b5b4;">push</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">);
-    vec.</span><span style="color:#96b5b4;">push</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">);
-    </span><span style="color:#65737e;">// scope ends, `vec` is destroyed
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">make_vec</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> vec </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Vec</span><span style="color:#4d4d4c;">::new(); </span><span style="color:#999999;">// owned by make_vec&#39;s scope
+</span><span style="color:#4d4d4c;">    vec.</span><span style="color:#4271ae;">push</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">);
+    vec.</span><span style="color:#4271ae;">push</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">);
+    </span><span style="color:#999999;">// scope ends, `vec` is destroyed
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>The scope that creates a value also initially owns it. In this case,
 the body of <code>make_vec</code> is the owning scope for <code>vec</code>. The owner can do
@@ -157,28 +157,28 @@ anything it likes with <code>vec</code>, including mutating it by pushing. At th
 end of the scope, <code>vec</code> is still owned, so it is automatically
 deallocated.</p>
 <p>Things get more interesting if the vector is returned or passed around:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">make_vec</span><span style="color:#c0c5ce;">() -&gt; Vec&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt; {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> vec = Vec::new();
-    vec.</span><span style="color:#96b5b4;">push</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">);
-    vec.</span><span style="color:#96b5b4;">push</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">);
-    vec </span><span style="color:#65737e;">// transfer ownership to the caller
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">make_vec</span><span style="color:#4d4d4c;">() -&gt; Vec&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt; {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> vec </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Vec</span><span style="color:#4d4d4c;">::new();
+    vec.</span><span style="color:#4271ae;">push</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">);
+    vec.</span><span style="color:#4271ae;">push</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">);
+    vec </span><span style="color:#999999;">// transfer ownership to the caller
+</span><span style="color:#4d4d4c;">}
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">print_vec</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">vec</span><span style="color:#c0c5ce;">: Vec&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt;) {
-    </span><span style="color:#65737e;">// the `vec` parameter is part of this scope, so it&#39;s owned by `print_vec`
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">print_vec</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">vec</span><span style="color:#4d4d4c;">: Vec&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt;) {
+    </span><span style="color:#999999;">// the `vec` parameter is part of this scope, so it&#39;s owned by `print_vec`
 
-    </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> i in vec.</span><span style="color:#96b5b4;">iter</span><span style="color:#c0c5ce;">() {
-        println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, i)
+    </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> i </span><span style="color:#3e999f;">in</span><span style="color:#4d4d4c;"> vec.</span><span style="color:#4271ae;">iter</span><span style="color:#4d4d4c;">() {
+        println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, i)
     }
 
-    </span><span style="color:#65737e;">// now, `vec` is deallocated
-</span><span style="color:#c0c5ce;">}
+    </span><span style="color:#999999;">// now, `vec` is deallocated
+</span><span style="color:#4d4d4c;">}
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">use_vec</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> vec = </span><span style="color:#96b5b4;">make_vec</span><span style="color:#c0c5ce;">(); </span><span style="color:#65737e;">// take ownership of the vector
-    </span><span style="color:#96b5b4;">print_vec</span><span style="color:#c0c5ce;">(vec);       </span><span style="color:#65737e;">// pass ownership to `print_vec`
-</span><span style="color:#c0c5ce;">}
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">use_vec</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> vec </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">make_vec</span><span style="color:#4d4d4c;">(); </span><span style="color:#999999;">// take ownership of the vector
+    </span><span style="color:#4271ae;">print_vec</span><span style="color:#4d4d4c;">(vec);       </span><span style="color:#999999;">// pass ownership to `print_vec`
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>Now, just before <code>make_vec</code>'s scope ends, <code>vec</code> is moved out by
 returning it; it is not destroyed. A caller like <code>use_vec</code> then
@@ -189,19 +189,19 @@ caller. Since <code>print_vec</code> does not transfer the ownership any further
 at the end of its scope the vector is destroyed.</p>
 <p>Once ownership has been given away, a value can no longer be used. For
 example, consider this variant of <code>use_vec</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">use_vec</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> vec = </span><span style="color:#96b5b4;">make_vec</span><span style="color:#c0c5ce;">();  </span><span style="color:#65737e;">// take ownership of the vector
-    </span><span style="color:#96b5b4;">print_vec</span><span style="color:#c0c5ce;">(vec);        </span><span style="color:#65737e;">// pass ownership to `print_vec`
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">use_vec</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> vec </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">make_vec</span><span style="color:#4d4d4c;">();  </span><span style="color:#999999;">// take ownership of the vector
+    </span><span style="color:#4271ae;">print_vec</span><span style="color:#4d4d4c;">(vec);        </span><span style="color:#999999;">// pass ownership to `print_vec`
 
-    </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> i in vec.</span><span style="color:#96b5b4;">iter</span><span style="color:#c0c5ce;">() {  </span><span style="color:#65737e;">// continue using `vec`
-        </span><span style="color:#c0c5ce;">println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, i * </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">)
+    </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> i </span><span style="color:#3e999f;">in</span><span style="color:#4d4d4c;"> vec.</span><span style="color:#4271ae;">iter</span><span style="color:#4d4d4c;">() {  </span><span style="color:#999999;">// continue using `vec`
+        </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, i </span><span style="color:#3e999f;">* </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">)
     }
 }
 </span></pre>
 <p>If you feed this version to the compiler, you'll get an  error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error: use of moved value: `vec`
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error: use of moved value: `vec`
 
 for i in vec.iter() {
          ^~~
@@ -221,25 +221,25 @@ will check that these leases do not outlive the object being
 borrowed</strong>.</p>
 <p>To borrow a value, you make a <em>reference</em> to it (a kind of pointer),
 using the <code>&amp;</code> operator:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">print_vec</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">vec</span><span style="color:#c0c5ce;">: &amp;Vec&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt;) {
-    </span><span style="color:#65737e;">// the `vec` parameter is borrowed for this scope
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">print_vec</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">vec</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Vec&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt;) {
+    </span><span style="color:#999999;">// the `vec` parameter is borrowed for this scope
 
-    </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> i in vec.</span><span style="color:#96b5b4;">iter</span><span style="color:#c0c5ce;">() {
-        println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, i)
+    </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> i </span><span style="color:#3e999f;">in</span><span style="color:#4d4d4c;"> vec.</span><span style="color:#4271ae;">iter</span><span style="color:#4d4d4c;">() {
+        println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, i)
     }
 
-    </span><span style="color:#65737e;">// now, the borrow ends
-</span><span style="color:#c0c5ce;">}
+    </span><span style="color:#999999;">// now, the borrow ends
+</span><span style="color:#4d4d4c;">}
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">use_vec</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> vec = </span><span style="color:#96b5b4;">make_vec</span><span style="color:#c0c5ce;">();  </span><span style="color:#65737e;">// take ownership of the vector
-    </span><span style="color:#96b5b4;">print_vec</span><span style="color:#c0c5ce;">(&amp;vec);       </span><span style="color:#65737e;">// lend access to `print_vec`
-    </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> i in vec.</span><span style="color:#96b5b4;">iter</span><span style="color:#c0c5ce;">() {  </span><span style="color:#65737e;">// continue using `vec`
-        </span><span style="color:#c0c5ce;">println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, i * </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">)
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">use_vec</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> vec </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">make_vec</span><span style="color:#4d4d4c;">();  </span><span style="color:#999999;">// take ownership of the vector
+    </span><span style="color:#4271ae;">print_vec</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">vec);       </span><span style="color:#999999;">// lend access to `print_vec`
+    </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> i </span><span style="color:#3e999f;">in</span><span style="color:#4d4d4c;"> vec.</span><span style="color:#4271ae;">iter</span><span style="color:#4d4d4c;">() {  </span><span style="color:#999999;">// continue using `vec`
+        </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, i </span><span style="color:#3e999f;">* </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">)
     }
-    </span><span style="color:#65737e;">// vec is destroyed here
-</span><span style="color:#c0c5ce;">}
+    </span><span style="color:#999999;">// vec is destroyed here
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>Now <code>print_vec</code> takes a reference to a vector, and <code>use_vec</code> lends out
 the vector by writing <code>&amp;vec</code>. Since borrows are temporary, <code>use_vec</code>
@@ -263,10 +263,10 @@ active references at that time, but the value can be mutated.</p>
 <p>Rust checks these rules at compile time; borrowing has no runtime
 overhead.</p>
 <p>Why have two kinds of references? Consider a function like:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">push_all</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">from</span><span style="color:#c0c5ce;">: &amp;Vec&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt;, </span><span style="color:#bf616a;">to</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">mut </span><span style="color:#c0c5ce;">Vec&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt;) {
-    </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> i in from.</span><span style="color:#96b5b4;">iter</span><span style="color:#c0c5ce;">() {
-        to.</span><span style="color:#96b5b4;">push</span><span style="color:#c0c5ce;">(*i);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">push_all</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">from</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Vec&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt;, </span><span style="color:#f5871f;">to</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut </span><span style="color:#4d4d4c;">Vec&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt;) {
+    </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> i </span><span style="color:#3e999f;">in</span><span style="color:#4d4d4c;"> from.</span><span style="color:#4271ae;">iter</span><span style="color:#4d4d4c;">() {
+        to.</span><span style="color:#4271ae;">push</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">i);
     }
 }
 </span></pre>
@@ -274,8 +274,8 @@ overhead.</p>
 onto another. The iterator keeps a pointer into the vector at the
 current and final positions, stepping one toward the other.</p>
 <p>What if we called this function with the same vector for both arguments?</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#96b5b4;">push_all</span><span style="color:#c0c5ce;">(&amp;vec, &amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> vec)
+<pre style="background-color:#ffffff;">
+<span style="color:#4271ae;">push_all</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">vec, </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> vec)
 </span></pre>
 <p>This would spell disaster! As we're pushing elements onto the vector,
 it will occasionally need to resize, allocating a new hunk of memory
@@ -284,8 +284,8 @@ dangling pointer into the old memory, leading to memory unsafety (with
 attendant segfaults or worse).</p>
 <p>Fortunately, Rust ensures that <strong>whenever a mutable borrow is active,
 no other borrows of the object are active</strong>, producing the message:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error: cannot borrow `vec` as mutable because it is also borrowed as immutable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error: cannot borrow `vec` as mutable because it is also borrowed as immutable
 push_all(&amp;vec, &amp;mut vec);
                     ^~~
 </span></pre>
@@ -305,9 +305,9 @@ communicating.</p>
 <p><strong>Rust's ownership makes it easy to turn that advice into a
 compiler-checked rule</strong>. Consider the following channel API
 (<a href="http://static.rust-lang.org/doc/master/std/sync/mpsc/index.html">channels in Rust's standard library</a> are a bit different):</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">send</span><span style="color:#c0c5ce;">&lt;T: Send&gt;(</span><span style="color:#bf616a;">chan</span><span style="color:#c0c5ce;">: &amp;Channel&lt;T&gt;, </span><span style="color:#bf616a;">t</span><span style="color:#c0c5ce;">: T);
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">recv</span><span style="color:#c0c5ce;">&lt;T: Send&gt;(</span><span style="color:#bf616a;">chan</span><span style="color:#c0c5ce;">: &amp;Channel&lt;T&gt;) -&gt; T;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">send</span><span style="color:#4d4d4c;">&lt;T: Send&gt;(</span><span style="color:#f5871f;">chan</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Channel&lt;T&gt;, </span><span style="color:#f5871f;">t</span><span style="color:#4d4d4c;">: T);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">recv</span><span style="color:#4d4d4c;">&lt;T: Send&gt;(</span><span style="color:#f5871f;">chan</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Channel&lt;T&gt;) -&gt; T;
 </span></pre>
 <p>Channels are generic over the type of data they transmit (the <code>&lt;T: Send&gt;</code> part of the API). The <code>Send</code> part means that <code>T</code> must be
 considered safe to send between threads; we'll come back to that later
@@ -316,13 +316,13 @@ in the post, but for now it's enough to know that <code>Vec&lt;i32&gt;</code> is
 <p>As always in Rust, passing in a <code>T</code> to the <code>send</code> function means
 transferring ownership of it. This fact has profound consequences: it
 means that code like the following will generate a compiler error.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// Suppose chan: Channel&lt;Vec&lt;i32&gt;&gt;
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// Suppose chan: Channel&lt;Vec&lt;i32&gt;&gt;
 
-</span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> vec = Vec::new();
-</span><span style="color:#65737e;">// do some computation
-</span><span style="color:#96b5b4;">send</span><span style="color:#c0c5ce;">(&amp;chan, vec);
-</span><span style="color:#96b5b4;">print_vec</span><span style="color:#c0c5ce;">(&amp;vec);
+</span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> vec </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Vec</span><span style="color:#4d4d4c;">::new();
+</span><span style="color:#999999;">// do some computation
+</span><span style="color:#4271ae;">send</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">chan, vec);
+</span><span style="color:#4271ae;">print_vec</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">vec);
 </span></pre>
 <p>Here, the thread creates a vector, sends it to another thread, and
 then continues using it. The thread receiving the vector could mutate
@@ -330,8 +330,8 @@ it as this thread continues running, so the call to <code>print_vec</code> could
 lead to race condition or, for that matter, a use-after-free bug.</p>
 <p>Instead, the Rust compiler will produce an error message on the call
 to <code>print_vec</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">Error: use of moved value `vec`
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">Error: use of moved value `vec`
 </span></pre>
 <p>Disaster averted.</p>
 <h3 id="locks">Locks</h3>
@@ -364,15 +364,15 @@ synchronization at runtime. That leads to a locking API that hooks
 directly into Rust's ownership system.</p>
 <p>Here is a simplified version (the <a href="http://static.rust-lang.org/doc/master/std/sync/struct.Mutex.html">standard library's</a>
 is more ergonomic):</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// create a new mutex
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">mutex</span><span style="color:#c0c5ce;">&lt;T: Send&gt;(</span><span style="color:#bf616a;">t</span><span style="color:#c0c5ce;">: T) -&gt; Mutex&lt;T&gt;;
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// create a new mutex
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">mutex</span><span style="color:#4d4d4c;">&lt;T: Send&gt;(</span><span style="color:#f5871f;">t</span><span style="color:#4d4d4c;">: T) -&gt; Mutex&lt;T&gt;;
 
-</span><span style="color:#65737e;">// acquire the lock
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">lock</span><span style="color:#c0c5ce;">&lt;T: Send&gt;(</span><span style="color:#bf616a;">mutex</span><span style="color:#c0c5ce;">: &amp;Mutex&lt;T&gt;) -&gt; MutexGuard&lt;T&gt;;
+</span><span style="color:#999999;">// acquire the lock
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">lock</span><span style="color:#4d4d4c;">&lt;T: Send&gt;(</span><span style="color:#f5871f;">mutex</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Mutex&lt;T&gt;) -&gt; MutexGuard&lt;T&gt;;
 
-</span><span style="color:#65737e;">// access the data protected by the lock
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">access</span><span style="color:#c0c5ce;">&lt;T: Send&gt;(</span><span style="color:#bf616a;">guard</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">mut </span><span style="color:#c0c5ce;">MutexGuard&lt;T&gt;) -&gt; &amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> T;
+</span><span style="color:#999999;">// access the data protected by the lock
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">access</span><span style="color:#4d4d4c;">&lt;T: Send&gt;(</span><span style="color:#f5871f;">guard</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut </span><span style="color:#4d4d4c;">MutexGuard&lt;T&gt;) -&gt; </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> T;
 </span></pre>
 <p>This lock API is unusual in several respects.</p>
 <p>First, the <code>Mutex</code> type is generic over a type <code>T</code> of <strong>the data
@@ -386,20 +386,20 @@ it is destroyed; there is no separate <code>unlock</code> function.</p>
 <p>The only way to access the lock is through the <code>access</code> function,
 which turns a mutable borrow of the guard into a mutable borrow of the
 data (with a shorter lease):</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">use_lock</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">mutex</span><span style="color:#c0c5ce;">: &amp;Mutex&lt;Vec&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt;&gt;) {
-    </span><span style="color:#65737e;">// acquire the lock, taking ownership of a guard;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">use_lock</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">mutex</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Mutex&lt;Vec&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt;&gt;) {
+    </span><span style="color:#999999;">// acquire the lock, taking ownership of a guard;
     // the lock is held for the rest of the scope
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> guard = </span><span style="color:#96b5b4;">lock</span><span style="color:#c0c5ce;">(mutex);
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> guard </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">lock</span><span style="color:#4d4d4c;">(mutex);
 
-    </span><span style="color:#65737e;">// access the data by mutably borrowing the guard
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> vec = </span><span style="color:#96b5b4;">access</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> guard);
+    </span><span style="color:#999999;">// access the data by mutably borrowing the guard
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> vec </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">access</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> guard);
 
-    </span><span style="color:#65737e;">// vec has type `&amp;mut Vec&lt;i32&gt;`
-</span><span style="color:#c0c5ce;">    vec.</span><span style="color:#96b5b4;">push</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">);
+    </span><span style="color:#999999;">// vec has type `&amp;mut Vec&lt;i32&gt;`
+</span><span style="color:#4d4d4c;">    vec.</span><span style="color:#4271ae;">push</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">);
 
-    </span><span style="color:#65737e;">// lock automatically released here, when `guard` is destroyed
-</span><span style="color:#c0c5ce;">}
+    </span><span style="color:#999999;">// lock automatically released here, when `guard` is destroyed
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>There are two key ingredients here:</p>
 <ul>
@@ -415,25 +415,25 @@ data (with a shorter lease):</p>
 you access lock-protected data except when holding the lock</strong>. Any
 attempt to do otherwise will generate a compiler error. For example,
 consider the following buggy &quot;refactoring&quot;:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">use_lock</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">mutex</span><span style="color:#c0c5ce;">: &amp;Mutex&lt;Vec&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt;&gt;) {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> vec = {
-        </span><span style="color:#65737e;">// acquire the lock
-        </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> guard = </span><span style="color:#96b5b4;">lock</span><span style="color:#c0c5ce;">(mutex);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">use_lock</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">mutex</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Mutex&lt;Vec&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt;&gt;) {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> vec </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#999999;">// acquire the lock
+        </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> guard </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">lock</span><span style="color:#4d4d4c;">(mutex);
 
-        </span><span style="color:#65737e;">// attempt to return a borrow of the data
-        </span><span style="color:#96b5b4;">access</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> guard)
+        </span><span style="color:#999999;">// attempt to return a borrow of the data
+        </span><span style="color:#4271ae;">access</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> guard)
 
-        </span><span style="color:#65737e;">// guard is destroyed here, releasing the lock
-    </span><span style="color:#c0c5ce;">};
+        </span><span style="color:#999999;">// guard is destroyed here, releasing the lock
+    </span><span style="color:#4d4d4c;">};
 
-    </span><span style="color:#65737e;">// attempt to access the data outside of the lock.
-</span><span style="color:#c0c5ce;">    vec.</span><span style="color:#96b5b4;">push</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">);
+    </span><span style="color:#999999;">// attempt to access the data outside of the lock.
+</span><span style="color:#4d4d4c;">    vec.</span><span style="color:#4271ae;">push</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>Rust will generate an error pinpointing the problem:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error: `guard` does not live long enough
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error: `guard` does not live long enough
 access(&amp;mut guard)
             ^~~~~
 </span></pre>
@@ -478,8 +478,8 @@ boundaries, they are also the point of enforcement for <code>Send</code>.</p>
 <code>Rc</code> and other thread-<em>unsafe</em> types with confidence, knowing that if
 they ever do accidentally try to send one to another thread, the Rust
 compiler will say:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">`Rc&lt;Vec&lt;i32&gt;&gt;` cannot be sent between threads safely
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">`Rc&lt;Vec&lt;i32&gt;&gt;` cannot be sent between threads safely
 </span></pre>
 <p>Disaster averted.</p>
 <h3 id="sharing-the-stack-scoped">Sharing the stack: &quot;scoped&quot;</h3>
@@ -492,12 +492,12 @@ and <a href="https://crates.io/crates/scoped_threadpool"><code>scoped_threadpool
 on the heap that get shared between threads. But what if we wanted to
 start some threads that make use of data living in our stack frame?
 That could be dangerous:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">parent</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> vec = Vec::new();
-    </span><span style="color:#65737e;">// fill the vector
-    </span><span style="color:#c0c5ce;">thread::spawn(|| {
-        </span><span style="color:#96b5b4;">print_vec</span><span style="color:#c0c5ce;">(&amp;vec)
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">parent</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> vec </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Vec</span><span style="color:#4d4d4c;">::new();
+    </span><span style="color:#999999;">// fill the vector
+    </span><span style="color:#4d4d4c;">thread::spawn(|| {
+        </span><span style="color:#4271ae;">print_vec</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">vec)
     })
 }
 </span></pre>
@@ -506,14 +506,14 @@ the stack frame of <code>parent</code>. When <code>parent</code> exits, the stac
 popped, but the child thread is none the wiser. Oops!</p>
 <p>To rule out such memory unsafety, Rust's basic thread spawning API
 looks a bit like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">spawn</span><span style="color:#c0c5ce;">&lt;F&gt;(</span><span style="color:#bf616a;">f</span><span style="color:#c0c5ce;">: F) </span><span style="color:#b48ead;">where</span><span style="color:#c0c5ce;"> F: </span><span style="color:#b48ead;">&#39;static</span><span style="color:#c0c5ce;">, ...
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">spawn</span><span style="color:#4d4d4c;">&lt;F&gt;(</span><span style="color:#f5871f;">f</span><span style="color:#4d4d4c;">: F) </span><span style="color:#8959a8;">where</span><span style="color:#4d4d4c;"> F: </span><span style="color:#8959a8;">&#39;static</span><span style="color:#4d4d4c;">, ...
 </span></pre>
 <p>The <code>'static</code> constraint is a way of saying, roughly, that no borrowed
 data is permitted in the closure.  It means that a function like
 <code>parent</code> above will generate an error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error: `vec` does not live long enough
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error: `vec` does not live long enough
 </span></pre>
 <p>essentially catching the possibility of <code>parent</code>'s stack frame
 popping. Disaster averted.</p>
@@ -522,8 +522,8 @@ stack frame stays put until the child thread is done. This is the
 pattern of <em>fork-join</em> programming, often used for divide-and-conquer
 parallel algorithms. Rust supports it by providing a
 <a href="https://doc.rust-lang.org/1.0.0/std/thread/fn.scoped.html">&quot;scoped&quot;</a> variant of thread spawning:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">scoped</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, F&gt;(</span><span style="color:#bf616a;">f</span><span style="color:#c0c5ce;">: F) -&gt; JoinGuard&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">&gt; </span><span style="color:#b48ead;">where</span><span style="color:#c0c5ce;"> F: </span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, ...
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">scoped</span><span style="color:#4d4d4c;">&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">, F&gt;(</span><span style="color:#f5871f;">f</span><span style="color:#4d4d4c;">: F) -&gt; JoinGuard&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">&gt; </span><span style="color:#8959a8;">where</span><span style="color:#4d4d4c;"> F: </span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">, ...
 </span></pre>
 <p>There are two key differences from the <code>spawn</code> API above:</p>
 <ul>
@@ -545,15 +545,15 @@ words, Rust guarantees that the parent thread waits for the child to
 finish before popping any stack frames the child might have access to.</p>
 <p>Thus by adjusting our previous example, we can fix the bug and satisfy
 the compiler:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">parent</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> vec = Vec::new();
-    </span><span style="color:#65737e;">// fill the vector
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> guard = thread::scoped(|| {
-        </span><span style="color:#96b5b4;">print_vec</span><span style="color:#c0c5ce;">(&amp;vec)
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">parent</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> vec </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Vec</span><span style="color:#4d4d4c;">::new();
+    </span><span style="color:#999999;">// fill the vector
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> guard </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">thread::scoped(|| {
+        </span><span style="color:#4271ae;">print_vec</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">vec)
     });
-    </span><span style="color:#65737e;">// guard destroyed here, implicitly joining
-</span><span style="color:#c0c5ce;">}
+    </span><span style="color:#999999;">// guard destroyed here, implicitly joining
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>So in Rust, you can freely borrow stack data into child threads,
 confident that the compiler will check for sufficient synchronization.</p>

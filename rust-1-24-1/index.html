@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.24.1 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1241-2018-03-01">detailed release notes for
@@ -111,9 +111,9 @@ Rust generally strives to minimize undefined behavior, having none of it in
 safe code, and as little as possible in unsafe code. One area where you could
 invoke UB is when a panic! goes across an FFI boundary. In other words, this:</p>
 </blockquote>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">extern </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">C</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">panic_in_ffi</span><span style="color:#c0c5ce;">() {
-    panic!(&quot;</span><span style="color:#a3be8c;">Test</span><span style="color:#c0c5ce;">&quot;);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">extern </span><span style="color:#718c00;">&quot;C&quot; </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">panic_in_ffi</span><span style="color:#4d4d4c;">() {
+    panic!(</span><span style="color:#718c00;">&quot;Test&quot;</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <blockquote>
@@ -184,10 +184,10 @@ SEH, as do Rust panics.</p>
 <p>Before we can sort the exact details of what's happening, let's look at how <code>rlua</code>
 works. <code>rlua</code> has an internal function, <code>protect_lua_call</code>, used to call into
 Lua. Using it looks like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#96b5b4;">protect_lua_call</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.state, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, |</span><span style="color:#bf616a;">state</span><span style="color:#c0c5ce;">| {
+<pre style="background-color:#ffffff;">
+<span style="color:#4271ae;">protect_lua_call</span><span style="color:#4d4d4c;">(</span><span style="color:#c82829;">self</span><span style="color:#4d4d4c;">.state, </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, |</span><span style="color:#f5871f;">state</span><span style="color:#4d4d4c;">| {
     ffi::lua_newtable(state);
-})?;
+})</span><span style="color:#3e999f;">?</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>That is, <code>protect_lua_call</code> takes some arguments, one of which is a closure. This
 closure is passed to <code>lua_pcall</code>, which catches any <code>longjmp</code>s that may be thrown
@@ -205,16 +205,16 @@ by the code passed to it, aka, that closure.</p>
 <code>extern fn</code>, since that's what Lua needs. So, with the changes in 1.24.0, it
 sets up a panic handler that will cause an abort. In other words, the code
 sorta looks something like this pseudo code now:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#96b5b4;">protect_lua_call</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.state, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, |</span><span style="color:#bf616a;">state</span><span style="color:#c0c5ce;">| {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> result = panic::catch_unwind(|| {
+<pre style="background-color:#ffffff;">
+<span style="color:#4271ae;">protect_lua_call</span><span style="color:#4d4d4c;">(</span><span style="color:#c82829;">self</span><span style="color:#4d4d4c;">.state, </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, |</span><span style="color:#f5871f;">state</span><span style="color:#4d4d4c;">| {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> result </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">panic::catch_unwind(|| {
         ffi::lua_newtable(state);
     });
 
-    </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> result.</span><span style="color:#96b5b4;">is_err</span><span style="color:#c0c5ce;">() {
+    </span><span style="color:#8959a8;">if</span><span style="color:#4d4d4c;"> result.</span><span style="color:#4271ae;">is_err</span><span style="color:#4d4d4c;">() {
         process::abort();
     }
-})?;
+})</span><span style="color:#3e999f;">?</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>Earlier, when discussing <code>setjmp</code>/<code>longjmp</code>, we said that the issue with it in
 Rust code is that it doesn't handle Rust destructors. So, on every platform but

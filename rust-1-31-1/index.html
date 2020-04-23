@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.31.1 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1311-2018-12-20">detailed release notes for
@@ -92,20 +92,20 @@ crate</a> used by the compiler.</p>
 First, <a href="https://github.com/rust-lang/rls/pull/1170">hovering over the type with documentation above single-line
 attributes led to 100% CPU
 usage:</a></p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">/// Some documentation
-</span><span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">derive</span><span style="color:#c0c5ce;">(Debug)] </span><span style="color:#65737e;">// Multiple, single-line
-</span><span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">allow</span><span style="color:#c0c5ce;">(missing_docs)] </span><span style="color:#65737e;">// attributes
-</span><span style="color:#b48ead;">pub struct </span><span style="color:#c0c5ce;">MyStruct { </span><span style="color:#65737e;">/* ... */ </span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">/// Some documentation
+</span><span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">derive</span><span style="color:#4d4d4c;">(Debug)] </span><span style="color:#999999;">// Multiple, single-line
+</span><span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">allow</span><span style="color:#4d4d4c;">(missing_docs)] </span><span style="color:#999999;">// attributes
+</span><span style="color:#8959a8;">pub struct </span><span style="color:#4d4d4c;">MyStruct { </span><span style="color:#999999;">/* ... */ </span><span style="color:#4d4d4c;">}
 </span></pre>
 <p><a href="https://github.com/rust-lang/rls/pull/1171">Go to definition was fixed for std types</a>:
 Before, using the RLS on <code>HashMap</code>, for example, tried to open this file</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/libstd/collections/hash/map.rs
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/libstd/collections/hash/map.rs
 </span></pre>
 <p>and now RLS goes to the correct location (for Rust 1.31, note the extra <code>src</code>):</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libstd/collections/hash/map.rs
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libstd/collections/hash/map.rs
 </span></pre>
     </div>
   </div>

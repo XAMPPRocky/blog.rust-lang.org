@@ -91,16 +91,16 @@ part of our migration story for the 2018 edition, making the transition from
 is essential, since without such a tool we'd be much more limited in the kinds
 of breaking changes users would accept.</p>
 <p>A simple example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">trait </span><span style="color:#c0c5ce;">Foo {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">trait </span><span style="color:#4d4d4c;">Foo {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">, </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>The above is legal in Rust 2015, but not in Rust 2018 (method arguments must be
 made explicit). Rustfix changes the above code to:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">trait </span><span style="color:#c0c5ce;">Foo {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">, _: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">trait </span><span style="color:#4d4d4c;">Foo {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">, </span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>For detailed information on how to use Rustfix, see <a href="https://doc.rust-lang.org/stable/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html">these instructions</a>.
@@ -124,14 +124,14 @@ warning (<code>warn</code>).</p>
 lint checks that you haven't made an error by iterating on the result of <code>next</code>
 rather than the object you're calling <code>next</code> on (this is an easy mistake to make
 when changing a <code>while let</code> loop to a <code>for</code> loop).</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> x in y.</span><span style="color:#96b5b4;">next</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#65737e;">// ...
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">in</span><span style="color:#4d4d4c;"> y.</span><span style="color:#4271ae;">next</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#999999;">// ...
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>will give the error</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error: you are iterating over `Iterator::next()` which is an Option; this will compile but is probably not what you want
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error: you are iterating over `Iterator::next()` which is an Option; this will compile but is probably not what you want
  --&gt; src/main.rs:4:14
   |
 4 |     for x in y.next() {

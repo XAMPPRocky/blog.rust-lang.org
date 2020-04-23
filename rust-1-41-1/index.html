@@ -77,8 +77,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
       <p>The Rust team has published a new point release of Rust, 1.41.1.
 Rust is a programming language that is empowering everyone to build reliable and efficient software.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust 1.41.1 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/tools/install">get <code>rustup</code></a> from the appropriate page on our website.</p>
 <h2 id="what-s-in-1-41-1-stable">What's in 1.41.1 stable</h2>
@@ -94,20 +94,20 @@ the borrow checker accidentally allowed some unsound programs.
 Specifically, the borrow checker would not check that <code>static</code> items had the correct type.
 This in turn would allow the assignment of a temporary,
 with a lifetime less than <code>'static</code>, to a <code>static</code> variable:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">static mut </span><span style="color:#d08770;">MY_STATIC</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">&#39;static u8 </span><span style="color:#c0c5ce;">= &amp;</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">static mut </span><span style="color:#666969;">MY_STATIC</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;static u8 </span><span style="color:#3e999f;">= &amp;</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">;
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> my_temporary = </span><span style="color:#d08770;">42</span><span style="color:#c0c5ce;">;
-    </span><span style="color:#b48ead;">unsafe </span><span style="color:#c0c5ce;">{
-        </span><span style="color:#65737e;">// Erroneously allowed in 1.41.0:
-        </span><span style="color:#d08770;">MY_STATIC </span><span style="color:#c0c5ce;">= &amp;my_temporary;
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> my_temporary </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">42</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">unsafe </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#999999;">// Erroneously allowed in 1.41.0:
+        </span><span style="color:#666969;">MY_STATIC </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">my_temporary;
     }
 }
 </span></pre>
 <p>This was addressed in 1.41.1, with the program failing to compile:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0597]: `my_temporary` does not live long enough
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0597]: `my_temporary` does not live long enough
  --&gt; src/main.rs:6:21
   |
 6 |         MY_STATIC = &amp;my_temporary;
@@ -123,32 +123,32 @@ with a lifetime less than <code>'static</code>, to a <code>static</code> variabl
 <p>You can learn more about this bug in <a href="https://github.com/rust-lang/rust/issues/69114">issue #69114</a> and the <a href="https://github.com/rust-lang/rust/pull/69145">PR that fixed it</a>.</p>
 <h3 id="respecting-a-static-lifetime-in-a-copy-implementation">Respecting a <code>'static</code> lifetime in a <code>Copy</code> implementation</h3>
 <p>Ever since Rust 1.0, the following erroneous program has been compiling:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">derive</span><span style="color:#c0c5ce;">(Clone)]
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Foo&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">&gt;(&amp;</span><span style="color:#b48ead;">&#39;a u32</span><span style="color:#c0c5ce;">);
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Copy </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">Foo&lt;</span><span style="color:#b48ead;">&#39;static</span><span style="color:#c0c5ce;">&gt; {}
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">derive</span><span style="color:#4d4d4c;">(Clone)]
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Foo&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">&gt;(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;a u32</span><span style="color:#4d4d4c;">);
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Copy </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">Foo&lt;</span><span style="color:#8959a8;">&#39;static</span><span style="color:#4d4d4c;">&gt; {}
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> temporary = </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">;
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> foo = (Foo(&amp;temporary),);
-    </span><span style="color:#96b5b4;">drop</span><span style="color:#c0c5ce;">(foo.</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">); </span><span style="color:#65737e;">// Accessing a part of `foo` is necessary.
-    </span><span style="color:#96b5b4;">drop</span><span style="color:#c0c5ce;">(foo.</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">); </span><span style="color:#65737e;">// Indexing an array would also work.
-</span><span style="color:#c0c5ce;">}
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> temporary </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> foo </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">(Foo(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">temporary),);
+    </span><span style="color:#4271ae;">drop</span><span style="color:#4d4d4c;">(foo.</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">); </span><span style="color:#999999;">// Accessing a part of `foo` is necessary.
+    </span><span style="color:#4271ae;">drop</span><span style="color:#4d4d4c;">(foo.</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">); </span><span style="color:#999999;">// Indexing an array would also work.
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>In Rust 1.41.1, this issue was fixed <a href="https://github.com/rust-lang/rust/pull/69145">by the same PR as the one above</a>.
 Compiling the program now produces the following error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[</span><span style="color:#d08770;">E0597</span><span style="color:#c0c5ce;">]: `temporary` does not live long enough
-  --&gt; src/main.rs:</span><span style="color:#d08770;">7</span><span style="color:#c0c5ce;">:</span><span style="color:#d08770;">20
-   </span><span style="color:#c0c5ce;">|
-</span><span style="color:#d08770;">7  </span><span style="color:#c0c5ce;">|     </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> foo = (Foo(&amp;temporary),);
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[</span><span style="color:#666969;">E0597</span><span style="color:#4d4d4c;">]: `temporary` does not live long enough
+  </span><span style="color:#3e999f;">-</span><span style="color:#4d4d4c;">-&gt; src</span><span style="color:#3e999f;">/</span><span style="color:#4d4d4c;">main.rs:</span><span style="color:#f5871f;">7</span><span style="color:#4d4d4c;">:</span><span style="color:#f5871f;">20
+   </span><span style="color:#3e999f;">|
+</span><span style="color:#f5871f;">7  </span><span style="color:#3e999f;">|     </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> foo </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">(Foo(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">temporary),);
    |                    ^^^^^^^^^^ borrowed value does not live long enough
-</span><span style="color:#d08770;">8  </span><span style="color:#c0c5ce;">|     </span><span style="color:#96b5b4;">drop</span><span style="color:#c0c5ce;">(foo.</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">);
-   |          ----- copying this value requires </span><span style="color:#bf616a;">that
-   </span><span style="color:#c0c5ce;">|                `temporary` is borrowed </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> `</span><span style="color:#b48ead;">&#39;static</span><span style="color:#c0c5ce;">`
-</span><span style="color:#d08770;">9  </span><span style="color:#c0c5ce;">|     </span><span style="color:#96b5b4;">drop</span><span style="color:#c0c5ce;">(foo.</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">);
-</span><span style="color:#d08770;">10 </span><span style="color:#c0c5ce;">| }
-   | - `temporary` dropped here </span><span style="color:#b48ead;">while</span><span style="color:#c0c5ce;"> still borrowed
+</span><span style="color:#f5871f;">8  </span><span style="color:#3e999f;">|     </span><span style="color:#4271ae;">drop</span><span style="color:#4d4d4c;">(foo.</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">);
+   |          ----- copying this value requires </span><span style="color:#f5871f;">that
+   </span><span style="color:#4d4d4c;">|                `temporary` is borrowed </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> `</span><span style="color:#8959a8;">&#39;static</span><span style="color:#4d4d4c;">`
+</span><span style="color:#f5871f;">9  </span><span style="color:#3e999f;">|     </span><span style="color:#4271ae;">drop</span><span style="color:#4d4d4c;">(foo.</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">);
+</span><span style="color:#f5871f;">10 </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;"> }
+   </span><span style="color:#3e999f;">| -</span><span style="color:#4d4d4c;"> `temporary` dropped here </span><span style="color:#8959a8;">while</span><span style="color:#4d4d4c;"> still borrowed
 </span></pre>
 <p>This error occurs because <code>Foo&lt;'a&gt;</code>, for some <code>'a</code>, only implements <code>Copy</code> when <code>'a: 'static</code>.
 However, the <code>temporary</code> variable,

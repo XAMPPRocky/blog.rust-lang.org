@@ -100,29 +100,29 @@ been making to the once-unhelpful &quot;future is not send&quot; diagnostic.</p>
 where having a future that can be sent to other threads is desirable. This might look something
 like the following (for brevity, there aren't any threads here, just a requirement that the
 future implement <code>std::marker::Send</code>):</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::sync::{Mutex, MutexGuard};
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::sync::{Mutex, MutexGuard};
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">is_send</span><span style="color:#c0c5ce;">&lt;T: Send&gt;(</span><span style="color:#bf616a;">t</span><span style="color:#c0c5ce;">: T) { }
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">is_send</span><span style="color:#4d4d4c;">&lt;T: Send&gt;(</span><span style="color:#f5871f;">t</span><span style="color:#4d4d4c;">: T) { }
 
-async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#96b5b4;">bar</span><span style="color:#c0c5ce;">(&amp;Mutex::new(</span><span style="color:#d08770;">22</span><span style="color:#c0c5ce;">)).await
+async </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Mutex::new(</span><span style="color:#f5871f;">22</span><span style="color:#4d4d4c;">)).await
 }
 
-async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">bar</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: &amp;Mutex&lt;</span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">&gt;) {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> g = x.</span><span style="color:#96b5b4;">lock</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">unwrap</span><span style="color:#c0c5ce;">();
-    </span><span style="color:#96b5b4;">baz</span><span style="color:#c0c5ce;">().await
+async </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Mutex&lt;</span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">&gt;) {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> g </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> x.</span><span style="color:#4271ae;">lock</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">unwrap</span><span style="color:#4d4d4c;">();
+    </span><span style="color:#4271ae;">baz</span><span style="color:#4d4d4c;">().await
 }
 
-async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">baz</span><span style="color:#c0c5ce;">() { }
+async </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">baz</span><span style="color:#4d4d4c;">() { }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#96b5b4;">is_send</span><span style="color:#c0c5ce;">(</span><span style="color:#96b5b4;">foo</span><span style="color:#c0c5ce;">());
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#4271ae;">is_send</span><span style="color:#4d4d4c;">(</span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">());
 }
 </span></pre>
 <p>When we try to compile this, we'll get an unwieldly and hard-to-follow diagnostic:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0277]: `std::sync::MutexGuard&lt;&#39;_, u32&gt;` cannot be sent between threads safely
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0277]: `std::sync::MutexGuard&lt;&#39;_, u32&gt;` cannot be sent between threads safely
   --&gt; src/main.rs:23:5
    |
 23 |     is_send(foo());
@@ -147,32 +147,32 @@ note: required by `is_send`
 </span></pre>
 <p>That's.. not great. Let's break down what's happening and understand what this error is trying to
 tell us.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#96b5b4;">is_send</span><span style="color:#c0c5ce;">(</span><span style="color:#96b5b4;">foo</span><span style="color:#c0c5ce;">());
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#4271ae;">is_send</span><span style="color:#4d4d4c;">(</span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">());
 }
 </span></pre>
 <p>In <code>main</code>, we are calling <code>foo</code> and passing the return value to <code>is_send</code>. <code>foo</code> is an <code>async fn</code>,
 so it doesn't return <code>()</code> (what you might expect for a function with no return type specified).
 Instead, it returns <code>impl std::future::Future&lt;Output = ()&gt;</code>, some unnamed type that implements
 <code>std::future::Future</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#96b5b4;">bar</span><span style="color:#c0c5ce;">(&amp;Mutex::new(</span><span style="color:#d08770;">22</span><span style="color:#c0c5ce;">)).await
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">async </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Mutex::new(</span><span style="color:#f5871f;">22</span><span style="color:#4d4d4c;">)).await
 }
 
-</span><span style="color:#65737e;">// becomes...
+</span><span style="color:#999999;">// becomes...
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() -&gt; impl std::future::Future&lt;Output = ()&gt; {
-    async </span><span style="color:#b48ead;">move </span><span style="color:#c0c5ce;">{
-        </span><span style="color:#96b5b4;">bar</span><span style="color:#c0c5ce;">(&amp;Mutex::new(</span><span style="color:#d08770;">22</span><span style="color:#c0c5ce;">)).await
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() -&gt; impl std::future::Future&lt;Output = ()&gt; {
+    async </span><span style="color:#8959a8;">move </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Mutex::new(</span><span style="color:#f5871f;">22</span><span style="color:#4d4d4c;">)).await
     }
 }
 </span></pre>
 <p>If you want to learn more about the transformations that happen with async-await, consider
 reading the <a href="https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html"><code>async</code>/<code>.await</code> primer chapter of the async book</a>.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">is_send</span><span style="color:#c0c5ce;">&lt;T: Send&gt;(</span><span style="color:#bf616a;">t</span><span style="color:#c0c5ce;">: T) { }
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">is_send</span><span style="color:#4d4d4c;">&lt;T: Send&gt;(</span><span style="color:#f5871f;">t</span><span style="color:#4d4d4c;">: T) { }
 </span></pre>
 <p>It looks like the error we're getting is because the future returned by <code>foo</code> doesn't satisfy
 the <code>T: Send</code> bound of <code>is_send</code>.</p>
@@ -182,23 +182,23 @@ about what async-await is doing under the hood. rustc implements <code>async fn<
 an unstable language feature for resumable functions like the co-routines you might be familiar
 with from other languages. Generators are laid out like enums with variants containing all of the
 variables that are used across await points (which desugar to generator yields):</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">bar</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: &amp;Mutex&lt;</span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">&gt;) {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> g = x.</span><span style="color:#96b5b4;">lock</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">unwrap</span><span style="color:#c0c5ce;">();
-    </span><span style="color:#96b5b4;">baz</span><span style="color:#c0c5ce;">().await </span><span style="color:#65737e;">// &lt;- await point (suspend #0), `g` and `x` are in use before await point
-</span><span style="color:#c0c5ce;">} </span><span style="color:#65737e;">// &lt;- `g` and `x` dropped here, after await point
-</span></pre><pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">enum </span><span style="color:#c0c5ce;">BarGenerator {
-    </span><span style="color:#65737e;">// `bar`&#39;s parameters.
-</span><span style="color:#c0c5ce;">    Unresumed { x: &amp;Mutex&lt;</span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">&gt; },
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">async </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Mutex&lt;</span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">&gt;) {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> g </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> x.</span><span style="color:#4271ae;">lock</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">unwrap</span><span style="color:#4d4d4c;">();
+    </span><span style="color:#4271ae;">baz</span><span style="color:#4d4d4c;">().await </span><span style="color:#999999;">// &lt;- await point (suspend #0), `g` and `x` are in use before await point
+</span><span style="color:#4d4d4c;">} </span><span style="color:#999999;">// &lt;- `g` and `x` dropped here, after await point
+</span></pre><pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">enum </span><span style="color:#4d4d4c;">BarGenerator {
+    </span><span style="color:#999999;">// `bar`&#39;s parameters.
+</span><span style="color:#4d4d4c;">    Unresumed { x: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Mutex&lt;</span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">&gt; },
 
     Suspend0 {
-        </span><span style="color:#65737e;">// Future returned by `baz`, which is being polled.
-</span><span style="color:#c0c5ce;">        baz_future: BazGenerator,
+        </span><span style="color:#999999;">// Future returned by `baz`, which is being polled.
+</span><span style="color:#4d4d4c;">        baz_future: BazGenerator,
 
-        </span><span style="color:#65737e;">// Locals that are used across the await point.
-</span><span style="color:#c0c5ce;">        x: &amp;Mutex&lt;</span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">&gt;,
-        g: MutexGuard&lt;&#39;_, </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">&gt;,
+        </span><span style="color:#999999;">// Locals that are used across the await point.
+</span><span style="color:#4d4d4c;">        x: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Mutex&lt;</span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">&gt;,
+        g: MutexGuard&lt;&#39;</span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">, </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">&gt;,
     },
 
     Returned { value: () }
@@ -221,18 +221,18 @@ messages.</p>
 <p>Returning to our example, the future must be holding a type across an <code>.await</code> point that doesn't
 implement <code>Send</code>, but where? This is the primary question that the diagnostic improvement aims to
 help answer. Let's start by looking at <code>foo</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#96b5b4;">bar</span><span style="color:#c0c5ce;">(&amp;Mutex::new(</span><span style="color:#d08770;">22</span><span style="color:#c0c5ce;">)).await
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">async </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Mutex::new(</span><span style="color:#f5871f;">22</span><span style="color:#4d4d4c;">)).await
 }
 </span></pre>
 <p><code>foo</code> invokes <code>bar</code>, passing a reference to a <code>std::sync::Mutex</code> and getting a future back, before
 <code>await</code>ing it.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">bar</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: &amp;Mutex&lt;</span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">&gt;) {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> g: MutexGuard&lt;</span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">&gt; = x.</span><span style="color:#96b5b4;">lock</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">unwrap</span><span style="color:#c0c5ce;">();
-    </span><span style="color:#96b5b4;">baz</span><span style="color:#c0c5ce;">().await
-} </span><span style="color:#65737e;">// &lt;- `g` is dropped here
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">async </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Mutex&lt;</span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">&gt;) {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> g: MutexGuard&lt;</span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">&gt; </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> x.</span><span style="color:#4271ae;">lock</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">unwrap</span><span style="color:#4d4d4c;">();
+    </span><span style="color:#4271ae;">baz</span><span style="color:#4d4d4c;">().await
+} </span><span style="color:#999999;">// &lt;- `g` is dropped here
 </span></pre>
 <p><code>bar</code> locks the mutex before <code>await</code>ing <code>baz</code>. <code>std::sync::MutexGuard&lt;u32&gt;</code> does not implement
 <code>Send</code> and lives across the <code>baz().await</code> point (because <code>g</code> is dropped at the end of the scope)
@@ -241,8 +241,8 @@ which causes the entire future not to implement <code>Send</code>.</p>
 on the types they capture <em>and</em> find the type which lives across an await point ourselves.</p>
 <p>Fortunately, the Async Foundations WG has been working to improve this error, and
 <a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2018&amp;gist=7e80a8bc151df8817e0983e55bf2667a">in nightly</a>, we see the following diagnostic instead:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0277]: `std::sync::MutexGuard&lt;&#39;_, u32&gt;` cannot be sent between threads safely
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0277]: `std::sync::MutexGuard&lt;&#39;_, u32&gt;` cannot be sent between threads safely
   --&gt; src/main.rs:23:5
    |
 5  | fn is_send&lt;T: Send&gt;(t: T) {
@@ -271,17 +271,17 @@ or where a bound was propagated.</p>
 <p>To improve this diagnostic, the chain of obligations is now treated like a stack frame, where
 each &quot;frame&quot; of obligations represents each function's contribution to the error. Let's make
 that more concrete with a very rough approximation:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">Obligation {
-    kind: DerivedObligation(</span><span style="color:#65737e;">/* generator that captured `g` */</span><span style="color:#c0c5ce;">),
-    source: </span><span style="color:#65737e;">/* `Span` type pointing at `bar`&#39;s location in user code */</span><span style="color:#c0c5ce;">,
-    parent: Some(Obligation {
-        kind: DerivedObligation(</span><span style="color:#65737e;">/* generator calling `bar` */</span><span style="color:#c0c5ce;">),
-        source: </span><span style="color:#65737e;">/* `Span` type pointing at `foo`&#39;s location in user code */</span><span style="color:#c0c5ce;">,
-        parent: Some(Obligation {
-            kind: ItemObligation(</span><span style="color:#65737e;">/* type representing `std::marker::Send` */</span><span style="color:#c0c5ce;">),
-            source: </span><span style="color:#65737e;">/* `Span` type pointing at `is_send`&#39;s location in user code */</span><span style="color:#c0c5ce;">,
-            cause: None,
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">Obligation {
+    kind: DerivedObligation(</span><span style="color:#999999;">/* generator that captured `g` */</span><span style="color:#4d4d4c;">),
+    source: </span><span style="color:#999999;">/* `Span` type pointing at `bar`&#39;s location in user code */</span><span style="color:#4d4d4c;">,
+    parent: </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(Obligation {
+        kind: DerivedObligation(</span><span style="color:#999999;">/* generator calling `bar` */</span><span style="color:#4d4d4c;">),
+        source: </span><span style="color:#999999;">/* `Span` type pointing at `foo`&#39;s location in user code */</span><span style="color:#4d4d4c;">,
+        parent: </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(Obligation {
+            kind: ItemObligation(</span><span style="color:#999999;">/* type representing `std::marker::Send` */</span><span style="color:#4d4d4c;">),
+            source: </span><span style="color:#999999;">/* `Span` type pointing at `is_send`&#39;s location in user code */</span><span style="color:#4d4d4c;">,
+            cause: </span><span style="color:#c99e00;">None</span><span style="color:#4d4d4c;">,
         }),
     }),
 }
@@ -296,8 +296,8 @@ started (like the <a href="https://rustc-dev-guide.rust-lang.org">rustc dev guid
 <h1 id="what-s-next">What's next?</h1>
 <p>More improvements to this diagnostic are planned and being worked on, so that it is applicable in
 more cases, and has specialized messages for <code>Send</code> and <code>Sync</code>, like below:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0277]: future cannot be sent between threads safely
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0277]: future cannot be sent between threads safely
   --&gt; src/main.rs:23:5
    |
 5  | fn is_send&lt;T: Send&gt;(t: T) {

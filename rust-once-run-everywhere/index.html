@@ -95,23 +95,23 @@ seamlessly as with C.</p>
 <p>Let's start with a simple example of calling C code from Rust and then
 demonstrate that Rust imposes no additional overhead. Here's a C program which
 will simply double all the input it's given:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">double_input</span><span style="color:#c0c5ce;">(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">input</span><span style="color:#c0c5ce;">) {
-    </span><span style="color:#b48ead;">return</span><span style="color:#c0c5ce;"> input * </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">int </span><span style="color:#4271ae;">double_input</span><span style="color:#4d4d4c;">(</span><span style="color:#8959a8;">int </span><span style="color:#f5871f;">input</span><span style="color:#4d4d4c;">) {
+    </span><span style="color:#8959a8;">return</span><span style="color:#4d4d4c;"> input </span><span style="color:#3e999f;">* </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">;
 }
 </span></pre>
 <p>To call this from Rust, you might write a program like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">extern crate</span><span style="color:#c0c5ce;"> libc;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">extern crate</span><span style="color:#4d4d4c;"> libc;
 
-</span><span style="color:#b48ead;">extern </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">double_input</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">input</span><span style="color:#c0c5ce;">: libc::c_int) -&gt; libc::c_int;
+</span><span style="color:#8959a8;">extern </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">double_input</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">input</span><span style="color:#4d4d4c;">: libc::c_int) -&gt; libc::c_int;
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> input = </span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">;
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> output = </span><span style="color:#b48ead;">unsafe </span><span style="color:#c0c5ce;">{ </span><span style="color:#96b5b4;">double_input</span><span style="color:#c0c5ce;">(input) };
-    println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> * 2 = </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, input, output);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> input </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> output </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">unsafe </span><span style="color:#4d4d4c;">{ </span><span style="color:#4271ae;">double_input</span><span style="color:#4d4d4c;">(input) };
+    println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;"> * 2 = </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, input, output);
 }
 </span></pre>
 <p>And that's it! You can try this out for yourself by
@@ -124,20 +124,20 @@ subtle aspects of this Rust program, so let's cover each piece in detail.</p>
 type definitions for FFI bindings when talking with C, and it makes it easy to
 ensure that both C and Rust agree on the types crossing the language boundary.</p>
 <p>This leads us nicely into the next part of the program:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">extern </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">double_input</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">input</span><span style="color:#c0c5ce;">: libc::c_int) -&gt; libc::c_int;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">extern </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">double_input</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">input</span><span style="color:#4d4d4c;">: libc::c_int) -&gt; libc::c_int;
 }
 </span></pre>
 <p>In Rust this is a <strong>declaration</strong> of an externally available function. You can
 think of this along the lines of a C header file. Here's where the compiler
 learns about the inputs and outputs of the function, and you can see above that
 this matches our definition in C. Next up we have the main body of the program:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> input = </span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">;
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> output = </span><span style="color:#b48ead;">unsafe </span><span style="color:#c0c5ce;">{ </span><span style="color:#96b5b4;">double_input</span><span style="color:#c0c5ce;">(input) };
-    println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> * 2 = </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, input, output);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> input </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> output </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">unsafe </span><span style="color:#4d4d4c;">{ </span><span style="color:#4271ae;">double_input</span><span style="color:#4d4d4c;">(input) };
+    println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;"> * 2 = </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, input, output);
 }
 </span></pre>
 <p>We see one of the crucial aspects of FFI in Rust here, the <code>unsafe</code> block. The
@@ -154,8 +154,8 @@ into C one way or another, but it often comes at a cost with runtime type
 conversions or perhaps some language-runtime juggling. To get a handle on what
 Rust is doing, let's go straight to the assembly code of the above <code>main</code>
 function's call to <code>double_input</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">mov    $0x4,%edi
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">mov    $0x4,%edi
 callq  3bc30 &lt;double_input&gt;
 </span></pre>
 <p>And as before, that's it! Here we can see that calling a C function from Rust
@@ -170,28 +170,28 @@ typically found in a C header about how its API should be used.</strong></p>
 <p>For example, consider a C library for parsing a tarball. This library will
 expose functions to read the contents of each file in the tarball, probably
 something along the lines of:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// Gets the data for a file in the tarball at the given index, returning NULL if
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// Gets the data for a file in the tarball at the given index, returning NULL if
 // it does not exist. The `size` pointer is filled in with the size of the file
 // if successful.
-</span><span style="color:#b48ead;">const char </span><span style="color:#c0c5ce;">*</span><span style="color:#8fa1b3;">tarball_file_data</span><span style="color:#c0c5ce;">(tarball_t *</span><span style="color:#bf616a;">tarball</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">unsigned </span><span style="color:#bf616a;">index</span><span style="color:#c0c5ce;">, size_t *</span><span style="color:#bf616a;">size</span><span style="color:#c0c5ce;">);
+</span><span style="color:#8959a8;">const char </span><span style="color:#3e999f;">*</span><span style="color:#4271ae;">tarball_file_data</span><span style="color:#4d4d4c;">(tarball_t </span><span style="color:#3e999f;">*</span><span style="color:#f5871f;">tarball</span><span style="color:#4d4d4c;">, </span><span style="color:#8959a8;">unsigned </span><span style="color:#f5871f;">index</span><span style="color:#4d4d4c;">, </span><span style="color:#c99e00;">size_t </span><span style="color:#3e999f;">*</span><span style="color:#f5871f;">size</span><span style="color:#4d4d4c;">);
 </span></pre>
 <p>This function is implicitly making assumptions about how it can be used,
 however, by assuming that the <code>char*</code> pointer returned cannot outlive the input
 tarball. When bound in Rust, this API might look like this instead:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">pub struct </span><span style="color:#c0c5ce;">Tarball { </span><span style="color:#bf616a;">raw</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">*mut</span><span style="color:#c0c5ce;"> tarball_t }
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">pub struct </span><span style="color:#4d4d4c;">Tarball { </span><span style="color:#c82829;">raw</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">*mut</span><span style="color:#4d4d4c;"> tarball_t }
 
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Tarball {
-    </span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">file</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">index</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">) -&gt; Option&lt;&amp;[</span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">]&gt; {
-        </span><span style="color:#b48ead;">unsafe </span><span style="color:#c0c5ce;">{
-            </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> size = </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">;
-            </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> data = </span><span style="color:#96b5b4;">tarball_file_data</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.raw, index as libc::</span><span style="color:#b48ead;">c_uint</span><span style="color:#c0c5ce;">,
-                                         &amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> size);
-            </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> data.</span><span style="color:#96b5b4;">is_null</span><span style="color:#c0c5ce;">() {
-                None
-            } </span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{
-                Some(slice::from_raw_parts(data as </span><span style="color:#b48ead;">*const u8</span><span style="color:#c0c5ce;">, size as </span><span style="color:#b48ead;">usize</span><span style="color:#c0c5ce;">))
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Tarball {
+    </span><span style="color:#8959a8;">pub fn </span><span style="color:#4271ae;">file</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">index</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">) -&gt; Option&lt;</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[</span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">]&gt; {
+        </span><span style="color:#8959a8;">unsafe </span><span style="color:#4d4d4c;">{
+            </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> size </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">;
+            </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> data </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">tarball_file_data</span><span style="color:#4d4d4c;">(</span><span style="color:#c82829;">self</span><span style="color:#4d4d4c;">.raw, index </span><span style="color:#3e999f;">as </span><span style="color:#4d4d4c;">libc::</span><span style="color:#8959a8;">c_uint</span><span style="color:#4d4d4c;">,
+                                         </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> size);
+            </span><span style="color:#8959a8;">if</span><span style="color:#4d4d4c;"> data.</span><span style="color:#4271ae;">is_null</span><span style="color:#4d4d4c;">() {
+                </span><span style="color:#c99e00;">None
+            </span><span style="color:#4d4d4c;">} </span><span style="color:#8959a8;">else </span><span style="color:#4d4d4c;">{
+                </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(slice::from_raw_parts(data </span><span style="color:#3e999f;">as </span><span style="color:#8959a8;">*const u8</span><span style="color:#4d4d4c;">, size </span><span style="color:#3e999f;">as </span><span style="color:#8959a8;">usize</span><span style="color:#4d4d4c;">))
             }
         }
     }
@@ -228,11 +228,11 @@ when Rust calls into C, but also when C calls into Rust!</p>
 <p>Let's take the example above, but reverse the roles of each language. As before,
 all the code below is <a href="https://github.com/alexcrichton/rust-ffi-examples/tree/master/c-to-rust">available on GitHub</a>. First we'll start off with
 our Rust code:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">no_mangle</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">pub extern fn </span><span style="color:#8fa1b3;">double_input</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">input</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">{
-    input * </span><span style="color:#d08770;">2
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">no_mangle</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">pub extern fn </span><span style="color:#4271ae;">double_input</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">input</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">i32 </span><span style="color:#4d4d4c;">{
+    input </span><span style="color:#3e999f;">* </span><span style="color:#f5871f;">2
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>As with the Rust code before, there's not a whole lot here but there are some
 subtle aspects in play. First off, we've labeled our function definition with a
@@ -251,17 +251,17 @@ static archive which Rust calls a 'staticlib'. This enables all the relevant
 Rust code to be linked statically into the C program we're about to produce.</p>
 <p>Now that we've got our Rust library squared away, let's write our C program
 which will call Rust.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">#include </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#a3be8c;">stdint.h</span><span style="color:#c0c5ce;">&gt;
-</span><span style="color:#b48ead;">#include </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#a3be8c;">stdio.h</span><span style="color:#c0c5ce;">&gt;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">#include </span><span style="color:#718c00;">&lt;stdint.h&gt;
+</span><span style="color:#8959a8;">#include </span><span style="color:#718c00;">&lt;stdio.h&gt;
 
-</span><span style="color:#b48ead;">extern </span><span style="color:#c0c5ce;">int32_t </span><span style="color:#8fa1b3;">double_input</span><span style="color:#c0c5ce;">(int32_t </span><span style="color:#bf616a;">input</span><span style="color:#c0c5ce;">);
+</span><span style="color:#8959a8;">extern </span><span style="color:#c99e00;">int32_t </span><span style="color:#4271ae;">double_input</span><span style="color:#4d4d4c;">(</span><span style="color:#c99e00;">int32_t </span><span style="color:#f5871f;">input</span><span style="color:#4d4d4c;">);
 
-</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">int</span><span style="color:#c0c5ce;"> input = </span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">;
-    </span><span style="color:#b48ead;">int</span><span style="color:#c0c5ce;"> output = </span><span style="color:#bf616a;">double_input</span><span style="color:#c0c5ce;">(input);
-    </span><span style="color:#96b5b4;">printf</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> * 2 = </span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span style="color:#c0c5ce;">&quot;, input, output);
-    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">;
+</span><span style="color:#8959a8;">int </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">int</span><span style="color:#4d4d4c;"> input </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">int</span><span style="color:#4d4d4c;"> output </span><span style="color:#3e999f;">= </span><span style="color:#c82829;">double_input</span><span style="color:#4271ae;">(input)</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#4271ae;">printf(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">%d</span><span style="color:#718c00;"> * 2 = </span><span style="color:#666969;">%d</span><span style="color:#f5871f;">\n</span><span style="color:#718c00;">&quot;</span><span style="color:#4271ae;">, input, output)</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">return </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">;
 }
 </span></pre>
 <p>Here we can see that C, like Rust, needs to declare the <code>double_input</code> function

@@ -180,9 +180,9 @@ separate goals, as identified by Stroustrup:</p>
 <p>Rust 1.0 has essentially achieved the first goal, both in terms of language
 features and the standard library. But it doesn't quite manage to achieve the
 second goal. Take the following trait, for example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">pub trait </span><span style="color:#c0c5ce;">Extend&lt;A&gt; {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">extend</span><span style="color:#c0c5ce;">&lt;T&gt;(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">iterable</span><span style="color:#c0c5ce;">: T) </span><span style="color:#b48ead;">where</span><span style="color:#c0c5ce;"> T: IntoIterator&lt;Item=A&gt;;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">pub trait </span><span style="color:#4d4d4c;">Extend&lt;A&gt; {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">extend</span><span style="color:#4d4d4c;">&lt;T&gt;(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut </span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">iterable</span><span style="color:#4d4d4c;">: T) </span><span style="color:#8959a8;">where</span><span style="color:#4d4d4c;"> T: IntoIterator&lt;Item=A&gt;;
 }
 </span></pre>
 <p>The <code>Extend</code> trait provides a nice abstraction for inserting data from any kind of
@@ -200,11 +200,11 @@ code reuse. See <a href="https://github.com/rust-lang/rfcs/pull/1210">the RFC</a
 compiler that lets us achieve memory safety without garbage collection, by
 catching use-after-free bugs and the like. But occasionally, the borrower
 checker also &quot;catches&quot; non-bugs, like the following pattern:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> map.</span><span style="color:#96b5b4;">find</span><span style="color:#c0c5ce;">(&amp;key) {
-    Some(...) =&gt; { ... }
-    None =&gt; {
-        map.</span><span style="color:#96b5b4;">insert</span><span style="color:#c0c5ce;">(key, new_value);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> map.</span><span style="color:#4271ae;">find</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">key) {
+    </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">...</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{ </span><span style="color:#3e999f;">... </span><span style="color:#4d4d4c;">}
+    </span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+        map.</span><span style="color:#4271ae;">insert</span><span style="color:#4d4d4c;">(key, new_value);
     }
 }
 </span></pre>

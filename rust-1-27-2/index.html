@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.27.2 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1272-2018-07-20">detailed release notes for
@@ -87,20 +87,20 @@ appropriate page on our website, and check out the <a href="https://github.com/r
 <h2 id="what-s-in-1-27-2-stable">What's in 1.27.2 stable</h2>
 <p>This patch release fixes a bug in the borrow checker verification of <code>match</code> expressions. This bug
 was introduced in 1.27.1 with a different bugfix for <a href="https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#nicer-match-bindings">match ergonomics</a>.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">transmute_lifetime</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, T&gt;(</span><span style="color:#bf616a;">t</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">&#39;a </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">T</span><span style="color:#c0c5ce;">,)) -&gt; &amp;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;"> T {
-    </span><span style="color:#b48ead;">match </span><span style="color:#c0c5ce;">(&amp;t, ()) {
-        ((t,), ()) =&gt; t,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">transmute_lifetime</span><span style="color:#4d4d4c;">&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">, </span><span style="color:#8959a8;">&#39;b</span><span style="color:#4d4d4c;">, T&gt;(</span><span style="color:#f5871f;">t</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;a </span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">T</span><span style="color:#4d4d4c;">,)) -&gt; </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;b</span><span style="color:#4d4d4c;"> T {
+    </span><span style="color:#8959a8;">match </span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">t, ()) {
+        ((t,), ()) </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> t,
     }
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = {
-        </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> y = Box::new((</span><span style="color:#d08770;">42</span><span style="color:#c0c5ce;">,));
-        </span><span style="color:#96b5b4;">transmute_lifetime</span><span style="color:#c0c5ce;">(&amp;y)
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> y </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Box</span><span style="color:#4d4d4c;">::new((</span><span style="color:#f5871f;">42</span><span style="color:#4d4d4c;">,));
+        </span><span style="color:#4271ae;">transmute_lifetime</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">y)
     };
 
-    println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, x);
+    println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, x);
 }
 </span></pre>
 <p>1.27.2 will reject the above code.</p>

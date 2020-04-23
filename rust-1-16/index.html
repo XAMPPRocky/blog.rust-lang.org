@@ -77,8 +77,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
       <p>The Rust team is happy to announce the latest version of Rust, 1.16.0. Rust is a
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed, getting Rust 1.16 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1160-2017-03-16">detailed release notes for
@@ -90,8 +90,8 @@ workflow in many cases.</p>
 &quot;passes&quot;, that is, there are many distinct steps that the compiler takes on the road from your source code
 to producing the final binary. You can see each of these steps (and how much time and memory they take)
 by passing <code>-Z time-passes</code> to a nightly compiler:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustc +nightly hello.rs -Z time-passes
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustc +nightly hello.rs -Z time-passes
 time: 0.003; rss: 16MB  parsing
 time: 0.000; rss: 16MB  recursion limit
 time: 0.000; rss: 16MB  crate injection
@@ -139,36 +139,36 @@ dependencies, to let the compiler check types and such from them. It's also usef
 <a href="https://github.com/rust-lang-nursery/rls">Rust Language Server</a>, and possibly more tools in the future.</p>
 <p>Another large change is the removal of a long-standing diagnostic: <code>consider using an explicit lifetime parameter</code>. This diagnostic would kick in whenever you had an incorrect lifetime annotation,
 and the compiler thought that you might have meant something else. Consider this code:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::str::FromStr;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::str::FromStr;
 
-</span><span style="color:#b48ead;">pub struct </span><span style="color:#c0c5ce;">Name&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">&gt; {
-    </span><span style="color:#bf616a;">name</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">&#39;a str</span><span style="color:#c0c5ce;">,
+</span><span style="color:#8959a8;">pub struct </span><span style="color:#4d4d4c;">Name&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">&gt; {
+    </span><span style="color:#c82829;">name</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;a str</span><span style="color:#4d4d4c;">,
 }
 
-</span><span style="color:#b48ead;">impl</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">&gt; FromStr </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">Name&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">&gt; {
-    </span><span style="color:#b48ead;">type </span><span style="color:#c0c5ce;">Err = ();
+</span><span style="color:#8959a8;">impl</span><span style="color:#4d4d4c;">&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">&gt; FromStr </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">Name&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">&gt; {
+    </span><span style="color:#8959a8;">type </span><span style="color:#4d4d4c;">Err </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">();
 
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">from_str</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">s</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">str</span><span style="color:#c0c5ce;">) -&gt; Result&lt;Name, ()&gt; {
-        Ok(Name { name: s })
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">from_str</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">s</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">str</span><span style="color:#4d4d4c;">) -&gt; Result&lt;Name, ()&gt; {
+        </span><span style="color:#c99e00;">Ok</span><span style="color:#4d4d4c;">(Name { name: s })
     }
 }
 </span></pre>
 <p>Here, Rust isn't sure what to do with the lifetimes; as written, the code doesn't guarantee that <code>s</code>
 will live as long as <code>Name</code>, which is required for <code>Name</code> to be valid. Let's try to compile this
 code with Rust 1.15.1:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustc</span><span style="color:#c0c5ce;"> +1.15.1 foo.rs</span><span style="color:#bf616a;"> --crate-type</span><span style="color:#c0c5ce;">=lib
-</span><span style="color:#bf616a;">error[E0495]:</span><span style="color:#c0c5ce;"> cannot infer an appropriate lifetime for lifetime parameter in generic type due to conflicting requirements
-  </span><span style="color:#bf616a;">--</span><span style="color:#c0c5ce;">&gt; .</span><span style="color:#96b5b4;">\f</span><span style="color:#c0c5ce;">oo.rs:10:5
-   |
-</span><span style="color:#bf616a;">10 </span><span style="color:#c0c5ce;">|       </span><span style="color:#bf616a;">fn</span><span style="color:#c0c5ce;"> from_str(s: &amp;</span><span style="color:#bf616a;">str</span><span style="color:#c0c5ce;">) </span><span style="color:#bf616a;">-</span><span style="color:#c0c5ce;">&gt; Result&lt;Name, ()&gt; {
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustc</span><span style="color:#4271ae;"> +1.15.1 foo.rs</span><span style="color:#f5871f;"> --crate-type</span><span style="color:#3e999f;">=</span><span style="color:#4271ae;">lib
+</span><span style="color:#c82829;">error[E0495]:</span><span style="color:#4271ae;"> cannot infer an appropriate lifetime for lifetime parameter in generic type due to conflicting requirements
+  </span><span style="color:#c82829;">--</span><span style="color:#3e999f;">&gt;</span><span style="color:#4271ae;"> .</span><span style="color:#f5871f;">\f</span><span style="color:#4271ae;">oo.rs:10:5
+   </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">10 </span><span style="color:#3e999f;">|       </span><span style="color:#c82829;">fn</span><span style="color:#4271ae;"> from_str(s: </span><span style="color:#3e999f;">&amp;</span><span style="color:#c82829;">str</span><span style="color:#4d4d4c;">) </span><span style="color:#c82829;">-</span><span style="color:#3e999f;">&gt;</span><span style="color:#4271ae;"> Result</span><span style="color:#3e999f;">&lt;</span><span style="color:#4271ae;">Name, (</span><span style="color:#4d4d4c;">)</span><span style="color:#3e999f;">&gt; </span><span style="color:#4d4d4c;">{
    |  _____^ starting here...
 11 | |         Ok(Name { name: s })
 12 | |     }
-   | |</span><span style="color:#bf616a;">_____^</span><span style="color:#c0c5ce;"> ...ending here
-   |
-</span><span style="color:#bf616a;">help:</span><span style="color:#c0c5ce;"> consider using an explicit lifetime parameter as shown: fn from_str(s: &amp;&#39;</span><span style="color:#a3be8c;">a str) -&gt; Result&lt;Name, ()&gt;
+   </span><span style="color:#3e999f;">| |</span><span style="color:#c82829;">_____^</span><span style="color:#4271ae;"> ...ending here
+   </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">help:</span><span style="color:#4271ae;"> consider using an explicit lifetime parameter as shown: fn from_str(s: </span><span style="color:#3e999f;">&amp;</span><span style="color:#718c00;">&#39;a str) -&gt; Result&lt;Name, ()&gt;
   --&gt; .\foo.rs:10:5
    |
 10 |       fn from_str(s: &amp;str) -&gt; Result&lt;Name, ()&gt; {
@@ -179,34 +179,34 @@ code with Rust 1.15.1:</p>
 </span></pre>
 <p>The compiler explains the issue, and gives a helpful suggestion. So let's try it: modify the code to add in
 the <code>'a</code>, and compile again:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustc</span><span style="color:#c0c5ce;"> +1.15.1 .</span><span style="color:#96b5b4;">\f</span><span style="color:#c0c5ce;">oo.rs</span><span style="color:#bf616a;"> --crate-type</span><span style="color:#c0c5ce;">=lib
-</span><span style="color:#bf616a;">error[E0308]:</span><span style="color:#c0c5ce;"> method not compatible with trait
-  </span><span style="color:#bf616a;">--</span><span style="color:#c0c5ce;">&gt; .</span><span style="color:#96b5b4;">\f</span><span style="color:#c0c5ce;">oo.rs:10:5
-   |
-</span><span style="color:#bf616a;">10 </span><span style="color:#c0c5ce;">|       </span><span style="color:#bf616a;">fn</span><span style="color:#c0c5ce;"> from_str(s: &amp;&#39;</span><span style="color:#a3be8c;">a str) -&gt; Result&lt;Name, ()&gt; {
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustc</span><span style="color:#4271ae;"> +1.15.1 .</span><span style="color:#f5871f;">\f</span><span style="color:#4271ae;">oo.rs</span><span style="color:#f5871f;"> --crate-type</span><span style="color:#3e999f;">=</span><span style="color:#4271ae;">lib
+</span><span style="color:#c82829;">error[E0308]:</span><span style="color:#4271ae;"> method not compatible with trait
+  </span><span style="color:#c82829;">--</span><span style="color:#3e999f;">&gt;</span><span style="color:#4271ae;"> .</span><span style="color:#f5871f;">\f</span><span style="color:#4271ae;">oo.rs:10:5
+   </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">10 </span><span style="color:#3e999f;">|       </span><span style="color:#c82829;">fn</span><span style="color:#4271ae;"> from_str(s: </span><span style="color:#3e999f;">&amp;</span><span style="color:#718c00;">&#39;a str) -&gt; Result&lt;Name, ()&gt; {
    |  _____^ starting here...
 11 | |         Ok(Name { name: s })
 12 | |     }
    | |_____^ ...ending here: lifetime mismatch
    |
 &lt;snip&gt;
-help: consider using an explicit lifetime parameter as shown: fn from_str(s: &amp;</span><span style="color:#c0c5ce;">&#39;</span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;"> str) </span><span style="color:#bf616a;">-</span><span style="color:#c0c5ce;">&gt; Result&lt;Name&lt;&#39;</span><span style="color:#a3be8c;">a&gt;, ()&gt;
+help: consider using an explicit lifetime parameter as shown: fn from_str(s: &amp;&#39;</span><span style="color:#c82829;">a</span><span style="color:#4271ae;"> str</span><span style="color:#4d4d4c;">) </span><span style="color:#c82829;">-</span><span style="color:#3e999f;">&gt;</span><span style="color:#4271ae;"> Result</span><span style="color:#3e999f;">&lt;</span><span style="color:#4271ae;">Name</span><span style="color:#3e999f;">&lt;</span><span style="color:#718c00;">&#39;a&gt;, ()&gt;
   --&gt; .\foo.rs:10:5
    |
-10 |       fn from_str(s: &amp;</span><span style="color:#c0c5ce;">&#39;a str) </span><span style="color:#bf616a;">-</span><span style="color:#c0c5ce;">&gt; Result&lt;Name, ()&gt; {
+10 |       fn from_str(s: &amp;&#39;</span><span style="color:#4271ae;">a str</span><span style="color:#4d4d4c;">) </span><span style="color:#c82829;">-</span><span style="color:#3e999f;">&gt;</span><span style="color:#4271ae;"> Result</span><span style="color:#3e999f;">&lt;</span><span style="color:#4271ae;">Name, (</span><span style="color:#4d4d4c;">)</span><span style="color:#3e999f;">&gt; </span><span style="color:#4d4d4c;">{
    |  _____^ starting here...
 11 | |         Ok(Name { name: s })
 12 | |     }
-   | |</span><span style="color:#bf616a;">_____^</span><span style="color:#c0c5ce;"> ...ending here
+   </span><span style="color:#3e999f;">| |</span><span style="color:#c82829;">_____^</span><span style="color:#4271ae;"> ...ending here
 </span></pre>
 <p>It still doesn't work. That help message was not actually helpful. It does suggest adding another
 lifetime, this time on <code>Name</code>. If we do that...</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustc</span><span style="color:#c0c5ce;"> +1.15.1 .</span><span style="color:#96b5b4;">\f</span><span style="color:#c0c5ce;">oo.rs</span><span style="color:#bf616a;"> --crate-type</span><span style="color:#c0c5ce;">=lib
-&lt;snip&gt;
-help: </span><span style="color:#bf616a;">consider</span><span style="color:#c0c5ce;"> using an explicit lifetime parameter as shown: fn from_str(s: &amp;&#39;</span><span style="color:#a3be8c;">a str) -&gt; Result&lt;Name&lt;</span><span style="color:#c0c5ce;">&#39;</span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">&gt;, ()&gt;
-  -</span><span style="color:#bf616a;">-</span><span style="color:#c0c5ce;">&gt; .</span><span style="color:#96b5b4;">\f</span><span style="color:#c0c5ce;">oo.rs:10:5
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustc</span><span style="color:#4271ae;"> +1.15.1 .</span><span style="color:#f5871f;">\f</span><span style="color:#4271ae;">oo.rs</span><span style="color:#f5871f;"> --crate-type</span><span style="color:#3e999f;">=</span><span style="color:#4271ae;">lib
+</span><span style="color:#3e999f;">&lt;</span><span style="color:#4d4d4c;">snip</span><span style="color:#3e999f;">&gt;</span><span style="color:#4d4d4c;">
+help: </span><span style="color:#c82829;">consider</span><span style="color:#4271ae;"> using an explicit lifetime parameter as shown: fn from_str(s: </span><span style="color:#3e999f;">&amp;</span><span style="color:#718c00;">&#39;a str) -&gt; Result&lt;Name&lt;&#39;</span><span style="color:#c82829;">a</span><span style="color:#3e999f;">&gt;</span><span style="color:#4271ae;">, (</span><span style="color:#4d4d4c;">)</span><span style="color:#3e999f;">&gt;
+  </span><span style="color:#4d4d4c;">-</span><span style="color:#c82829;">-</span><span style="color:#3e999f;">&gt;</span><span style="color:#4271ae;"> .</span><span style="color:#f5871f;">\f</span><span style="color:#4271ae;">oo.rs:10:5
 </span></pre>
 <p>... that's what we already have, compiler!</p>
 <p>This diagnostic was well-intentioned, but when it's wrong, it was <em>very</em> wrong, as you can see here. Sometimes
@@ -218,14 +218,14 @@ limit false positives.</p>
 <p>An aside: the above implementation is not possible; <code>Name</code> would need to use <code>String</code>, not <code>&amp;str</code>.</p>
 </blockquote>
 <p>In other diagnostic changes, previous versions of Rust would helpfully attempt to suggest fixes for typos:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> foo = </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> foo </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">;
 
-println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, ffo);
+println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, ffo);
 </span></pre>
 <p>Would give this error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0425]: cannot find value `ffo` in this scope
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0425]: cannot find value `ffo` in this scope
  --&gt; foo.rs:4:20
   |
 4 |     println!(&quot;{}&quot;, ffo);
@@ -265,12 +265,12 @@ a single-argument form</a>, just like <code>println!</code> has. This ends up wr
 of symmetry.</p>
 <p>All structs in the standard library <a href="https://github.com/rust-lang/rust/pull/38006">now implement <code>Debug</code></a>.</p>
 <p>When slicing a <code>&amp;str</code>, <a href="https://github.com/rust-lang/rust/pull/38066">you'll see better errors</a>. For example, this code:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&amp;&quot;</span><span style="color:#a3be8c;">abcαβγ</span><span style="color:#c0c5ce;">&quot;[..</span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">]
+<pre style="background-color:#ffffff;">
+<span style="color:#3e999f;">&amp;</span><span style="color:#718c00;">&quot;abcαβγ&quot;</span><span style="color:#4d4d4c;">[</span><span style="color:#3e999f;">..</span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">]
 </span></pre>
 <p>Is incorrect. It generates this error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">thread &#39;str::test_slice_fail_boundary_1&#39; panicked at &#39;byte index 4 is not
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">thread &#39;str::test_slice_fail_boundary_1&#39; panicked at &#39;byte index 4 is not
 a char boundary; it is inside &#39;α&#39; (bytes 3..5) of `abcαβγ`&#39;
 </span></pre>
 <p>The part after the <code>;</code> is new.</p>

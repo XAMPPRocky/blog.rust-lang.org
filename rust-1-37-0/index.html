@@ -76,33 +76,33 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
     <div class="post">
       <p>The Rust team is happy to announce a new version of Rust, 1.37.0. Rust is a programming language that is empowering everyone to build reliable and efficient software.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust 1.37.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1370-2019-08-15">detailed release notes for 1.37.0</a> on GitHub.</p>
 <h2 id="what-s-in-1-37-0-stable">What's in 1.37.0 stable</h2>
 <p>The highlights of Rust 1.37.0 include referring to <code>enum</code> variants through <code>type</code> aliases, built-in <code>cargo vendor</code>, unnamed <code>const</code> items, profile-guided optimization, a <code>default-run</code> key in Cargo, and <code>#[repr(align(N))]</code> on <code>enum</code>s. Read on for a few highlights, or see the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1370-2019-08-15">detailed release notes</a> for additional information.</p>
 <h3 id="referring-to-enum-variants-through-type-aliases">Referring to <code>enum</code> variants through <code>type</code> aliases</h3>
 <p>With Rust 1.37.0, you can now refer to <code>enum</code> variants through type aliases. For example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">type </span><span style="color:#c0c5ce;">ByteOption = Option&lt;</span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">&gt;;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">type </span><span style="color:#4d4d4c;">ByteOption </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">Option&lt;</span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">&gt;;
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">increment_or_zero</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: ByteOption) -&gt; </span><span style="color:#b48ead;">u8 </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> x {
-        ByteOption::Some(y) =&gt; y + </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,
-        ByteOption::None =&gt; </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">increment_or_zero</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: ByteOption) -&gt; </span><span style="color:#8959a8;">u8 </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> x {
+        ByteOption::Some(y) </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> y </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">,
+        ByteOption::None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">,
     }
 }
 </span></pre>
 <p>In implementations, <code>Self</code> acts like a type alias. So in Rust 1.37.0, you can also refer to <code>enum</code> variants with <code>Self::Variant</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Coin {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">value_in_cents</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">u8 </span><span style="color:#c0c5ce;">{
-        </span><span style="color:#b48ead;">match </span><span style="color:#bf616a;">self </span><span style="color:#c0c5ce;">{
-            </span><span style="color:#b48ead;">Self</span><span style="color:#c0c5ce;">::Penny =&gt; </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,
-            </span><span style="color:#b48ead;">Self</span><span style="color:#c0c5ce;">::Nickel =&gt; </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">,
-            </span><span style="color:#b48ead;">Self</span><span style="color:#c0c5ce;">::Dime =&gt; </span><span style="color:#d08770;">10</span><span style="color:#c0c5ce;">,
-            </span><span style="color:#b48ead;">Self</span><span style="color:#c0c5ce;">::Quarter =&gt; </span><span style="color:#d08770;">25</span><span style="color:#c0c5ce;">,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Coin {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">value_in_cents</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">u8 </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#8959a8;">match </span><span style="color:#c82829;">self </span><span style="color:#4d4d4c;">{
+            </span><span style="color:#8959a8;">Self</span><span style="color:#4d4d4c;">::Penny </span><span style="color:#3e999f;">=&gt; </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">,
+            </span><span style="color:#8959a8;">Self</span><span style="color:#4d4d4c;">::Nickel </span><span style="color:#3e999f;">=&gt; </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">,
+            </span><span style="color:#8959a8;">Self</span><span style="color:#4d4d4c;">::Dime </span><span style="color:#3e999f;">=&gt; </span><span style="color:#f5871f;">10</span><span style="color:#4d4d4c;">,
+            </span><span style="color:#8959a8;">Self</span><span style="color:#4d4d4c;">::Quarter </span><span style="color:#3e999f;">=&gt; </span><span style="color:#f5871f;">25</span><span style="color:#4d4d4c;">,
         }
     }
 }
@@ -113,19 +113,19 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 <p>There are multiple cases where <code>cargo vendor</code> is already used in production: the Rust compiler <code>rustc</code> uses it to ship all its dependencies in release tarballs, and projects with monorepos use it to commit the dependencies' code in source control.</p>
 <h3 id="using-unnamed-const-items-for-macros">Using unnamed <code>const</code> items for macros</h3>
 <p>You can now create <a href="https://github.com/rust-lang/rust/pull/61347/">unnamed <code>const</code> items</a>. Instead of giving your constant an explicit name, simply name it <code>_</code> instead. For example, in the <code>rustc</code> compiler we find:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">/// Type size assertion where the first parameter
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">/// Type size assertion where the first parameter
 /// is a type and the second is the expected size.
-</span><span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">macro_export</span><span style="color:#c0c5ce;">]
-</span><span style="color:#96b5b4;">macro_rules! </span><span style="color:#c0c5ce;">static_assert_size {
-    (</span><span style="color:#bf616a;">$ty</span><span style="color:#c0c5ce;">:</span><span style="color:#b48ead;">ty</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">$size</span><span style="color:#c0c5ce;">:</span><span style="color:#b48ead;">expr</span><span style="color:#c0c5ce;">) =&gt; {
-        </span><span style="color:#b48ead;">const </span><span style="color:#c0c5ce;">_: [(); </span><span style="color:#bf616a;">$size</span><span style="color:#c0c5ce;">] = [(); ::std::mem::size_of::&lt;</span><span style="color:#bf616a;">$ty</span><span style="color:#c0c5ce;">&gt;()];
-        </span><span style="color:#65737e;">//    ^ Note the underscore here.
-    </span><span style="color:#c0c5ce;">}
+</span><span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">macro_export</span><span style="color:#4d4d4c;">]
+</span><span style="color:#4271ae;">macro_rules! </span><span style="color:#4d4d4c;">static_assert_size {
+    (</span><span style="color:#f5871f;">$ty</span><span style="color:#4d4d4c;">:</span><span style="color:#8959a8;">ty</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">$size</span><span style="color:#4d4d4c;">:</span><span style="color:#8959a8;">expr</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#8959a8;">const </span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">: [(); </span><span style="color:#c82829;">$size</span><span style="color:#4d4d4c;">] </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">[(); ::std::mem::size_of::&lt;</span><span style="color:#c82829;">$ty</span><span style="color:#4d4d4c;">&gt;()];
+        </span><span style="color:#999999;">//    ^ Note the underscore here.
+    </span><span style="color:#4d4d4c;">}
 }
 
-static_assert_size!(Option&lt;Box&lt;String&gt;&gt;, </span><span style="color:#d08770;">8</span><span style="color:#c0c5ce;">); </span><span style="color:#65737e;">// 1.
-</span><span style="color:#c0c5ce;">static_assert_size!(</span><span style="color:#b48ead;">usize</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">8</span><span style="color:#c0c5ce;">); </span><span style="color:#65737e;">// 2.
+static_assert_size!(Option&lt;Box&lt;String&gt;&gt;, </span><span style="color:#f5871f;">8</span><span style="color:#4d4d4c;">); </span><span style="color:#999999;">// 1.
+</span><span style="color:#4d4d4c;">static_assert_size!(</span><span style="color:#8959a8;">usize</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">8</span><span style="color:#4d4d4c;">); </span><span style="color:#999999;">// 2.
 </span></pre>
 <p>Notice the second <code>static_assert_size!(..)</code>: thanks to the use of unnamed constants, you can define new items without naming conflicts. Previously you would have needed to write <code>static_assert_size!(MY_DUMMY_IDENTIFIER, usize, 8);</code>. Instead, with Rust 1.37.0, it now becomes easier to create ergonomic and reusable declarative and procedural macros for static analysis purposes.</p>
 <h3 id="profile-guided-optimization">Profile-guided optimization</h3>
@@ -141,17 +141,17 @@ static_assert_size!(Option&lt;Box&lt;String&gt;&gt;, </span><span style="color:#
 <p>Rust 1.37.0 addresses the issue by adding <a href="https://doc.rust-lang.org/cargo/reference/manifest.html#the-default-run-field"><code>default-run</code></a>, a new key in <code>Cargo.toml</code>. When the key is declared in the <code>[package]</code> section, <code>cargo run</code> will default to the chosen binary if the <code>--bin</code> flag is not passed.</p>
 <h3 id="repr-align-n-on-enums"><code>#[repr(align(N))]</code> on <code>enum</code>s</h3>
 <p><a href="https://doc.rust-lang.org/reference/type-layout.html#the-alignment-modifiers">The <code>#[repr(align(N))]</code> attribute</a> can be used to raise the <a href="https://doc.rust-lang.org/reference/type-layout.html#size-and-alignment">alignment</a> of a type definition. Previously, the attribute was only allowed on <code>struct</code>s and <code>union</code>s. With Rust 1.37.0, the attribute can now also be used <a href="https://github.com/rust-lang/rust/pull/61229">on <code>enum</code> definitions</a>. For example, the following type <code>Align16</code> would, as expected, report <code>16</code> as the alignment whereas the natural alignment without <code>#[repr(align(16))]</code> would be <code>4</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">repr</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">align</span><span style="color:#c0c5ce;">(16))]
-</span><span style="color:#b48ead;">enum </span><span style="color:#c0c5ce;">Align16 {
-    Foo { foo: </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">},
-    Bar { bar: </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">},
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">repr</span><span style="color:#4d4d4c;">(</span><span style="color:#c82829;">align</span><span style="color:#4271ae;">(16)</span><span style="color:#4d4d4c;">)]
+</span><span style="color:#8959a8;">enum </span><span style="color:#4d4d4c;">Align16 {
+    Foo { foo: </span><span style="color:#8959a8;">u32 </span><span style="color:#4d4d4c;">},
+    Bar { bar: </span><span style="color:#8959a8;">u32 </span><span style="color:#4d4d4c;">},
 }
 </span></pre>
 <p>The semantics of using <code>#[repr(align(N))</code> on an <code>enum</code> is the same as defining a wrapper struct <code>AlignN&lt;T&gt;</code> with that alignment and then using <code>AlignN&lt;MyEnum&gt;</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">repr</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">align</span><span style="color:#c0c5ce;">(N))]
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">AlignN&lt;T&gt;(T);
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">repr</span><span style="color:#4d4d4c;">(</span><span style="color:#c82829;">align</span><span style="color:#4271ae;">(N)</span><span style="color:#4d4d4c;">)]
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">AlignN&lt;T&gt;(T);
 </span></pre><h3 id="library-changes">Library changes</h3>
 <p>In Rust 1.37.0 there have been a number of standard library stabilizations:</p>
 <ul>

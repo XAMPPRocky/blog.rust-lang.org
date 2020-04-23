@@ -79,8 +79,8 @@ programming language that is empowering everyone to build reliable and
 efficient software.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.34.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate
 page on our website.</p>
@@ -104,25 +104,25 @@ on crates from both crates.io and your custom registry.
 Crates on crates.io cannot however depend on external registries.</p>
 <p>To use an alternate registry, you must add these lines to your <code>.cargo/config</code>.
 This file can be in your home directory (<code>~/.cargo/config</code>) or relative to the package directory.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[registries]
-</span><span style="color:#bf616a;">my-registry </span><span style="color:#c0c5ce;">= { </span><span style="color:#bf616a;">index </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">https://my-intranet:8080/git/index</span><span style="color:#c0c5ce;">&quot; }
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">registries</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">my-registry </span><span style="color:#4d4d4c;">= { </span><span style="color:#c82829;">index </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;https://my-intranet:8080/git/index&quot; </span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>Depending on a crate from an alternate registry is easy.
 When specifying dependencies in your <code>Cargo.toml</code>, use the <code>registry</code> key to
 let Cargo know that you wish to fetch the crate from the alternate registry:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[dependencies]
-</span><span style="color:#bf616a;">other-crate </span><span style="color:#c0c5ce;">= { </span><span style="color:#bf616a;">version </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">1.0</span><span style="color:#c0c5ce;">&quot;, </span><span style="color:#bf616a;">registry </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">my-registry</span><span style="color:#c0c5ce;">&quot; }
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">dependencies</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">other-crate </span><span style="color:#4d4d4c;">= { </span><span style="color:#c82829;">version </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;1.0&quot;</span><span style="color:#4d4d4c;">, </span><span style="color:#c82829;">registry </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;my-registry&quot; </span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>As a crate author, if you wish to publish your crate to an alternate registry,
 you first need to save the authentication token into <code>~/.cargo/credentials</code> with the <code>cargo login</code> command:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">cargo</span><span style="color:#c0c5ce;"> login</span><span style="color:#bf616a;"> --registry</span><span style="color:#c0c5ce;">=my-registry
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">cargo</span><span style="color:#4271ae;"> login</span><span style="color:#f5871f;"> --registry</span><span style="color:#3e999f;">=</span><span style="color:#4271ae;">my-registry
 </span></pre>
 <p>You can then use the <code>--registry</code> flag to indicate which registry to use when publishing:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">cargo</span><span style="color:#c0c5ce;"> publish</span><span style="color:#bf616a;"> --registry</span><span style="color:#c0c5ce;">=my-registry
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">cargo</span><span style="color:#4271ae;"> publish</span><span style="color:#f5871f;"> --registry</span><span style="color:#3e999f;">=</span><span style="color:#4271ae;">my-registry
 </span></pre>
 <p>There is <a href="https://doc.rust-lang.org/nightly/cargo/reference/registries.html#running-a-registry">documentation</a> on how to run your own registry.</p>
 <h3 id="in-documentation-tests"><code>?</code> in documentation tests</h3>
@@ -134,26 +134,26 @@ and a test failure in the case of the tests.</p>
 However, the support within documentation tests was limited to doctests that have an explicit <code>fn main()</code>.</p>
 <p>In this release, full support for <code>?</code> in doctests has been added.
 Now, you can write this in your documentation tests:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">/// ```rust
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">/// ```rust
 /// use std::io;
 /// let mut input = String::new();
 /// io::stdin().read_line(&amp;mut input)?;
 /// # Ok::&lt;(), io::Error&gt;(())
 /// ```
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">my_func</span><span style="color:#c0c5ce;">() {}
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">my_func</span><span style="color:#4d4d4c;">() {}
 </span></pre>
 <p>You still have to specify the error type being used at the bottom of the documentation test.</p>
 <h3 id="custom-attributes-accept-arbitrary-token-streams">Custom attributes accept arbitrary token streams</h3>
 <p><a href="https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html">Procedural macros</a> in Rust can define custom attributes that they consume.
 Until now, such attributes were restricted to being trees of paths and literals
 according to a specific syntax, like:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">foo</span><span style="color:#c0c5ce;">(bar)]
-#[</span><span style="color:#bf616a;">foo </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">bar</span><span style="color:#c0c5ce;">&quot;]
-#[</span><span style="color:#bf616a;">foo </span><span style="color:#c0c5ce;">= 0]
-#[</span><span style="color:#bf616a;">foo</span><span style="color:#c0c5ce;">(bar = true)]
-#[</span><span style="color:#bf616a;">foo</span><span style="color:#c0c5ce;">(bar, </span><span style="color:#bf616a;">baz</span><span style="color:#c0c5ce;">(quux, foo = &quot;</span><span style="color:#a3be8c;">bar</span><span style="color:#c0c5ce;">&quot;))]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">foo</span><span style="color:#4d4d4c;">(bar)]
+#[</span><span style="color:#c82829;">foo </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;bar&quot;</span><span style="color:#4d4d4c;">]
+#[</span><span style="color:#c82829;">foo </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> 0]
+#[</span><span style="color:#c82829;">foo</span><span style="color:#4d4d4c;">(bar </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> true)]
+#[</span><span style="color:#c82829;">foo</span><span style="color:#4d4d4c;">(bar, </span><span style="color:#c82829;">baz</span><span style="color:#4271ae;">(quux, foo </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;bar&quot;</span><span style="color:#4271ae;">)</span><span style="color:#4d4d4c;">)]
 </span></pre>
 <p>Unlike procedural macros, these helper attributes could not accept arbitrary token streams in delimiters,
 so you could not write <code>#[range(0..10)]</code> or <code>#[bound(T: MyTrait)]</code>.
@@ -167,8 +167,8 @@ have unnecessary strings in their syntax and if they can be better expressed wit
 <p>For example, the <a href="https://doc.rust-lang.org/std/primitive.u32.html#method.from_be_bytes"><code>from_be_bytes</code></a> and related methods on integer types take arrays,
 but data is often read in via slices. Converting between slices and arrays is tedious to do manually.
 With the new traits, it can be done inline with <code>.try_into()</code>.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> num = </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">::from_be_bytes(slice.</span><span style="color:#96b5b4;">try_into</span><span style="color:#c0c5ce;">()?);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> num </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">::from_be_bytes(slice.</span><span style="color:#4271ae;">try_into</span><span style="color:#4d4d4c;">()</span><span style="color:#3e999f;">?</span><span style="color:#4d4d4c;">);
 </span></pre>
 <p>For conversions that cannot fail, such as <code>u8</code> to <code>u32</code>, the <a href="https://doc.rust-lang.org/std/convert/enum.Infallible.html"><code>Infallible</code></a> type was added.
 This also permits a blanket implementation of <code>TryFrom</code> for all existing <code>From</code> implementations.

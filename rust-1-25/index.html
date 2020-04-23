@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.25.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1250-2018-03-29">detailed release notes for
@@ -91,18 +91,18 @@ from LLVM 4. This has a number of effects, a major one
 being a step closer to AVR support.</p>
 <p>A new way to write <code>use</code> statements has landed: <a href="https://github.com/rust-lang/rust/pull/47948">nested import groups</a>. If you've
 ever written a set of imports like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::fs::File;
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::io::Read;
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::path::{Path, PathBuf};
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::fs::File;
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::io::Read;
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::path::{Path, PathBuf};
 </span></pre>
 <p>You can now write this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// on one line
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::{fs::File, io::Read, path::{Path, PathBuf}};
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// on one line
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::{fs::File, io::Read, path::{Path, PathBuf}};
 
-</span><span style="color:#65737e;">// with some more breathing room
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::{
+</span><span style="color:#999999;">// with some more breathing room
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::{
     fs::File,
     io::Read,
     path::{
@@ -123,17 +123,17 @@ CommonMark spec.</p>
 <p>Finally, in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1358-repr-align.md">RFC 1358</a>, <code>#[repr(align(x))]</code> was accepted. In Rust
 1.25, <a href="https://github.com/rust-lang/rust/pull/47006">it is now stable</a>! This attribute lets you set the <a href="https://en.wikipedia.org/wiki/Data_structure_alignment">alignment</a>
 of your <code>struct</code>s:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Number(</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Number(</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">);
 
-assert_eq!(std::mem::align_of::&lt;Number&gt;(), </span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">);
-assert_eq!(std::mem::size_of::&lt;Number&gt;(), </span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">);
+assert_eq!(std::mem::align_of::&lt;Number&gt;(), </span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">);
+assert_eq!(std::mem::size_of::&lt;Number&gt;(), </span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">);
 
-#[</span><span style="color:#bf616a;">repr</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">align</span><span style="color:#c0c5ce;">(16))]
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Align16(</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">);
+#[</span><span style="color:#c82829;">repr</span><span style="color:#4d4d4c;">(</span><span style="color:#c82829;">align</span><span style="color:#4271ae;">(16)</span><span style="color:#4d4d4c;">)]
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Align16(</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">);
 
-assert_eq!(std::mem::align_of::&lt;Align16&gt;(), </span><span style="color:#d08770;">16</span><span style="color:#c0c5ce;">);
-assert_eq!(std::mem::size_of::&lt;Align16&gt;(), </span><span style="color:#d08770;">16</span><span style="color:#c0c5ce;">);
+assert_eq!(std::mem::align_of::&lt;Align16&gt;(), </span><span style="color:#f5871f;">16</span><span style="color:#4d4d4c;">);
+assert_eq!(std::mem::size_of::&lt;Align16&gt;(), </span><span style="color:#f5871f;">16</span><span style="color:#4d4d4c;">);
 </span></pre>
 <p>If you're working with low-level stuff, control of these kinds of things
 can be very important!</p>

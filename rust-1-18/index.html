@@ -77,8 +77,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
       <p>The Rust team is happy to announce the latest version of Rust, 1.18.0. Rust is a
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed, getting Rust 1.18 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1180-2017-06-08">detailed release notes for
@@ -107,8 +107,8 @@ what you think</a>!</p>
 items are private by default in Rust, and you can use the <code>pub</code> keyword to make
 them public. In Rust 1.18.0, <code>pub</code> has <a href="https://github.com/rust-lang/rust/pull/40556">gained a new
 form</a>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">pub</span><span style="color:#c0c5ce;">(</span><span style="color:#b48ead;">crate</span><span style="color:#c0c5ce;">) bar;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">pub</span><span style="color:#4d4d4c;">(</span><span style="color:#8959a8;">crate</span><span style="color:#4d4d4c;">) bar;
 </span></pre>
 <p>The bit inside of <code>()</code> is a 'restriction', which refines the notion of how this
 is made public. Using the <code>crate</code> keyword like the example above means that
@@ -117,8 +117,8 @@ easier to declare APIs that are &quot;public to your crate&quot;, but not expose
 users. This was <em>possible</em> with the existing module system, but often very
 awkward.</p>
 <p>You can also specify a path, like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">pub</span><span style="color:#c0c5ce;">(in a::b::c) foo;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">pub</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">in </span><span style="color:#4d4d4c;">a::b::c) foo;
 </span></pre>
 <p>This means &quot;usable within the hierarchy of <code>a::b::c</code>, but not elsewhere.&quot; This
 feature was defined in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1422-pub-restricted.md">RFC
@@ -128,9 +128,9 @@ reference</a>.</p>
 <p>For our Windows users, Rust 1.18.0 has <a href="https://github.com/rust-lang/rust/pull/40870">a new attribute,
 <code>#![windows_subsystem]</code></a>. It
 works like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#![</span><span style="color:#bf616a;">windows_subsystem </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">console</span><span style="color:#c0c5ce;">&quot;]
-#![</span><span style="color:#bf616a;">windows_subsystem </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">windows</span><span style="color:#c0c5ce;">&quot;]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#![</span><span style="color:#c82829;">windows_subsystem </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;console&quot;</span><span style="color:#4d4d4c;">]
+#![</span><span style="color:#c82829;">windows_subsystem </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;windows&quot;</span><span style="color:#4d4d4c;">]
 </span></pre>
 <p>These control the <a href="https://msdn.microsoft.com/en-us/library/fcc1zstk.aspx"><code>/SUBSYSTEM</code> flag</a>
 in the linker. For now, only <code>&quot;console&quot;</code> and <code>&quot;windows&quot;</code> are supported.</p>
@@ -140,8 +140,8 @@ your application's start. With this flag, it won't.</p>
 <p>Finally, Rust's tuples, enum variant fields, and structs (without <code>#[repr]</code>) have
 always had an unspecified layout. <a href="https://github.com/rust-lang/rust/pull/40377">We've turned on automatic re-ordering</a>, which can result in smaller sizes
 through reducing padding. Consider a struct like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Suboptimal(</span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">u16</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Suboptimal(</span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">, </span><span style="color:#8959a8;">u16</span><span style="color:#4d4d4c;">, </span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">);
 </span></pre>
 <p>In previous versions of Rust on the x86_64 platform, this struct would have the
 size of six bytes. But looking at the source, you'd expect it to have four. The
@@ -151,8 +151,8 @@ two, another byte of padding is placed after the first <code>u8</code>. To give 
 a proper alignment, another byte is added after the second <code>u8</code> as well, giving us
 <code>1 + 1 (padding) + 2 + 1 + 1 (padding) = 6 bytes</code>.</p>
 <p>But what if our struct looked like this?</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Optimal(</span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">u16</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Optimal(</span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">, </span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">, </span><span style="color:#8959a8;">u16</span><span style="color:#4d4d4c;">);
 </span></pre>
 <p>This struct is properly aligned; the <code>u16</code> lies on a two byte boundary, and so
 does the entire struct. No padding is needed. This gives us <code>1 + 1 + 2 = 4 bytes</code>.</p>

@@ -83,18 +83,18 @@ About 1000 patches were landed in this release.</p>
 <h4 id="controlled-unwinding">Controlled unwinding</h4>
 <p>The biggest shift in Rust 1.9 is the stabilization of the <code>std::panic</code> module,
 which includes methods for halting the unwinding process started by a panic:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::panic;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::panic;
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> result = panic::catch_unwind(|| {
-    println!(&quot;</span><span style="color:#a3be8c;">hello!</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> result </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">panic::catch_unwind(|| {
+    println!(</span><span style="color:#718c00;">&quot;hello!&quot;</span><span style="color:#4d4d4c;">);
 });
-assert!(result.</span><span style="color:#96b5b4;">is_ok</span><span style="color:#c0c5ce;">());
+assert!(result.</span><span style="color:#4271ae;">is_ok</span><span style="color:#4d4d4c;">());
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> result = panic::catch_unwind(|| {
-    panic!(&quot;</span><span style="color:#a3be8c;">oh no!</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> result </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">panic::catch_unwind(|| {
+    panic!(</span><span style="color:#718c00;">&quot;oh no!&quot;</span><span style="color:#4d4d4c;">);
 });
-assert!(result.</span><span style="color:#96b5b4;">is_err</span><span style="color:#c0c5ce;">());
+assert!(result.</span><span style="color:#4271ae;">is_err</span><span style="color:#4d4d4c;">());
 </span></pre>
 <p>This new API was defined in <a href="https://github.com/rust-lang/rfcs/pull/1236">RFC 1236</a>.</p>
 <p>In general, Rust distinguishes between two ways that an operation can fail:</p>

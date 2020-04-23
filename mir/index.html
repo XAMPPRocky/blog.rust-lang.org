@@ -175,9 +175,9 @@ At first, we'll just break the Rust down into &quot;simpler Rust&quot;, but
 eventually we'll step away from Rust altogether and into MIR code.</p>
 <p>Our Rust example starts out as this simple <code>for</code> loop, which iterates
 over all the elements in a vector and processes them one by one:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> elem in vec {
-    </span><span style="color:#96b5b4;">process</span><span style="color:#c0c5ce;">(elem);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> elem </span><span style="color:#3e999f;">in</span><span style="color:#4d4d4c;"> vec {
+    </span><span style="color:#4271ae;">process</span><span style="color:#4d4d4c;">(elem);
 }
 </span></pre>
 <p>Rust itself offers three kinds of loops: <code>for</code> loops, like this one;
@@ -190,21 +190,21 @@ for MIR, we'd like to reduce all of these into one core concept.</p>
 then repeatedly calling <code>next</code> on that iterator. That means that we
 can rewrite the <code>for</code> loop we saw before into a <code>while let</code> loop
 that looks like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> iterator = vec.</span><span style="color:#96b5b4;">into_iter</span><span style="color:#c0c5ce;">();
-</span><span style="color:#b48ead;">while let </span><span style="color:#c0c5ce;">Some(elem) = iterator.</span><span style="color:#96b5b4;">next</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#96b5b4;">process</span><span style="color:#c0c5ce;">(elem);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> iterator </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> vec.</span><span style="color:#4271ae;">into_iter</span><span style="color:#4d4d4c;">();
+</span><span style="color:#8959a8;">while let </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(elem) </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> iterator.</span><span style="color:#4271ae;">next</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#4271ae;">process</span><span style="color:#4d4d4c;">(elem);
 }
 </span></pre>
 <p>By applying this rewriting, we can remove all <code>for</code> loops, but that
 still leaves multiple kinds of loops. So next we can imagine rewrite
 all <code>while let</code> loops into a simple <code>loop</code> combined with a <code>match</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> iterator = vec.</span><span style="color:#96b5b4;">into_iter</span><span style="color:#c0c5ce;">();
-</span><span style="color:#b48ead;">loop </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> iterator.</span><span style="color:#96b5b4;">next</span><span style="color:#c0c5ce;">() {
-        Some(elem) =&gt; </span><span style="color:#96b5b4;">process</span><span style="color:#c0c5ce;">(elem),
-        None =&gt; </span><span style="color:#b48ead;">break</span><span style="color:#c0c5ce;">,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> iterator </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> vec.</span><span style="color:#4271ae;">into_iter</span><span style="color:#4d4d4c;">();
+</span><span style="color:#8959a8;">loop </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> iterator.</span><span style="color:#4271ae;">next</span><span style="color:#4d4d4c;">() {
+        </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(elem) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4271ae;">process</span><span style="color:#4d4d4c;">(elem),
+        </span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#8959a8;">break</span><span style="color:#4d4d4c;">,
     }
 }
 </span></pre>
@@ -222,20 +222,20 @@ compiler automatically figures out which trait the method belongs to
 based on the type of the <code>iterator</code> and the set of traits in
 scope. But if we prefer to be more explicit, we could instead invoke
 the methods in the trait directly, using function call syntax:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// Rather than `vec.into_iter()`, we are calling
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// Rather than `vec.into_iter()`, we are calling
 // the function `IntoIterator::into_iter`. This is
 // exactly equivalent, just more explicit.
-</span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> iterator = IntoIterator::into_iter(vec);
-</span><span style="color:#b48ead;">loop </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#65737e;">// Similarly, `iterator.next()` can be rewritten
+</span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> iterator </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">IntoIterator</span><span style="color:#4d4d4c;">::into_iter(vec);
+</span><span style="color:#8959a8;">loop </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#999999;">// Similarly, `iterator.next()` can be rewritten
     // to make clear which trait the `next` method
     // comes from. We see here that the `.` notation
     // was also adding an implicit mutable reference,
     // which is now made explicit.
-    </span><span style="color:#b48ead;">match </span><span style="color:#c0c5ce;">Iterator::next(&amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> iterator) {
-        Some(elem) =&gt; </span><span style="color:#96b5b4;">process</span><span style="color:#c0c5ce;">(elem),
-        None =&gt; </span><span style="color:#b48ead;">break</span><span style="color:#c0c5ce;">,
+    </span><span style="color:#8959a8;">match </span><span style="color:#c99e00;">Iterator</span><span style="color:#4d4d4c;">::next(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> iterator) {
+        </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(elem) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4271ae;">process</span><span style="color:#4d4d4c;">(elem),
+        </span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#8959a8;">break</span><span style="color:#4d4d4c;">,
     }
 }
 </span></pre>
@@ -245,17 +245,17 @@ we don't use method calls. But we could reduce the set of concepts
 further if were moved away from <code>loop</code> and <code>break</code> and towards
 something more fundamental: <code>goto</code>. Using <code>goto</code> we could transform
 the previous code example into something like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> iterator = IntoIterator::into_iter(vec);
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> iterator </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">IntoIterator</span><span style="color:#4d4d4c;">::into_iter(vec);
 
-</span><span style="color:#b48ead;">loop</span><span style="color:#c0c5ce;">:
-    </span><span style="color:#b48ead;">match </span><span style="color:#c0c5ce;">Iterator::next(&amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> iterator) {
-        Some(elem) =&gt; { </span><span style="color:#96b5b4;">process</span><span style="color:#c0c5ce;">(elem); goto </span><span style="color:#b48ead;">loop</span><span style="color:#c0c5ce;">; }
-        None =&gt; { goto </span><span style="color:#b48ead;">break</span><span style="color:#c0c5ce;">; }
+</span><span style="color:#8959a8;">loop</span><span style="color:#4d4d4c;">:
+    </span><span style="color:#8959a8;">match </span><span style="color:#c99e00;">Iterator</span><span style="color:#4d4d4c;">::next(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> iterator) {
+        </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(elem) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{ </span><span style="color:#4271ae;">process</span><span style="color:#4d4d4c;">(elem); goto </span><span style="color:#8959a8;">loop</span><span style="color:#4d4d4c;">; }
+        </span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{ goto </span><span style="color:#8959a8;">break</span><span style="color:#4d4d4c;">; }
     }
 
-</span><span style="color:#b48ead;">break</span><span style="color:#c0c5ce;">:
-    ...
+</span><span style="color:#8959a8;">break</span><span style="color:#4d4d4c;">:
+    </span><span style="color:#3e999f;">...
 </span></pre>
 <p>We've gotten pretty far in breaking our example down into simpler
 constructs. We're not quite done yet, but before we go further it's
@@ -326,10 +326,10 @@ want in the base language, because they can be misused to write bad
 code; but they are perfectly fine in MIR.</p>
 <p>It's probably easiest to explain match handling by example. Let's
 consider the <code>match</code> expression we saw in the previous section:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">match </span><span style="color:#c0c5ce;">Iterator::next(&amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> iterator) {
-    Some(elem) =&gt; </span><span style="color:#96b5b4;">process</span><span style="color:#c0c5ce;">(elem),
-    None =&gt; </span><span style="color:#b48ead;">break</span><span style="color:#c0c5ce;">,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">match </span><span style="color:#c99e00;">Iterator</span><span style="color:#4d4d4c;">::next(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> iterator) {
+    </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(elem) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4271ae;">process</span><span style="color:#4d4d4c;">(elem),
+    </span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#8959a8;">break</span><span style="color:#4d4d4c;">,
 }
 </span></pre>
 <p>Here, the result of calling <code>next</code> is of type <code>Option&lt;T&gt;</code>, where <code>T</code>
@@ -345,31 +345,31 @@ union, where reads are not checked for correctness).</p>
 extracting of the data. I'm going to give the equivalent of MIR here
 first in a kind of pseudo-code, since there is no actual Rust syntax
 for these operations:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">loop</span><span style="color:#c0c5ce;">:
-    </span><span style="color:#65737e;">// Put the value we are matching on into a temporary variable.
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> tmp = Iterator::next(&amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> iterator);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">loop</span><span style="color:#4d4d4c;">:
+    </span><span style="color:#999999;">// Put the value we are matching on into a temporary variable.
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> tmp </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Iterator</span><span style="color:#4d4d4c;">::next(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> iterator);
     
-    </span><span style="color:#65737e;">// Next, we &quot;switch&quot; on the value to determine which it has.
-</span><span style="color:#c0c5ce;">    switch tmp {
-        Some =&gt; {
-            </span><span style="color:#65737e;">// If this is a Some, we can extract the element out
+    </span><span style="color:#999999;">// Next, we &quot;switch&quot; on the value to determine which it has.
+</span><span style="color:#4d4d4c;">    switch tmp {
+        </span><span style="color:#c99e00;">Some </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+            </span><span style="color:#999999;">// If this is a Some, we can extract the element out
             // by &quot;downcasting&quot;. This effectively asserts that
             // the value `tmp` is of the Some variant.
-            </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> elem = (tmp as Some).</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">;
+            </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> elem </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">(tmp </span><span style="color:#3e999f;">as </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">).</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">;
     
-            </span><span style="color:#65737e;">// The user&#39;s original code:
-            </span><span style="color:#96b5b4;">process</span><span style="color:#c0c5ce;">(elem);
+            </span><span style="color:#999999;">// The user&#39;s original code:
+            </span><span style="color:#4271ae;">process</span><span style="color:#4d4d4c;">(elem);
             
-            goto </span><span style="color:#b48ead;">loop</span><span style="color:#c0c5ce;">;
+            goto </span><span style="color:#8959a8;">loop</span><span style="color:#4d4d4c;">;
         }
-        None =&gt; {
-            goto </span><span style="color:#b48ead;">break</span><span style="color:#c0c5ce;">;
+        </span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+            goto </span><span style="color:#8959a8;">break</span><span style="color:#4d4d4c;">;
         }
     }
     
-</span><span style="color:#b48ead;">break</span><span style="color:#c0c5ce;">:
-    ....
+</span><span style="color:#8959a8;">break</span><span style="color:#4d4d4c;">:
+    </span><span style="color:#3e999f;">...</span><span style="color:#4d4d4c;">.
 </span></pre>
 <p>Of course, the actual MIR is based on a control-flow-graph, so it
 would look something like this:</p>
@@ -397,9 +397,9 @@ explicit edges in the control-flow graph to represent potential
 panics, and the cleanup that we have to do.</p>
 <p>Let's look at the explicit drops first. If you recall, we started with
 an example that was just a for loop:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> elem in vec {
-    </span><span style="color:#96b5b4;">process</span><span style="color:#c0c5ce;">(elem);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> elem </span><span style="color:#3e999f;">in</span><span style="color:#4d4d4c;"> vec {
+    </span><span style="color:#4271ae;">process</span><span style="color:#4d4d4c;">(elem);
 }
 </span></pre>
 <p>We then transformed this for loop to explicitly invoke
@@ -450,21 +450,21 @@ implemented. This is primarily because doing it on the pre-MIR
 compiler was architecturally challenging.</p>
 <p>To better understand what the feature is, consider this function
 <code>send_if</code>, which conditionally sends a vector to another thread:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">send_if</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">data</span><span style="color:#c0c5ce;">: Vec&lt;Data&gt;) {
-    </span><span style="color:#65737e;">// If `some_condition` returns *true*, then ownership of `data`
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">send_if</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">data</span><span style="color:#4d4d4c;">: Vec&lt;Data&gt;) {
+    </span><span style="color:#999999;">// If `some_condition` returns *true*, then ownership of `data`
     // moves into the `send_to_other_thread` function, and hence
     // we should not free it (the other thread will free it).
-    </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">some_condition</span><span style="color:#c0c5ce;">(&amp;data) {
-        </span><span style="color:#96b5b4;">send_to_other_thread</span><span style="color:#c0c5ce;">(data);
+    </span><span style="color:#8959a8;">if </span><span style="color:#4271ae;">some_condition</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">data) {
+        </span><span style="color:#4271ae;">send_to_other_thread</span><span style="color:#4d4d4c;">(data);
     }
 
-    </span><span style="color:#96b5b4;">post_send</span><span style="color:#c0c5ce;">();
+    </span><span style="color:#4271ae;">post_send</span><span style="color:#4d4d4c;">();
 
-    </span><span style="color:#65737e;">// If `some_condition` returned *false*, the ownership of `data`
+    </span><span style="color:#999999;">// If `some_condition` returned *false*, the ownership of `data`
     // remains with `send_if`, which means that the `data` vector
     // should be freed here, when we return.
-</span><span style="color:#c0c5ce;">}
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>The key point, as indicated in the comments, is that we can't know
 statically whether we ought to free <code>data</code> or not. It depends on
@@ -480,19 +480,19 @@ same thing that the equivalent C++ code would do.)</p>
 <p>But we'd like to do better than that. What we would <em>like</em> to do is to
 use boolean flags on the stack that tell us what needs to be freed.
 So that might look something like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">send_if</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">data</span><span style="color:#c0c5ce;">: Vec&lt;Data&gt;) {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> data_is_owned = </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">send_if</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">data</span><span style="color:#4d4d4c;">: Vec&lt;Data&gt;) {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> data_is_owned </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">true</span><span style="color:#4d4d4c;">;
 
-    </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">some_condition</span><span style="color:#c0c5ce;">(&amp;data) {
-        </span><span style="color:#96b5b4;">send_to_other_thread</span><span style="color:#c0c5ce;">(data);
-        data_is_owned = </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#8959a8;">if </span><span style="color:#4271ae;">some_condition</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">data) {
+        </span><span style="color:#4271ae;">send_to_other_thread</span><span style="color:#4d4d4c;">(data);
+        data_is_owned </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">false</span><span style="color:#4d4d4c;">;
     }
 
-    </span><span style="color:#96b5b4;">post_send</span><span style="color:#c0c5ce;">();
+    </span><span style="color:#4271ae;">post_send</span><span style="color:#4d4d4c;">();
 
-    </span><span style="color:#65737e;">// Free `data`, but only if we still own it:
-    </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> data_is_owned {
+    </span><span style="color:#999999;">// Free `data`, but only if we still own it:
+    </span><span style="color:#8959a8;">if</span><span style="color:#4d4d4c;"> data_is_owned {
         mem::drop(data);
     }
 }
@@ -532,14 +532,14 @@ would be the same).</p>
 the <code>send_if</code> function called <code>send_if2</code>. This variation checks some
 condition and, if it is met, sends the data to another thread for
 processing. Otherwise, it processes it locally:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">send_if2</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">data</span><span style="color:#c0c5ce;">: Vec&lt;Data&gt;) {
-    </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">some_condition</span><span style="color:#c0c5ce;">(&amp;data) {
-        </span><span style="color:#96b5b4;">send_to_other_thread</span><span style="color:#c0c5ce;">(data);
-        </span><span style="color:#b48ead;">return</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">send_if2</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">data</span><span style="color:#4d4d4c;">: Vec&lt;Data&gt;) {
+    </span><span style="color:#8959a8;">if </span><span style="color:#4271ae;">some_condition</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">data) {
+        </span><span style="color:#4271ae;">send_to_other_thread</span><span style="color:#4d4d4c;">(data);
+        </span><span style="color:#8959a8;">return</span><span style="color:#4d4d4c;">;
     }
 
-    </span><span style="color:#96b5b4;">process</span><span style="color:#c0c5ce;">(&amp;data);
+    </span><span style="color:#4271ae;">process</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">data);
 }
 </span></pre>
 <p>This would generate MIR like:</p>

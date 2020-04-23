@@ -77,8 +77,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
       <p>The Rust team is happy to announce the latest version of Rust, 1.21.0. Rust
 is a systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed, getting Rust 1.21 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1210-2017-10-12">detailed release notes for
@@ -87,34 +87,34 @@ appropriate page on our website, and check out the <a href="https://github.com/r
 <p>This release contains some very minor, but nice-to-have features, as well as
 some new documentation.</p>
 <p>First up, a small change to literals. Consider code like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = &amp;</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= &amp;</span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>In Rust, this code is synonymous with:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> _x = </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = &amp;_x;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> _x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">_x;
 </span></pre>
 <p>That is, the <code>5</code> here will be stored on the stack, or possibly in registers.
 <code>x</code> will be a reference to it.</p>
 <p>However, given that it's a literal integer, there's no reason that it <em>has</em>
 to be local like this. Imagine we had a function that took a <code>'static</code> argument,
 like <code>std::thread::spawn</code>. You might use <code>x</code> like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::thread;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::thread;
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = &amp;</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">;
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= &amp;</span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">;
 
-    thread::spawn(</span><span style="color:#b48ead;">move </span><span style="color:#c0c5ce;">|| {
-        println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, x);
+    thread::spawn(</span><span style="color:#8959a8;">move </span><span style="color:#3e999f;">|| </span><span style="color:#4d4d4c;">{
+        println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, x);
     });
 
 }
 </span></pre>
 <p>In previous versions of Rust, this would fail to compile:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0597]: borrowed value does not live long enough
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0597]: borrowed value does not live long enough
   --&gt; src/main.rs:4:14
    |
 4  |     let x = &amp;5;
@@ -130,10 +130,10 @@ requirements for <code>spawn</code>.</p>
 <p>However, if you compile this on Rust 1.21, it will work. Why? Well,
 if the thing being referred to is okay to put into a <code>static</code>, we could
 instead de-sugar <code>let x = &amp;5;</code> like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">static </span><span style="color:#d08770;">FIVE</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">static </span><span style="color:#666969;">FIVE</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">;
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = &amp;</span><span style="color:#d08770;">FIVE</span><span style="color:#c0c5ce;">;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= &amp;</span><span style="color:#666969;">FIVE</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>Here, since the <code>FIVE</code> is <code>static</code>, <code>x</code> is a <code>&amp;'static i32</code>. And so this
 is what Rust will now do in this kind of case. For full details, see <a href="https://github.com/rust-lang/rfcs/blob/master/text/1414-rvalue_static_promotion.md">RFC 1414</a>,
@@ -186,29 +186,29 @@ though pre-requisite work is ongoing at the moment.</p>
 <p>Next, <a href="https://github.com/rust-lang/rust/pull/44567"><code>Iterator::for_each</code></a> has
 been stabilized, letting you consume an iterator for side effects without needing
 a <code>for</code> loop:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// old
-</span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> i in </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">..</span><span style="color:#d08770;">10 </span><span style="color:#c0c5ce;">{
-    println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, i);
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// old
+</span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> i </span><span style="color:#3e999f;">in </span><span style="color:#f5871f;">0</span><span style="color:#3e999f;">..</span><span style="color:#f5871f;">10 </span><span style="color:#4d4d4c;">{
+    println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, i);
 }
 
-</span><span style="color:#65737e;">// new
-</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">..</span><span style="color:#d08770;">10</span><span style="color:#c0c5ce;">).</span><span style="color:#96b5b4;">for_each</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">i</span><span style="color:#c0c5ce;">| println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, i));
+</span><span style="color:#999999;">// new
+</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">0</span><span style="color:#3e999f;">..</span><span style="color:#f5871f;">10</span><span style="color:#4d4d4c;">).</span><span style="color:#4271ae;">for_each</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">i</span><span style="color:#4d4d4c;">| println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, i));
 </span></pre>
 <p>The correct one to use depends on your situation; in the sample above, the <code>for</code> loop
 is pretty straightforward. But when you're chaining a number of iterators together,
 the <code>for_each</code> version is sometimes clearer. Consider this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// old
-</span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> i in (</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">..</span><span style="color:#d08770;">100</span><span style="color:#c0c5ce;">).</span><span style="color:#96b5b4;">map</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">| x + </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">).</span><span style="color:#96b5b4;">filter</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">| x % </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">) {
-    println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, i);
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// old
+</span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> i </span><span style="color:#3e999f;">in </span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">0</span><span style="color:#3e999f;">..</span><span style="color:#f5871f;">100</span><span style="color:#4d4d4c;">).</span><span style="color:#4271ae;">map</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">| x </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">).</span><span style="color:#4271ae;">filter</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">| x </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">== </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">) {
+    println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, i);
 }
 
-</span><span style="color:#65737e;">// new
-</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">..</span><span style="color:#d08770;">100</span><span style="color:#c0c5ce;">)
-    .</span><span style="color:#96b5b4;">map</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">| x + </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">)
-    .</span><span style="color:#96b5b4;">filter</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">| x % </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">)
-    .</span><span style="color:#96b5b4;">for_each</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">i</span><span style="color:#c0c5ce;">| println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, i));
+</span><span style="color:#999999;">// new
+</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">0</span><span style="color:#3e999f;">..</span><span style="color:#f5871f;">100</span><span style="color:#4d4d4c;">)
+    .</span><span style="color:#4271ae;">map</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">| x </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">)
+    .</span><span style="color:#4271ae;">filter</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">| x </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">== </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">)
+    .</span><span style="color:#4271ae;">for_each</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">i</span><span style="color:#4d4d4c;">| println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, i));
 </span></pre>
 <p><a href="https://github.com/rust-lang/rust/pull/42565"><code>Rc&lt;T&gt;</code> and <code>Arc&lt;T&gt;</code> now implement <code>From&lt;&amp;[T]&gt; where T: Clone</code>, <code>From&lt;str&gt;</code>,
 <code>From&lt;String&gt;</code>, <code>From&lt;Box&lt;T&gt;&gt; where T: ?Sized</code>, and
@@ -232,19 +232,19 @@ override certain parts of your dependency graph. We also have a feature,
 <code>[replace]</code>, and while we have no plans to deprecate or remove <code>[replace]</code>,
 at this point, you should use <code>[patch]</code> instead of <code>[replace]</code>.</p>
 <p>So what's it look like? Let's say we have a <code>Cargo.toml</code> that looks like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[dependencies]
-</span><span style="color:#bf616a;">foo </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">1.2.3</span><span style="color:#c0c5ce;">&quot;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">dependencies</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">foo </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;1.2.3&quot;
 </span></pre>
 <p>In addition, our <code>foo</code> crate depends on a <code>bar</code> crate, and we find a bug in
 <code>bar</code>. To test this out, we'd download the source code for <code>bar</code>, and then
 update our <code>Cargo.toml</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[dependencies]
-</span><span style="color:#bf616a;">foo </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">1.2.3</span><span style="color:#c0c5ce;">&quot;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">dependencies</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">foo </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;1.2.3&quot;
 
-[patch.crates-io]
-</span><span style="color:#bf616a;">bar </span><span style="color:#c0c5ce;">= { </span><span style="color:#bf616a;">path </span><span style="color:#c0c5ce;">= &#39;</span><span style="color:#a3be8c;">/path/to/bar</span><span style="color:#c0c5ce;">&#39; }
+</span><span style="color:#4d4d4c;">[</span><span style="color:#c82829;">patch.crates-io</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">bar </span><span style="color:#4d4d4c;">= { </span><span style="color:#c82829;">path </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&#39;/path/to/bar&#39; </span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>Now, when you <code>cargo build</code>, it will use the local version of <code>bar</code>, rather
 than the one from <code>crates.io</code> that <code>foo</code> depends on.</p>

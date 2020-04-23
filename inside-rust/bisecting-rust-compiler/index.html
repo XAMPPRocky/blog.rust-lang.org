@@ -106,26 +106,26 @@ fix the problem.</p>
 <p><code>cargo-bisect-rustc</code> was created originally by Mark Rousskov. I extended
 it recently to make it easier to use.</p>
 <p>To install the tool run:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">cargo</span><span style="color:#c0c5ce;"> install cargo-bisect-rustc
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">cargo</span><span style="color:#4271ae;"> install cargo-bisect-rustc
 </span></pre><h2 id="finding-a-regression">Finding a regression</h2>
 <p>We are going to use <a href="https://github.com/rust-lang/rust/issues/64945">this &quot;old&quot; reported rustc
 regression</a> as an
 example:</p>
 <p>Our application consists only of this file:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">pub struct </span><span style="color:#c0c5ce;">Slice&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, T&gt;(&amp;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;"> [T]);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">pub struct </span><span style="color:#4d4d4c;">Slice&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">, T&gt;(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;"> [T]);
 
-</span><span style="color:#b48ead;">impl</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, T: </span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">&gt; Slice&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, T&gt; {
-    </span><span style="color:#b48ead;">pub const </span><span style="color:#d08770;">EMPTY</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">Self </span><span style="color:#c0c5ce;">= Slice ({
-        </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> v: &amp;[T] = &amp;[];
+</span><span style="color:#8959a8;">impl</span><span style="color:#4d4d4c;">&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">, T: </span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">&gt; Slice&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">, T&gt; {
+    </span><span style="color:#8959a8;">pub const </span><span style="color:#666969;">EMPTY</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">Self </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Slice ({
+        </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> v: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[T] </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">[];
         v
     });
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> s = Slice(&amp;[</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">]);
-    assert!(s.</span><span style="color:#d08770;">0 </span><span style="color:#c0c5ce;">!= Slice::</span><span style="color:#d08770;">EMPTY</span><span style="color:#c0c5ce;">.</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> s </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Slice(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">]);
+    assert!(s.</span><span style="color:#f5871f;">0 </span><span style="color:#3e999f;">!= </span><span style="color:#4d4d4c;">Slice::</span><span style="color:#666969;">EMPTY</span><span style="color:#4d4d4c;">.</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>Then we run <code>cargo bisect-rustc --end=2019-10-02</code>.</p>
@@ -143,23 +143,23 @@ automatically search for the commit that introduced the regression.</p>
 <p>Let's see the tool in action:</p>
 <p>The tool starts by downloading various nightly compilers, trying to find
 a date when the program worked ...</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">checking nightly-2019-10-02
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">checking nightly-2019-10-02
 std for x86_64-unknown-linux-gnu: 172.87 MB / 172.87 MB [===============================================================================================================================================================] 100.00 % 10.67 MB/s uninstalling nightly-2019-10-02
 checking nightly-2019-09-30
 ...
 </span></pre>
 <p>Once it has one failing and working point it starts bisecting ...</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">std for x86_64-unknown-linux-gnu: 173.43 MB / 173.43 MB [===============================================================================================================================================================] 100.00 % 12.82 MB/s uninstalling nightly-2019-09-29
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">std for x86_64-unknown-linux-gnu: 173.43 MB / 173.43 MB [===============================================================================================================================================================] 100.00 % 12.82 MB/s uninstalling nightly-2019-09-29
 tested nightly-2019-09-29, got No
 searched toolchains nightly-2019-09-28 through nightly-2019-09-30
 regression in nightly-2019-09-30
 </span></pre>
 <p>Once it finds a nightly, it starts to search the PRs that went into that
 nightly build ...</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">looking for regression commit between 2019-09-30 and 2019-09-29
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">looking for regression commit between 2019-09-30 and 2019-09-29
 fetching commits from 488381ce9ef0ceabe83b73127c659e5d38137df0 to 8431f261dd160021b6af85916f161a13dd101ca0
 ...
 searched toolchains 488381ce9ef0ceabe83b73127c659e5d38137df0 through 8431f261dd160021b6af85916f161a13dd101ca0
@@ -167,8 +167,8 @@ regression in 0bbab7d99dde8620604fb265706dc8bff20345a7
 </span></pre>
 <p>Finally, when it finds the PR that broke the compiler, it generates a
 bug report that you can copy and paste!</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">==================================================================================
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">==================================================================================
 = Please open an issue on Rust&#39;s github repository                               =
 = https://github.com/rust-lang/rust/issues/new                                   =
 = Below you will find a text that would serve as a starting point of your report =

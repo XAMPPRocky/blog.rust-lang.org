@@ -100,40 +100,40 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;inside-rust&
 <p>Lists are one of the most basic and common data structures found in software. In Rust, lists are usually a contiguous sequence of elements in memory, or a <em>slice</em>.</p>
 <p>Since slices are so commonplace, it is important that working with them is easy. To that end, we stabilized <a href="https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#basic-slice-patterns"><em>fixed-length slice patterns</em> in Rust 1.26.0</a>. So now it is possible to e.g., write <code>let [a, b, c] = my_array;</code> to destructure an array of 3 elements. Oftentimes, however, we're working with a slice of unknown length, so given only fixed-length slice patterns, we have to provide a fallback <code>match</code> arm with e.g. <code>_</code> as the pattern.</p>
 <p>In Rust 1.42.0, <a href="https://github.com/rust-lang/rust/pull/67712">we are stabilizing <em>subslice patterns</em></a>. To introduce a subslice pattern, we use <code>..</code> which denotes a variable-length gap, matching as many elements as possible not matched by the patterns before and after the <code>..</code>. For example, in a parser, we would like to error when a list of attributes, <code>attrs</code>, is not followed by an item, <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_parse/parser/struct.Parser.html#method.recover_attrs_no_item">so we write</a>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">/// Recover if we parsed attributes and expected an item but there was none.
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">recover_attrs_no_item</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">attrs</span><span style="color:#c0c5ce;">: &amp;[Attribute]) -&gt; PResult&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, ()&gt; {
-    </span><span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">(start, end) = </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> attrs {
-        [] =&gt; </span><span style="color:#b48ead;">return </span><span style="color:#c0c5ce;">Ok(()),
-        [x0] =&gt; (x0, x0),
-        [x0, .., xn] =&gt; (x0, xn),
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">/// Recover if we parsed attributes and expected an item but there was none.
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">recover_attrs_no_item</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut </span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">attrs</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[Attribute]) -&gt; PResult&lt;</span><span style="color:#8959a8;">&#39;a</span><span style="color:#4d4d4c;">, ()&gt; {
+    </span><span style="color:#8959a8;">let </span><span style="color:#4d4d4c;">(start, end) </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> attrs {
+        [] </span><span style="color:#3e999f;">=&gt; </span><span style="color:#8959a8;">return </span><span style="color:#c99e00;">Ok</span><span style="color:#4d4d4c;">(()),
+        [x0] </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">(x0, x0),
+        [x0, </span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">, xn] </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">(x0, xn),
     };
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> msg = </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> end.</span><span style="color:#96b5b4;">is_doc_comment</span><span style="color:#c0c5ce;">() {
-        &quot;</span><span style="color:#a3be8c;">expected item after doc comment</span><span style="color:#c0c5ce;">&quot;
-    } </span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{
-        &quot;</span><span style="color:#a3be8c;">expected item after attributes</span><span style="color:#c0c5ce;">&quot;
-    };
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> err = </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.</span><span style="color:#96b5b4;">struct_span_err</span><span style="color:#c0c5ce;">(end.span, msg);
-    </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> end.</span><span style="color:#96b5b4;">is_doc_comment</span><span style="color:#c0c5ce;">() {
-        err.</span><span style="color:#96b5b4;">span_label</span><span style="color:#c0c5ce;">(end.span, &quot;</span><span style="color:#a3be8c;">this doc comment doesn&#39;t document anything</span><span style="color:#c0c5ce;">&quot;);
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> msg </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">if</span><span style="color:#4d4d4c;"> end.</span><span style="color:#4271ae;">is_doc_comment</span><span style="color:#4d4d4c;">() {
+        </span><span style="color:#718c00;">&quot;expected item after doc comment&quot;
+    </span><span style="color:#4d4d4c;">} </span><span style="color:#8959a8;">else </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#718c00;">&quot;expected item after attributes&quot;
+    </span><span style="color:#4d4d4c;">};
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> err </span><span style="color:#3e999f;">= </span><span style="color:#c82829;">self</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">struct_span_err</span><span style="color:#4d4d4c;">(end.span, msg);
+    </span><span style="color:#8959a8;">if</span><span style="color:#4d4d4c;"> end.</span><span style="color:#4271ae;">is_doc_comment</span><span style="color:#4d4d4c;">() {
+        err.</span><span style="color:#4271ae;">span_label</span><span style="color:#4d4d4c;">(end.span, </span><span style="color:#718c00;">&quot;this doc comment doesn&#39;t document anything&quot;</span><span style="color:#4d4d4c;">);
     }
-    </span><span style="color:#b48ead;">if let </span><span style="color:#c0c5ce;">[.., penultimate, _] = attrs {
-        err.</span><span style="color:#96b5b4;">span_label</span><span style="color:#c0c5ce;">(start.span.</span><span style="color:#96b5b4;">to</span><span style="color:#c0c5ce;">(penultimate.span), &quot;</span><span style="color:#a3be8c;">other attributes here</span><span style="color:#c0c5ce;">&quot;);
+    </span><span style="color:#8959a8;">if let </span><span style="color:#4d4d4c;">[</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">, penultimate, </span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">] </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> attrs {
+        err.</span><span style="color:#4271ae;">span_label</span><span style="color:#4d4d4c;">(start.span.</span><span style="color:#4271ae;">to</span><span style="color:#4d4d4c;">(penultimate.span), </span><span style="color:#718c00;">&quot;other attributes here&quot;</span><span style="color:#4d4d4c;">);
     }
-    Err(err)
+    </span><span style="color:#c99e00;">Err</span><span style="color:#4d4d4c;">(err)
 }
 </span></pre>
 <p>Here we have two subslice patterns, the first one being <code>[x0, .., xn]</code>. In this case, the pattern binds <code>x0</code>, the first element, and <code>xn</code>, the last element, and ignores everything in the middle, matching a slice with at least two elements in total. Meanwhile, <code>[]</code> and <code>[x0]</code> match cases with fewer than two elements, so the compiler knows that we have covered all possibilities. In the latter case, we extract the <code>penultimate</code> element of the slice, which, as the name suggests, also requires that the slice has at least two elements.</p>
 <p>We can also bind a subslice to a variable. For example, suppose we want to disallow <code>...</code> in all but the last parameter of a function. If so, we can write:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">match </span><span style="color:#c0c5ce;">&amp;*fn_decl.inputs {
-    ... </span><span style="color:#65737e;">// other arms
-    </span><span style="color:#c0c5ce;">[ps @ .., _] =&gt; {
-        </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> Param { ty, span, .. } in ps {
-            </span><span style="color:#b48ead;">if let </span><span style="color:#c0c5ce;">TyKind::CVarArgs = ty.kind {
-                </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.</span><span style="color:#96b5b4;">err_handler</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">span_err</span><span style="color:#c0c5ce;">(
-                    *span,
-                    &quot;</span><span style="color:#a3be8c;">`...` must be the last argument of a C-variadic function</span><span style="color:#c0c5ce;">&quot;,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">match </span><span style="color:#3e999f;">&amp;*</span><span style="color:#4d4d4c;">fn_decl.inputs {
+    </span><span style="color:#3e999f;">... </span><span style="color:#999999;">// other arms
+    </span><span style="color:#4d4d4c;">[ps </span><span style="color:#3e999f;">@ ..</span><span style="color:#4d4d4c;">, </span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">] </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> Param { ty, span, </span><span style="color:#3e999f;">.. </span><span style="color:#4d4d4c;">} </span><span style="color:#3e999f;">in</span><span style="color:#4d4d4c;"> ps {
+            </span><span style="color:#8959a8;">if let </span><span style="color:#4d4d4c;">TyKind::CVarArgs </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> ty.kind {
+                </span><span style="color:#c82829;">self</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">err_handler</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">span_err</span><span style="color:#4d4d4c;">(
+                    </span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">span,
+                    </span><span style="color:#718c00;">&quot;`...` must be the last argument of a C-variadic function&quot;</span><span style="color:#4d4d4c;">,
                 );
             }
         }
@@ -144,62 +144,62 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;inside-rust&
 <p>After more than 7 years of baking in nightly, with many twists and turns, subslice patterns will finally be stable. To get here, we've had to redesign the feature, plug soundness holes in the borrow checker, and substantially refactor the exhaustiveness checker. For more on how we got here, <a href="https://github.com/rust-lang/rust/pull/67712">read the stabilization report</a>, <a href="https://thomashartmann.dev/blog/feature(slice_patterns)/">Thomas Hartmann's blog post</a>, and stay tuned for the 1.42.0 release announcement  on the 12th of March.</p>
 <h2 id="nested-or-patterns">Nested OR-patterns</h2>
 <p>When pattern matching on an <code>enum</code>, the logic for some of the variants may be exactly the same. To avoid repeating ourselves, the <code>|</code> separator in <code>match</code>, <code>if let</code>, or <code>while let</code> expressions can be used to say that the branch should be taken if any of the <code>|</code>-separated patterns match. For example, we may write:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// Any local node that may call something in its body block should be explored.
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">should_explore</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">tcx</span><span style="color:#c0c5ce;">: TyCtxt&lt;&#39;_&gt;, </span><span style="color:#bf616a;">hir_id</span><span style="color:#c0c5ce;">: hir::HirId) -&gt; </span><span style="color:#b48ead;">bool </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> tcx.</span><span style="color:#96b5b4;">hir</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">find</span><span style="color:#c0c5ce;">(hir_id) {
-        Some(Node::Item(..))
-        | Some(Node::ImplItem(..))
-        | Some(Node::ForeignItem(..))
-        | Some(Node::TraitItem(..))
-        | Some(Node::Variant(..))
-        | Some(Node::AnonConst(..))
-        | Some(Node::Pat(..)) =&gt; </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">,
-        _ =&gt; </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">,
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// Any local node that may call something in its body block should be explored.
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">should_explore</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">tcx</span><span style="color:#4d4d4c;">: TyCtxt&lt;&#39;</span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">&gt;, </span><span style="color:#f5871f;">hir_id</span><span style="color:#4d4d4c;">: hir::HirId) -&gt; </span><span style="color:#8959a8;">bool </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> tcx.</span><span style="color:#4271ae;">hir</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">find</span><span style="color:#4d4d4c;">(hir_id) {
+        </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(Node::Item(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">))
+        </span><span style="color:#3e999f;">| </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(Node::ImplItem(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">))
+        </span><span style="color:#3e999f;">| </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(Node::ForeignItem(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">))
+        </span><span style="color:#3e999f;">| </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(Node::TraitItem(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">))
+        </span><span style="color:#3e999f;">| </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(Node::Variant(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">))
+        </span><span style="color:#3e999f;">| </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(Node::AnonConst(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">))
+        </span><span style="color:#3e999f;">| </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(Node::Pat(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">)) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#f5871f;">true</span><span style="color:#4d4d4c;">,
+        </span><span style="color:#3e999f;">_ =&gt; </span><span style="color:#f5871f;">false</span><span style="color:#4d4d4c;">,
     }
 }
 </span></pre>
 <p>This is serviceable, but <code>Some(_)</code> is still repeated several times. With <a href="https://github.com/rust-lang/rust/issues/54883"><code>#![feature(or_patterns)]</code></a>, which recently became usable on nightly, this repetition can be avoided:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// Any local node that may call something in its body block should be explored.
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">should_explore</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">tcx</span><span style="color:#c0c5ce;">: TyCtxt&lt;&#39;_&gt;, </span><span style="color:#bf616a;">hir_id</span><span style="color:#c0c5ce;">: hir::HirId) -&gt; </span><span style="color:#b48ead;">bool </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> tcx.</span><span style="color:#96b5b4;">hir</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">find</span><span style="color:#c0c5ce;">(hir_id) {
-        Some(
-            Node::Item(..)
-            | Node::ImplItem(..)
-            | Node::ForeignItem(..)
-            | Node::TraitItem(..)
-            | Node::Variant(..)
-            | Node::AnonConst(..)
-            | Node::Pat(..),
-        ) =&gt; </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">,
-        _ =&gt; </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">,
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// Any local node that may call something in its body block should be explored.
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">should_explore</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">tcx</span><span style="color:#4d4d4c;">: TyCtxt&lt;&#39;</span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">&gt;, </span><span style="color:#f5871f;">hir_id</span><span style="color:#4d4d4c;">: hir::HirId) -&gt; </span><span style="color:#8959a8;">bool </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> tcx.</span><span style="color:#4271ae;">hir</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">find</span><span style="color:#4d4d4c;">(hir_id) {
+        </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(
+            Node::Item(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">)
+            </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">Node::ImplItem(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">)
+            </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">Node::ForeignItem(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">)
+            </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">Node::TraitItem(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">)
+            </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">Node::Variant(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">)
+            </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">Node::AnonConst(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">)
+            </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">Node::Pat(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">),
+        ) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#f5871f;">true</span><span style="color:#4d4d4c;">,
+        </span><span style="color:#3e999f;">_ =&gt; </span><span style="color:#f5871f;">false</span><span style="color:#4d4d4c;">,
     }
 }
 </span></pre>
 <p>Previously, when using <code>|</code> in a <code>match</code> expression, the <code>|</code> syntax was part of <code>match</code> itself. With <code>or_patterns</code>, this is now part of patterns themselves, so you can nest OR-patterns arbitrarily, and use them in <code>let</code> statements too:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">Ok(x) | Err(x) = </span><span style="color:#96b5b4;">foo</span><span style="color:#c0c5ce;">();
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let </span><span style="color:#c99e00;">Ok</span><span style="color:#4d4d4c;">(x) </span><span style="color:#3e999f;">| </span><span style="color:#c99e00;">Err</span><span style="color:#4d4d4c;">(x) </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">();
 </span></pre>
 <p>An OR-pattern covers the <em>union</em> of all the <code>|</code>-ed (&quot;or-ed&quot;) patterns. To ensure that whatever alternative matched, all bindings are consistent and initialized, each or-ed pattern must include the exact same set of bindings, with the same types, and the same binding modes.</p>
 <h2 id="bindings-after">Bindings after <code>@</code></h2>
 <p>When matching on a certain substructure, you sometimes want to hold on to the whole. For example, given <code>Some(Expr { .. })</code>, you would like to bind the outer <code>Some(_)</code> layer. In Rust, this can be done using e.g., <code>expr @ Some(Expr { .. })</code>, which binds the matched place to <code>expr</code> while also ensuring that it matches <code>Some(Expr { .. })</code>.</p>
 <p>Suppose also that <code>Expr</code> has a field <code>span</code> that you would also use. In ancient times, that is before Rust 1.0, this was possible, but today, it results in an error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[</span><span style="color:#d08770;">E0303</span><span style="color:#c0c5ce;">]: pattern bindings are not allowed after an `@`
- --&gt; src/lib.rs:L:C
-  |
-L |         bar @ Some(Expr { span }) =&gt; {}
-  |                           ^^^^ not allowed after `@`
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[</span><span style="color:#666969;">E0303</span><span style="color:#4d4d4c;">]: pattern bindings are not allowed after an `</span><span style="color:#3e999f;">@</span><span style="color:#4d4d4c;">`
+ </span><span style="color:#3e999f;">-</span><span style="color:#4d4d4c;">-&gt; src</span><span style="color:#3e999f;">/</span><span style="color:#4d4d4c;">lib.rs:L:C
+  </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;">
+L </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;">         bar </span><span style="color:#3e999f;">@ </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(Expr { span }) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{}
+  </span><span style="color:#3e999f;">|                           ^^^^</span><span style="color:#4d4d4c;"> not allowed after `</span><span style="color:#3e999f;">@</span><span style="color:#4d4d4c;">`
 </span></pre>
 <p>This was turned into an error in <a href="https://github.com/rust-lang/rust/pull/16053">#16053</a>, mainly due to the difficulties of encoding borrow checking rules in a sound way in the old AST based borrow checker.</p>
 <p>Since then, we have <a href="https://github.com/rust-lang/rust/pull/64790">removed the old borrow checker</a> in favor of one based on <a href="https://rustc-dev-guide.rust-lang.org/mir/index.html">MIR</a>, which is a simpler, and more appropriate data structure for borrow checking. Specifically, in the case of a statement like <code>let ref x @ ref y = a;</code>, we would get roughly the same MIR as if we had used <code>let x = &amp;a; let y = &amp;a;</code>.</p>
 <p>So now that having bindings to the right of <code>@</code> is handled uniformly and correctly by the borrow checker (e.g., the compiler won't allow <code>ref x @ ref mut y</code>), we have decided to allow them under <a href="https://github.com/rust-lang/rust/issues/65490"><code>#![feature(bindings_after_at)]</code></a>, now available on nightly. With the feature gate enabled, you may for example write:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#![</span><span style="color:#bf616a;">feature</span><span style="color:#c0c5ce;">(bindings_after_at)]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#![</span><span style="color:#c82829;">feature</span><span style="color:#4d4d4c;">(bindings_after_at)]
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">if let</span><span style="color:#c0c5ce;"> x @ Some(y) = Some(</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">) {
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">if let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">@ </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(y) </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">) {
         dbg!(x, y);
     }
 }
@@ -207,38 +207,38 @@ L |         bar @ Some(Expr { span }) =&gt; {}
 <p>Our hope is that with providing this feature, we remove one surprising corner of the language.</p>
 <h2 id="combining-by-move-and-by-ref-bindings">Combining by-move and by-<code>ref</code> bindings</h2>
 <p>For similar reasons as noted in the case of bindings after <code>@</code>, Rust does not currently allow you to combine normal by-move bindings with those that are by-<code>ref</code>. For example, should you write...:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> tup = (&quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot;.</span><span style="color:#96b5b4;">to_string</span><span style="color:#c0c5ce;">(), </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">);
-    </span><span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">(x, </span><span style="color:#b48ead;">ref</span><span style="color:#c0c5ce;"> y) = tup;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> tup </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">(</span><span style="color:#718c00;">&quot;foo&quot;</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">to_string</span><span style="color:#4d4d4c;">(), </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">);
+    </span><span style="color:#8959a8;">let </span><span style="color:#4d4d4c;">(x, </span><span style="color:#8959a8;">ref</span><span style="color:#4d4d4c;"> y) </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> tup;
 }
 </span></pre>
 <p>... you would get an error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[</span><span style="color:#d08770;">E0009</span><span style="color:#c0c5ce;">]: cannot bind by-</span><span style="color:#b48ead;">move</span><span style="color:#c0c5ce;"> and by-</span><span style="color:#b48ead;">ref </span><span style="color:#c0c5ce;">in the same pattern
- --&gt; src/main.rs:</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">:</span><span style="color:#d08770;">10
-  </span><span style="color:#c0c5ce;">|
-</span><span style="color:#d08770;">3 </span><span style="color:#c0c5ce;">|     </span><span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">(x, </span><span style="color:#b48ead;">ref</span><span style="color:#c0c5ce;"> y) = tup;
-  |          ^  ----- by-</span><span style="color:#b48ead;">ref</span><span style="color:#c0c5ce;"> pattern </span><span style="color:#bf616a;">here
-  </span><span style="color:#c0c5ce;">|          |
-  |          by-</span><span style="color:#b48ead;">move</span><span style="color:#c0c5ce;"> pattern here
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[</span><span style="color:#666969;">E0009</span><span style="color:#4d4d4c;">]: cannot bind by</span><span style="color:#3e999f;">-</span><span style="color:#8959a8;">move</span><span style="color:#4d4d4c;"> and by</span><span style="color:#3e999f;">-</span><span style="color:#8959a8;">ref </span><span style="color:#3e999f;">in</span><span style="color:#4d4d4c;"> the same pattern
+ </span><span style="color:#3e999f;">-</span><span style="color:#4d4d4c;">-&gt; src</span><span style="color:#3e999f;">/</span><span style="color:#4d4d4c;">main.rs:</span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">:</span><span style="color:#f5871f;">10
+  </span><span style="color:#3e999f;">|
+</span><span style="color:#f5871f;">3 </span><span style="color:#3e999f;">|     </span><span style="color:#8959a8;">let </span><span style="color:#4d4d4c;">(x, </span><span style="color:#8959a8;">ref</span><span style="color:#4d4d4c;"> y) </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> tup;
+  |          ^  ----- by-</span><span style="color:#8959a8;">ref</span><span style="color:#4d4d4c;"> pattern </span><span style="color:#f5871f;">here
+  </span><span style="color:#4d4d4c;">|          </span><span style="color:#3e999f;">|
+  |</span><span style="color:#4d4d4c;">          by</span><span style="color:#3e999f;">-</span><span style="color:#8959a8;">move</span><span style="color:#4d4d4c;"> pattern here
 </span></pre>
 <p>At the same time, however, the compiler is perfectly happy to allow...:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> tup = (&quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot;.</span><span style="color:#96b5b4;">to_string</span><span style="color:#c0c5ce;">(), </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">);
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = tup.</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">;
-    </span><span style="color:#b48ead;">let ref</span><span style="color:#c0c5ce;"> y = tup.</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> tup </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">(</span><span style="color:#718c00;">&quot;foo&quot;</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">to_string</span><span style="color:#4d4d4c;">(), </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">);
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> tup.</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">let ref</span><span style="color:#4d4d4c;"> y </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> tup.</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">;
 }
 </span></pre>
 <p>... even though there is no semantic difference between these programs.</p>
 <p>Now that we have moved to the new borrow checker, as outlined in the previous section, we have relaxed this restriction on nightly as well, so under <a href="https://github.com/rust-lang/rust/issues/68354"><code>#![feature(move_ref_pattern)]</code></a>, you may write:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#![</span><span style="color:#bf616a;">feature</span><span style="color:#c0c5ce;">(move_ref_pattern)]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#![</span><span style="color:#c82829;">feature</span><span style="color:#4d4d4c;">(move_ref_pattern)]
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> tup = (&quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot;.</span><span style="color:#96b5b4;">to_string</span><span style="color:#c0c5ce;">(), </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">);
-    </span><span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">(x, </span><span style="color:#b48ead;">ref</span><span style="color:#c0c5ce;"> y) = tup;
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> tup </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">(</span><span style="color:#718c00;">&quot;foo&quot;</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">to_string</span><span style="color:#4d4d4c;">(), </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">);
+    </span><span style="color:#8959a8;">let </span><span style="color:#4d4d4c;">(x, </span><span style="color:#8959a8;">ref</span><span style="color:#4d4d4c;"> y) </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> tup;
 }
 </span></pre><h2 id="how-can-i-help">How can I help?</h2>
 <p>To recap, we have three unstable features, all improving pattern matching in different ways:</p>

@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.26.1 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1261-2018-05-29">detailed release notes for
@@ -113,14 +113,14 @@ fixed.</p>
 stable, as nothing except for <code>impl Termination</code> will work, but that trait is
 currently unstable to import.</p>
 <p>For example, this will no longer work on 1.26.1:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() -&gt; impl Copy {}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() -&gt; impl Copy {}
 </span></pre>
 <p>But this will keep working, as it doesn't attempt to return any hidden types
 via <code>impl Trait</code>, but rather names types concretely.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() -&gt; Result&lt;(), std::io::Error&gt; {
-    Ok(())
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() -&gt; Result&lt;(), std::io::Error&gt; {
+    </span><span style="color:#c99e00;">Ok</span><span style="color:#4d4d4c;">(())
 }
 </span></pre><h3 id="turbofish-no-longer-works-for-method-arguments-with-impl-trait">Turbofish no longer works for method arguments with <code>impl Trait</code></h3>
 <p>Previously, we accidentally permitted code to specify the type of method
@@ -128,23 +128,23 @@ arguments which use <code>impl Trait</code>. On 1.26.0, the code below would wor
 how exactly turbofish (<code>::&lt;u32&gt;</code> below) should interact with <code>impl Trait</code>
 hasn't yet been decided, so we're preventing turbofish use until we can be
 sure the semantics are as we desire.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Foo;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Foo;
 
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Foo {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">bar</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">_arg</span><span style="color:#c0c5ce;">: impl Copy) {}
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Foo {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">_arg</span><span style="color:#4d4d4c;">: impl Copy) {}
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    Foo.bar::&lt;</span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">&gt;(</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    Foo.bar::&lt;</span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">&gt;(</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">);
 }
 </span></pre><h3 id="floating-point-comparisons-changed-in-constant-contexts">Floating point comparisons changed in constant contexts</h3>
 <p>Previously, comparing <code>NaN</code> as greater than other floating point numbers in a constant
 context would return true, which is a bug; now, this comparison returns false.
 In some cases that may mean that the behavior of code will change, but we
 expect this to be relatively unlikely.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">use std::f64::NAN;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">use std::f64::NAN;
 const FOO: bool = ::std::f64::NAN &gt;= ::std::f64::NAN;
 # On 1.26.0
 assert_eq!(FOO, true);
@@ -159,8 +159,8 @@ refused to partially install Rust. Some users will need to run <code>rustup inst
 component, but this should be a one-time problem.</p>
 <p>This was unfortunately fixed too late to make it into 1.26 stable, so we added
 the patch for 1.26.1 to permit users to install Rust on these platforms.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update
 info: syncing channel updates for &#39;stable-x86_64-unknown-freebsd&#39;
 info: latest update on 2018-05-10, rust version 1.26.0 (a77568041 2018-05-07)
 error: component &#39;rust-docs&#39; for &#39;x86_64-unknown-freebsd&#39; is unavailable for download

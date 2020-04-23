@@ -101,15 +101,15 @@ crates, instead of using a manually updated pinned version of nightly.</p>
 <h2 id="how-to-prepare-for-the-changes">How to prepare for the changes</h2>
 <p>To test if your crate builds inside the new environment you can download the
 Docker image locally and execute a shell inside it:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">docker pull rustops/crates-build-env
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">docker pull rustops/crates-build-env
 docker run --rm --memory 3221225472 -it rustops/crates-build-env bash
 </span></pre>
 <p>Once you're in a shell you can install <a href="https://rustup.rs">rustup</a> (it's not installed by default
 in the image), install Rust nightly, clone your crate's repository and then
 build the documentation:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo fetch
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo fetch
 time cargo doc --no-deps
 </span></pre>
 <p>To aid your testing these commands will limit the available RAM to 3 GB and

@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.29.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1290-2018-09-13">detailed release notes for
@@ -97,19 +97,19 @@ features: they're new abilities that Cargo has grown, and they're both about lin
 <p>With the release of Rust 1.29, Cargo has a new subcommand: <code>cargo fix</code>. If you've written
 code in Rust before, you've probably seen a compiler warning before. For example, consider
 this code:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">do_something</span><span style="color:#c0c5ce;">() {}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">do_something</span><span style="color:#4d4d4c;">() {}
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> i in </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">..</span><span style="color:#d08770;">100 </span><span style="color:#c0c5ce;">{
-        </span><span style="color:#96b5b4;">do_something</span><span style="color:#c0c5ce;">();
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> i </span><span style="color:#3e999f;">in </span><span style="color:#f5871f;">0</span><span style="color:#3e999f;">..</span><span style="color:#f5871f;">100 </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#4271ae;">do_something</span><span style="color:#4d4d4c;">();
     }
 }
 </span></pre>
 <p>Here, we're calling <code>do_something</code> a hundred times. But we never use the variable <code>i</code>.
 And so Rust warns:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo build
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo build
    Compiling myprogram v0.1.0 (file:///path/to/myprogram)
 warning: unused variable: `i`
  --&gt; src\main.rs:4:9
@@ -123,19 +123,19 @@ warning: unused variable: `i`
 </span></pre>
 <p>See how it suggests that we use <code>_i</code> as a name instead? We can automatically
 apply that suggestion with <code>cargo fix</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo fix
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo fix
     Checking myprogram v0.1.0 (file:///C:/Users/steve/tmp/fix)
       Fixing src\main.rs (1 fix)
     Finished dev [unoptimized + debuginfo] target(s) in 0.59s
 </span></pre>
 <p>If we look at <code>src\main.rs</code> again, we'll see that the code has changed:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">do_something</span><span style="color:#c0c5ce;">() {}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">do_something</span><span style="color:#4d4d4c;">() {}
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> _i in </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">..</span><span style="color:#d08770;">100 </span><span style="color:#c0c5ce;">{
-        </span><span style="color:#96b5b4;">do_something</span><span style="color:#c0c5ce;">();
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> _i </span><span style="color:#3e999f;">in </span><span style="color:#f5871f;">0</span><span style="color:#3e999f;">..</span><span style="color:#f5871f;">100 </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#4271ae;">do_something</span><span style="color:#4d4d4c;">();
     }
 }
 </span></pre>
@@ -151,23 +151,23 @@ issue</a>.</p>
 <p>Speaking of warnings, you can now check out a preview of <code>cargo clippy</code> through Rustup.
 Clippy is a large number of additional warnings that you can run against your Rust code.</p>
 <p>For example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> lock_guard = mutex.</span><span style="color:#96b5b4;">lock</span><span style="color:#c0c5ce;">();
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> lock_guard </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> mutex.</span><span style="color:#4271ae;">lock</span><span style="color:#4d4d4c;">();
 
-std::mem::drop(&amp;lock_guard)
+std::mem::drop(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">lock_guard)
 
-</span><span style="color:#96b5b4;">operation_that_requires_mutex_to_be_unlocked</span><span style="color:#c0c5ce;">();
+</span><span style="color:#4271ae;">operation_that_requires_mutex_to_be_unlocked</span><span style="color:#4d4d4c;">();
 </span></pre>
 <p>This code is syntactically correct, but may have a deadlock! You see, we
 dropped <em>a reference to <code>lock_guard</code></em>, not the guard itself. Dropping
 a reference is a no-op, and so this is almost certainly a bug.</p>
 <p>We can get the preview of Clippy from Rustup:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup component add clippy-preview
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup component add clippy-preview
 </span></pre>
 <p>and then run it:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo clippy
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo clippy
 error: calls to `std::mem::drop` with a reference instead of an owned value. Dropping a reference does nothing.
  --&gt; src\main.rs:5:5
   |

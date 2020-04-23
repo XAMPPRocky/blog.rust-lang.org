@@ -77,8 +77,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
       <p>The Rust team is happy to announce the latest version of Rust, 1.15.0. Rust is a
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed, getting Rust 1.15 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1150-2017-02-02">detailed release notes for
@@ -87,10 +87,10 @@ appropriate page on our website, and check out the <a href="https://github.com/r
 <p>Rust 1.15 sees an <em>extremely</em> eagerly-awaited feature land on stable: custom
 derive! To review, in Rust, you've always been able to automatically implement
 some traits through the <code>derive</code> attribute:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">derive</span><span style="color:#c0c5ce;">(Debug)]
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Pet {
-    </span><span style="color:#bf616a;">name</span><span style="color:#c0c5ce;">: String,
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">derive</span><span style="color:#4d4d4c;">(Debug)]
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Pet {
+    </span><span style="color:#c82829;">name</span><span style="color:#4d4d4c;">: String,
 }
 </span></pre>
 <p>The <code>Debug</code> trait is then implemented for <code>Pet</code>, with vastly less boilerplate.
@@ -98,61 +98,61 @@ However, this only worked for traits provided as part of the standard library;
 it was not customizable. With Rust 1.15, it now is. That means, if you want to
 turn your <code>Pet</code> into JSON, it's as easy as adding <a href="https://serde.rs">Serde</a> to your
 <code>Cargo.toml</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[dependencies]
-</span><span style="color:#bf616a;">serde </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">0.9</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">serde_derive </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">0.9</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">serde_json </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">0.9</span><span style="color:#c0c5ce;">&quot;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">dependencies</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">serde </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;0.9&quot;
+</span><span style="color:#c82829;">serde_derive </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;0.9&quot;
+</span><span style="color:#c82829;">serde_json </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;0.9&quot;
 </span></pre>
 <p>And adding another trait to your <code>Pet</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">macro_use</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">extern crate</span><span style="color:#c0c5ce;"> serde_derive;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">macro_use</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">extern crate</span><span style="color:#4d4d4c;"> serde_derive;
 
-</span><span style="color:#b48ead;">extern crate</span><span style="color:#c0c5ce;"> serde_json;
+</span><span style="color:#8959a8;">extern crate</span><span style="color:#4d4d4c;"> serde_json;
 
-#[</span><span style="color:#bf616a;">derive</span><span style="color:#c0c5ce;">(Serialize, Deserialize, Debug)]
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Pet {
-    </span><span style="color:#bf616a;">name</span><span style="color:#c0c5ce;">: String,
+#[</span><span style="color:#c82829;">derive</span><span style="color:#4d4d4c;">(Serialize, Deserialize, Debug)]
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Pet {
+    </span><span style="color:#c82829;">name</span><span style="color:#4d4d4c;">: String,
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> pet = Pet { name: String::from(&quot;</span><span style="color:#a3be8c;">Ferris</span><span style="color:#c0c5ce;">&quot;) };
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> pet </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Pet { name: </span><span style="color:#c99e00;">String</span><span style="color:#4d4d4c;">::from(</span><span style="color:#718c00;">&quot;Ferris&quot;</span><span style="color:#4d4d4c;">) };
 
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> serialized = serde_json::to_string(&amp;pet).</span><span style="color:#96b5b4;">unwrap</span><span style="color:#c0c5ce;">();
-    println!(&quot;</span><span style="color:#a3be8c;">serialized = </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, serialized);
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> serialized </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">serde_json::to_string(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">pet).</span><span style="color:#4271ae;">unwrap</span><span style="color:#4d4d4c;">();
+    println!(</span><span style="color:#718c00;">&quot;serialized = </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, serialized);
 
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> deserialized: Pet = serde_json::from_str(&amp;serialized).</span><span style="color:#96b5b4;">unwrap</span><span style="color:#c0c5ce;">();
-    println!(&quot;</span><span style="color:#a3be8c;">deserialized = </span><span style="color:#d08770;">{:?}</span><span style="color:#c0c5ce;">&quot;, deserialized);
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> deserialized: Pet </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">serde_json::from_str(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">serialized).</span><span style="color:#4271ae;">unwrap</span><span style="color:#4d4d4c;">();
+    println!(</span><span style="color:#718c00;">&quot;deserialized = </span><span style="color:#666969;">{:?}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, deserialized);
 }
 </span></pre>
 <p>This will output:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">serialized = {&quot;name&quot;:&quot;Ferris&quot;}
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">serialized = {&quot;name&quot;:&quot;Ferris&quot;}
 deserialized = Pet { name: &quot;Ferris&quot; }
 </span></pre>
 <p>Another common use-case is <a href="http://diesel.rs">Diesel</a>. Say we had a database of <code>Pet</code>s.
 We could fetch them like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// some extern crate and use lines elided here
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// some extern crate and use lines elided here
 
-</span><span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">derive</span><span style="color:#c0c5ce;">(Queryable)]
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Pet {
-    </span><span style="color:#bf616a;">name</span><span style="color:#c0c5ce;">: String,
+</span><span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">derive</span><span style="color:#4d4d4c;">(Queryable)]
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Pet {
+    </span><span style="color:#c82829;">name</span><span style="color:#4d4d4c;">: String,
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">diesel_demo::schema::pets::dsl::*;
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">diesel_demo::schema::pets::dsl::</span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">;
 
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> connection = </span><span style="color:#96b5b4;">establish_connection</span><span style="color:#c0c5ce;">();
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> results = pets
-        .</span><span style="color:#96b5b4;">limit</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">)
-        .load::&lt;Pet&gt;(&amp;connection)
-        .</span><span style="color:#96b5b4;">expect</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">Error loading pets</span><span style="color:#c0c5ce;">&quot;);
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> connection </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">establish_connection</span><span style="color:#4d4d4c;">();
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> results </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> pets
+        .</span><span style="color:#4271ae;">limit</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">)
+        .load::&lt;Pet&gt;(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">connection)
+        .</span><span style="color:#4271ae;">expect</span><span style="color:#4d4d4c;">(</span><span style="color:#718c00;">&quot;Error loading pets&quot;</span><span style="color:#4d4d4c;">);
 
-    println!(&quot;</span><span style="color:#a3be8c;">Displaying </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> pets</span><span style="color:#c0c5ce;">&quot;, results.</span><span style="color:#96b5b4;">len</span><span style="color:#c0c5ce;">());
-    </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> pet in results {
-        println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, pet.name);
+    println!(</span><span style="color:#718c00;">&quot;Displaying </span><span style="color:#666969;">{}</span><span style="color:#718c00;"> pets&quot;</span><span style="color:#4d4d4c;">, results.</span><span style="color:#4271ae;">len</span><span style="color:#4d4d4c;">());
+    </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> pet </span><span style="color:#3e999f;">in</span><span style="color:#4d4d4c;"> results {
+        println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, pet.name);
     }
 }
 </span></pre>
@@ -191,13 +191,13 @@ We continue to work on making the compiler faster. Expect to see more in the
 future!</p>
 <p>As a smaller improvement, <a href="https://github.com/rust-lang/rust/pull/37791"><code>?Sized</code> can now be used in <code>where</code>
 clauses</a>. In other words:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Foo&lt;T: </span><span style="background-color:#bf616a;color:#2b303b;">?</span><span style="color:#c0c5ce;">Sized&gt; {
-    </span><span style="color:#bf616a;">f</span><span style="color:#c0c5ce;">: T,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Foo&lt;T: </span><span style="background-color:#c82829;color:#ffffff;">?</span><span style="color:#4d4d4c;">Sized&gt; {
+    </span><span style="color:#c82829;">f</span><span style="color:#4d4d4c;">: T,
 }
 
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Foo&lt;T&gt; where T: ?Sized {
-    </span><span style="color:#bf616a;">f</span><span style="color:#c0c5ce;">: T,
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Foo&lt;T&gt; where T: ?Sized {
+    </span><span style="color:#c82829;">f</span><span style="color:#4d4d4c;">: T,
 }
 </span></pre>
 <p>This second form is now accepted, and is equivalent to the first.</p>

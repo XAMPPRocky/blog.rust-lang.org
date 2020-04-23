@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.23.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1230-2018-01-04">detailed release notes for
@@ -114,23 +114,23 @@ improvements and updates to Cargo's docs throughout the year.</p>
 <h3 id="library-stabilizations">Library stabilizations</h3>
 <p>As of Rust 1.0, a trait named <a href="https://doc.rust-lang.org/std/ascii/trait.AsciiExt.html"><code>AsciiExt</code></a> existed to provide ASCII related functionality
 on <code>u8</code>, <code>char</code>, <code>[u8]</code>, and <code>str</code>. To use it, you'd write code like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::ascii::AsciiExt;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::ascii::AsciiExt;
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> ascii = &#39;</span><span style="color:#a3be8c;">a</span><span style="color:#c0c5ce;">&#39;;
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> non_ascii = &#39;</span><span style="color:#a3be8c;">❤</span><span style="color:#c0c5ce;">&#39;;
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> int_ascii = </span><span style="color:#d08770;">97</span><span style="color:#c0c5ce;">;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> ascii </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&#39;a&#39;</span><span style="color:#4d4d4c;">;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> non_ascii </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&#39;❤&#39;</span><span style="color:#4d4d4c;">;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> int_ascii </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">97</span><span style="color:#4d4d4c;">;
 
-assert!(ascii.</span><span style="color:#96b5b4;">is_ascii</span><span style="color:#c0c5ce;">());
-assert!(!non_ascii.</span><span style="color:#96b5b4;">is_ascii</span><span style="color:#c0c5ce;">());
-assert!(int_ascii.</span><span style="color:#96b5b4;">is_ascii</span><span style="color:#c0c5ce;">());
+assert!(ascii.</span><span style="color:#4271ae;">is_ascii</span><span style="color:#4d4d4c;">());
+assert!(</span><span style="color:#3e999f;">!</span><span style="color:#4d4d4c;">non_ascii.</span><span style="color:#4271ae;">is_ascii</span><span style="color:#4d4d4c;">());
+assert!(int_ascii.</span><span style="color:#4271ae;">is_ascii</span><span style="color:#4d4d4c;">());
 </span></pre>
 <p>In Rust 1.23, these methods are now defined directly on those types, and so you no longer need
 to import the trait. Thanks to our stability guarantees, this trait still exists, so if you'd
 like to still support Rust versions before Rust 1.23, you can do this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">allow</span><span style="color:#c0c5ce;">(unused_imports)]
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::ascii::AsciiExt;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">allow</span><span style="color:#4d4d4c;">(unused_imports)]
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::ascii::AsciiExt;
 </span></pre>
 <p>…to suppress the related warning. Once you drop support for older Rusts, you
 can remove both lines, and everything will continue to work.</p>

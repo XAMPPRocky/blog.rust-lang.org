@@ -137,23 +137,23 @@ there can be any number of uses.</p>
 JavaScript or C#. Rust's version of the feature is similar, but with a
 few key differences.</p>
 <p>To use async-await, you start by writing <code>async fn</code> instead of <code>fn</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">first_function</span><span style="color:#c0c5ce;">() -&gt; </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">{ .. }
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">async </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">first_function</span><span style="color:#4d4d4c;">() -&gt; </span><span style="color:#8959a8;">u32 </span><span style="color:#4d4d4c;">{ </span><span style="color:#3e999f;">.. </span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>Unlike a regular function, calling an <code>async fn</code> doesn't do anything
 to start -- instead, it returns a <code>Future</code>. This is a suspended
 computation that is waiting to be executed. To actually <em>execute</em>
 the future, you have to use the <code>.await</code> operator:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">another_function</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#65737e;">// Create the future:
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> future = </span><span style="color:#96b5b4;">first_function</span><span style="color:#c0c5ce;">();
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">async </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">another_function</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#999999;">// Create the future:
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> future </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">first_function</span><span style="color:#4d4d4c;">();
     
-    </span><span style="color:#65737e;">// Await the future, which will execute it (and suspend
+    </span><span style="color:#999999;">// Await the future, which will execute it (and suspend
     // this function if we encounter a need to wait for I/O): 
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> result: </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">= future.await;
-    ...
-}
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> result: </span><span style="color:#8959a8;">u32 </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> future.await;
+    </span><span style="color:#3e999f;">...
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>This example shows the first difference between Rust and other
 languages: we write <code>future.await</code> instead of <code>await future</code>. This

@@ -93,31 +93,31 @@ helping us make Rust even better. &lt;3</p>
 <h2 id="setup-install-rust-beta">Setup: install Rust beta</h2>
 <p>First things first, you'll need to install the beta release channel of Rust.
 With <a href="https://www.rust-lang.org/en-US/install.html">Rustup</a>, it's as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup install beta
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup install beta
 </span></pre>
 <p>To use this channel of Rust instead of your default, you can append a <code>+beta</code>
 to any <code>rustc</code> or cargo commands:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustc +beta --version
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustc +beta --version
 $ cargo +beta build
 </span></pre>
 <p>This lets you stick to stable as the default, while using beta for your
 experiments.</p>
 <h2 id="start-a-new-project">Start a new project</h2>
 <p>To start a new project with Rust 2018:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo +beta new my-sample-project
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo +beta new my-sample-project
 </span></pre>
 <p>Nothing changes! Well, something changed. Check out <code>Cargo.toml</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[package]
-</span><span style="color:#bf616a;">name </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">my-sample-project</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">version </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">0.1.0</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">authors </span><span style="color:#c0c5ce;">= [&quot;</span><span style="color:#a3be8c;">Your Name &lt;you@example.com&gt;</span><span style="color:#c0c5ce;">&quot;]
-</span><span style="color:#bf616a;">edition </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">2018</span><span style="color:#c0c5ce;">&quot;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">package</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">name </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;my-sample-project&quot;
+</span><span style="color:#c82829;">version </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;0.1.0&quot;
+</span><span style="color:#c82829;">authors </span><span style="color:#4d4d4c;">= [</span><span style="color:#718c00;">&quot;Your Name &lt;you@example.com&gt;&quot;</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">edition </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;2018&quot;
 
-[dependencies]
+</span><span style="color:#4d4d4c;">[</span><span style="color:#c82829;">dependencies</span><span style="color:#4d4d4c;">]
 </span></pre>
 <p>That new <code>edition = &quot;2018&quot;</code> key/value pair means you're working with Rust 2018.
 If it doesn't exist, it's the same as <code>edition = &quot;2015&quot;</code>, so all
@@ -127,8 +127,8 @@ existing projects keep working.</p>
 dependencies need to be updated for this to work; Rust 2018 and 2015
 interoperate seamlessly!</p>
 <p>The first step is to run <code>cargo fix</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo fix --edition
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo fix --edition
 </span></pre>
 <p>This will check your code, and automatically fix any issues that it can.
 <code>cargo fix</code> is still pretty new, and so it can't always fix your code
@@ -141,14 +141,14 @@ user's forums.</p>
 <p>Congrats! Your code is now valid in both Rust 2015 and Rust 2018!</p>
 <p>Once this is done, you can commit to Rust 2018 by updating
 your <code>Cargo.toml</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[package]
-</span><span style="color:#bf616a;">name </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">my-sample-project</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">version </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">0.1.0</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">authors </span><span style="color:#c0c5ce;">= [&quot;</span><span style="color:#a3be8c;">Your Name &lt;you@example.com&gt;</span><span style="color:#c0c5ce;">&quot;]
-</span><span style="color:#bf616a;">edition </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">2018</span><span style="color:#c0c5ce;">&quot;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">package</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">name </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;my-sample-project&quot;
+</span><span style="color:#c82829;">version </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;0.1.0&quot;
+</span><span style="color:#c82829;">authors </span><span style="color:#4d4d4c;">= [</span><span style="color:#718c00;">&quot;Your Name &lt;you@example.com&gt;&quot;</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">edition </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;2018&quot;
 
-[dependencies]
+</span><span style="color:#4d4d4c;">[</span><span style="color:#c82829;">dependencies</span><span style="color:#4d4d4c;">]
 </span></pre>
 <p>See that <code>edition = &quot;2018&quot;</code>? That's what opts you in to the new features.
 Set it, <code>cargo +beta build</code>, and you should be good to go!</p>

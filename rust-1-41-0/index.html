@@ -79,8 +79,8 @@ programming language that is empowering everyone to build reliable and
 efficient software.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.41.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1410-2020-01-30">detailed release notes for
@@ -101,16 +101,16 @@ when generics are involved.</p>
 way of composition. As an example, suppose your crate defines the
 <code>BetterVec&lt;T&gt;</code> struct, and you want a way to convert your struct to the
 standard library's <code>Vec&lt;T&gt;</code>. The code you would write is:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">impl</span><span style="color:#c0c5ce;">&lt;T&gt; From&lt;BetterVec&lt;T&gt;&gt; </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">Vec&lt;T&gt; {
-    </span><span style="color:#65737e;">// ...
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">impl</span><span style="color:#4d4d4c;">&lt;T&gt; From&lt;BetterVec&lt;T&gt;&gt; </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">Vec&lt;T&gt; {
+    </span><span style="color:#999999;">// ...
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>...which is an instance of the pattern:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">impl</span><span style="color:#c0c5ce;">&lt;T&gt; ForeignTrait&lt;LocalType&gt; </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">ForeignType&lt;T&gt; {
-    </span><span style="color:#65737e;">// ...
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">impl</span><span style="color:#4d4d4c;">&lt;T&gt; ForeignTrait&lt;LocalType&gt; </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">ForeignType&lt;T&gt; {
+    </span><span style="color:#999999;">// ...
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>In Rust 1.40.0 this <code>impl</code> was forbidden by the orphan rule, as both <code>From</code> and
 <code>Vec</code> are defined in the standard library, which is foreign to the current
@@ -144,28 +144,28 @@ is now ABI compatible with the C language's pointer (<code>T*</code>) types. So 
 have an <code>extern &quot;C&quot;</code> Rust function, called from C, your Rust function can now
 use <code>Box&lt;T&gt;</code>, for some specific <code>T</code>, while using <code>T*</code> in C for the
 corresponding function. As an example, on the C side you may have:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// C header
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// C header
 
 // Returns ownership to the caller.
-</span><span style="color:#b48ead;">struct</span><span style="color:#c0c5ce;"> Foo* </span><span style="color:#bf616a;">foo_new</span><span style="color:#c0c5ce;">(</span><span style="color:#b48ead;">void</span><span style="color:#c0c5ce;">);
+</span><span style="color:#8959a8;">struct</span><span style="color:#4d4d4c;"> Foo</span><span style="color:#3e999f;">* </span><span style="color:#c82829;">foo_new</span><span style="color:#4271ae;">(</span><span style="color:#8959a8;">void</span><span style="color:#4271ae;">)</span><span style="color:#4d4d4c;">;
 
-</span><span style="color:#65737e;">// Takes ownership from the caller; no-op when invoked with NULL.
-</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">foo_delete</span><span style="color:#c0c5ce;">(</span><span style="color:#b48ead;">struct</span><span style="color:#c0c5ce;"> Foo*);
+</span><span style="color:#999999;">// Takes ownership from the caller; no-op when invoked with NULL.
+</span><span style="color:#8959a8;">void </span><span style="color:#4271ae;">foo_delete</span><span style="color:#4d4d4c;">(</span><span style="color:#8959a8;">struct</span><span style="color:#4d4d4c;"> Foo</span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">);
 </span></pre>
 <p>...while on the Rust side, you would have:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">repr</span><span style="color:#c0c5ce;">(C)]
-</span><span style="color:#b48ead;">pub struct </span><span style="color:#c0c5ce;">Foo;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">repr</span><span style="color:#4d4d4c;">(C)]
+</span><span style="color:#8959a8;">pub struct </span><span style="color:#4d4d4c;">Foo;
 
-#[</span><span style="color:#bf616a;">no_mangle</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">pub extern </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">C</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo_new</span><span style="color:#c0c5ce;">() -&gt; Box&lt;Foo&gt; {
-    Box::new(Foo)
+#[</span><span style="color:#c82829;">no_mangle</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">pub extern </span><span style="color:#718c00;">&quot;C&quot; </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo_new</span><span style="color:#4d4d4c;">() -&gt; Box&lt;Foo&gt; {
+    </span><span style="color:#c99e00;">Box</span><span style="color:#4d4d4c;">::new(Foo)
 }
 
-</span><span style="color:#65737e;">// The possibility of NULL is represented with the `Option&lt;_&gt;`.
-</span><span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">no_mangle</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">pub extern </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">C</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo_delete</span><span style="color:#c0c5ce;">(_: Option&lt;Box&lt;Foo&gt;&gt;) {}
+</span><span style="color:#999999;">// The possibility of NULL is represented with the `Option&lt;_&gt;`.
+</span><span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">no_mangle</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">pub extern </span><span style="color:#718c00;">&quot;C&quot; </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo_delete</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">: Option&lt;Box&lt;Foo&gt;&gt;) {}
 </span></pre>
 <p>Note however that while <code>Box&lt;T&gt;</code> and <code>T*</code> have the same representation and ABI,
 a <code>Box&lt;T&gt;</code> must still be non-null, aligned, and ready for deallocation by the

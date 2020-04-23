@@ -100,20 +100,20 @@ information see the respective announcements for <a href="https://curl.haxx.se/c
 <p>Rust has gained a new operator, <code>?</code>, that makes error handling more pleasant by
 reducing the visual noise involved. It does this by solving one simple
 problem. To illustrate, imagine we had some code to read some data from a file:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">read_username_from_file</span><span style="color:#c0c5ce;">() -&gt; Result&lt;String, io::Error&gt; {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> f = File::open(&quot;</span><span style="color:#a3be8c;">username.txt</span><span style="color:#c0c5ce;">&quot;);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">read_username_from_file</span><span style="color:#4d4d4c;">() -&gt; Result&lt;String, io::Error&gt; {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> f </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">File::open(</span><span style="color:#718c00;">&quot;username.txt&quot;</span><span style="color:#4d4d4c;">);
 
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> f = </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> f {
-        Ok(file) =&gt; file,
-        Err(e) =&gt; </span><span style="color:#b48ead;">return </span><span style="color:#c0c5ce;">Err(e),
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> f </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> f {
+        </span><span style="color:#c99e00;">Ok</span><span style="color:#4d4d4c;">(file) </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> file,
+        </span><span style="color:#c99e00;">Err</span><span style="color:#4d4d4c;">(e) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#8959a8;">return </span><span style="color:#c99e00;">Err</span><span style="color:#4d4d4c;">(e),
     };
 
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> s = String::new();
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> s </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">String</span><span style="color:#4d4d4c;">::new();
 
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> f.</span><span style="color:#96b5b4;">read_to_string</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> s) {
-        Ok(_) =&gt; Ok(s),
-        Err(e) =&gt; Err(e),
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> f.</span><span style="color:#4271ae;">read_to_string</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> s) {
+        </span><span style="color:#c99e00;">Ok</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#c99e00;">Ok</span><span style="color:#4d4d4c;">(s),
+        </span><span style="color:#c99e00;">Err</span><span style="color:#4d4d4c;">(e) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#c99e00;">Err</span><span style="color:#4d4d4c;">(e),
     }
 }
 </span></pre>
@@ -125,14 +125,14 @@ errors up the call stack, the matching is just boilerplate - seeing it written
 out, in the same pattern every time, doesn't provide the reader with a great
 deal of useful information.</p>
 <p>With <code>?</code>, the above code looks like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">read_username_from_file</span><span style="color:#c0c5ce;">() -&gt; Result&lt;String, io::Error&gt; {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> f = File::open(&quot;</span><span style="color:#a3be8c;">username.txt</span><span style="color:#c0c5ce;">&quot;)?;
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> s = String::new();
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">read_username_from_file</span><span style="color:#4d4d4c;">() -&gt; Result&lt;String, io::Error&gt; {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> f </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">File::open(</span><span style="color:#718c00;">&quot;username.txt&quot;</span><span style="color:#4d4d4c;">)</span><span style="color:#3e999f;">?</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> s </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">String</span><span style="color:#4d4d4c;">::new();
 
-    f.</span><span style="color:#96b5b4;">read_to_string</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> s)?;
+    f.</span><span style="color:#4271ae;">read_to_string</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> s)</span><span style="color:#3e999f;">?</span><span style="color:#4d4d4c;">;
 
-    Ok(s)
+    </span><span style="color:#c99e00;">Ok</span><span style="color:#4d4d4c;">(s)
 }
 </span></pre>
 <p>The <code>?</code> is shorthand for the entire match statements we wrote earlier. In other
@@ -145,14 +145,14 @@ call stack.</p>
 <p>Seasoned Rustaceans may recognize that this is the same as the <code>try!</code> macro
 that's been available since Rust <code>1.0</code>. And indeed, they are the same. Before
 1.13, <code>read_username_from_file</code> could have been implemented like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">read_username_from_file</span><span style="color:#c0c5ce;">() -&gt; Result&lt;String, io::Error&gt; {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> f = try!(File::open(&quot;</span><span style="color:#a3be8c;">username.txt</span><span style="color:#c0c5ce;">&quot;));
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> s = String::new();
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">read_username_from_file</span><span style="color:#4d4d4c;">() -&gt; Result&lt;String, io::Error&gt; {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> f </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">try!(File::open(</span><span style="color:#718c00;">&quot;username.txt&quot;</span><span style="color:#4d4d4c;">));
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> s </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">String</span><span style="color:#4d4d4c;">::new();
 
-    try!(f.</span><span style="color:#96b5b4;">read_to_string</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> s));
+    try!(f.</span><span style="color:#4271ae;">read_to_string</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> s));
 
-    Ok(s)
+    </span><span style="color:#c99e00;">Ok</span><span style="color:#4d4d4c;">(s)
 }
 </span></pre>
 <p>So why extend the language when we already have a macro? There are multiple
@@ -166,12 +166,12 @@ evolution, from <code>try!</code> to <code>?</code> is a great example.</p>
 <p>One of the reasons <code>try!</code> needs a sweeter syntax is that it is quite
 unattractive when multiple invocations of <code>try!</code> are used in
 succession. Consider:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">try!(try!(try!(</span><span style="color:#96b5b4;">foo</span><span style="color:#c0c5ce;">()).</span><span style="color:#96b5b4;">bar</span><span style="color:#c0c5ce;">()).</span><span style="color:#96b5b4;">baz</span><span style="color:#c0c5ce;">())
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">try!(try!(try!(</span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">()).</span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">()).</span><span style="color:#4271ae;">baz</span><span style="color:#4d4d4c;">())
 </span></pre>
 <p>as opposed to</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#96b5b4;">foo</span><span style="color:#c0c5ce;">()?.</span><span style="color:#96b5b4;">bar</span><span style="color:#c0c5ce;">()?.</span><span style="color:#96b5b4;">baz</span><span style="color:#c0c5ce;">()?
+<pre style="background-color:#ffffff;">
+<span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">()</span><span style="color:#3e999f;">?</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">()</span><span style="color:#3e999f;">?</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">baz</span><span style="color:#4d4d4c;">()</span><span style="color:#3e999f;">?
 </span></pre>
 <p>The first is quite difficult to scan visually, and each layer of error handling
 prefixes the expression with an additional call to <code>try!</code>. This brings undue
@@ -239,17 +239,17 @@ information see the respective announcements for <a href="https://curl.haxx.se/c
 1.0.2j</a>.</p>
 <p>Macros can now be used in type position (<a href="https://github.com/rust-lang/rfcs/blob/master/text/0873-type-macros.md">RFC 873</a>), and
 attributes can be applied to statements (<a href="https://github.com/rust-lang/rfcs/blob/master/text/0016-more-attributes.md">RFC 16</a>):</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// Use a macro to name a type
-</span><span style="color:#96b5b4;">macro_rules! </span><span style="color:#c0c5ce;">Tuple {
-    { </span><span style="color:#bf616a;">$A</span><span style="color:#c0c5ce;">:ty,</span><span style="color:#bf616a;">$B</span><span style="color:#c0c5ce;">:ty } =&gt; { (</span><span style="color:#bf616a;">$A</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">$B</span><span style="color:#c0c5ce;">) }
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// Use a macro to name a type
+</span><span style="color:#4271ae;">macro_rules! </span><span style="color:#4d4d4c;">Tuple {
+    { </span><span style="color:#c82829;">$A</span><span style="color:#4d4d4c;">:ty,</span><span style="color:#c82829;">$B</span><span style="color:#4d4d4c;">:ty } </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{ (</span><span style="color:#c82829;">$A</span><span style="color:#4d4d4c;">, </span><span style="color:#c82829;">$B</span><span style="color:#4d4d4c;">) }
 }
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x: Tuple!(</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">) = (</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">);
-</span></pre><pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// Apply a lint attribute to a single statement
-</span><span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">allow</span><span style="color:#c0c5ce;">(non_snake_case)]
-</span><span style="color:#b48ead;">let </span><span style="color:#d08770;">BAD_STYLE </span><span style="color:#c0c5ce;">= List::new();
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x: Tuple</span><span style="color:#3e999f;">!</span><span style="color:#4d4d4c;">(</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">, </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">);
+</span></pre><pre style="background-color:#ffffff;">
+<span style="color:#999999;">// Apply a lint attribute to a single statement
+</span><span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">allow</span><span style="color:#4d4d4c;">(non_snake_case)]
+</span><span style="color:#8959a8;">let </span><span style="color:#666969;">BAD_STYLE </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">List::new();
 </span></pre>
 <p>Inline drop flags have been removed. Previously, in case of a conditional move,
 the compiler would store a &quot;drop flag&quot; inline in a struct (increasing its size)

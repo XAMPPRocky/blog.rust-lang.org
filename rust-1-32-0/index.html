@@ -79,8 +79,8 @@ programming language that is empowering everyone to build reliable and
 efficient software.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.32.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1320-2019-01-17">detailed release notes for
@@ -97,57 +97,57 @@ information.</p>
 <h4 id="the-dbg-macro">The <code>dbg</code> macro</h4>
 <p>First up, a quality of life improvement. Are you a &quot;print debugger&quot;? If you are, and
 you've wanted to print out some value while working on some code, you have to do this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">;
 
-println!(&quot;</span><span style="color:#d08770;">{:?}</span><span style="color:#c0c5ce;">&quot;, x);
+println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{:?}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, x);
 
-</span><span style="color:#65737e;">// or maybe even this
-</span><span style="color:#c0c5ce;">println!(&quot;</span><span style="color:#d08770;">{:#?}</span><span style="color:#c0c5ce;">&quot;, x);
+</span><span style="color:#999999;">// or maybe even this
+</span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{:#?}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, x);
 </span></pre>
 <p>This isn't the <em>largest</em> speed bump, but it is a lot of stuff to simply show the value of <code>x</code>.
 Additionally, there's no context here. If you have several of these <code>println!</code>s, it can be hard
 to tell which is which, unless you add your own context to each invocation, requiring even more work.</p>
 <p>In Rust 1.32.0, <a href="https://github.com/rust-lang/rust/pull/56395/">we've added a new macro,
 <code>dbg!</code></a>, for this purpose:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">;
 
     dbg!(x);
 }
 </span></pre>
 <p>If you run this program, you'll see:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[src/main.rs:4] x = 5
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[src/main.rs:4] x = 5
 </span></pre>
 <p>You get the file and line number of where this was invoked, as well as the
 name and value. Additionally, <code>println!</code> prints to the standard output, so
 you really should be using <code>eprintln!</code> to print to standard error. <code>dbg!</code>
 does the right thing and goes to <code>stderr</code>.</p>
 <p>It even works in more complex circumstances. Consider this factorial example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">factorial</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">n</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> n &lt;= </span><span style="color:#d08770;">1 </span><span style="color:#c0c5ce;">{
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">factorial</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">n</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">u32 </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#8959a8;">if</span><span style="color:#4d4d4c;"> n </span><span style="color:#3e999f;">&lt;= </span><span style="color:#f5871f;">1 </span><span style="color:#4d4d4c;">{
         n
-    } </span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{
-        n * </span><span style="color:#96b5b4;">factorial</span><span style="color:#c0c5ce;">(n - </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">)
+    } </span><span style="color:#8959a8;">else </span><span style="color:#4d4d4c;">{
+        n </span><span style="color:#3e999f;">* </span><span style="color:#4271ae;">factorial</span><span style="color:#4d4d4c;">(n </span><span style="color:#3e999f;">- </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">)
     }
 }
 </span></pre>
 <p>If we wanted to debug this, we might write it like this with <code>eprintln!</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">factorial</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">n</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">{
-    eprintln!(&quot;</span><span style="color:#a3be8c;">n: {}</span><span style="color:#c0c5ce;">&quot;, n);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">factorial</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">n</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">u32 </span><span style="color:#4d4d4c;">{
+    eprintln!(</span><span style="color:#718c00;">&quot;n: {}&quot;</span><span style="color:#4d4d4c;">, n);
 
-    </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> n &lt;= </span><span style="color:#d08770;">1 </span><span style="color:#c0c5ce;">{
-        eprintln!(&quot;</span><span style="color:#a3be8c;">n &lt;= 1</span><span style="color:#c0c5ce;">&quot;);
+    </span><span style="color:#8959a8;">if</span><span style="color:#4d4d4c;"> n </span><span style="color:#3e999f;">&lt;= </span><span style="color:#f5871f;">1 </span><span style="color:#4d4d4c;">{
+        eprintln!(</span><span style="color:#718c00;">&quot;n &lt;= 1&quot;</span><span style="color:#4d4d4c;">);
 
         n
-    } </span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{
-        </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> n = n * </span><span style="color:#96b5b4;">factorial</span><span style="color:#c0c5ce;">(n - </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">);
+    } </span><span style="color:#8959a8;">else </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> n </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> n </span><span style="color:#3e999f;">* </span><span style="color:#4271ae;">factorial</span><span style="color:#4d4d4c;">(n </span><span style="color:#3e999f;">- </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">);
 
-        eprintln!(&quot;</span><span style="color:#a3be8c;">n: {}</span><span style="color:#c0c5ce;">&quot;, n);
+        eprintln!(</span><span style="color:#718c00;">&quot;n: {}&quot;</span><span style="color:#4d4d4c;">, n);
 
         n
     }
@@ -155,8 +155,8 @@ does the right thing and goes to <code>stderr</code>.</p>
 </span></pre>
 <p>We want to log <code>n</code> on each iteration, as well as have some kind of context
 for each of the branches. We see this output for <code>factorial(4)</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">n: 4
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">n: 4
 n: 3
 n: 2
 n: 1
@@ -169,19 +169,19 @@ n: 24
 print out the context to make it more clear, but now we're not debugging our code,
 we're figuring out how to make our debugging code better.</p>
 <p>Consider this version using <code>dbg!</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">factorial</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">n</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">dbg!(n &lt;= </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">) {
-        dbg!(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">)
-    } </span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{
-        dbg!(n * </span><span style="color:#96b5b4;">factorial</span><span style="color:#c0c5ce;">(n - </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">))
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">factorial</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">n</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">u32 </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#8959a8;">if </span><span style="color:#4d4d4c;">dbg!(n </span><span style="color:#3e999f;">&lt;= </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">) {
+        dbg!(</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">)
+    } </span><span style="color:#8959a8;">else </span><span style="color:#4d4d4c;">{
+        dbg!(n </span><span style="color:#3e999f;">* </span><span style="color:#4271ae;">factorial</span><span style="color:#4d4d4c;">(n </span><span style="color:#3e999f;">- </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">))
     }
 }
 </span></pre>
 <p>We simply wrap each of the various expressions we want to print with the macro. We
 get this output instead:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[src/main.rs:3] n &lt;= 1 = false
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[src/main.rs:3] n &lt;= 1 = false
 [src/main.rs:3] n &lt;= 1 = false
 [src/main.rs:3] n &lt;= 1 = false
 [src/main.rs:3] n &lt;= 1 = true
@@ -222,13 +222,13 @@ this work, and by default, you will get the system allocator for your
 programs.</p>
 <p>If you'd like to continue to use jemalloc, use <a href="https://crates.io/crates/jemallocator">the jemallocator crate</a>. In
 your <code>Cargo.toml</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">jemallocator </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">0.1.8</span><span style="color:#c0c5ce;">&quot;
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">jemallocator </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;0.1.8&quot;
 </span></pre>
 <p>And in your crate root:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">global_allocator</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">static </span><span style="color:#d08770;">ALLOC</span><span style="color:#c0c5ce;">: jemallocator::Jemalloc = jemallocator::Jemalloc;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">global_allocator</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">static </span><span style="color:#666969;">ALLOC</span><span style="color:#4d4d4c;">: jemallocator::Jemalloc </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">jemallocator::Jemalloc;
 </span></pre>
 <p>That's it! If you don't need jemalloc, it's not forced upon you, and if
 you do need it, it's a few lines of code away.</p>
@@ -239,10 +239,10 @@ Nicknamed <a href="https://github.com/rust-lang/rust/pull/56759#issuecomment-450
 paths&quot;</a>,
 it permits previously invalid import path statements to be resolved exactly
 the same way as non-import paths. For example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">enum </span><span style="color:#c0c5ce;">Color { Red, Green, Blue }
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">enum </span><span style="color:#4d4d4c;">Color { Red, Green, Blue }
 
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">Color::*;
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">Color::</span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>This code did <em>not</em> previously compile, as <code>use</code> statements had to start with
 <code>super</code>, <code>self</code>, or <code>crate</code>. Now that the compiler supports uniform paths,
@@ -253,20 +253,20 @@ system. We hope you've been enjoying the simplified system so far!</p>
 <h4 id="macro-improvements">Macro improvements</h4>
 <p>A few improvements to macros have landed in Rust 1.32.0. First, <a href="https://github.com/rust-lang/rust/pull/56072/">a new
 <code>literal</code> matcher</a> was added:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#96b5b4;">macro_rules! </span><span style="color:#c0c5ce;">m {
-    ($lt:literal) =&gt; {};
+<pre style="background-color:#ffffff;">
+<span style="color:#4271ae;">macro_rules! </span><span style="color:#4d4d4c;">m {
+    ($lt:literal) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{};
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    m!(&quot;</span><span style="color:#a3be8c;">some string literal</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    m!(</span><span style="color:#718c00;">&quot;some string literal&quot;</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p><code>literal</code> matches against literals of any type; string literals, numeric literals, <code>char</code> literals.</p>
 <p>In the 2018 edition, <code>macro_rules</code> macros can also use <code>?</code>, like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#96b5b4;">macro_rules! </span><span style="color:#c0c5ce;">bar {
-    ($(a)?) =&gt; {}
+<pre style="background-color:#ffffff;">
+<span style="color:#4271ae;">macro_rules! </span><span style="color:#4d4d4c;">bar {
+    (</span><span style="color:#3e999f;">$</span><span style="color:#4d4d4c;">(a)?) =&gt; {}
 }
 </span></pre>
 <p>The <code>?</code> will match zero or one repetitions of the pattern, similar to the

@@ -77,8 +77,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
       <p>The Rust team is happy to announce the latest version of Rust, 1.15.1. Rust is a
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed, getting Rust 1.15.1 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">download Rust</a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1151-2017-02-09">detailed release notes for
@@ -103,10 +103,10 @@ offers a mutable view into the buffer being iterated over. Conceptually it is
 simple: just return a reference to the buffer; and indeed the implementation is
 simple, but it's unsafe because <code>IntoIter</code> is implemented with an unsafe pointer
 to the buffer:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">as_mut_slice</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">) -&gt; &amp;</span><span style="color:#b48ead;">mut </span><span style="color:#c0c5ce;">[T] {
-    </span><span style="color:#b48ead;">unsafe </span><span style="color:#c0c5ce;">{
-        slice::from_raw_parts_mut(</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.ptr as </span><span style="color:#b48ead;">*mut</span><span style="color:#c0c5ce;"> T, </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.</span><span style="color:#96b5b4;">len</span><span style="color:#c0c5ce;">())
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">pub fn </span><span style="color:#4271ae;">as_mut_slice</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut </span><span style="color:#4d4d4c;">[T] {
+    </span><span style="color:#8959a8;">unsafe </span><span style="color:#4d4d4c;">{
+        slice::from_raw_parts_mut(</span><span style="color:#c82829;">self</span><span style="color:#4d4d4c;">.ptr </span><span style="color:#3e999f;">as </span><span style="color:#8959a8;">*mut</span><span style="color:#4d4d4c;"> T, </span><span style="color:#c82829;">self</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">len</span><span style="color:#4d4d4c;">())
     }
 }
 </span></pre>
@@ -118,24 +118,24 @@ mutable reference. That is totally bogus because it means <code>as_mut_slice</co
 used to produce multiple mutable references to the same buffer, which is the one
 single thing you must not do in Rust.</p>
 <p>Here's a simple example of what this bug would let you write, incorrectly:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> v = vec![</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">];
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> v_iter = v.</span><span style="color:#96b5b4;">into_iter</span><span style="color:#c0c5ce;">();
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> slice1: &amp;</span><span style="color:#b48ead;">mut </span><span style="color:#c0c5ce;">[_] = v_iter.</span><span style="color:#96b5b4;">as_mut_slice</span><span style="color:#c0c5ce;">();
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> slice2: &amp;</span><span style="color:#b48ead;">mut </span><span style="color:#c0c5ce;">[_] = v_iter.</span><span style="color:#96b5b4;">as_mut_slice</span><span style="color:#c0c5ce;">();
-    slice1[</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">] = </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">;
-    slice2[</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">] = </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> v </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">vec![</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">];
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> v_iter </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> v.</span><span style="color:#4271ae;">into_iter</span><span style="color:#4d4d4c;">();
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> slice1: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut </span><span style="color:#4d4d4c;">[</span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">] </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> v_iter.</span><span style="color:#4271ae;">as_mut_slice</span><span style="color:#4d4d4c;">();
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> slice2: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut </span><span style="color:#4d4d4c;">[</span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">] </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> v_iter.</span><span style="color:#4271ae;">as_mut_slice</span><span style="color:#4d4d4c;">();
+    slice1[</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">] </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">;
+    slice2[</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">] </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">;
 }
 </span></pre>
 <p>Here both <code>slice1</code> and <code>slice2</code> are referencing the same mutable slice. Also
 notice that the iterator they are created from, <code>v_iter</code> is not declared
 mutable, which is a good indication something fishy is going on.</p>
 <p>The <a href="https://github.com/rust-lang/rust/pull/39466">solution</a> here is trivial, just change <code>&amp;self</code> to <code>&amp;mut self</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">as_mut_slice</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">) -&gt; &amp;</span><span style="color:#b48ead;">mut </span><span style="color:#c0c5ce;">[T] {
-    </span><span style="color:#b48ead;">unsafe </span><span style="color:#c0c5ce;">{
-        slice::from_raw_parts_mut(</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.ptr as </span><span style="color:#b48ead;">*mut</span><span style="color:#c0c5ce;"> T, </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.</span><span style="color:#96b5b4;">len</span><span style="color:#c0c5ce;">())
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">pub fn </span><span style="color:#4271ae;">as_mut_slice</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut </span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut </span><span style="color:#4d4d4c;">[T] {
+    </span><span style="color:#8959a8;">unsafe </span><span style="color:#4d4d4c;">{
+        slice::from_raw_parts_mut(</span><span style="color:#c82829;">self</span><span style="color:#4d4d4c;">.ptr </span><span style="color:#3e999f;">as </span><span style="color:#8959a8;">*mut</span><span style="color:#4d4d4c;"> T, </span><span style="color:#c82829;">self</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">len</span><span style="color:#4d4d4c;">())
     }
 }
 </span></pre>

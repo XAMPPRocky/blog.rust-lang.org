@@ -119,12 +119,12 @@ establish a foundation for the discussion: What does <code>match</code> look
 like, and how does it work?</p>
 <h3 id="the-basics-of-match">The Basics of <code>match</code></h3>
 <p>The <code>match</code> expression in Rust has this form:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">match </span><span style="color:#d08770;">INPUT_EXPRESSION </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#d08770;">PATTERNS_1 </span><span style="color:#c0c5ce;">=&gt; </span><span style="color:#d08770;">RESULT_EXPRESSION_1</span><span style="color:#c0c5ce;">,
-    </span><span style="color:#d08770;">PATTERNS_2 </span><span style="color:#c0c5ce;">=&gt; </span><span style="color:#d08770;">RESULT_EXPRESSION_2</span><span style="color:#c0c5ce;">,
-    ...
-    PATTERNS_n =&gt; RESULT_EXPRESSION_n
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">match </span><span style="color:#666969;">INPUT_EXPRESSION </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#666969;">PATTERNS_1 </span><span style="color:#3e999f;">=&gt; </span><span style="color:#666969;">RESULT_EXPRESSION_1</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#666969;">PATTERNS_2 </span><span style="color:#3e999f;">=&gt; </span><span style="color:#666969;">RESULT_EXPRESSION_2</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#3e999f;">...</span><span style="color:#4d4d4c;">
+    PATTERNS_n </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> RESULT_EXPRESSION_n
 }
 </span></pre>
 <p>where each of the <code>PATTERNS_i</code> contains at least one <em>pattern</em>. A
@@ -136,26 +136,26 @@ or simply &quot;arm&quot;.</p>
 can also match user-defined symbolic data, defined via <code>enum</code>.</p>
 <p>The below code demonstrates generating the next guess (poorly) in a number
 guessing game, given the answer from a previous guess.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">enum </span><span style="color:#c0c5ce;">Answer {
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">enum </span><span style="color:#4d4d4c;">Answer {
     Higher,
     Lower,
     Bingo,
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">suggest_guess</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">prior_guess</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">answer</span><span style="color:#c0c5ce;">: Answer) {
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> answer {
-        Answer::Higher =&gt; println!(&quot;</span><span style="color:#a3be8c;">maybe try </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> next</span><span style="color:#c0c5ce;">&quot;, prior_guess + </span><span style="color:#d08770;">10</span><span style="color:#c0c5ce;">),
-        Answer::Lower  =&gt; println!(&quot;</span><span style="color:#a3be8c;">maybe try </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> next</span><span style="color:#c0c5ce;">&quot;, prior_guess - </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">),
-        Answer::Bingo  =&gt; println!(&quot;</span><span style="color:#a3be8c;">we won with </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">!</span><span style="color:#c0c5ce;">&quot;, prior_guess),
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">suggest_guess</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">prior_guess</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">answer</span><span style="color:#4d4d4c;">: Answer) {
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> answer {
+        Answer::Higher </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;maybe try </span><span style="color:#666969;">{}</span><span style="color:#718c00;"> next&quot;</span><span style="color:#4d4d4c;">, prior_guess </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">10</span><span style="color:#4d4d4c;">),
+        Answer::Lower  </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;maybe try </span><span style="color:#666969;">{}</span><span style="color:#718c00;"> next&quot;</span><span style="color:#4d4d4c;">, prior_guess </span><span style="color:#3e999f;">- </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">),
+        Answer::Bingo  </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;we won with </span><span style="color:#666969;">{}</span><span style="color:#718c00;">!&quot;</span><span style="color:#4d4d4c;">, prior_guess),
     }
 }
 
-#[</span><span style="color:#bf616a;">test</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">demo_suggest_guess</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#96b5b4;">suggest_guess</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">10</span><span style="color:#c0c5ce;">, Answer::Higher);
-    </span><span style="color:#96b5b4;">suggest_guess</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">20</span><span style="color:#c0c5ce;">, Answer::Lower);
-    </span><span style="color:#96b5b4;">suggest_guess</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">19</span><span style="color:#c0c5ce;">, Answer::Bingo);
+#[</span><span style="color:#c82829;">test</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">demo_suggest_guess</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#4271ae;">suggest_guess</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">10</span><span style="color:#4d4d4c;">, Answer::Higher);
+    </span><span style="color:#4271ae;">suggest_guess</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">20</span><span style="color:#4d4d4c;">, Answer::Lower);
+    </span><span style="color:#4271ae;">suggest_guess</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">19</span><span style="color:#4d4d4c;">, Answer::Bingo);
 }
 </span></pre>
 <p>(Incidentally, nearly all the code in this post is directly
@@ -174,19 +174,19 @@ patterns by vertical bars (<code>|</code>); thus that arm matches either this pa
 or that pattern, et cetera.</p>
 <p>These features are illustrated in the following revision to the
 guessing-game answer generation strategy:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">GuessState {
-    </span><span style="color:#bf616a;">guess</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">,
-    </span><span style="color:#bf616a;">answer</span><span style="color:#c0c5ce;">: Answer,
-    </span><span style="color:#bf616a;">low</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">,
-    </span><span style="color:#bf616a;">high</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">GuessState {
+    </span><span style="color:#c82829;">guess</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#c82829;">answer</span><span style="color:#4d4d4c;">: Answer,
+    </span><span style="color:#c82829;">low</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#c82829;">high</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">,
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">suggest_guess_smarter</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">s</span><span style="color:#c0c5ce;">: GuessState) {
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> s {
-        </span><span style="color:#65737e;">// First arm only fires on Bingo; it binds `p` to last guess.
-</span><span style="color:#c0c5ce;">        GuessState { answer: Answer::Bingo, guess: p, .. } =&gt; {
-     </span><span style="color:#65737e;">// ~~~~~~~~~~   ~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~  ~~
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">suggest_guess_smarter</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">s</span><span style="color:#4d4d4c;">: GuessState) {
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> s {
+        </span><span style="color:#999999;">// First arm only fires on Bingo; it binds `p` to last guess.
+</span><span style="color:#4d4d4c;">        GuessState { answer: Answer::Bingo, guess: p, </span><span style="color:#3e999f;">.. </span><span style="color:#4d4d4c;">} </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+     </span><span style="color:#999999;">// ~~~~~~~~~~   ~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~  ~~
      //     |                 |                 |     |
      //     |                 |                 |     Ignore remaining fields
      //     |                 |                 |
@@ -196,19 +196,19 @@ guessing-game answer generation strategy:</p>
      //     |
      //  Match against an instance of the struct `GuessState`
      
-            </span><span style="color:#c0c5ce;">println!(&quot;</span><span style="color:#a3be8c;">we won with </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">!</span><span style="color:#c0c5ce;">&quot;, p);
+            </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;we won with </span><span style="color:#666969;">{}</span><span style="color:#718c00;">!&quot;</span><span style="color:#4d4d4c;">, p);
         }
 
-        </span><span style="color:#65737e;">// Second arm fires if answer was too low or too high.
+        </span><span style="color:#999999;">// Second arm fires if answer was too low or too high.
         // We want to find a new guess in the range (l..h), where:
         //
         // - If it was too low, then we want something higher, so we
         //   bind the guess to `l` and use our last high guess as `h`.
         // - If it was too high, then we want something lower; bind
         //   the guess to `h` and use our last low guess as `l`.
-</span><span style="color:#c0c5ce;">        GuessState { answer: Answer::Higher, low: _, guess: l, high: h } |
-        GuessState { answer: Answer::Lower,  low: l, guess: h, high: _ } =&gt; {
-     </span><span style="color:#65737e;">// ~~~~~~~~~~   ~~~~~~~~~~~~~~~~~~~~~   ~~~~~~  ~~~~~~~~  ~~~~~~~
+</span><span style="color:#4d4d4c;">        GuessState { answer: Answer::Higher, low: </span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">, guess: l, high: h } </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;">
+        GuessState { answer: Answer::Lower,  low: l, guess: h, high: </span><span style="color:#3e999f;">_ </span><span style="color:#4d4d4c;">} </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+     </span><span style="color:#999999;">// ~~~~~~~~~~   ~~~~~~~~~~~~~~~~~~~~~   ~~~~~~  ~~~~~~~~  ~~~~~~~
      //     |                 |                 |        |        |
      //     |                 |                 |        |    Copy or ignore
      //     |                 |                 |        |    field `high`,
@@ -226,17 +226,17 @@ guessing-game answer generation strategy:</p>
      //     |
      //  Match against an instance of the struct `GuessState`
 
-            </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> mid = l + ((h - l) / </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">);
-            println!(&quot;</span><span style="color:#a3be8c;">lets try </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> next</span><span style="color:#c0c5ce;">&quot;, mid);
+            </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> mid </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> l </span><span style="color:#3e999f;">+ </span><span style="color:#4d4d4c;">((h </span><span style="color:#3e999f;">-</span><span style="color:#4d4d4c;"> l) </span><span style="color:#3e999f;">/ </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">);
+            println!(</span><span style="color:#718c00;">&quot;lets try </span><span style="color:#666969;">{}</span><span style="color:#718c00;"> next&quot;</span><span style="color:#4d4d4c;">, mid);
         }
     }
 }
 
-#[</span><span style="color:#bf616a;">test</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">demo_guess_state</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#96b5b4;">suggest_guess_smarter</span><span style="color:#c0c5ce;">(GuessState {
-        guess: </span><span style="color:#d08770;">20</span><span style="color:#c0c5ce;">, answer: Answer::Lower, low: </span><span style="color:#d08770;">10</span><span style="color:#c0c5ce;">, high: </span><span style="color:#d08770;">1000
-    </span><span style="color:#c0c5ce;">});
+#[</span><span style="color:#c82829;">test</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">demo_guess_state</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#4271ae;">suggest_guess_smarter</span><span style="color:#4d4d4c;">(GuessState {
+        guess: </span><span style="color:#f5871f;">20</span><span style="color:#4d4d4c;">, answer: Answer::Lower, low: </span><span style="color:#f5871f;">10</span><span style="color:#4d4d4c;">, high: </span><span style="color:#f5871f;">1000
+    </span><span style="color:#4d4d4c;">});
 }
 </span></pre>
 <p>This ability to simultaneously perform case analysis <em>and</em> bind input
@@ -263,14 +263,14 @@ in a least one arm in the match.</p>
 <p>This helps catch bugs in program logic and ensures that the value of a
 <code>match</code> expression is well-defined.</p>
 <p>So, for example, the following code is rejected at compile-time.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">suggest_guess_broken</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">prior_guess</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">answer</span><span style="color:#c0c5ce;">: Answer) {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> next_guess = </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> answer {
-        Answer::Higher =&gt; prior_guess + </span><span style="color:#d08770;">10</span><span style="color:#c0c5ce;">,
-        Answer::Lower  =&gt; prior_guess - </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,
-        </span><span style="color:#65737e;">// ERROR: non-exhaustive patterns: `Bingo` not covered
-    </span><span style="color:#c0c5ce;">};
-    println!(&quot;</span><span style="color:#a3be8c;">maybe try </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> next</span><span style="color:#c0c5ce;">&quot;, next_guess);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">suggest_guess_broken</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">prior_guess</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">answer</span><span style="color:#4d4d4c;">: Answer) {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> next_guess </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> answer {
+        Answer::Higher </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> prior_guess </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">10</span><span style="color:#4d4d4c;">,
+        Answer::Lower  </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> prior_guess </span><span style="color:#3e999f;">- </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">,
+        </span><span style="color:#999999;">// ERROR: non-exhaustive patterns: `Bingo` not covered
+    </span><span style="color:#4d4d4c;">};
+    println!(</span><span style="color:#718c00;">&quot;maybe try </span><span style="color:#666969;">{}</span><span style="color:#718c00;"> next&quot;</span><span style="color:#4d4d4c;">, next_guess);
 }
 </span></pre>
 <p>Many other languages offer a pattern matching construct (ML and
@@ -299,24 +299,24 @@ that such expressions always either evaluate to a value of the correct type,
 <h4 id="jumping-out-of-a-match">Jumping out of a match</h4>
 <p>The following code is a fixed version of the <code>suggest_guess_broken</code>
 function we saw above; it directly illustrates &quot;jumping elsewhere&quot;:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">suggest_guess_fixed</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">prior_guess</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">answer</span><span style="color:#c0c5ce;">: Answer) {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> next_guess = </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> answer {
-        Answer::Higher =&gt; prior_guess + </span><span style="color:#d08770;">10</span><span style="color:#c0c5ce;">,
-        Answer::Lower  =&gt; prior_guess - </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,
-        Answer::Bingo  =&gt; {
-            println!(&quot;</span><span style="color:#a3be8c;">we won with </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">!</span><span style="color:#c0c5ce;">&quot;, prior_guess);
-            </span><span style="color:#b48ead;">return</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">suggest_guess_fixed</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">prior_guess</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">answer</span><span style="color:#4d4d4c;">: Answer) {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> next_guess </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> answer {
+        Answer::Higher </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> prior_guess </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">10</span><span style="color:#4d4d4c;">,
+        Answer::Lower  </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> prior_guess </span><span style="color:#3e999f;">- </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">,
+        Answer::Bingo  </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+            println!(</span><span style="color:#718c00;">&quot;we won with </span><span style="color:#666969;">{}</span><span style="color:#718c00;">!&quot;</span><span style="color:#4d4d4c;">, prior_guess);
+            </span><span style="color:#8959a8;">return</span><span style="color:#4d4d4c;">;
         }
     };
-    println!(&quot;</span><span style="color:#a3be8c;">maybe try </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;"> next</span><span style="color:#c0c5ce;">&quot;, next_guess);
+    println!(</span><span style="color:#718c00;">&quot;maybe try </span><span style="color:#666969;">{}</span><span style="color:#718c00;"> next&quot;</span><span style="color:#4d4d4c;">, next_guess);
 }
 
-#[</span><span style="color:#bf616a;">test</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">demo_guess_fixed</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#96b5b4;">suggest_guess_fixed</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">10</span><span style="color:#c0c5ce;">, Answer::Higher);
-    </span><span style="color:#96b5b4;">suggest_guess_fixed</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">20</span><span style="color:#c0c5ce;">, Answer::Lower);
-    </span><span style="color:#96b5b4;">suggest_guess_fixed</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">19</span><span style="color:#c0c5ce;">, Answer::Bingo);
+#[</span><span style="color:#c82829;">test</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">demo_guess_fixed</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#4271ae;">suggest_guess_fixed</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">10</span><span style="color:#4d4d4c;">, Answer::Higher);
+    </span><span style="color:#4271ae;">suggest_guess_fixed</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">20</span><span style="color:#4d4d4c;">, Answer::Lower);
+    </span><span style="color:#4271ae;">suggest_guess_fixed</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">19</span><span style="color:#4d4d4c;">, Answer::Bingo);
 }
 </span></pre>
 <p>The <code>suggest_guess_fixed</code> function illustrates that <code>match</code> can handle
@@ -337,10 +337,10 @@ but in Rust, enums can define much richer classes of data.</p>
 <p>For example, a binary tree is either a leaf, or an internal node with
 references to two child trees. Here is one way to encode a tree of
 integers in Rust:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">enum </span><span style="color:#c0c5ce;">BinaryTree {
-    Leaf(</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">),
-    Node(Box&lt;BinaryTree&gt;, </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">, Box&lt;BinaryTree&gt;)
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">enum </span><span style="color:#4d4d4c;">BinaryTree {
+    Leaf(</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">),
+    Node(Box&lt;BinaryTree&gt;, </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">, Box&lt;BinaryTree&gt;)
 }
 </span></pre>
 <p>(The <code>Box&lt;V&gt;</code> type describes an owning reference to a heap-allocated
@@ -359,17 +359,17 @@ you cannot accidentally interpret the data of a <code>Leaf</code> as if it were 
 <code>Node</code>, nor vice versa.</p>
 <p>Here is a function that sums all of the integers in a tree
 using <code>match</code>.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">tree_weight_v1</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">t</span><span style="color:#c0c5ce;">: BinaryTree) -&gt; </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> t {
-        BinaryTree::Leaf(payload) =&gt; payload,
-        BinaryTree::Node(left, payload, right) =&gt; {
-            </span><span style="color:#96b5b4;">tree_weight_v1</span><span style="color:#c0c5ce;">(*left) + payload + </span><span style="color:#96b5b4;">tree_weight_v1</span><span style="color:#c0c5ce;">(*right)
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">tree_weight_v1</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">t</span><span style="color:#4d4d4c;">: BinaryTree) -&gt; </span><span style="color:#8959a8;">i32 </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> t {
+        BinaryTree::Leaf(payload) </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> payload,
+        BinaryTree::Node(left, payload, right) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+            </span><span style="color:#4271ae;">tree_weight_v1</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">left) </span><span style="color:#3e999f;">+</span><span style="color:#4d4d4c;"> payload </span><span style="color:#3e999f;">+ </span><span style="color:#4271ae;">tree_weight_v1</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">right)
         }
     }
 }
 
-</span><span style="color:#65737e;">/// Returns tree that Looks like:
+</span><span style="color:#999999;">/// Returns tree that Looks like:
 ///
 ///      +----(4)---+
 ///      |          |
@@ -377,19 +377,19 @@ using <code>match</code>.</p>
 ///   |     |   
 ///  [1]   [3]
 ///
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">sample_tree</span><span style="color:#c0c5ce;">() -&gt; BinaryTree {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> l1 = Box::new(BinaryTree::Leaf(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">));
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> l3 = Box::new(BinaryTree::Leaf(</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">));
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> n2 = Box::new(BinaryTree::Node(l1, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, l3));
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> l5 = Box::new(BinaryTree::Leaf(</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">));
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">sample_tree</span><span style="color:#4d4d4c;">() -&gt; BinaryTree {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> l1 </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Box</span><span style="color:#4d4d4c;">::new(BinaryTree::Leaf(</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">));
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> l3 </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Box</span><span style="color:#4d4d4c;">::new(BinaryTree::Leaf(</span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">));
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> n2 </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Box</span><span style="color:#4d4d4c;">::new(BinaryTree::Node(l1, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, l3));
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> l5 </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Box</span><span style="color:#4d4d4c;">::new(BinaryTree::Leaf(</span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">));
 
-    BinaryTree::Node(n2, </span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">, l5)
+    BinaryTree::Node(n2, </span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">, l5)
 }
 
-#[</span><span style="color:#bf616a;">test</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">tree_demo_1</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> tree = </span><span style="color:#96b5b4;">sample_tree</span><span style="color:#c0c5ce;">();
-    assert_eq!(</span><span style="color:#96b5b4;">tree_weight_v1</span><span style="color:#c0c5ce;">(tree), (</span><span style="color:#d08770;">1 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">) + </span><span style="color:#d08770;">4 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">);
+#[</span><span style="color:#c82829;">test</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">tree_demo_1</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> tree </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">sample_tree</span><span style="color:#4d4d4c;">();
+    assert_eq!(</span><span style="color:#4271ae;">tree_weight_v1</span><span style="color:#4d4d4c;">(tree), (</span><span style="color:#f5871f;">1 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">4 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>Algebraic data types establish structural invariants that are strictly
@@ -412,35 +412,35 @@ string rendering it as an ordinal (&quot;1st&quot;, &quot;2nd&quot;, &quot;3rd&q
 it is written in a style similar to a <code>switch</code> in a statement-oriented
 language like C (or C++, Java, et cetera), where the arms of the
 <code>match</code> are executed for their side-effect alone:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">num_to_ordinal</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">) -&gt; String {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> suffix;
-    </span><span style="color:#b48ead;">match </span><span style="color:#c0c5ce;">(x % </span><span style="color:#d08770;">10</span><span style="color:#c0c5ce;">, x % </span><span style="color:#d08770;">100</span><span style="color:#c0c5ce;">) {
-        (</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">) | (</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">21</span><span style="color:#c0c5ce;">...</span><span style="color:#d08770;">91</span><span style="color:#c0c5ce;">) =&gt; {
-            suffix = &quot;</span><span style="color:#a3be8c;">st</span><span style="color:#c0c5ce;">&quot;;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">num_to_ordinal</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">) -&gt; String {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> suffix;
+    </span><span style="color:#8959a8;">match </span><span style="color:#4d4d4c;">(x </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">10</span><span style="color:#4d4d4c;">, x </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">100</span><span style="color:#4d4d4c;">) {
+        (</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">21</span><span style="color:#3e999f;">...</span><span style="color:#f5871f;">91</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+            suffix </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;st&quot;</span><span style="color:#4d4d4c;">;
         }
-        (</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">) | (</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">22</span><span style="color:#c0c5ce;">...</span><span style="color:#d08770;">92</span><span style="color:#c0c5ce;">) =&gt; {
-            suffix = &quot;</span><span style="color:#a3be8c;">nd</span><span style="color:#c0c5ce;">&quot;;
+        (</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">22</span><span style="color:#3e999f;">...</span><span style="color:#f5871f;">92</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+            suffix </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;nd&quot;</span><span style="color:#4d4d4c;">;
         }
-        (</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">) | (</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">23</span><span style="color:#c0c5ce;">...</span><span style="color:#d08770;">93</span><span style="color:#c0c5ce;">) =&gt; {
-            suffix = &quot;</span><span style="color:#a3be8c;">rd</span><span style="color:#c0c5ce;">&quot;;
+        (</span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">23</span><span style="color:#3e999f;">...</span><span style="color:#f5871f;">93</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+            suffix </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;rd&quot;</span><span style="color:#4d4d4c;">;
         }
-        _                     =&gt; {
-            suffix = &quot;</span><span style="color:#a3be8c;">th</span><span style="color:#c0c5ce;">&quot;;
+        </span><span style="color:#3e999f;">_                     =&gt; </span><span style="color:#4d4d4c;">{
+            suffix </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;th&quot;</span><span style="color:#4d4d4c;">;
         }
     }
-    </span><span style="color:#b48ead;">return </span><span style="color:#c0c5ce;">format!(&quot;</span><span style="color:#d08770;">{}{}</span><span style="color:#c0c5ce;">&quot;, x, suffix);
+    </span><span style="color:#8959a8;">return </span><span style="color:#4d4d4c;">format!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, x, suffix);
 }
 
-#[</span><span style="color:#bf616a;">test</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">test_num_to_ordinal</span><span style="color:#c0c5ce;">() {
-    assert_eq!(</span><span style="color:#96b5b4;">num_to_ordinal</span><span style="color:#c0c5ce;">(   </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">),    &quot;</span><span style="color:#a3be8c;">0th</span><span style="color:#c0c5ce;">&quot;);
-    assert_eq!(</span><span style="color:#96b5b4;">num_to_ordinal</span><span style="color:#c0c5ce;">(   </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">),    &quot;</span><span style="color:#a3be8c;">1st</span><span style="color:#c0c5ce;">&quot;);
-    assert_eq!(</span><span style="color:#96b5b4;">num_to_ordinal</span><span style="color:#c0c5ce;">(  </span><span style="color:#d08770;">12</span><span style="color:#c0c5ce;">),   &quot;</span><span style="color:#a3be8c;">12th</span><span style="color:#c0c5ce;">&quot;);
-    assert_eq!(</span><span style="color:#96b5b4;">num_to_ordinal</span><span style="color:#c0c5ce;">(  </span><span style="color:#d08770;">22</span><span style="color:#c0c5ce;">),   &quot;</span><span style="color:#a3be8c;">22nd</span><span style="color:#c0c5ce;">&quot;);
-    assert_eq!(</span><span style="color:#96b5b4;">num_to_ordinal</span><span style="color:#c0c5ce;">(  </span><span style="color:#d08770;">43</span><span style="color:#c0c5ce;">),   &quot;</span><span style="color:#a3be8c;">43rd</span><span style="color:#c0c5ce;">&quot;);
-    assert_eq!(</span><span style="color:#96b5b4;">num_to_ordinal</span><span style="color:#c0c5ce;">(  </span><span style="color:#d08770;">67</span><span style="color:#c0c5ce;">),   &quot;</span><span style="color:#a3be8c;">67th</span><span style="color:#c0c5ce;">&quot;);
-    assert_eq!(</span><span style="color:#96b5b4;">num_to_ordinal</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">1901</span><span style="color:#c0c5ce;">), &quot;</span><span style="color:#a3be8c;">1901st</span><span style="color:#c0c5ce;">&quot;);
+#[</span><span style="color:#c82829;">test</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">test_num_to_ordinal</span><span style="color:#4d4d4c;">() {
+    assert_eq!(</span><span style="color:#4271ae;">num_to_ordinal</span><span style="color:#4d4d4c;">(   </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">),    </span><span style="color:#718c00;">&quot;0th&quot;</span><span style="color:#4d4d4c;">);
+    assert_eq!(</span><span style="color:#4271ae;">num_to_ordinal</span><span style="color:#4d4d4c;">(   </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">),    </span><span style="color:#718c00;">&quot;1st&quot;</span><span style="color:#4d4d4c;">);
+    assert_eq!(</span><span style="color:#4271ae;">num_to_ordinal</span><span style="color:#4d4d4c;">(  </span><span style="color:#f5871f;">12</span><span style="color:#4d4d4c;">),   </span><span style="color:#718c00;">&quot;12th&quot;</span><span style="color:#4d4d4c;">);
+    assert_eq!(</span><span style="color:#4271ae;">num_to_ordinal</span><span style="color:#4d4d4c;">(  </span><span style="color:#f5871f;">22</span><span style="color:#4d4d4c;">),   </span><span style="color:#718c00;">&quot;22nd&quot;</span><span style="color:#4d4d4c;">);
+    assert_eq!(</span><span style="color:#4271ae;">num_to_ordinal</span><span style="color:#4d4d4c;">(  </span><span style="color:#f5871f;">43</span><span style="color:#4d4d4c;">),   </span><span style="color:#718c00;">&quot;43rd&quot;</span><span style="color:#4d4d4c;">);
+    assert_eq!(</span><span style="color:#4271ae;">num_to_ordinal</span><span style="color:#4d4d4c;">(  </span><span style="color:#f5871f;">67</span><span style="color:#4d4d4c;">),   </span><span style="color:#718c00;">&quot;67th&quot;</span><span style="color:#4d4d4c;">);
+    assert_eq!(</span><span style="color:#4271ae;">num_to_ordinal</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">1901</span><span style="color:#4d4d4c;">), </span><span style="color:#718c00;">&quot;1901st&quot;</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>The Rust compiler accepts the above program. This is notable because
@@ -458,14 +458,14 @@ to mark <code>suffix</code> as mutable).</p>
 </ul>
 <p>To be clear, the above program certainly <em>can</em> be written in an
 expression-oriented style in Rust; for example, like so:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">num_to_ordinal_expr</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">) -&gt; String {
-    format!(&quot;</span><span style="color:#d08770;">{}{}</span><span style="color:#c0c5ce;">&quot;, x, </span><span style="color:#b48ead;">match </span><span style="color:#c0c5ce;">(x % </span><span style="color:#d08770;">10</span><span style="color:#c0c5ce;">, x % </span><span style="color:#d08770;">100</span><span style="color:#c0c5ce;">) {
-        (</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">) | (</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">21</span><span style="color:#c0c5ce;">...</span><span style="color:#d08770;">91</span><span style="color:#c0c5ce;">) =&gt; &quot;</span><span style="color:#a3be8c;">st</span><span style="color:#c0c5ce;">&quot;,
-        (</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">) | (</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">22</span><span style="color:#c0c5ce;">...</span><span style="color:#d08770;">92</span><span style="color:#c0c5ce;">) =&gt; &quot;</span><span style="color:#a3be8c;">nd</span><span style="color:#c0c5ce;">&quot;,
-        (</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">) | (</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">23</span><span style="color:#c0c5ce;">...</span><span style="color:#d08770;">93</span><span style="color:#c0c5ce;">) =&gt; &quot;</span><span style="color:#a3be8c;">rd</span><span style="color:#c0c5ce;">&quot;,
-        _                     =&gt; &quot;</span><span style="color:#a3be8c;">th</span><span style="color:#c0c5ce;">&quot;
-    })
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">num_to_ordinal_expr</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">) -&gt; String {
+    format!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, x, </span><span style="color:#8959a8;">match </span><span style="color:#4d4d4c;">(x </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">10</span><span style="color:#4d4d4c;">, x </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">100</span><span style="color:#4d4d4c;">) {
+        (</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">21</span><span style="color:#3e999f;">...</span><span style="color:#f5871f;">91</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#718c00;">&quot;st&quot;</span><span style="color:#4d4d4c;">,
+        (</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">22</span><span style="color:#3e999f;">...</span><span style="color:#f5871f;">92</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#718c00;">&quot;nd&quot;</span><span style="color:#4d4d4c;">,
+        (</span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">23</span><span style="color:#3e999f;">...</span><span style="color:#f5871f;">93</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#718c00;">&quot;rd&quot;</span><span style="color:#4d4d4c;">,
+        </span><span style="color:#3e999f;">_                     =&gt; </span><span style="color:#718c00;">&quot;th&quot;
+    </span><span style="color:#4d4d4c;">})
 }
 </span></pre>
 <p>Sometimes expression-oriented style can yield very succinct code;
@@ -480,36 +480,36 @@ binding is assigned at most once.</p>
 <p>An important case where this arises is when one wants to
 initialize some state and then borrow from it, but only on
 <em>some</em> control-flow branches.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">sometimes_initialize</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">input</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">) {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> string: String; </span><span style="color:#65737e;">// a dynamically-constructed string value
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> borrowed: &amp;</span><span style="color:#b48ead;">str</span><span style="color:#c0c5ce;">; </span><span style="color:#65737e;">// a reference to string data
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> input {
-        </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">...</span><span style="color:#d08770;">100 </span><span style="color:#c0c5ce;">=&gt; {
-            </span><span style="color:#65737e;">// Construct a String on the fly...
-</span><span style="color:#c0c5ce;">            string = format!(&quot;</span><span style="color:#a3be8c;">input prints as </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, input);
-            </span><span style="color:#65737e;">// ... and then borrow from inside it.
-</span><span style="color:#c0c5ce;">            borrowed = &amp;string[</span><span style="color:#d08770;">6</span><span style="color:#c0c5ce;">..];
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">sometimes_initialize</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">input</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">) {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> string: </span><span style="color:#c99e00;">String</span><span style="color:#4d4d4c;">; </span><span style="color:#999999;">// a dynamically-constructed string value
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> borrowed: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">str</span><span style="color:#4d4d4c;">; </span><span style="color:#999999;">// a reference to string data
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> input {
+        </span><span style="color:#f5871f;">0</span><span style="color:#3e999f;">...</span><span style="color:#f5871f;">100 </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+            </span><span style="color:#999999;">// Construct a String on the fly...
+</span><span style="color:#4d4d4c;">            string </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">format!(</span><span style="color:#718c00;">&quot;input prints as </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, input);
+            </span><span style="color:#999999;">// ... and then borrow from inside it.
+</span><span style="color:#4d4d4c;">            borrowed </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">string[</span><span style="color:#f5871f;">6</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">];
         }
-        _ =&gt; {
-            </span><span style="color:#65737e;">// String literals are *already* borrowed references
-</span><span style="color:#c0c5ce;">            borrowed = &quot;</span><span style="color:#a3be8c;">expected between 0 and 100</span><span style="color:#c0c5ce;">&quot;;
+        </span><span style="color:#3e999f;">_ =&gt; </span><span style="color:#4d4d4c;">{
+            </span><span style="color:#999999;">// String literals are *already* borrowed references
+</span><span style="color:#4d4d4c;">            borrowed </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;expected between 0 and 100&quot;</span><span style="color:#4d4d4c;">;
         }
     }
-    println!(&quot;</span><span style="color:#a3be8c;">borrowed: </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, borrowed);
+    println!(</span><span style="color:#718c00;">&quot;borrowed: </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, borrowed);
 
-    </span><span style="color:#65737e;">// Below would cause compile-time error if uncommented...
+    </span><span style="color:#999999;">// Below would cause compile-time error if uncommented...
 
     // println!(&quot;string: {}&quot;, string);
 
     // ...namely: error: use of possibly uninitialized variable: `string`
-</span><span style="color:#c0c5ce;">}
+</span><span style="color:#4d4d4c;">}
 
-#[</span><span style="color:#bf616a;">test</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">demo_sometimes_initialize</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#96b5b4;">sometimes_initialize</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">23</span><span style="color:#c0c5ce;">);  </span><span style="color:#65737e;">// this invocation will initialize `string`
-    </span><span style="color:#96b5b4;">sometimes_initialize</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">123</span><span style="color:#c0c5ce;">); </span><span style="color:#65737e;">// this one will not
-</span><span style="color:#c0c5ce;">}
+#[</span><span style="color:#c82829;">test</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">demo_sometimes_initialize</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#4271ae;">sometimes_initialize</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">23</span><span style="color:#4d4d4c;">);  </span><span style="color:#999999;">// this invocation will initialize `string`
+    </span><span style="color:#4271ae;">sometimes_initialize</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">123</span><span style="color:#4d4d4c;">); </span><span style="color:#999999;">// this one will not
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>The interesting thing about the above code is that after the <code>match</code>,
 we are not allowed to directly access <code>string</code>, because the compiler
@@ -539,24 +539,24 @@ instance.</p>
 <p>That version of <code>tree_weight</code> has one big downside, however: it takes
 its input tree by value. Once you pass a tree to <code>tree_weight_v1</code>, that
 tree is <em>gone</em> (as in, deallocated).</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">test</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">tree_demo_v1_fails</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> tree = </span><span style="color:#96b5b4;">sample_tree</span><span style="color:#c0c5ce;">();
-    assert_eq!(</span><span style="color:#96b5b4;">tree_weight_v1</span><span style="color:#c0c5ce;">(tree), (</span><span style="color:#d08770;">1 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">) + </span><span style="color:#d08770;">4 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">test</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">tree_demo_v1_fails</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> tree </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">sample_tree</span><span style="color:#4d4d4c;">();
+    assert_eq!(</span><span style="color:#4271ae;">tree_weight_v1</span><span style="color:#4d4d4c;">(tree), (</span><span style="color:#f5871f;">1 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">4 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">);
 
-    </span><span style="color:#65737e;">// If you uncomment this line below ...
+    </span><span style="color:#999999;">// If you uncomment this line below ...
     
     // assert_eq!(tree_weight_v1(tree), (1 + 2 + 3) + 4 + 5);
 
     // ... you will get: error: use of moved value: `tree`
-</span><span style="color:#c0c5ce;">}
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>This is <em>not</em> a consequence, however, of using <code>match</code>; it is rather
 a consequence of the function signature that was chosen:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">tree_weight_v1</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">t</span><span style="color:#c0c5ce;">: BinaryTree) -&gt; </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">{ </span><span style="color:#d08770;">0 </span><span style="color:#c0c5ce;">}
-</span><span style="color:#65737e;">//                   ^~~~~~~~~~ this means this function takes ownership of `t`
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">tree_weight_v1</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">t</span><span style="color:#4d4d4c;">: BinaryTree) -&gt; </span><span style="color:#8959a8;">i32 </span><span style="color:#4d4d4c;">{ </span><span style="color:#f5871f;">0 </span><span style="color:#4d4d4c;">}
+</span><span style="color:#999999;">//                   ^~~~~~~~~~ this means this function takes ownership of `t`
 </span></pre>
 <p>In fact, in Rust, <code>match</code> is designed to work quite well <em>without</em>
 taking ownership. In particular, the input to <code>match</code> is an <em><a href="https://doc.rust-lang.org/reference.html#lvalues,-rvalues-and-temporaries">L-value</a>
@@ -573,21 +573,21 @@ location that <code>match</code> will inspect.)</p>
 <p>So, if we want a version of <code>tree_weight</code> that merely borrows a tree
 rather than taking ownership of it, then we will need to make use of
 this feature of Rust's <code>match</code>.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">tree_weight_v2</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">t</span><span style="color:#c0c5ce;">: &amp;BinaryTree) -&gt; </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#65737e;">//               ^~~~~~~~~~~ The `&amp;` means we are *borrowing* the tree
-    </span><span style="color:#b48ead;">match </span><span style="color:#c0c5ce;">*t {
-        BinaryTree::Leaf(payload) =&gt; payload,
-        BinaryTree::Node(</span><span style="color:#b48ead;">ref</span><span style="color:#c0c5ce;"> left, payload, </span><span style="color:#b48ead;">ref</span><span style="color:#c0c5ce;"> right) =&gt; {
-            </span><span style="color:#96b5b4;">tree_weight_v2</span><span style="color:#c0c5ce;">(left) + payload + </span><span style="color:#96b5b4;">tree_weight_v2</span><span style="color:#c0c5ce;">(right)
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">tree_weight_v2</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">t</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">BinaryTree) -&gt; </span><span style="color:#8959a8;">i32 </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#999999;">//               ^~~~~~~~~~~ The `&amp;` means we are *borrowing* the tree
+    </span><span style="color:#8959a8;">match </span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">t {
+        BinaryTree::Leaf(payload) </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> payload,
+        BinaryTree::Node(</span><span style="color:#8959a8;">ref</span><span style="color:#4d4d4c;"> left, payload, </span><span style="color:#8959a8;">ref</span><span style="color:#4d4d4c;"> right) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+            </span><span style="color:#4271ae;">tree_weight_v2</span><span style="color:#4d4d4c;">(left) </span><span style="color:#3e999f;">+</span><span style="color:#4d4d4c;"> payload </span><span style="color:#3e999f;">+ </span><span style="color:#4271ae;">tree_weight_v2</span><span style="color:#4d4d4c;">(right)
         }
     }
 }
 
-#[</span><span style="color:#bf616a;">test</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">tree_demo_2</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> tree = </span><span style="color:#96b5b4;">sample_tree</span><span style="color:#c0c5ce;">();
-    assert_eq!(</span><span style="color:#96b5b4;">tree_weight_v2</span><span style="color:#c0c5ce;">(&amp;tree), (</span><span style="color:#d08770;">1 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">) + </span><span style="color:#d08770;">4 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">);
+#[</span><span style="color:#c82829;">test</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">tree_demo_2</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> tree </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">sample_tree</span><span style="color:#4d4d4c;">();
+    assert_eq!(</span><span style="color:#4271ae;">tree_weight_v2</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">tree), (</span><span style="color:#f5871f;">1 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">4 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>The function <code>tree_weight_v2</code> looks very much like <code>tree_weight_v1</code>.
@@ -642,24 +642,24 @@ binding form like <code>match</code> allows one to take mutable references to
 disjoint parts of the data simultaneously.</p>
 <p>This code demonstrates this concept by incrementing all of the
 values in a given tree.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">tree_grow</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">t</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> BinaryTree) {
-    </span><span style="color:#65737e;">//          ^~~~~~~~~~~~~~~ `&amp;mut`: we have exclusive access to the tree
-    </span><span style="color:#b48ead;">match </span><span style="color:#c0c5ce;">*t {
-        BinaryTree::Leaf(</span><span style="color:#b48ead;">ref mut</span><span style="color:#c0c5ce;"> payload) =&gt; *payload += </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,
-        BinaryTree::Node(</span><span style="color:#b48ead;">ref mut</span><span style="color:#c0c5ce;"> left, </span><span style="color:#b48ead;">ref mut</span><span style="color:#c0c5ce;"> payload, </span><span style="color:#b48ead;">ref mut</span><span style="color:#c0c5ce;"> right) =&gt; {
-            </span><span style="color:#96b5b4;">tree_grow</span><span style="color:#c0c5ce;">(left);
-            *payload += </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">;
-            </span><span style="color:#96b5b4;">tree_grow</span><span style="color:#c0c5ce;">(right);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">tree_grow</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">t</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> BinaryTree) {
+    </span><span style="color:#999999;">//          ^~~~~~~~~~~~~~~ `&amp;mut`: we have exclusive access to the tree
+    </span><span style="color:#8959a8;">match </span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">t {
+        BinaryTree::Leaf(</span><span style="color:#8959a8;">ref mut</span><span style="color:#4d4d4c;"> payload) </span><span style="color:#3e999f;">=&gt; *</span><span style="color:#4d4d4c;">payload </span><span style="color:#3e999f;">+= </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">,
+        BinaryTree::Node(</span><span style="color:#8959a8;">ref mut</span><span style="color:#4d4d4c;"> left, </span><span style="color:#8959a8;">ref mut</span><span style="color:#4d4d4c;"> payload, </span><span style="color:#8959a8;">ref mut</span><span style="color:#4d4d4c;"> right) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+            </span><span style="color:#4271ae;">tree_grow</span><span style="color:#4d4d4c;">(left);
+            </span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">payload </span><span style="color:#3e999f;">+= </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">;
+            </span><span style="color:#4271ae;">tree_grow</span><span style="color:#4d4d4c;">(right);
         }
     }
 }
 
-#[</span><span style="color:#bf616a;">test</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">tree_demo_3</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> tree = </span><span style="color:#96b5b4;">sample_tree</span><span style="color:#c0c5ce;">();
-    </span><span style="color:#96b5b4;">tree_grow</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> tree);
-    assert_eq!(</span><span style="color:#96b5b4;">tree_weight_v2</span><span style="color:#c0c5ce;">(&amp;tree), (</span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">3 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">) + </span><span style="color:#d08770;">5 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">6</span><span style="color:#c0c5ce;">);
+#[</span><span style="color:#c82829;">test</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">tree_demo_3</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> tree </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">sample_tree</span><span style="color:#4d4d4c;">();
+    </span><span style="color:#4271ae;">tree_grow</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> tree);
+    assert_eq!(</span><span style="color:#4271ae;">tree_weight_v2</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">tree), (</span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">3 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">5 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">6</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>Note that the code above now binds <code>payload</code> by a <code>ref mut</code>-pattern;

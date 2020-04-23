@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.27.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1270-2018-06-21">detailed release notes for
@@ -107,10 +107,10 @@ list of all lints.</p>
 <p>Okay, now for the big news: the <a href="https://github.com/rust-lang/rust/pull/49664/">basics of SIMD</a> are now available! SIMD
 stands for &quot;single instruction, multiple data.&quot; Consider a function
 like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">: &amp;[</span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">], </span><span style="color:#bf616a;">b</span><span style="color:#c0c5ce;">: &amp;[</span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">], </span><span style="color:#bf616a;">c</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> [</span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">]) {
-    </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">((a, b), c) in a.</span><span style="color:#96b5b4;">iter</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">zip</span><span style="color:#c0c5ce;">(b).</span><span style="color:#96b5b4;">zip</span><span style="color:#c0c5ce;">(c) {
-        *c = *a + *b;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">pub fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">a</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[</span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">], </span><span style="color:#f5871f;">b</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[</span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">], </span><span style="color:#f5871f;">c</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> [</span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">]) {
+    </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">((a, b), c) </span><span style="color:#3e999f;">in</span><span style="color:#4d4d4c;"> a.</span><span style="color:#4271ae;">iter</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">zip</span><span style="color:#4d4d4c;">(b).</span><span style="color:#4271ae;">zip</span><span style="color:#4d4d4c;">(c) {
+        </span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">c </span><span style="color:#3e999f;">= *</span><span style="color:#4d4d4c;">a </span><span style="color:#3e999f;">+ *</span><span style="color:#4d4d4c;">b;
     }
 }
 </span></pre>
@@ -133,33 +133,33 @@ module</a> allows us to use these kinds of instructions <em>directly</em>, which
 means we don't need to rely on a smart compiler. Additionally, it includes
 some features that allow us to choose a particular implementation based
 on various criteria. For example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">cfg</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">all</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">any</span><span style="color:#c0c5ce;">(target_arch = &quot;</span><span style="color:#a3be8c;">x86</span><span style="color:#c0c5ce;">&quot;, target_arch = &quot;</span><span style="color:#a3be8c;">x86_64</span><span style="color:#c0c5ce;">&quot;),
-      target_feature = &quot;</span><span style="color:#a3be8c;">avx2</span><span style="color:#c0c5ce;">&quot;))]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() {
-    #[</span><span style="color:#bf616a;">cfg</span><span style="color:#c0c5ce;">(target_arch = &quot;</span><span style="color:#a3be8c;">x86</span><span style="color:#c0c5ce;">&quot;)]
-    </span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::arch::x86::_mm256_add_epi64;
-    #[</span><span style="color:#bf616a;">cfg</span><span style="color:#c0c5ce;">(target_arch = &quot;</span><span style="color:#a3be8c;">x86_64</span><span style="color:#c0c5ce;">&quot;)]
-    </span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::arch::x86_64::_mm256_add_epi64;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">cfg</span><span style="color:#4d4d4c;">(</span><span style="color:#c82829;">all</span><span style="color:#4271ae;">(</span><span style="color:#c82829;">any</span><span style="color:#4271ae;">(target_arch </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;x86&quot;</span><span style="color:#4271ae;">, target_arch </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;x86_64&quot;</span><span style="color:#4271ae;">),
+      target_feature </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;avx2&quot;</span><span style="color:#4271ae;">)</span><span style="color:#4d4d4c;">)]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() {
+    #[</span><span style="color:#c82829;">cfg</span><span style="color:#4d4d4c;">(target_arch </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;x86&quot;</span><span style="color:#4d4d4c;">)]
+    </span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::arch::x86::_mm256_add_epi64;
+    #[</span><span style="color:#c82829;">cfg</span><span style="color:#4d4d4c;">(target_arch </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;x86_64&quot;</span><span style="color:#4d4d4c;">)]
+    </span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::arch::x86_64::_mm256_add_epi64;
 
-    </span><span style="color:#b48ead;">unsafe </span><span style="color:#c0c5ce;">{
-        </span><span style="color:#96b5b4;">_mm256_add_epi64</span><span style="color:#c0c5ce;">(...);
+    </span><span style="color:#8959a8;">unsafe </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#4271ae;">_mm256_add_epi64</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">...</span><span style="color:#4d4d4c;">);
     }
 }
 </span></pre>
 <p>Here, we use <code>cfg</code> flags to choose the correct version based on the machine
 we're targeting; on <code>x86</code> we use that version, and on <code>x86_64</code> we use
 its version. We can also choose at runtime:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() {
-    #[</span><span style="color:#bf616a;">cfg</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">any</span><span style="color:#c0c5ce;">(target_arch = &quot;</span><span style="color:#a3be8c;">x86</span><span style="color:#c0c5ce;">&quot;, target_arch = &quot;</span><span style="color:#a3be8c;">x86_64</span><span style="color:#c0c5ce;">&quot;))]
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() {
+    #[</span><span style="color:#c82829;">cfg</span><span style="color:#4d4d4c;">(</span><span style="color:#c82829;">any</span><span style="color:#4271ae;">(target_arch </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;x86&quot;</span><span style="color:#4271ae;">, target_arch </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;x86_64&quot;</span><span style="color:#4271ae;">)</span><span style="color:#4d4d4c;">)]
     {
-        </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">is_x86_feature_detected!(&quot;</span><span style="color:#a3be8c;">avx2</span><span style="color:#c0c5ce;">&quot;) {
-            </span><span style="color:#b48ead;">return unsafe </span><span style="color:#c0c5ce;">{ </span><span style="color:#96b5b4;">foo_avx2</span><span style="color:#c0c5ce;">() };
+        </span><span style="color:#8959a8;">if </span><span style="color:#4d4d4c;">is_x86_feature_detected!(</span><span style="color:#718c00;">&quot;avx2&quot;</span><span style="color:#4d4d4c;">) {
+            </span><span style="color:#8959a8;">return unsafe </span><span style="color:#4d4d4c;">{ </span><span style="color:#4271ae;">foo_avx2</span><span style="color:#4d4d4c;">() };
         }
     }
 
-    </span><span style="color:#96b5b4;">foo_fallback</span><span style="color:#c0c5ce;">();
+    </span><span style="color:#4271ae;">foo_fallback</span><span style="color:#4d4d4c;">();
 }
 </span></pre>
 <p>Here, we have two versions of the function: one which uses <code>AVX2</code>, a specific
@@ -176,20 +176,20 @@ future. But landing the basics now lets the ecosystem experiment with higher
 level libraries starting today. For example, check out the
 <a href="https://github.com/AdamNiederer/faster">faster</a> crate. Here's a code
 snippet with no SIMD:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> lots_of_3s = (&amp;[-</span><span style="color:#d08770;">123.456</span><span style="color:#b48ead;">f32</span><span style="color:#c0c5ce;">; </span><span style="color:#d08770;">128</span><span style="color:#c0c5ce;">][..]).</span><span style="color:#96b5b4;">iter</span><span style="color:#c0c5ce;">()
-    .</span><span style="color:#96b5b4;">map</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">v</span><span style="color:#c0c5ce;">| {
-        </span><span style="color:#d08770;">9.0 </span><span style="color:#c0c5ce;">* v.</span><span style="color:#96b5b4;">abs</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">sqrt</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">sqrt</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">recip</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">ceil</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">sqrt</span><span style="color:#c0c5ce;">() - </span><span style="color:#d08770;">4.0 </span><span style="color:#c0c5ce;">- </span><span style="color:#d08770;">2.0
-    </span><span style="color:#c0c5ce;">})
-    .collect::&lt;Vec&lt;</span><span style="color:#b48ead;">f32</span><span style="color:#c0c5ce;">&gt;&gt;();
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> lots_of_3s </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[</span><span style="color:#3e999f;">-</span><span style="color:#f5871f;">123.456</span><span style="color:#8959a8;">f32</span><span style="color:#4d4d4c;">; </span><span style="color:#f5871f;">128</span><span style="color:#4d4d4c;">][</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">]).</span><span style="color:#4271ae;">iter</span><span style="color:#4d4d4c;">()
+    .</span><span style="color:#4271ae;">map</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">v</span><span style="color:#4d4d4c;">| {
+        </span><span style="color:#f5871f;">9.0 </span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;"> v.</span><span style="color:#4271ae;">abs</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">sqrt</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">sqrt</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">recip</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">ceil</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">sqrt</span><span style="color:#4d4d4c;">() </span><span style="color:#3e999f;">- </span><span style="color:#f5871f;">4.0 </span><span style="color:#3e999f;">- </span><span style="color:#f5871f;">2.0
+    </span><span style="color:#4d4d4c;">})
+    .collect::&lt;Vec&lt;</span><span style="color:#8959a8;">f32</span><span style="color:#4d4d4c;">&gt;&gt;();
 </span></pre>
 <p>To use SIMD with this code via <code>faster</code>, you'd change it to this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> lots_of_3s = (&amp;[-</span><span style="color:#d08770;">123.456</span><span style="color:#b48ead;">f32</span><span style="color:#c0c5ce;">; </span><span style="color:#d08770;">128</span><span style="color:#c0c5ce;">][..]).</span><span style="color:#96b5b4;">simd_iter</span><span style="color:#c0c5ce;">()
-    .</span><span style="color:#96b5b4;">simd_map</span><span style="color:#c0c5ce;">(</span><span style="color:#96b5b4;">f32s</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">0.0</span><span style="color:#c0c5ce;">), |</span><span style="color:#bf616a;">v</span><span style="color:#c0c5ce;">| {
-        </span><span style="color:#96b5b4;">f32s</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">9.0</span><span style="color:#c0c5ce;">) * v.</span><span style="color:#96b5b4;">abs</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">sqrt</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">rsqrt</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">ceil</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">sqrt</span><span style="color:#c0c5ce;">() - </span><span style="color:#96b5b4;">f32s</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">4.0</span><span style="color:#c0c5ce;">) - </span><span style="color:#96b5b4;">f32s</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">2.0</span><span style="color:#c0c5ce;">)
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> lots_of_3s </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[</span><span style="color:#3e999f;">-</span><span style="color:#f5871f;">123.456</span><span style="color:#8959a8;">f32</span><span style="color:#4d4d4c;">; </span><span style="color:#f5871f;">128</span><span style="color:#4d4d4c;">][</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">]).</span><span style="color:#4271ae;">simd_iter</span><span style="color:#4d4d4c;">()
+    .</span><span style="color:#4271ae;">simd_map</span><span style="color:#4d4d4c;">(</span><span style="color:#4271ae;">f32s</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">0.0</span><span style="color:#4d4d4c;">), |</span><span style="color:#f5871f;">v</span><span style="color:#4d4d4c;">| {
+        </span><span style="color:#4271ae;">f32s</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">9.0</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;"> v.</span><span style="color:#4271ae;">abs</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">sqrt</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">rsqrt</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">ceil</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">sqrt</span><span style="color:#4d4d4c;">() </span><span style="color:#3e999f;">- </span><span style="color:#4271ae;">f32s</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">4.0</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">- </span><span style="color:#4271ae;">f32s</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">2.0</span><span style="color:#4d4d4c;">)
     })
-    .</span><span style="color:#96b5b4;">scalar_collect</span><span style="color:#c0c5ce;">();
+    .</span><span style="color:#4271ae;">scalar_collect</span><span style="color:#4d4d4c;">();
 </span></pre>
 <p>It looks almost the same: <code>simd_iter</code> instead of <code>iter</code>, <code>simd_map</code> instead
 of <code>map</code>, <code>f32s(2.0)</code> instead of <code>2.0</code>. But you get a SIMD-ified version
@@ -201,8 +201,8 @@ will contain these SIMD speedups without you needing to do anything at all!</p>
 <h3 id="dyn-trait"><code>dyn Trait</code></h3>
 <p>Rust's trait object syntax is one that we ultimately regret. If you'll recall,
 given a trait <code>Foo</code>, this is a trait object:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">Box&lt;Foo&gt;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">Box&lt;Foo&gt;
 </span></pre>
 <p>However, if <code>Foo</code> were a struct, it'd just be a normal struct placed inside a
 <code>Box&lt;T&gt;</code>. When designing the language, we thought that the similarity here was
@@ -216,11 +216,11 @@ things, and so that feels like <code>Trait</code> is what you should use, given 
 shorter, but in reality, that's not always true.</p>
 <p>As such, in Rust 1.27, we have stabilized a new syntax, <a href="https://github.com/rust-lang/rfcs/blob/master/text/2113-dyn-trait-syntax.md"><code>dyn Trait</code></a>. A
 trait object now looks like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// old =&gt; new
-</span><span style="color:#c0c5ce;">Box&lt;Foo&gt; =&gt; Box&lt;dyn Foo&gt;
-&amp;Foo =&gt; &amp;dyn Foo
-&amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> Foo =&gt; &amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> dyn Foo
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// old =&gt; new
+</span><span style="color:#4d4d4c;">Box&lt;Foo&gt; </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">Box&lt;dyn Foo&gt;
+</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Foo </span><span style="color:#3e999f;">=&gt; &amp;</span><span style="color:#4d4d4c;">dyn Foo
+</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> Foo </span><span style="color:#3e999f;">=&gt; &amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> dyn Foo
 </span></pre>
 <p>And similarly for other pointer types, <code>Arc&lt;Foo&gt;</code> is now <code>Arc&lt;dyn Foo&gt;</code>, etc.
 Due to backwards compatibility, we cannot remove the old syntax, but we have
@@ -237,17 +237,17 @@ Expect to hear more about <code>rustfix</code> in a future announcement.</p>
 used on functions</a>.</p>
 <p>Previously, it only applied to types, like <code>Result&lt;T, E&gt;</code>. But now, you can
 do this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">must_use</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">double</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">* x
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">must_use</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">double</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">i32 </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;"> x
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#96b5b4;">double</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">); </span><span style="color:#65737e;">// warning: unused return value of `double` which must be used
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#4271ae;">double</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">); </span><span style="color:#999999;">// warning: unused return value of `double` which must be used
 
-    </span><span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">_ = </span><span style="color:#96b5b4;">double</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">); </span><span style="color:#65737e;">// (no warning)
-</span><span style="color:#c0c5ce;">}
+    </span><span style="color:#8959a8;">let </span><span style="color:#3e999f;">_ = </span><span style="color:#4271ae;">double</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">); </span><span style="color:#999999;">// (no warning)
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>We've also <a href="https://github.com/rust-lang/rust/pull/49533/">enhanced several bits of the standard
 library</a> to make use of this;

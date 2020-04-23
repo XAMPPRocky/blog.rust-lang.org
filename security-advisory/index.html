@@ -89,13 +89,13 @@ does not manually implement <code>Error::type_id</code> your code is not affecte
 This function has a default implementation in the standard library, but it can
 also be overridden by downstream crates. For example, the following is
 currently allowed on Rust 1.34.0 and Rust 1.34.1:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">MyType;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">MyType;
 
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Error </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">MyType {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">type_id</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">) -&gt; TypeId {
-        </span><span style="color:#65737e;">// Enable safe casting to `String` by accident.
-        </span><span style="color:#c0c5ce;">TypeId::of::&lt;String&gt;()
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Error </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">MyType {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">type_id</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">) -&gt; TypeId {
+        </span><span style="color:#999999;">// Enable safe casting to `String` by accident.
+        </span><span style="color:#4d4d4c;">TypeId::of::&lt;String&gt;()
     }
 }
 </span></pre>

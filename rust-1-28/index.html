@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.28.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1280-2018-08-02">detailed release notes for
@@ -97,16 +97,16 @@ define new allocators by implementing the <a href="https://doc.rust-lang.org/sta
 standard library now provides a handle to the system allocator, which can be
 used to switch to the system allocator when desired, by declaring a static and
 marking it with the <code>#[global_allocator]</code> attribute.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::alloc::System;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::alloc::System;
 
-#[</span><span style="color:#bf616a;">global_allocator</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">static </span><span style="color:#d08770;">GLOBAL</span><span style="color:#c0c5ce;">: System = System;
+#[</span><span style="color:#c82829;">global_allocator</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">static </span><span style="color:#666969;">GLOBAL</span><span style="color:#4d4d4c;">: System </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> System;
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> v = Vec::new();
-    </span><span style="color:#65737e;">// This will allocate memory using the system allocator.
-</span><span style="color:#c0c5ce;">    v.</span><span style="color:#96b5b4;">push</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> v </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Vec</span><span style="color:#4d4d4c;">::new();
+    </span><span style="color:#999999;">// This will allocate memory using the system allocator.
+</span><span style="color:#4d4d4c;">    v.</span><span style="color:#4271ae;">push</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>However, sometimes you want to define a custom allocator for a given application
@@ -114,20 +114,20 @@ domain. This is also relatively easy to do by implementing the <code>GlobalAlloc
 trait. You can read more about how to do this in the <a href="https://doc.rust-lang.org/stable/std/alloc/trait.GlobalAlloc.html">documentation</a>.</p>
 <h3 id="improved-error-message-for-formatting">Improved error message for formatting</h3>
 <p>Work on diagnostics continues, this time with an emphasis on formatting:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">format!(&quot;</span><span style="color:#d08770;">{_foo}</span><span style="color:#c0c5ce;">&quot;, _foo = </span><span style="color:#d08770;">6</span><span style="color:#b48ead;">usize</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">format!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{_foo}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, _foo </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">6</span><span style="color:#8959a8;">usize</span><span style="color:#4d4d4c;">);
 </span></pre>
 <p>Previously, the error message emitted here was relatively poor:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error: invalid format string: expected `&#39;}&#39;`, found `&#39;_&#39;`
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error: invalid format string: expected `&#39;}&#39;`, found `&#39;_&#39;`
   |
 2 |     format!(&quot;{_foo}&quot;, _foo = 6usize);
   |             ^^^^^^^^
 </span></pre>
 <p>Now, we emit a diagnostic that tells you the specific reason the format string
 is invalid:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error: invalid format string: invalid argument name `_foo`
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error: invalid format string: invalid argument name `_foo`
   |
 2 |     let _ = format!(&quot;{_foo}&quot;, _foo = 6usize);
   |                       ^^^^ invalid argument name in format string
@@ -146,19 +146,19 @@ remains even when <code>NonZeroU8</code> is wrapped inside another struct; the e
 below illustrates that <code>Door</code> is still 1 byte large despite being placed inside
 an <code>Option</code>. This optimization applies to user-defined enums as well: <code>Option</code>
 is not special.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::mem;
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::num::NonZeroU8;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::mem;
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::num::NonZeroU8;
 
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Key(NonZeroU8);
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Key(NonZeroU8);
 
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Door {
-    </span><span style="color:#bf616a;">key</span><span style="color:#c0c5ce;">: Key,
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Door {
+    </span><span style="color:#c82829;">key</span><span style="color:#4d4d4c;">: Key,
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    assert_eq!(mem::size_of::&lt;Door&gt;(), </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">);
-    assert_eq!(mem::size_of::&lt;Option&lt;Door&gt;&gt;(), </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    assert_eq!(mem::size_of::&lt;Door&gt;(), </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">);
+    assert_eq!(mem::size_of::&lt;Option&lt;Door&gt;&gt;(), </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>A number of other libraries have also been stabilized: you can see the more

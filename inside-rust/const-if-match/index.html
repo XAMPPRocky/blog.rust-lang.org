@@ -77,28 +77,28 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;inside-rust&
       <p><strong>TLDR; <code>if</code> and <code>match</code> are now usable in constants on the latest nightly.</strong></p>
 <p>As a result, you can now write code like the following and have it execute at
 compile-time:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">static </span><span style="color:#d08770;">PLATFORM</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">str </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">cfg!(unix) {
-    &quot;</span><span style="color:#a3be8c;">unix</span><span style="color:#c0c5ce;">&quot;
-} </span><span style="color:#b48ead;">else if </span><span style="color:#c0c5ce;">cfg!(windows) {
-    &quot;</span><span style="color:#a3be8c;">windows</span><span style="color:#c0c5ce;">&quot;
-} </span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{
-    &quot;</span><span style="color:#a3be8c;">other</span><span style="color:#c0c5ce;">&quot;
-};
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">static </span><span style="color:#666969;">PLATFORM</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">str </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">if </span><span style="color:#4d4d4c;">cfg!(unix) {
+    </span><span style="color:#718c00;">&quot;unix&quot;
+</span><span style="color:#4d4d4c;">} </span><span style="color:#8959a8;">else if </span><span style="color:#4d4d4c;">cfg!(windows) {
+    </span><span style="color:#718c00;">&quot;windows&quot;
+</span><span style="color:#4d4d4c;">} </span><span style="color:#8959a8;">else </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#718c00;">&quot;other&quot;
+</span><span style="color:#4d4d4c;">};
 
-</span><span style="color:#b48ead;">const </span><span style="color:#c0c5ce;">_: () = assert!(std::mem::size_of::&lt;</span><span style="color:#b48ead;">usize</span><span style="color:#c0c5ce;">&gt;() == </span><span style="color:#d08770;">8</span><span style="color:#c0c5ce;">, &quot;</span><span style="color:#a3be8c;">Only 64-bit platforms are supported</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#8959a8;">const </span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">: () </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">assert!(std::mem::size_of::&lt;</span><span style="color:#8959a8;">usize</span><span style="color:#4d4d4c;">&gt;() </span><span style="color:#3e999f;">== </span><span style="color:#f5871f;">8</span><span style="color:#4d4d4c;">, </span><span style="color:#718c00;">&quot;Only 64-bit platforms are supported&quot;</span><span style="color:#4d4d4c;">);
 </span></pre>
 <p><code>if</code> and <code>match</code> can also be used in the body of a <code>const fn</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">gcd</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">b</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">{
-    </span><span style="color:#b48ead;">match </span><span style="color:#c0c5ce;">(a, b) {
-        (x, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">) | (</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, x) =&gt; x,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const fn </span><span style="color:#4271ae;">gcd</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">a</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">b</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">u32 </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#8959a8;">match </span><span style="color:#4d4d4c;">(a, b) {
+        (x, </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">, x) </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> x,
 
-        (x, y) </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> x % </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0 </span><span style="color:#c0c5ce;">&amp;&amp; y % </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0 </span><span style="color:#c0c5ce;">=&gt; </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">*</span><span style="color:#96b5b4;">gcd</span><span style="color:#c0c5ce;">(x/</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, y/</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">),
-        (x, y) | (y, x) </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> x % </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0 </span><span style="color:#c0c5ce;">=&gt; </span><span style="color:#96b5b4;">gcd</span><span style="color:#c0c5ce;">(x/</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, y),
+        (x, y) </span><span style="color:#8959a8;">if</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">== </span><span style="color:#f5871f;">0 </span><span style="color:#3e999f;">&amp;&amp;</span><span style="color:#4d4d4c;"> y </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">== </span><span style="color:#f5871f;">0 </span><span style="color:#3e999f;">=&gt; </span><span style="color:#f5871f;">2</span><span style="color:#3e999f;">*</span><span style="color:#4271ae;">gcd</span><span style="color:#4d4d4c;">(x</span><span style="color:#3e999f;">/</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, y</span><span style="color:#3e999f;">/</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">),
+        (x, y) </span><span style="color:#3e999f;">| </span><span style="color:#4d4d4c;">(y, x) </span><span style="color:#8959a8;">if</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">== </span><span style="color:#f5871f;">0 </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4271ae;">gcd</span><span style="color:#4d4d4c;">(x</span><span style="color:#3e999f;">/</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, y),
 
-        (x, y) </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> x &lt; y =&gt; </span><span style="color:#96b5b4;">gcd</span><span style="color:#c0c5ce;">((y-x)/</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, x),
-        (x, y) =&gt; </span><span style="color:#96b5b4;">gcd</span><span style="color:#c0c5ce;">((x-y)/</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, y),
+        (x, y) </span><span style="color:#8959a8;">if</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">&lt;</span><span style="color:#4d4d4c;"> y </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4271ae;">gcd</span><span style="color:#4d4d4c;">((y</span><span style="color:#3e999f;">-</span><span style="color:#4d4d4c;">x)</span><span style="color:#3e999f;">/</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, x),
+        (x, y) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4271ae;">gcd</span><span style="color:#4d4d4c;">((x</span><span style="color:#3e999f;">-</span><span style="color:#4d4d4c;">y)</span><span style="color:#3e999f;">/</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, y),
     }
 }
 </span></pre><h2 id="what-exactly-is-going-on-here">What exactly is going on here?</h2>
@@ -160,20 +160,20 @@ needs to statically guarantee certain properties about variables in a <code>cons
 such as whether they allow for interior mutability or whether they have a
 <code>Drop</code> implementation that needs to be called. For example, we must reject the
 following code since it would result in a <code>const</code> being mutable at runtime!</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const </span><span style="color:#d08770;">CELL</span><span style="color:#c0c5ce;">: &amp;std::cell::Cell&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt; = &amp;std::cell::Cell::new(</span><span style="color:#d08770;">42</span><span style="color:#c0c5ce;">); </span><span style="color:#65737e;">// Not allowed...
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const </span><span style="color:#666969;">CELL</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">std::cell::Cell&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt; </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">std::cell::Cell::new(</span><span style="color:#f5871f;">42</span><span style="color:#4d4d4c;">); </span><span style="color:#999999;">// Not allowed...
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#d08770;">CELL</span><span style="color:#c0c5ce;">.</span><span style="color:#96b5b4;">set</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">);
-    println!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, </span><span style="color:#d08770;">CELL</span><span style="color:#c0c5ce;">.</span><span style="color:#96b5b4;">get</span><span style="color:#c0c5ce;">()); </span><span style="color:#65737e;">// otherwise this could print `0`!!!
-</span><span style="color:#c0c5ce;">}
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#666969;">CELL</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">set</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">);
+    println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, </span><span style="color:#666969;">CELL</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">get</span><span style="color:#4d4d4c;">()); </span><span style="color:#999999;">// otherwise this could print `0`!!!
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>However, it is sometimes okay for a <code>const</code> to contain a reference to a <em>type</em>
 that may have interior mutability, as long as we can prove that the actual
 <em>value</em> of that type does not. This is particularly useful for <code>enum</code>s with a
 &quot;unit variant&quot; (e.g., <code>Option::None</code>).</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const </span><span style="color:#d08770;">NO_CELL</span><span style="color:#c0c5ce;">: Option&lt;&amp;std::cell::Cell&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt;&gt; = None; </span><span style="color:#65737e;">// OK
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const </span><span style="color:#666969;">NO_CELL</span><span style="color:#4d4d4c;">: Option&lt;</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">std::cell::Cell&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt;&gt; </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">None</span><span style="color:#4d4d4c;">; </span><span style="color:#999999;">// OK
 </span></pre>
 <p>A more detailed (but non-normative) treatment of the rules <a href="https://github.com/rust-lang/const-eval/blob/master/static.md#drop">for <code>Drop</code></a>
 and <a href="https://github.com/rust-lang/const-eval/blob/master/const.md#2-interior-mutability">for interior mutability</a> in a const context can be found
@@ -185,11 +185,11 @@ that we could properly track the value of each local across the control-flow
 graph. At the moment, the analysis is very conservative, especially when values are
 moved in and out of compound data types. For example, the following will not
 compile, even when the feature gate is enabled.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">imprecise</span><span style="color:#c0c5ce;">() -&gt; Vec&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt; {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> tuple: (Vec&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt;,) = (Vec::new(),);
-    tuple.</span><span style="color:#d08770;">0
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const fn </span><span style="color:#4271ae;">imprecise</span><span style="color:#4d4d4c;">() -&gt; Vec&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt; {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> tuple: (Vec&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt;,) </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">(</span><span style="color:#c99e00;">Vec</span><span style="color:#4d4d4c;">::new(),);
+    tuple.</span><span style="color:#f5871f;">0
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>Even though the <code>Vec</code> created by <code>Vec::new</code> will never actually be dropped
 inside the <code>const fn</code>, we don't detect that all fields of <code>tuple</code> have been moved

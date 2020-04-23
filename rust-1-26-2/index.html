@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.26.2 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1262-2018-06-05">detailed release notes for
@@ -88,19 +88,19 @@ appropriate page on our website, and check out the <a href="https://github.com/r
 <p>This patch release fixes a bug in the borrow checker verification of <code>match</code> expressions. This bug
 was introduced in 1.26.0 with the stabilization of <a href="https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#nicer-match-bindings">match ergonomics</a>. Specifically, it permitted
 code which took two mutable borrows of the <code>bar</code> path at the same time.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> foo = Some(&quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot;.</span><span style="color:#96b5b4;">to_string</span><span style="color:#c0c5ce;">());
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> bar = &amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> foo;
-</span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> bar {
-    Some(baz) =&gt; {
-        bar.</span><span style="color:#96b5b4;">take</span><span style="color:#c0c5ce;">(); </span><span style="color:#65737e;">// Should not be permitted, as baz has a unique reference to the bar pointer.
-    </span><span style="color:#c0c5ce;">},
-    None =&gt; unreachable!(),
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> foo </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(</span><span style="color:#718c00;">&quot;foo&quot;</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">to_string</span><span style="color:#4d4d4c;">());
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> bar </span><span style="color:#3e999f;">= &amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> foo;
+</span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> bar {
+    </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(baz) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+        bar.</span><span style="color:#4271ae;">take</span><span style="color:#4d4d4c;">(); </span><span style="color:#999999;">// Should not be permitted, as baz has a unique reference to the bar pointer.
+    </span><span style="color:#4d4d4c;">},
+    </span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">unreachable!(),
 }
 </span></pre>
 <p>1.26.2 will reject the above code with this error message:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0499]: cannot borrow `*bar` as mutable more than once at a time
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0499]: cannot borrow `*bar` as mutable more than once at a time
  --&gt; src/main.rs:6:9
   |
 5 |     Some(baz) =&gt; {

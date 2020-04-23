@@ -99,11 +99,11 @@ target, <code>wasm32-unknown-emscripten</code>. It is still early days, and ther
 of bugs to shake out, so please give it a try and report them! To give you a
 small taste of how it works, once you have <a href="http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html">emscripten</a> installed, compiling
 some Rust code to WebAssembly is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> target add wasm32-unknown-emscripten
-</span><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> echo &#39;</span><span style="color:#a3be8c;">fn main() { println!(&quot;Hello, Emscripten!&quot;); }</span><span style="color:#c0c5ce;">&#39; &gt; hello.rs
-</span><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> rustc</span><span style="color:#bf616a;"> --target</span><span style="color:#c0c5ce;">=wasm32-unknown-emscripten hello.rs
-</span><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> node hello.js
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> target add wasm32-unknown-emscripten
+</span><span style="color:#c82829;">$</span><span style="color:#4271ae;"> echo </span><span style="color:#718c00;">&#39;fn main() { println!(&quot;Hello, Emscripten!&quot;); }&#39; </span><span style="color:#3e999f;">&gt;</span><span style="color:#4271ae;"> hello.rs
+</span><span style="color:#c82829;">$</span><span style="color:#4271ae;"> rustc</span><span style="color:#f5871f;"> --target</span><span style="color:#3e999f;">=</span><span style="color:#4271ae;">wasm32-unknown-emscripten hello.rs
+</span><span style="color:#c82829;">$</span><span style="color:#4271ae;"> node hello.js
 </span></pre>
 <p>The community has been doing interesting, experimental work in this area: see
 <a href="http://www.hellorust.com/emscripten/">Jan-Erik's slides</a> for the workshop he ran at <a href="http://www.rust-belt-rust.com/sessions/">Rust Belt Rust</a> for some
@@ -144,41 +144,41 @@ simpler.</p>
 improvements to compile times</a> have landed, with more coming in the future.</p>
 <p>In the language, one small improvement has landed: support for <a href="https://github.com/rust-lang/rfcs/blob/master/text/1492-dotdot-in-patterns.md">RFC 1492</a>. This small
 addition lets you use <code>..</code> in more places. Previously, say you had a struct like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Point {
-    </span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">,
-    </span><span style="color:#bf616a;">y</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">,
-    </span><span style="color:#bf616a;">z</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Point {
+    </span><span style="color:#c82829;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#c82829;">y</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#c82829;">z</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">,
 }
 </span></pre>
 <p>In any context where you're doing a pattern match, you could use <code>..</code> to ignore the
 parts you don't care about. For example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> p = Point { x: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, y: </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, z: </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">};
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> p </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Point { x: </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">, y: </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, z: </span><span style="color:#f5871f;">2 </span><span style="color:#4d4d4c;">};
 
-</span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> p {
-    Point { x, .. } =&gt; println!(&quot;</span><span style="color:#a3be8c;">x is </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, x),
+</span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> p {
+    Point { x, </span><span style="color:#3e999f;">.. </span><span style="color:#4d4d4c;">} </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;x is </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, x),
 }
 </span></pre>
 <p>The <code>..</code> ignores <code>y</code> and <code>z</code>.</p>
 <p>Consider a similar <code>Point</code>, but as a tuple struct:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Point(</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Point(</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">, </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">, </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">);
 </span></pre>
 <p>Previously, you could use <code>..</code> to ignore all three elements:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> p = Point(</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> p </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Point(</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">);
 
-</span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> p {
-    Point(..) =&gt; println!(&quot;</span><span style="color:#a3be8c;">found a point</span><span style="color:#c0c5ce;">&quot;),
+</span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> p {
+    Point(</span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;found a point&quot;</span><span style="color:#4d4d4c;">),
 }
 </span></pre>
 <p>But you could not use it to only ignore parts of the tuple:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> p = Point(</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> p </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Point(</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">);
 
-</span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> p {
-    Point(x, ..) =&gt; println!(&quot;</span><span style="color:#a3be8c;">x is </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, x),
+</span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> p {
+    Point(x, </span><span style="color:#3e999f;">..</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;x is </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, x),
 }
 </span></pre>
 <p>This was an inconsistency, and so with RFC 1492 stabilized, compiles fine as of

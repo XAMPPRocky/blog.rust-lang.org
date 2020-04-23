@@ -86,27 +86,27 @@ one based on Cargo.</p>
 <p>The first feature is that the various “operator equals” operators, such as <code>+=</code>
 and <code>-=</code>, are now overloadable via various traits. This change was accepted in
 <a href="https://github.com/rust-lang/rfcs/blob/master/text/0953-op-assign.md">RFC 953</a>, and looks like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::ops::AddAssign;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::ops::AddAssign;
 
-#[</span><span style="color:#bf616a;">derive</span><span style="color:#c0c5ce;">(Debug)]
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Count { 
-    </span><span style="color:#bf616a;">value</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">,
+#[</span><span style="color:#c82829;">derive</span><span style="color:#4d4d4c;">(Debug)]
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Count { 
+    </span><span style="color:#c82829;">value</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">,
 }
     
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">AddAssign </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">Count {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">add_assign</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">other</span><span style="color:#c0c5ce;">: Count) {
-        </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.value += other.value;
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">AddAssign </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">Count {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">add_assign</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut </span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">other</span><span style="color:#4d4d4c;">: Count) {
+        </span><span style="color:#c82829;">self</span><span style="color:#4d4d4c;">.value </span><span style="color:#3e999f;">+=</span><span style="color:#4d4d4c;"> other.value;
     }
 }   
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> c1 = Count { value: </span><span style="color:#d08770;">1 </span><span style="color:#c0c5ce;">};
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> c2 = Count { value: </span><span style="color:#d08770;">5 </span><span style="color:#c0c5ce;">};
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> c1 </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Count { value: </span><span style="color:#f5871f;">1 </span><span style="color:#4d4d4c;">};
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> c2 </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Count { value: </span><span style="color:#f5871f;">5 </span><span style="color:#4d4d4c;">};
 
-    c1 += c2;
+    c1 </span><span style="color:#3e999f;">+=</span><span style="color:#4d4d4c;"> c2;
 
-    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span style="color:#c0c5ce;">&quot;, c1);
+    println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{:?}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, c1);
 }
 </span></pre>
 <p>This will print out <code>Count { value: 6 }</code>. Like the other operator traits, an
@@ -114,9 +114,9 @@ associated type allows you to use different types on each side of the operator,
 as well. See the RFC for more details.</p>
 <p>The second feature is very small, and comes from <a href="https://github.com/rust-lang/rfcs/blob/master/text/0218-empty-struct-with-braces.md">RFC 218</a>. Before Rust 1.8, a
 <code>struct</code> with no fields did not have curly braces:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Foo; </span><span style="color:#65737e;">// works
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Bar { } </span><span style="color:#65737e;">// error
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Foo; </span><span style="color:#999999;">// works
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Bar { } </span><span style="color:#999999;">// error
 </span></pre>
 <p>The second form is no longer an error. This was originally disallowed for
 consistency with other empty declarations, as well as a parsing ambiguity.

@@ -95,8 +95,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;inside-rust&
 <h2 id="cargo-audit-fix-automatically-update-vulnerable-dependencies"><code>cargo audit fix</code>: automatically update vulnerable dependencies</h2>
 <p>One of our <a href="https://github.com/RustSec/cargo-audit/issues/23">most requested features</a> (especially by fans of the similar <a href="https://docs.npmjs.com/cli/audit"><code>npm audit fix</code></a> command), the <a href="https://github.com/RustSec/cargo-audit#cargo-audit-fix-subcommand">new <code>cargo audit fix</code> subcommand</a> will attempt to automatically update version requirements for vulnerable dependencies to non-vulnerable versions.</p>
 <p>Note that this is an experimental new feature which isn't enabled by default. To try it out, install <code>cargo-audit</code> with the following:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">$ cargo install cargo-audit --features=fix
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">$ cargo install cargo-audit --features=fix
 </span></pre>
 <p>This will perform the same audit process as <code>cargo audit</code> initially, and then attempt to apply fixes to your <code>Cargo.toml</code>:</p>
 <p><img src="https://raw.githubusercontent.com/RustSec/cargo-audit/c857beb/img/screenshot-fix.png" alt="cargo audit fix screenshot" /></p>
@@ -106,12 +106,12 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;inside-rust&
 <h2 id="warnings-for-yanked-crates">Warnings for yanked crates</h2>
 <p>As you can see in the screenshot above, <code>cargo audit</code> now checks each of the crates in your <code>Cargo.lock</code> file against the <a href="https://crates.io">crates.io</a> index to determine if any of them have been yanked. If they have, it will emit a warning as per above.</p>
 <p>If you'd like for yanked crates to be a hard failure, you can run <code>cargo audit</code> with the <code>-D</code> command-line argument:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">$ cargo audit -D
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">$ cargo audit -D
 </span></pre>
 <p>or if you prefer to be more explicit:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">$ cargo audit --deny-warnings
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">$ cargo audit --deny-warnings
 </span></pre><h2 id="compatibility-with-the-new-v2-format-for-cargo-lock">Compatibility with the new &quot;V2&quot; format for <code>Cargo.lock</code></h2>
 <p>Rust 1.39 shipped support for a new <a href="https://github.com/rust-lang/cargo/pull/7070">merge-friendly <code>Cargo.lock</code> format</a>.</p>
 <p><code>cargo audit</code> consumes <code>Cargo.lock</code> directly, and while the V2 format change didn't break the core vulnerability-auditing functionality of <code>cargo audit</code>, several minor features regressed because of this, such as displaying dependency trees for vulnerable dependencies.</p>

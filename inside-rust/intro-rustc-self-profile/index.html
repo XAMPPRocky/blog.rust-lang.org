@@ -98,33 +98,33 @@ The Rust Unstable Book has <a href="https://doc.rust-lang.org/nightly/unstable-b
 <p>In this post, we'll look at the tools currently available and use them to profile <code>rustc</code> while it compiles an example crate.</p>
 <h2 id="setup">Setup</h2>
 <p>First, we'll install the tools we're going to use from the <code>measureme</code> repository to analyze self-profile trace data.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> cargo install</span><span style="color:#bf616a;"> --git</span><span style="color:#c0c5ce;"> https://github.com/rust-lang/measureme crox flamegraph summarize
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> cargo install</span><span style="color:#f5871f;"> --git</span><span style="color:#4271ae;"> https://github.com/rust-lang/measureme crox flamegraph summarize
 </span></pre>
 <p>Now that we have our tools, let's download an example crate to profile its build.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> cd ..
-</span><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> git clone https://github.com/rust-lang/regex.git
-</span><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> cd regex
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> cd ..
+</span><span style="color:#c82829;">$</span><span style="color:#4271ae;"> git clone https://github.com/rust-lang/regex.git
+</span><span style="color:#c82829;">$</span><span style="color:#4271ae;"> cd regex
 </span></pre>
 <p>We'll need to use a recent nightly compiler to get access to unstable <code>-Z</code> flags.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> rustup override set nightly
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> rustup override set nightly
 </span></pre>
 <p>If you haven't installed a nightly compiler before, this will download the nightly compiler for you.
 If you have, then update it to make sure you're on a recent version.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> rustup update nightly
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> rustup update nightly
 </span></pre><h2 id="profiling-the-compiler">Profiling the compiler</h2>
 <p>Now we can build it and tell <code>rustc</code> to profile the build of the <code>regex</code> crate.
 This will cause three new files to be created in the working directory which contain the profling data.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> cargo rustc -- -Zself-profile
-</span><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> ls
-</span><span style="color:#bf616a;">CHANGELOG.md</span><span style="color:#c0c5ce;">        LICENSE-APACHE       UNICODE.md              regex-17088.string_data       regex-syntax         target
-</span><span style="color:#bf616a;">Cargo.lock</span><span style="color:#c0c5ce;">          LICENSE-MIT          bench                   regex-17088.string_index      rustfmt.toml         test
-</span><span style="color:#bf616a;">Cargo.toml</span><span style="color:#c0c5ce;">          PERFORMANCE.md       examples                regex-capi                    scripts              tests
-</span><span style="color:#bf616a;">HACKING.md</span><span style="color:#c0c5ce;">          README.md            regex-17088.events      regex-debug                   src
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> cargo rustc</span><span style="color:#3e999f;"> --</span><span style="color:#4271ae;"> -Zself-profile
+</span><span style="color:#c82829;">$</span><span style="color:#4271ae;"> ls
+</span><span style="color:#c82829;">CHANGELOG.md</span><span style="color:#4271ae;">        LICENSE-APACHE       UNICODE.md              regex-17088.string_data       regex-syntax         target
+</span><span style="color:#c82829;">Cargo.lock</span><span style="color:#4271ae;">          LICENSE-MIT          bench                   regex-17088.string_index      rustfmt.toml         test
+</span><span style="color:#c82829;">Cargo.toml</span><span style="color:#4271ae;">          PERFORMANCE.md       examples                regex-capi                    scripts              tests
+</span><span style="color:#c82829;">HACKING.md</span><span style="color:#4271ae;">          README.md            regex-17088.events      regex-debug                   src
 </span></pre>
 <p>The new files follow the format <code>{crate name}-{rustc process id}.{events,string_data,string_index}</code>.</p>
 <p>We'll use each of the three main tools to analyze the profiling data:</p>
@@ -132,63 +132,63 @@ This will cause three new files to be created in the working directory which con
 <p>As its name suggests, this tool summarizes the data found in the trace files.
 Additionally, <code>summarize</code> can also show a &quot;diff&quot; between two trace files but we won't be using this mode.</p>
 <p>Let's run the tool, passing just the file name (but not the extension) for the trace:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> summarize summarize regex-17088
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">Item                                          </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">Self</span><span style="color:#c0c5ce;"> time | % of total time | </span><span style="color:#bf616a;">Time     </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">Item</span><span style="color:#c0c5ce;"> count |
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">LLVM_module_codegen_emit_obj                  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">4.89s     </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">42.752          </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">4.89s    </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">159        </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">codegen_module                                </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1.25s     </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">10.967          </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1.37s    </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">159        </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">LLVM_module_optimize_module_passes            </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1.15s     </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">10.022          </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1.15s    </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">159        </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">LLVM_module_codegen_make_bitcode              </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">786.56ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">6.875           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">960.73ms </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">159        </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">typeck_tables_of                              </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">565.18ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">4.940           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">689.39ms </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">848        </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">LLVM_module_codegen                           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">408.01ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">3.566           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">6.26s    </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">159        </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">mir_borrowck                                  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">224.03ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1.958           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">543.33ms </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">848        </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">LLVM_module_codegen_emit_compressed_bitcode   </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">174.17ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1.522           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">174.17ms </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">159        </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">optimized_mir                                 </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">157.91ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1.380           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">205.29ms </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1996       </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">evaluate_obligation                           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">146.50ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1.281           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">184.17ms </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">8304       </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">codegen_crate                                 </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">139.48ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1.219           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1.58s    </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1          </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">mir_built                                     </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">123.88ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1.083           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">168.01ms </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">848        </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">metadata_decode_entry                         </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">88.36ms   </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">0.772           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">117.77ms </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">55642      </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">incr_comp_copy_cgu_workproducts               </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">64.21ms   </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">0.561           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">64.21ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1          </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">monomorphization_collector_graph_walk         </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">54.11ms   </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">0.473           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">344.00ms </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1          </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">link_rlib                                     </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">43.21ms   </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">0.378           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">43.21ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1          </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">check_impl_item_well_formed                   </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">41.36ms   </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">0.362           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">77.14ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">736        </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">codegen_fulfill_obligation                    </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">40.36ms   </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">0.353           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">51.56ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1759       </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">expand_crate                                  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">37.24ms   </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">0.326           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">48.52ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1          </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">symbol_name                                   </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">36.31ms   </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">0.317           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">39.06ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">5513       </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
-</span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">free_global_ctxt                              </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">34.34ms   </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">0.300           </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">34.34ms  </span><span style="color:#c0c5ce;">| </span><span style="color:#bf616a;">1          </span><span style="color:#c0c5ce;">|
-</span><span style="color:#bf616a;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> summarize summarize regex-17088
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">Item                                          </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">Self</span><span style="color:#4271ae;"> time </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">%</span><span style="color:#4271ae;"> of total time </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">Time     </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">Item</span><span style="color:#4271ae;"> count </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">LLVM_module_codegen_emit_obj                  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">4.89s     </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">42.752          </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">4.89s    </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">159        </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">codegen_module                                </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1.25s     </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">10.967          </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1.37s    </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">159        </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">LLVM_module_optimize_module_passes            </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1.15s     </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">10.022          </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1.15s    </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">159        </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">LLVM_module_codegen_make_bitcode              </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">786.56ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">6.875           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">960.73ms </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">159        </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">typeck_tables_of                              </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">565.18ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">4.940           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">689.39ms </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">848        </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">LLVM_module_codegen                           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">408.01ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">3.566           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">6.26s    </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">159        </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">mir_borrowck                                  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">224.03ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1.958           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">543.33ms </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">848        </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">LLVM_module_codegen_emit_compressed_bitcode   </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">174.17ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1.522           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">174.17ms </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">159        </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">optimized_mir                                 </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">157.91ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1.380           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">205.29ms </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1996       </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">evaluate_obligation                           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">146.50ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1.281           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">184.17ms </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">8304       </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">codegen_crate                                 </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">139.48ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1.219           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1.58s    </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1          </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">mir_built                                     </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">123.88ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1.083           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">168.01ms </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">848        </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">metadata_decode_entry                         </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">88.36ms   </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">0.772           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">117.77ms </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">55642      </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">incr_comp_copy_cgu_workproducts               </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">64.21ms   </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">0.561           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">64.21ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1          </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">monomorphization_collector_graph_walk         </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">54.11ms   </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">0.473           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">344.00ms </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1          </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">link_rlib                                     </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">43.21ms   </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">0.378           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">43.21ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1          </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">check_impl_item_well_formed                   </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">41.36ms   </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">0.362           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">77.14ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">736        </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">codegen_fulfill_obligation                    </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">40.36ms   </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">0.353           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">51.56ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1759       </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">expand_crate                                  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">37.24ms   </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">0.326           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">48.52ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1          </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">symbol_name                                   </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">36.31ms   </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">0.317           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">39.06ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">5513       </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
+</span><span style="color:#3e999f;">| </span><span style="color:#c82829;">free_global_ctxt                              </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">34.34ms   </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">0.300           </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">34.34ms  </span><span style="color:#3e999f;">| </span><span style="color:#c82829;">1          </span><span style="color:#3e999f;">|
+</span><span style="color:#c82829;">+-----------------------------------------------+-----------+-----------------+----------+------------+
 ...
-Total</span><span style="color:#c0c5ce;"> cpu time: 11.440758871s
+Total</span><span style="color:#4271ae;"> cpu time: 11.440758871s
 </span></pre>
 <p>The output is sorted by the self time (time spent in the query or activity but not other queries or activities called by itself).
 As you can see, most of the compilation time is spent in LLVM generating the binary code for the executable.</p>
 <h3 id="flamegraph"><code>flamegraph</code></h3>
 <p>As you may have guessed, <code>flamegraph</code> will produce a <a href="http://www.brendangregg.com/flamegraphs.html">flame graph</a> of the profiling data.
 To run the tool, we'll pass just the filename without a file extension like we did for <code>summarize</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> flamegraph regex-17088
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> flamegraph regex-17088
 </span></pre>
 <p>This will create a file called <code>rustc.svg</code> in the working directory:</p>
 <p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png" alt="Image of flamegraph output" /></a></p>
@@ -200,8 +200,8 @@ You can use it to create a graphical timeline showing exactly when various trace
 Let's get started with the basics!</p>
 <h4 id="basic-usage">Basic usage</h4>
 <p>To run the tool, we'll just pass the filename without a file extension like we've done before:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> crox regex-17088
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> crox regex-17088
 </span></pre>
 <p>This creates a file called <code>chrome_profiler.json</code> in the working directory.
 To open it, we'll use the regular Chromium performance tools you might already be familiar with:</p>
@@ -218,8 +218,8 @@ To open it, we'll use the regular Chromium performance tools you might already b
 <h4 id="filtering-short-events">Filtering short events</h4>
 <p>If the <code>chrome_profiler.json</code> file gets too large, the normal Chromium performance tools have issues opening the file.
 One easy way to deal with this is to tell <code>crox</code> to remove events shorter than a chosen duration:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> crox</span><span style="color:#bf616a;"> --minimum-duration</span><span style="color:#c0c5ce;"> 2 regex-17088
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> crox</span><span style="color:#f5871f;"> --minimum-duration</span><span style="color:#4271ae;"> 2 regex-17088
 </span></pre>
 <p>Filtering out events less than 2 microseconds shrinks our <code>chrome_profiler.js</code> file from 27mb to 11mb.</p>
 <h4 id="capturing-event-arguments">Capturing event arguments</h4>
@@ -227,13 +227,13 @@ One easy way to deal with this is to tell <code>crox</code> to remove events sho
 For example, queries will include their query key.
 This functionality is turned off by default because it increases the self-profiler overhead.</p>
 <p>To turn this feature on, we'll need to record a new compilation, passing an additional argument to <code>rustc</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> cargo clean
-</span><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> cargo rustc -- -Zself-profile -Zself-profile-events=default,args
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> cargo clean
+</span><span style="color:#c82829;">$</span><span style="color:#4271ae;"> cargo rustc</span><span style="color:#3e999f;"> --</span><span style="color:#4271ae;"> -Zself-profile -Zself-profile-events=default,args
 </span></pre>
 <p>And then process the new output files:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> crox regex-23649
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> crox regex-23649
 </span></pre>
 <p>Now in the Chromium profiler, if you click on a node, you can see additional data about many of the events at the bottom of the screen:</p>
 <p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png" alt="Image of Chrome profiler details" /></a></p>
@@ -242,15 +242,15 @@ This functionality is turned off by default because it increases the self-profil
 <p>By using the <code>RUSTFLAGS</code> environment variable, we can profile every <code>rustc</code> invocation, not just the final crate's.
 <code>crox</code> can then combine all of the profiles together into one output file.
 Since this will create a lot of files, we'll tell <code>rustc</code> to create a folder to put all the traces in.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> rm regex-17088.* regex-23649.* </span><span style="color:#65737e;"># clean up the old trace files since we&#39;re done with them
-</span><span style="color:#c0c5ce;">$ cargo clean
-</span><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> RUSTFLAGS=&quot;</span><span style="color:#a3be8c;">-Zself-profile=</span><span style="color:#c0c5ce;">$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">pwd</span><span style="color:#a3be8c;">)/profiles -Zself-profile-events=default,args</span><span style="color:#c0c5ce;">&quot; cargo build
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> rm regex-17088.</span><span style="color:#3e999f;">*</span><span style="color:#4271ae;"> regex-23649.</span><span style="color:#3e999f;">* </span><span style="color:#999999;"># clean up the old trace files since we&#39;re done with them
+</span><span style="color:#4271ae;">$ cargo clean
+</span><span style="color:#c82829;">$</span><span style="color:#4271ae;"> RUSTFLAGS=</span><span style="color:#718c00;">&quot;-Zself-profile=$(</span><span style="color:#c82829;">pwd</span><span style="color:#718c00;">)/profiles -Zself-profile-events=default,args&quot;</span><span style="color:#4271ae;"> cargo build
 </span></pre>
 <p>This creates quite a few trace files in the working directory.
 Now, we'll tell <code>crox</code> to combine all of the trace files in the current directory together:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> crox</span><span style="color:#bf616a;"> --dir</span><span style="color:#c0c5ce;"> profiles
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">$</span><span style="color:#4271ae;"> crox</span><span style="color:#f5871f;"> --dir</span><span style="color:#4271ae;"> profiles
 </span></pre>
 <p>Opening this file shows all of the crates compiled:</p>
 <p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png" alt="Image of Chrome profiler with all crates" /></a></p>

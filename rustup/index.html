@@ -163,8 +163,8 @@ good Rust citizenship!</p>
 ></script>
 </div>
 <p>Finally, rustup can also change the default toolchain with <code>rustup default</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">$ rustc --version
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">$ rustc --version
 rustc 1.8.0 (db2939409 2016-04-11)
 $ rustup default 1.7.0
 info: syncing channel updates for &#39;1.7.0-x86_64-unknown-linux-gnu&#39;
@@ -181,8 +181,8 @@ rustc 1.7.0 (a5d1e7a59 2016-02-29)
 might want to switch from the default stable toolchain on Windows,
 which targets the 32-bit x86 architecture and the GNU ABI, to a
 stable toolchain that targets the 64-bit, MSVC ABI.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup default stable-x86_64-pc-windows-msvc
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup default stable-x86_64-pc-windows-msvc
 info: syncing channel updates for &#39;stable-x86_64-pc-windows-msvc&#39;
 info: downloading component &#39;rustc&#39;
 info: downloading component &#39;rust-std&#39;
@@ -226,8 +226,8 @@ just a different flavor: musl. (Yes, this is technically cross-compilation
 even though both targets are Linux).</p>
 <p>I'm going to be running on Ubuntu 16.04 (using <a href="https://hub.docker.com/r/brson/rustup-demo/">this Docker
 image</a>). We'll be building the basic hello world:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rust:~$ cargo new --bin hello &amp;&amp; cd hello
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rust:~$ cargo new --bin hello &amp;&amp; cd hello
 rust:~/hello$ cargo run
    Compiling hello v0.1.0 (file:///home/rust/hello)
      Running `target/debug/hello`
@@ -235,8 +235,8 @@ Hello, world!
 </span></pre>
 <p>That's with the default <code>x86_64-unknown-linux-gnu</code> target. And you can
 see it has many dynamic dependencies:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rust:~/hello$ ldd target/debug/hello
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rust:~/hello$ ldd target/debug/hello
         linux-vdso.so.1 =&gt;  (0x00007ffe5e979000)
         libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fca26d03000)
         libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fca26ae6000)
@@ -248,8 +248,8 @@ see it has many dynamic dependencies:</p>
 <p>To compile for musl instead call <code>cargo</code> with the argument
 <code>--target=x86_64-unknown-linux-musl</code>. If we just go ahead and try that
 we'll get an error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rust:~/hello$ cargo run --target=x86_64-unknown-linux-musl
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rust:~/hello$ cargo run --target=x86_64-unknown-linux-musl
    Compiling hello v0.1.0 (file:///home/rust/hello)
 error: can&#39;t find crate for `std` [E0463]
 error: aborting due to previous error
@@ -263,8 +263,8 @@ course because we haven't installed it.</p>
 platform. Previously, this was an error-prone, manual process — cue those
 blog posts I mentioned earlier. But with rustup, it's just part of the usual
 workflow:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rust:~/hello$ rustup target add x86_64-unknown-linux-musl
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rust:~/hello$ rustup target add x86_64-unknown-linux-musl
 info: downloading component &#39;rust-std&#39; for &#39;x86_64-unknown-linux-musl&#39;
 info: installing component &#39;rust-std&#39; for &#39;x86_64-unknown-linux-musl&#39;
 rust:~/hello$ rustup show
@@ -284,16 +284,16 @@ rustc 1.8.0 (db2939409 2016-04-11)
 <code>x86_64-unknown-linux-gnu</code> target triple, and now I can also target
 <code>x86_64-unknown-linux-musl</code>. Neat. Surely we are ready to build a slick
 statically-linked binary we can release into the cloud. Let's try:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rust:~/hello$ cargo run --target=x86_64-unknown-linux-musl
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rust:~/hello$ cargo run --target=x86_64-unknown-linux-musl
    Compiling hello v0.1.0 (file:///hello)
      Running `target/x86_64-unknown-linux-musl/debug/hello`
 Hello, world!
 </span></pre>
 <p>And that... just worked! Run <code>ldd</code> on it for proof that it's the real
 deal:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rust:~/hello$ ldd target/x86_64-unknown-linux-musl/debug/hello
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rust:~/hello$ ldd target/x86_64-unknown-linux-musl/debug/hello
         not a dynamic executable
 </span></pre>
 <p>Now take that <code>hello</code> binary and copy it to any x86_64 machine running Linux and
@@ -307,8 +307,8 @@ libraries compiled for musl.</p>
 from OS X or Windows, though on Windows the setup is slightly different.</p>
 <p>To build for Android we need to add the Android target, so let's
 set up another 'hello, world' project and install it.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rust:~$ cargo new --bin hello &amp;&amp; cd hello
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rust:~$ cargo new --bin hello &amp;&amp; cd hello
 rust:~/hello$ rustup target add arm-linux-androideabi
 info: downloading component &#39;rust-std&#39; for &#39;arm-linux-androideabi&#39;
 info: installing component &#39;rust-std&#39; for &#39;arm-linux-androideabi&#39;
@@ -327,8 +327,8 @@ rustc 1.8.0 (db2939409 2016-04-11)
 </span></pre>
 <p>So let's see what happens if we try to just build our 'hello'
 project without installing anything further:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rust:~/hello$ cargo build --target=arm-linux-androideabi
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rust:~/hello$ cargo build --target=arm-linux-androideabi
    Compiling hello v0.1.0 (file:///home/rust/hello)
 error: linking with `cc` failed: exit code: 1
 ... (lots of noise elided)
@@ -343,8 +343,8 @@ Rust code that targets Android the only thing we need is the NDK, but
 for practical development we'll want the <a href="https://developer.android.com/sdk/index.html">Android SDK</a> too.</p>
 <p>On Linux, download and unpack them with the following commands (the
 output of which is not included here):</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rust:~/home$ cd
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rust:~/home$ cd
 rust:~$ curl -O https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
 rust:~$ tar xzf android-sdk_r24.4.1-linux.tgz
 rust:~$ curl -O http://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
@@ -353,8 +353,8 @@ rust:~$ unzip android-ndk-r10e-linux-x86_64.zip
 <p>We further need to create what the NDK calls a <a href="https://developer.android.com/ndk/guides/standalone_toolchain.html">&quot;standalone
 toolchain&quot;</a>.  We're going to put ours in a directory called
 <code>android-18-toolchain</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rust:~$ android-ndk-r10e/build/tools/make-standalone-toolchain.sh \
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rust:~$ android-ndk-r10e/build/tools/make-standalone-toolchain.sh \
       --platform=android-18 --toolchain=arm-linux-androideabi-clang3.6 \
       --install-dir=android-18-toolchain --ndk-dir=android-ndk-r10e/ --arch=arm
 Auto-config: --toolchain=arm-linux-androideabi-4.8, --llvm-version=3.6
@@ -383,17 +383,17 @@ do that we configure the <code>arm-linux-androideabi</code> target in
 <a href="http://doc.crates.io/config.html"><code>.cargo/config</code></a> with the 'linker' value. And while we're doing that
 we'll go ahead and set the default target for this project to Android
 so we don't have to keep calling cargo with the <code>--target</code> option.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[build]
-</span><span style="color:#bf616a;">target </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">arm-linux-androideabi</span><span style="color:#c0c5ce;">&quot;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">build</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">target </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;arm-linux-androideabi&quot;
 
-[target.arm-linux-androideabi]
-</span><span style="color:#bf616a;">linker </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">/home/rust/android-18-toolchain/bin/arm-linux-androideabi-clang</span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#4d4d4c;">[</span><span style="color:#c82829;">target.arm-linux-androideabi</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">linker </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;/home/rust/android-18-toolchain/bin/arm-linux-androideabi-clang&quot;
 </span></pre>
 <p>Now let's change back to the 'hello' project directory and try
 to build again:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rust:~$ cd hello
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rust:~$ cd hello
 rust:~/hello$ cargo build
    Compiling hello v0.1.0 (file:///home/rust/hello)
 </span></pre>

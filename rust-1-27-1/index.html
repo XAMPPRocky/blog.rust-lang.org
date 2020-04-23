@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.27.1 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1271-2018-07-10">detailed release notes for
@@ -90,17 +90,17 @@ This bug was introduced in 1.26.0 with the stabilization of <a href="https://blo
 uncertain that this specific problem actually indicated unsoundness in the borrow checker,
 but suspected that it might be a possibility, so decided to issue a point release. The
 code sample below caused a panic inside the compiler prior to this patch.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> a = vec![&quot;&quot;.</span><span style="color:#96b5b4;">to_string</span><span style="color:#c0c5ce;">()];
-    a.</span><span style="color:#96b5b4;">iter</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">enumerate</span><span style="color:#c0c5ce;">()
-            .</span><span style="color:#96b5b4;">take_while</span><span style="color:#c0c5ce;">(|(_, &amp;</span><span style="color:#bf616a;">t</span><span style="color:#c0c5ce;">)| </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">)
-            .collect::&lt;Vec&lt;_&gt;&gt;();
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> a </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">vec![</span><span style="color:#718c00;">&quot;&quot;</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">to_string</span><span style="color:#4d4d4c;">()];
+    a.</span><span style="color:#4271ae;">iter</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">enumerate</span><span style="color:#4d4d4c;">()
+            .</span><span style="color:#4271ae;">take_while</span><span style="color:#4d4d4c;">(|(_, &amp;</span><span style="color:#f5871f;">t</span><span style="color:#4d4d4c;">)| </span><span style="color:#f5871f;">false</span><span style="color:#4d4d4c;">)
+            .collect::&lt;Vec&lt;</span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">&gt;&gt;();
 }
 </span></pre>
 <p>1.27.1 will reject the above code with this error message:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0507]: cannot move out of borrowed content
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0507]: cannot move out of borrowed content
     --&gt; src/main.rs:4:30
     |
   4 |             .take_while(|(_, &amp;t)| false)

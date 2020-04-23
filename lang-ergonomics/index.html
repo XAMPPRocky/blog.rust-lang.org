@@ -229,8 +229,8 @@ end up having to repeat the same set of trait bounds over and over. <code>HashMa
 a good example; it takes a key type which, in practice, must satisfy the <code>Hash</code>
 and <code>Eq</code> traits. So the question is, how should we understand a signature like
 the following?</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">use_map</span><span style="color:#c0c5ce;">&lt;K, V&gt;(</span><span style="color:#bf616a;">map</span><span style="color:#c0c5ce;">: HashMap&lt;K, V&gt;) { ... }
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">use_map</span><span style="color:#4d4d4c;">&lt;K, V&gt;(</span><span style="color:#f5871f;">map</span><span style="color:#4d4d4c;">: HashMap&lt;K, V&gt;) { </span><span style="color:#3e999f;">... </span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>Right now, such a signature would be accepted, but if you tried to use any of
 <code>map</code>'s methods, you'd get an error that <code>K</code> needs to be <code>Hash</code> and <code>Eq</code>, and
@@ -244,13 +244,13 @@ ergonomic improvement.</p>
 <a href="http://smallcultfollowing.com/babysteps/blog/2014/07/06/implied-bounds/">straightforward</a>
 to assume bounds that are &quot;implied&quot; by the type, like assuming that <code>K</code> must be
 <code>Hash</code> and <code>Eq</code> above, by tying it to the type definition:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">HashMap&lt;K: Hash + Eq, V&gt; { ... }
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">HashMap&lt;K: Hash </span><span style="color:#3e999f;">+</span><span style="color:#4d4d4c;"> Eq, V&gt; { ... }
 </span></pre>
 <p>What's the impact on the reasoning footprint? It means that to completely
 understand a signature like</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">use_map</span><span style="color:#c0c5ce;">&lt;K, V&gt;(</span><span style="color:#bf616a;">map</span><span style="color:#c0c5ce;">: HashMap&lt;K, V&gt;) { ... }
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">use_map</span><span style="color:#4d4d4c;">&lt;K, V&gt;(</span><span style="color:#f5871f;">map</span><span style="color:#4d4d4c;">: HashMap&lt;K, V&gt;) { </span><span style="color:#3e999f;">... </span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>you need to be aware of the bounds on any type constructor like <code>HashMap</code> that
 you're applying to a type variable like <code>K</code>. So in particular, if you're trying
@@ -310,14 +310,14 @@ grapple with choices about it</strong>.</p>
 <code>String</code>, and want to pass it to a function that only needs a borrow (say,
 <code>&amp;str</code>), after which you no longer need the value. Today, you <em>must</em> borrow the
 value in the argument:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">read_config</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">path</span><span style="color:#c0c5ce;">: &amp;Path) -&gt; Config { ... }
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">read_config</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">path</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Path) -&gt; Config { </span><span style="color:#3e999f;">... </span><span style="color:#4d4d4c;">}
 
-</span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> path = PathBuf::new(src_dir);
-path.</span><span style="color:#96b5b4;">push</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">Config.toml</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> path </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">PathBuf::new(src_dir);
+path.</span><span style="color:#4271ae;">push</span><span style="color:#4d4d4c;">(</span><span style="color:#718c00;">&quot;Config.toml&quot;</span><span style="color:#4d4d4c;">);
 
-</span><span style="color:#65737e;">// we have to borrow `path` with `&amp;` even though we&#39;re done with it
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> config = </span><span style="color:#96b5b4;">read_config</span><span style="color:#c0c5ce;">(&amp;path);
+</span><span style="color:#999999;">// we have to borrow `path` with `&amp;` even though we&#39;re done with it
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> config </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">read_config</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">path);
 </span></pre>
 <p>But we could easily allow you to write <code>read_config(path)</code>, implicitly borrowing
 <code>path</code> for <code>read_config</code> and then <em>dropping it</em> immediately afterwards. That
@@ -334,10 +334,10 @@ everywhere.</p>
 interaction between pattern matching and borrowing. In particular, when you're
 pattern matching against borrowed data, you often have to do a little
 reborrowing dance:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">match </span><span style="color:#c0c5ce;">*foo {
-    Some(</span><span style="color:#b48ead;">ref</span><span style="color:#c0c5ce;"> contents) =&gt; { ... }
-    None =&gt; { ... }
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">match </span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">foo {
+    </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(</span><span style="color:#8959a8;">ref</span><span style="color:#4d4d4c;"> contents) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{ </span><span style="color:#3e999f;">... </span><span style="color:#4d4d4c;">}
+    </span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{ </span><span style="color:#3e999f;">... </span><span style="color:#4d4d4c;">}
 }
 </span></pre>
 <p>Here we're using <code>*</code> to dereference an <code>Option</code>, and then <code>ref</code> to <em>re</em>reference
@@ -371,8 +371,8 @@ curve for <code>match</code>.</p>
 <h2 id="example-the-module-system">Example: the module system</h2>
 <p>Finally, let's take the module system. In the most common usage, modules are
 defined like so:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">mod </span><span style="color:#c0c5ce;">some_module;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">mod </span><span style="color:#4d4d4c;">some_module;
 </span></pre>
 <p>where <code>some_module.rs</code> is a file at an appropriate place in the source tree. You
 can specify an explicit path if you prefer, so this is a case of implicitness

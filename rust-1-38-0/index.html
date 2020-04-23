@@ -76,8 +76,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
     <div class="post">
       <p>The Rust team is happy to announce a new version of Rust, 1.38.0. Rust is a programming language that is empowering everyone to build reliable and efficient software.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust 1.38.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website.</p>
 <h2 id="what-s-in-1-38-0-stable">What's in 1.38.0 stable</h2>
@@ -89,18 +89,18 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 <p>As <a href="https://blog.rust-lang.org/2019/07/04/Rust-1.36.0.html#maybeuninitt%3E-instead-of-mem::uninitialized">previously announced</a>, <code>std::mem::uninitialized</code> is essentially impossible to use safely. Instead, <code>MaybeUninit&lt;T&gt;</code> should be used.</p>
 <p>We have not yet deprecated <code>mem::uninitialized</code>; this will be done in a future release. Starting in 1.38.0, however, <code>rustc</code> will provide a lint for a narrow class of incorrect initializations using <code>mem::uninitialized</code> or <code>mem::zeroed</code>.</p>
 <p>It is undefined behavior for some types, such as <code>&amp;T</code> and <code>Box&lt;T&gt;</code>, to ever contain an all-<code>0</code> bit pattern, because they represent pointer-like objects that cannot be <code>null</code>. It is therefore an error to use <code>mem::uninitialized</code> or <code>mem::zeroed</code> to initialize one of these types, so the new lint will attempt to warn whenever one of those functions is used to initialize one of them, either directly or as a member of a larger <code>struct</code>. The check is recursive, so the following code will emit a warning:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Wrap&lt;T&gt;(T);
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Outer(Wrap&lt;Wrap&lt;Wrap&lt;Box&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt;&gt;&gt;&gt;);
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">CannotBeZero {
-    </span><span style="color:#bf616a;">outer</span><span style="color:#c0c5ce;">: Outer,
-    </span><span style="color:#bf616a;">foo</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">,
-    </span><span style="color:#bf616a;">bar</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">f32
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Wrap&lt;T&gt;(T);
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Outer(Wrap&lt;Wrap&lt;Wrap&lt;Box&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt;&gt;&gt;&gt;);
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">CannotBeZero {
+    </span><span style="color:#c82829;">outer</span><span style="color:#4d4d4c;">: Outer,
+    </span><span style="color:#c82829;">foo</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#c82829;">bar</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">f32
+</span><span style="color:#4d4d4c;">}
 
-...
+</span><span style="color:#3e999f;">...
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> bad_value: CannotBeZero = </span><span style="color:#b48ead;">unsafe </span><span style="color:#c0c5ce;">{ std::mem::uninitialized() };
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> bad_value: CannotBeZero </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">unsafe </span><span style="color:#4d4d4c;">{ std::mem::uninitialized() };
 </span></pre>
 <p>Astute readers may note that Rust has more types that cannot be zero, notably <code>NonNull&lt;T&gt;</code> and <code>NonZero&lt;T&gt;</code>. For now, initialization of these structs with <code>mem::uninitialized</code> or <code>mem::zeroed</code> is <em>not</em> linted against.</p>
 <p>These checks do not cover all cases of unsound use of <code>mem::uninitialized</code> or <code>mem::zeroed</code>, they merely help identify code that is definitely wrong. All code should still be moved to use <code>MaybeUninit</code> instead.</p>
@@ -108,20 +108,20 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 <p>The <code>#[deprecated]</code> attribute, first introduced in Rust 1.9.0, allows crate authors to notify their users an item of their crate is deprecated and will be removed in a future release. Rust 1.38.0 extends the attribute, allowing it to be applied to macros as well.</p>
 <h3 id="std-any-type-name"><code>std::any::type_name</code></h3>
 <p>For debugging, it is sometimes useful to get the name of a type. For instance, in generic code, you may want to see, at run-time, what concrete types a function's type parameters has been instantiated with. This can now be done using <code>std::any::type_name</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">gen_value</span><span style="color:#c0c5ce;">&lt;T: Default&gt;() -&gt; T {
-    println!(&quot;</span><span style="color:#a3be8c;">Initializing an instance of </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, std::any::type_name::&lt;T&gt;());
-    Default::default()
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">gen_value</span><span style="color:#4d4d4c;">&lt;T: Default&gt;() -&gt; T {
+    println!(</span><span style="color:#718c00;">&quot;Initializing an instance of </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, std::any::type_name::&lt;T&gt;());
+    </span><span style="color:#c99e00;">Default</span><span style="color:#4d4d4c;">::default()
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">_: </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">= </span><span style="color:#96b5b4;">gen_value</span><span style="color:#c0c5ce;">();
-    </span><span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">_: String = </span><span style="color:#96b5b4;">gen_value</span><span style="color:#c0c5ce;">();
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let </span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32 </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">gen_value</span><span style="color:#4d4d4c;">();
+    </span><span style="color:#8959a8;">let </span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">: </span><span style="color:#c99e00;">String </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">gen_value</span><span style="color:#4d4d4c;">();
 }
 </span></pre>
 <p>This prints:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">Initializing an instance of i32
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">Initializing an instance of i32
 Initializing an instance of alloc::string::String
 </span></pre>
 <p>Like all standard library functions intended only for debugging, the exact contents and format of the string are not guaranteed. The value returned is only a best-effort description of the type; multiple types may share the same <code>type_name</code> value, and the value may change in future compiler releases.</p>

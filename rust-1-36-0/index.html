@@ -77,8 +77,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
       <p>The Rust team is happy to announce a new version of Rust, 1.36.0.
 Rust is a programming language that is empowering everyone to build reliable and efficient software.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust 1.36.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website,
 and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1360-2019-07-04">detailed release notes for 1.36.0</a> on GitHub.</p>
@@ -107,12 +107,12 @@ We hope this will facilitate the development of a <code>#![no_std]</code> compat
 prior to stabilizing support for <code>#![no_std]</code> binaries using <code>alloc</code>.</p>
 <p>If you are the maintainer of a library that only relies on some allocation primitives to function,
 consider making your library <code>#[no_std]</code> compatible by using the following at the top of your <code>lib.rs</code> file:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#![</span><span style="color:#bf616a;">no_std</span><span style="color:#c0c5ce;">]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#![</span><span style="color:#c82829;">no_std</span><span style="color:#4d4d4c;">]
 
-</span><span style="color:#b48ead;">extern crate</span><span style="color:#c0c5ce;"> alloc;
+</span><span style="color:#8959a8;">extern crate</span><span style="color:#4d4d4c;"> alloc;
 
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">alloc::vec::Vec;
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">alloc::vec::Vec;
 </span></pre><h3 id="maybeuninit-t-instead-of-mem-uninitialized"><a href="https://doc.rust-lang.org/std/mem/union.MaybeUninit.html"><code>MaybeUninit&lt;T&gt;</code></a> instead of <a href="https://doc.rust-lang.org/std/mem/fn.uninitialized.html"><code>mem::uninitialized</code></a></h3>
 <p>In previous releases of Rust, the <a href="https://doc.rust-lang.org/std/mem/fn.uninitialized.html"><code>mem::uninitialized</code></a> function has allowed you to bypass Rust's
 initialization checks by pretending that you've initialized a value at type <code>T</code> without doing anything.
@@ -135,12 +135,12 @@ The standard library also contains extensive documentation about <a href="https:
 <p><a href="https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html#non-lexical-lifetimes">In the announcement for Rust 1.31.0</a>, we told you about NLL (Non-Lexical Lifetimes),
 an improvement to the language that makes the borrow checker smarter and more user friendly.
 For example, you may now write:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> x = </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">;
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> y = &amp;x;
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> z = &amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> x; </span><span style="color:#65737e;">// This was not allowed before 1.31.0.
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> y </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">x;
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> z </span><span style="color:#3e999f;">= &amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> x; </span><span style="color:#999999;">// This was not allowed before 1.31.0.
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>In 1.31.0 NLL was stabilized only for Rust 2018,
 with a promise that we would backport it to Rust 2015 as well.

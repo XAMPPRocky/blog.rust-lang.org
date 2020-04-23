@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.24.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1240-2018-02-15">detailed release notes for
@@ -90,8 +90,8 @@ appropriate page on our website, and check out the <a href="https://github.com/r
 <p>For years now, we've wanted a tool that automatically can reformat your Rust code to some sort
 of &quot;standard style.&quot; With this release, we're happy to announce that a <em>preview</em> of <code>rustfmt</code>
 can be used with 1.24 stable. To give it a try, do this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> component add rustfmt-preview
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> component add rustfmt-preview
 </span></pre>
 <p>There are two important aspects here: first, you're using <code>rustup component add</code> instead of <code>cargo install</code> here. If you've previously used <code>rustfmt</code> via
 <code>cargo install</code>, you should uninstall it first. Second, this is a preview, as
@@ -124,9 +124,9 @@ to eke out every last drop of performance.</p>
 strives to minimize undefined behavior, having none of it in safe code, and as little as
 possible in unsafe code. One area where you could invoke UB is when a <code>panic!</code> goes
 across an FFI boundary. In other words, this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">extern </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">C</span><span style="color:#c0c5ce;">&quot; </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">panic_in_ffi</span><span style="color:#c0c5ce;">() {
-    panic!(&quot;</span><span style="color:#a3be8c;">Test</span><span style="color:#c0c5ce;">&quot;);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">extern </span><span style="color:#718c00;">&quot;C&quot; </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">panic_in_ffi</span><span style="color:#4d4d4c;">() {
+    panic!(</span><span style="color:#718c00;">&quot;Test&quot;</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>This cannot work, as the exact mechanism of how panics work would have to be reconciled

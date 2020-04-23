@@ -81,12 +81,12 @@ improve Rust's usability across the board. We mentioned ways to help us
 <a href="http://www.jonathanturner.org/2016/08/helping-out-with-rust-errors.html">make the transition</a>
 to the new errors, and already many people have jumped in (and thank you to those volunteers!)</p>
 <p>Let's dive in and see what's changed.  We'll start with a simple example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">borrow_same_field_twice_mut_mut</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> foo = </span><span style="color:#96b5b4;">make_foo</span><span style="color:#c0c5ce;">();
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> bar1 = &amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> foo.bar1;
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> _bar2 = &amp;</span><span style="color:#b48ead;">mut</span><span style="color:#c0c5ce;"> foo.bar1;
-    *bar1;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">borrow_same_field_twice_mut_mut</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> foo </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">make_foo</span><span style="color:#4d4d4c;">();
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> bar1 </span><span style="color:#3e999f;">= &amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> foo.bar1;
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> _bar2 </span><span style="color:#3e999f;">= &amp;</span><span style="color:#8959a8;">mut</span><span style="color:#4d4d4c;"> foo.bar1;
+    </span><span style="color:#3e999f;">*</span><span style="color:#4d4d4c;">bar1;
 }
 </span></pre>
 <p>Here we make the error of mutably borrowing the same value twice. This is a classic error in Rust.
@@ -139,8 +139,8 @@ feature allows developers to explore unfamiliar error messages with longer, more
 explanations.</p>
 <p>Today, when you can call <code>--explain</code>, you pass an error code. The compiler then prints out
 an extended message that goes into more detail about how errors of that form occur:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustc --explain E0200
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustc --explain E0200
 
 Unsafe traits must have unsafe implementations. This error occurs when an
 implementation for an unsafe trait isn&#39;t marked as unsafe. This may be resolved
@@ -161,8 +161,8 @@ Rust.</p>
 Taking a page from the error message work, we'll be updating the explain
 messages to focus on your code. For example, taking the borrow-checker error we
 started with, we might have an extended error message that looks like:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0499]: cannot borrow `foo.bar1` as mutable more than once at a time
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0499]: cannot borrow `foo.bar1` as mutable more than once at a time
   --&gt; src/test/compile-fail/borrowck/borrowck-borrow-from-owned-ptr.rs:29:22
 
 The borrow checker detected that `foo.bar1` was borrowed multiple

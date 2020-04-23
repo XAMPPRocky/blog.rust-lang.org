@@ -113,28 +113,28 @@ use them with all same ease of use you'd expect from other Cargo dependencies!</
 <p>Each of the three types of procedural macros are <a href="https://doc.rust-lang.org/stable/reference/procedural-macros.html">defined in a slightly different
 fashion</a>, and here we'll single out attribute macros. First, we'll flag
 <code>Cargo.toml</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[lib]
-</span><span style="color:#bf616a;">proc-macro </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">true
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">lib</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">proc-macro </span><span style="color:#4d4d4c;">= </span><span style="color:#f5871f;">true
 </span></pre>
 <p>and then in <code>src/lib.rs</code> we can write our macro:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">extern crate</span><span style="color:#c0c5ce;"> proc_macro;
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">proc_macro::TokenStream;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">extern crate</span><span style="color:#4d4d4c;"> proc_macro;
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">proc_macro::TokenStream;
 
-#[</span><span style="color:#bf616a;">proc_macro_attribute</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">hello</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">attr</span><span style="color:#c0c5ce;">: TokenStream, </span><span style="color:#bf616a;">item</span><span style="color:#c0c5ce;">: TokenStream) -&gt; TokenStream {
-    </span><span style="color:#65737e;">// ...
-</span><span style="color:#c0c5ce;">}
+#[</span><span style="color:#c82829;">proc_macro_attribute</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">pub fn </span><span style="color:#4271ae;">hello</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">attr</span><span style="color:#4d4d4c;">: TokenStream, </span><span style="color:#f5871f;">item</span><span style="color:#4d4d4c;">: TokenStream) -&gt; TokenStream {
+    </span><span style="color:#999999;">// ...
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>We can then write some unit tests in <code>tests/smoke.rs</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">my_crate</span><span style="color:#c0c5ce;">::</span><span style="color:#bf616a;">hello</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">wrapped_function</span><span style="color:#c0c5ce;">() {}
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">my_crate</span><span style="color:#4d4d4c;">::</span><span style="color:#c82829;">hello</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">wrapped_function</span><span style="color:#4d4d4c;">() {}
 
-#[</span><span style="color:#bf616a;">test</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">works</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#96b5b4;">wrapped_function</span><span style="color:#c0c5ce;">();
+#[</span><span style="color:#c82829;">test</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">works</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#4271ae;">wrapped_function</span><span style="color:#4d4d4c;">();
 }
 </span></pre>
 <p>... and that's it! When we execute <code>cargo test</code> Cargo will compile our
@@ -156,22 +156,22 @@ some of these points.</p>
 <p>First stabilized in <a href="https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html">Rust 1.30</a> (noticing a trend with 1.15?) macros are now
 integrated with the module system in Rust. This mainly means that you no longer
 need the clunky <code>#[macro_use]</code> attribute when importing macros! Instead of this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">macro_use</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">extern crate</span><span style="color:#c0c5ce;"> log;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">macro_use</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">extern crate</span><span style="color:#4d4d4c;"> log;
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    debug!(&quot;</span><span style="color:#a3be8c;">hello, </span><span style="color:#c0c5ce;">&quot;);
-    info!(&quot;</span><span style="color:#a3be8c;">world!</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    debug!(</span><span style="color:#718c00;">&quot;hello, &quot;</span><span style="color:#4d4d4c;">);
+    info!(</span><span style="color:#718c00;">&quot;world!&quot;</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>you can do:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">log::info;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">log::info;
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    log::debug!(&quot;</span><span style="color:#a3be8c;">hello, </span><span style="color:#c0c5ce;">&quot;);
-    info!(&quot;</span><span style="color:#a3be8c;">world!</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    log::debug</span><span style="color:#3e999f;">!</span><span style="color:#4d4d4c;">(</span><span style="color:#718c00;">&quot;hello, &quot;</span><span style="color:#4d4d4c;">);
+    info!(</span><span style="color:#718c00;">&quot;world!&quot;</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>Integration with the module system solves one of the most confusing parts about
@@ -179,29 +179,29 @@ macros historically. They're now imported and namespaced just as you would any
 other item in Rust!</p>
 <p>The benefits are not only limited to bang-style <code>macro_rules</code> macros, as you can
 now transform code that looks like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">macro_use</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">extern crate</span><span style="color:#c0c5ce;"> serde_derive;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">macro_use</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">extern crate</span><span style="color:#4d4d4c;"> serde_derive;
 
-#[</span><span style="color:#bf616a;">derive</span><span style="color:#c0c5ce;">(Deserialize)]
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Foo {
-    </span><span style="color:#65737e;">// ...
-</span><span style="color:#c0c5ce;">}
+#[</span><span style="color:#c82829;">derive</span><span style="color:#4d4d4c;">(Deserialize)]
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Foo {
+    </span><span style="color:#999999;">// ...
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>into</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">serde::Deserialize;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">serde::Deserialize;
 
-#[</span><span style="color:#bf616a;">derive</span><span style="color:#c0c5ce;">(Deserialize)]
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Foo {
-    </span><span style="color:#65737e;">// ...
-</span><span style="color:#c0c5ce;">}
+#[</span><span style="color:#c82829;">derive</span><span style="color:#4d4d4c;">(Deserialize)]
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Foo {
+    </span><span style="color:#999999;">// ...
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>and you don't even need to explicitly depend on <code>serde_derive</code> in <code>Cargo.toml</code>!
 All you need is:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[dependencies]
-</span><span style="color:#bf616a;">serde </span><span style="color:#c0c5ce;">= { </span><span style="color:#bf616a;">version </span><span style="color:#c0c5ce;">= &#39;</span><span style="color:#a3be8c;">1.0.82</span><span style="color:#c0c5ce;">&#39;, </span><span style="color:#bf616a;">features </span><span style="color:#c0c5ce;">= [&#39;</span><span style="color:#a3be8c;">derive</span><span style="color:#c0c5ce;">&#39;] }
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">dependencies</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">serde </span><span style="color:#4d4d4c;">= { </span><span style="color:#c82829;">version </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&#39;1.0.82&#39;</span><span style="color:#4d4d4c;">, </span><span style="color:#c82829;">features </span><span style="color:#4d4d4c;">= [</span><span style="color:#718c00;">&#39;derive&#39;</span><span style="color:#4d4d4c;">] }
 </span></pre><h3 id="what-s-inside-a-tokenstream">What's inside a <code>TokenStream</code>?</h3>
 <p>This mysterious <code>TokenStream</code> type comes from the <a href="https://doc.rust-lang.org/proc_macro/">compiler-provided
 <code>proc_macro</code> crate</a>. When it was first added all you could do with a
@@ -241,14 +241,14 @@ we still need to write a whole Rust parser! Thankfully though the community has
 been hard at work to make sure writing procedural macros in Rust is as smooth as
 can be, so you need look no further than the <a href="https://crates.io/crates/syn"><code>syn</code> crate</a>.</p>
 <p>With the <a href="https://crates.io/crates/syn"><code>syn</code></a> crate we can parse any Rust AST as a one-liner:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">proc_macro_attribute</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">hello</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">attr</span><span style="color:#c0c5ce;">: TokenStream, </span><span style="color:#bf616a;">item</span><span style="color:#c0c5ce;">: TokenStream) -&gt; TokenStream {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> input = syn::parse_macro_input!(item as syn::ItemFn);
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> name = &amp;input.ident;
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> abi = &amp;input.abi;
-    </span><span style="color:#65737e;">// ...
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">proc_macro_attribute</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">pub fn </span><span style="color:#4271ae;">hello</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">attr</span><span style="color:#4d4d4c;">: TokenStream, </span><span style="color:#f5871f;">item</span><span style="color:#4d4d4c;">: TokenStream) -&gt; TokenStream {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> input </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">syn::parse_macro_input</span><span style="color:#3e999f;">!</span><span style="color:#4d4d4c;">(item </span><span style="color:#3e999f;">as </span><span style="color:#4d4d4c;">syn::ItemFn);
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> name </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">input.ident;
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> abi </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">input.abi;
+    </span><span style="color:#999999;">// ...
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>The <a href="https://crates.io/crates/syn"><code>syn</code></a> crate not only comes with the ability to parse built-in syntax
 but you can also easily write a recursive descent parser for your own syntax.
@@ -264,19 +264,19 @@ collect it into a <code>TokenStream</code>. This is quite tedious, though, so le
 look at <a href="https://crates.io/crates/syn"><code>syn</code></a>'s sibling crate: <a href="https://docs.rs/quote/0.6/quote/"><code>quote</code></a>.</p>
 <p>The <a href="https://docs.rs/quote/0.6/quote/"><code>quote</code></a> crate is a quasi-quoting implementation for Rust which primarily
 provides a convenient macro for us to use:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">quote::quote;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">quote::quote;
 
-#[</span><span style="color:#bf616a;">proc_macro_attribute</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">hello</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">attr</span><span style="color:#c0c5ce;">: TokenStream, </span><span style="color:#bf616a;">item</span><span style="color:#c0c5ce;">: TokenStream) -&gt; TokenStream {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> input = syn::parse_macro_input!(item as syn::ItemFn);
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> name = &amp;input.ident;
+#[</span><span style="color:#c82829;">proc_macro_attribute</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">pub fn </span><span style="color:#4271ae;">hello</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">attr</span><span style="color:#4d4d4c;">: TokenStream, </span><span style="color:#f5871f;">item</span><span style="color:#4d4d4c;">: TokenStream) -&gt; TokenStream {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> input </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">syn::parse_macro_input</span><span style="color:#3e999f;">!</span><span style="color:#4d4d4c;">(item </span><span style="color:#3e999f;">as </span><span style="color:#4d4d4c;">syn::ItemFn);
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> name </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">input.ident;
 
-    </span><span style="color:#65737e;">// Our input function is always equivalent to returning 42, right?
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> result = quote! {
-        </span><span style="color:#b48ead;">fn </span><span style="color:#c0c5ce;">#</span><span style="color:#96b5b4;">name</span><span style="color:#c0c5ce;">() -&gt; </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">{ </span><span style="color:#d08770;">42 </span><span style="color:#c0c5ce;">}
+    </span><span style="color:#999999;">// Our input function is always equivalent to returning 42, right?
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> result </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">quote! {
+        </span><span style="color:#8959a8;">fn </span><span style="color:#3e999f;">#</span><span style="color:#4271ae;">name</span><span style="color:#4d4d4c;">() -&gt; </span><span style="color:#8959a8;">u32 </span><span style="color:#4d4d4c;">{ </span><span style="color:#f5871f;">42 </span><span style="color:#4d4d4c;">}
     };
-    result.</span><span style="color:#96b5b4;">into</span><span style="color:#c0c5ce;">()
+    result.</span><span style="color:#4271ae;">into</span><span style="color:#4d4d4c;">()
 }
 </span></pre>
 <p>The <a href="https://docs.rs/quote/0.6/quote/macro.quote.html"><code>quote!</code> macro</a> allows you to write mostly-Rust syntax and interpolate
@@ -287,16 +287,16 @@ together various pieces of syntax into one return value.</p>
 <p>Perhaps the greatest feature of procedural macros in Rust 2018 is the ability to
 customize and use <a href="https://doc.rust-lang.org/proc_macro/struct.Span.html"><code>Span</code></a> information on each token, giving us the ability for
 amazing syntactical error messages from procedural macros:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error: expected `fn`
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error: expected `fn`
  --&gt; src/main.rs:3:14
   |
 3 | my_annotate!(not_fn foo() {});
   |              ^^^^^^
 </span></pre>
 <p>as well as completely custom error messages:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error: imported methods must have at least one argument
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error: imported methods must have at least one argument
   --&gt; invalid-imports.rs:12:5
    |
 12 |     fn f1();
@@ -311,25 +311,25 @@ if you preserve the <a href="https://doc.rust-lang.org/proc_macro/struct.Span.ht
 though you're producing brand new syntax the compiler's error messages are still
 accurate!</p>
 <p>For example, a small macro like:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">proc_macro</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">make_pub</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">item</span><span style="color:#c0c5ce;">: TokenStream) -&gt; TokenStream {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> result = quote! {
-        </span><span style="color:#b48ead;">pub </span><span style="color:#c0c5ce;">#item
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">proc_macro</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">pub fn </span><span style="color:#4271ae;">make_pub</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">item</span><span style="color:#4d4d4c;">: TokenStream) -&gt; TokenStream {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> result </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">quote! {
+        </span><span style="color:#8959a8;">pub </span><span style="color:#3e999f;">#</span><span style="color:#4d4d4c;">item
     };
-    result.</span><span style="color:#96b5b4;">into</span><span style="color:#c0c5ce;">()
+    result.</span><span style="color:#4271ae;">into</span><span style="color:#4d4d4c;">()
 }
 </span></pre>
 <p>when invoked as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">my_macro::make_pub! {
-    </span><span style="color:#b48ead;">static</span><span style="color:#c0c5ce;"> X: </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot;;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">my_macro::make_pub</span><span style="color:#3e999f;">! </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#8959a8;">static</span><span style="color:#4d4d4c;"> X: </span><span style="color:#8959a8;">u32 </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;foo&quot;</span><span style="color:#4d4d4c;">;
 }
 </span></pre>
 <p>is invalid because we're returning a string from a function that should return a
 <code>u32</code>, and the compiler will helpfully diagnose the problem as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0308]: mismatched types
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0308]: mismatched types
  --&gt; src/main.rs:1:37
   |
 1 | my_macro::make_pub!(static X: u32 = &quot;foo&quot;);

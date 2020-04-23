@@ -78,72 +78,72 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;inside-rust&
 <h2 id="what-is-constant-propagation">What is constant propagation?</h2>
 <p>Constant propagation is an optimization where the compiler recognizes code that can be run at compile time, evaluates it, and replaces the original code with the result.</p>
 <p>For example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const</span><span style="color:#c0c5ce;"> X: </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const</span><span style="color:#4d4d4c;"> X: </span><span style="color:#8959a8;">u32 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">;
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> y = X + X;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> y </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> X </span><span style="color:#3e999f;">+</span><span style="color:#4d4d4c;"> X;
 </span></pre>
 <p>Rather than evaluating <code>X + X</code> at runtime, the compiler can recognize that the value of <code>X</code> is known at compile time and replace it with the correct value resulting in:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const</span><span style="color:#c0c5ce;"> X: </span><span style="color:#b48ead;">u32 </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const</span><span style="color:#4d4d4c;"> X: </span><span style="color:#8959a8;">u32 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">;
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> y = </span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> y </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>This optimization is opportunistic and automatically recognizes constants even when they are not declared as such:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Point {
-  </span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">,
-  </span><span style="color:#bf616a;">y</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Point {
+  </span><span style="color:#c82829;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">,
+  </span><span style="color:#c82829;">y</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">,
 }
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> a = </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">; </span><span style="color:#65737e;">// optimizes to 4
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> b = [</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">][</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">]; </span><span style="color:#65737e;">// optimizes to 3
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> c = (Point { x: </span><span style="color:#d08770;">21</span><span style="color:#c0c5ce;">, y: </span><span style="color:#d08770;">42 </span><span style="color:#c0c5ce;">}).y; </span><span style="color:#65737e;">// optimizes to 42
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> a </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">; </span><span style="color:#999999;">// optimizes to 4
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> b </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">[</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">][</span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">]; </span><span style="color:#999999;">// optimizes to 3
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> c </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">(Point { x: </span><span style="color:#f5871f;">21</span><span style="color:#4d4d4c;">, y: </span><span style="color:#f5871f;">42 </span><span style="color:#4d4d4c;">}).y; </span><span style="color:#999999;">// optimizes to 42
 </span></pre><h2 id="propagation-into-control-flow">Propagation into control flow</h2>
 <p>The constant propagation pass also handles propagating into control flow.
 For example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const</span><span style="color:#c0c5ce;"> Foo: Option&lt;</span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">&gt; = Some(</span><span style="color:#d08770;">12</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const</span><span style="color:#4d4d4c;"> Foo: Option&lt;</span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">&gt; </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">12</span><span style="color:#4d4d4c;">);
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> Foo {
-   None =&gt; panic!(&quot;</span><span style="color:#a3be8c;">no value</span><span style="color:#c0c5ce;">&quot;),
-   Some(v) =&gt; v,
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> Foo {
+   </span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">panic!(</span><span style="color:#718c00;">&quot;no value&quot;</span><span style="color:#4d4d4c;">),
+   </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(v) </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> v,
 };
 </span></pre>
 <p>becomes:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const</span><span style="color:#c0c5ce;"> Foo: Option&lt;</span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">&gt; = Some(</span><span style="color:#d08770;">12</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const</span><span style="color:#4d4d4c;"> Foo: Option&lt;</span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">&gt; </span><span style="color:#3e999f;">= </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">12</span><span style="color:#4d4d4c;">);
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = </span><span style="color:#d08770;">12</span><span style="color:#c0c5ce;">;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">12</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>This is very helpful for checked math, the default in <code>debug</code> mode, which introduces additional control flow after every operation:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">4 </span><span style="color:#c0c5ce;">* </span><span style="color:#d08770;">6</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">4 </span><span style="color:#3e999f;">* </span><span style="color:#f5871f;">6</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>actually operates like this with overflow checking enabled:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">(_tmp0, overflowed) = CheckedMultiply(</span><span style="color:#d08770;">4</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">6</span><span style="color:#c0c5ce;">);
-assert!(!overflowed, &quot;</span><span style="color:#a3be8c;">attempt to multiply with overflow</span><span style="color:#c0c5ce;">&quot;);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let </span><span style="color:#4d4d4c;">(_tmp0, overflowed) </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> CheckedMultiply(</span><span style="color:#f5871f;">4</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">6</span><span style="color:#4d4d4c;">);
+assert!(</span><span style="color:#3e999f;">!</span><span style="color:#4d4d4c;">overflowed, </span><span style="color:#718c00;">&quot;attempt to multiply with overflow&quot;</span><span style="color:#4d4d4c;">);
 
-</span><span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">(_tmp1, overflowed) = CheckedAdd(_tmp0, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">);
-assert!(!overflowed, &quot;</span><span style="color:#a3be8c;">attempt to add with overflow</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#8959a8;">let </span><span style="color:#4d4d4c;">(_tmp1, overflowed) </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> CheckedAdd(_tmp0, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">);
+assert!(</span><span style="color:#3e999f;">!</span><span style="color:#4d4d4c;">overflowed, </span><span style="color:#718c00;">&quot;attempt to add with overflow&quot;</span><span style="color:#4d4d4c;">);
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = _temp1;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> _temp1;
 </span></pre>
 <p>which adds quite a bit of control flow!
 Constant propagation evaluates the math at compile time and reduces this to:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> _tmp0 = </span><span style="color:#d08770;">24</span><span style="color:#c0c5ce;">;
-assert!(!</span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">, &quot;</span><span style="color:#a3be8c;">attempt to multiply with overflow</span><span style="color:#c0c5ce;">&quot;);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> _tmp0 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">24</span><span style="color:#4d4d4c;">;
+assert!(</span><span style="color:#3e999f;">!</span><span style="color:#f5871f;">false</span><span style="color:#4d4d4c;">, </span><span style="color:#718c00;">&quot;attempt to multiply with overflow&quot;</span><span style="color:#4d4d4c;">);
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> _tmp1 = </span><span style="color:#d08770;">26</span><span style="color:#c0c5ce;">;
-assert!(!</span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">, &quot;</span><span style="color:#a3be8c;">attempt to add with overflow</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> _tmp1 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">26</span><span style="color:#4d4d4c;">;
+assert!(</span><span style="color:#3e999f;">!</span><span style="color:#f5871f;">false</span><span style="color:#4d4d4c;">, </span><span style="color:#718c00;">&quot;attempt to add with overflow&quot;</span><span style="color:#4d4d4c;">);
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = </span><span style="color:#d08770;">26</span><span style="color:#c0c5ce;">;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">26</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>which is further reduced to just:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = </span><span style="color:#d08770;">26</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">26</span><span style="color:#4d4d4c;">;
 </span></pre><h2 id="compiler-performance">Compiler performance</h2>
 <p>As you might have guessed, reducing the amount of control flow processed by the Rust compiler has a positive effect on compile times.
 We're seeing 2-10% improvement on a variety of test cases in both debug and release mode.

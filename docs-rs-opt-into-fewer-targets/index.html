@@ -102,17 +102,17 @@ and <code>i686-pc-windows-msvc</code> targets, and is blank on all others.</p>
 <p>This feature allows you to request building only on specific targets.
 For example, <a href="https://docs.rs/winapi/"><code>winapi</code></a> could opt into only building windows targets
 by putting the following in its <code>Cargo.toml</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[package.metadata.docs.rs]
-</span><span style="color:#65737e;"># This also sets the default target to `x86_64-pc-windows-msvc`
-</span><span style="color:#bf616a;">targets </span><span style="color:#c0c5ce;">= [&quot;</span><span style="color:#a3be8c;">x86_64-pc-windows-msvc</span><span style="color:#c0c5ce;">&quot;, &quot;</span><span style="color:#a3be8c;">i686-pc-windows-msvc</span><span style="color:#c0c5ce;">&quot;]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">package.metadata.docs.rs</span><span style="color:#4d4d4c;">]
+</span><span style="color:#999999;"># This also sets the default target to `x86_64-pc-windows-msvc`
+</span><span style="color:#c82829;">targets </span><span style="color:#4d4d4c;">= [</span><span style="color:#718c00;">&quot;x86_64-pc-windows-msvc&quot;</span><span style="color:#4d4d4c;">, </span><span style="color:#718c00;">&quot;i686-pc-windows-msvc&quot;</span><span style="color:#4d4d4c;">]
 </span></pre>
 <p>If you only need a single target, it's even simpler:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[package.metadata.docs.rs]
-</span><span style="color:#65737e;"># This sets the default target to `x86_64-unknown-linux-gnu`
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">package.metadata.docs.rs</span><span style="color:#4d4d4c;">]
+</span><span style="color:#999999;"># This sets the default target to `x86_64-unknown-linux-gnu`
 # and only builds that target
-</span><span style="color:#bf616a;">targets </span><span style="color:#c0c5ce;">= [&quot;</span><span style="color:#a3be8c;">x86_64-unknown-linux-gnu</span><span style="color:#c0c5ce;">&quot;]
+</span><span style="color:#c82829;">targets </span><span style="color:#4d4d4c;">= [</span><span style="color:#718c00;">&quot;x86_64-unknown-linux-gnu&quot;</span><span style="color:#4d4d4c;">]
 </span></pre>
 <p>See the <a href="https://docs.rs/about#metadata">docs.rs documentation</a> for more details about how to opt-in.</p>
 <h2 id="how-does-this-help-my-crate">How does this help my crate?</h2>

@@ -145,18 +145,18 @@ release candidate for the next stable release, so for the cost of an extra
 build in CI, you can help us know if there's going to be some sort of problem
 before it hits a stable release! It's really easy. For example, on
 <a href="https://travis-ci.org/">Travis</a>, you can use this as your <code>.travis.yml</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">language</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">rust
-rust</span><span style="color:#c0c5ce;">:
-  - </span><span style="color:#a3be8c;">stable
-  </span><span style="color:#c0c5ce;">- </span><span style="color:#a3be8c;">beta
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">language</span><span style="color:#4d4d4c;">: </span><span style="color:#c82829;">rust
+rust</span><span style="color:#4d4d4c;">:
+  - </span><span style="color:#718c00;">stable
+  </span><span style="color:#4d4d4c;">- </span><span style="color:#718c00;">beta
 </span></pre>
 <p>And you'll test against both. Furthermore, if you'd like to make it so that any
 beta failure doesn't fail your own build, do this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">matrix</span><span style="color:#c0c5ce;">:
-  </span><span style="color:#bf616a;">allow_failures</span><span style="color:#c0c5ce;">:
-    - </span><span style="color:#bf616a;">rust</span><span style="color:#c0c5ce;">: </span><span style="color:#a3be8c;">beta
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">matrix</span><span style="color:#4d4d4c;">:
+  </span><span style="color:#c82829;">allow_failures</span><span style="color:#4d4d4c;">:
+    - </span><span style="color:#c82829;">rust</span><span style="color:#4d4d4c;">: </span><span style="color:#718c00;">beta
 </span></pre>
 <p>The beta build may go red, but your build will stay green.</p>
 <p>Most other CI systems, such as <a href="https://www.appveyor.com/">AppVeyor</a>, should

@@ -76,8 +76,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
     <div class="post">
       <p>The Rust team is happy to announce a new version of Rust, 1.40.0. Rust is a programming language that is empowering everyone to build reliable and efficient software.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust 1.40.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1400-2019-12-19">detailed release notes for 1.40.0</a> on GitHub.</p>
 <h2 id="what-s-in-1-40-0-stable">What's in 1.40.0 stable</h2>
@@ -85,58 +85,58 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 <h3 id="non-exhaustive-structs-enums-and-variants"><code>#[non_exhaustive]</code> structs, enums, and variants</h3>
 <p>Suppose you're a library author of a crate <code>alpha</code>, that has a <code>pub struct Foo</code>. You would like to make <code>alpha::Foo</code>'s fields <code>pub</code> as well, but you're not sure whether you might be adding more fields to <code>Foo</code> in future releases. So now you have a dilemma: either you make the fields private, with the drawbacks that follow, or you risk users depending on the exact fields, breaking their code when you add a new one. Rust 1.40.0 introduces a way to break the logjam: <code>#[non_exhaustive]</code>.</p>
 <p>The attribute <code>#[non_exhaustive]</code>, when attached to a <code>struct</code> or the variant of an <code>enum</code>, will prevent code outside of the crate defining it from constructing said <code>struct</code> or variant. To avoid future breakage, other crates are also prevented from exhaustively matching on the fields. The following example illustrates errors in <code>beta</code> which depends on <code>alpha</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// alpha/lib.rs:
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// alpha/lib.rs:
 
-</span><span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">non_exhaustive</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Foo {
-    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">bool</span><span style="color:#c0c5ce;">,
+</span><span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">non_exhaustive</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Foo {
+    </span><span style="color:#8959a8;">pub </span><span style="color:#c82829;">a</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">bool</span><span style="color:#4d4d4c;">,
 }
 
-</span><span style="color:#b48ead;">enum </span><span style="color:#c0c5ce;">Bar {
-    #[</span><span style="color:#bf616a;">non_exhaustive</span><span style="color:#c0c5ce;">]
-    Variant { b: </span><span style="color:#b48ead;">u8 </span><span style="color:#c0c5ce;">}
+</span><span style="color:#8959a8;">enum </span><span style="color:#4d4d4c;">Bar {
+    #[</span><span style="color:#c82829;">non_exhaustive</span><span style="color:#4d4d4c;">]
+    Variant { b: </span><span style="color:#8959a8;">u8 </span><span style="color:#4d4d4c;">}
 }
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">make_foo</span><span style="color:#c0c5ce;">() -&gt; Foo { ... }
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">make_bar</span><span style="color:#c0c5ce;">() -&gt; Bar { ... }
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">make_foo</span><span style="color:#4d4d4c;">() -&gt; Foo { </span><span style="color:#3e999f;">... </span><span style="color:#4d4d4c;">}
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">make_bar</span><span style="color:#4d4d4c;">() -&gt; Bar { </span><span style="color:#3e999f;">... </span><span style="color:#4d4d4c;">}
 
-</span><span style="color:#65737e;">// beta/lib.rs:
+</span><span style="color:#999999;">// beta/lib.rs:
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = Foo { a: </span><span style="color:#d08770;">true </span><span style="color:#c0c5ce;">}; </span><span style="color:#65737e;">//~ ERROR
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> Foo { a } = </span><span style="color:#96b5b4;">make_foo</span><span style="color:#c0c5ce;">(); </span><span style="color:#65737e;">//~ ERROR
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Foo { a: </span><span style="color:#f5871f;">true </span><span style="color:#4d4d4c;">}; </span><span style="color:#999999;">//~ ERROR
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> Foo { a } </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">make_foo</span><span style="color:#4d4d4c;">(); </span><span style="color:#999999;">//~ ERROR
 
 // `beta` will still compile when more fields are added.
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> Foo { a, .. } = </span><span style="color:#96b5b4;">make_foo</span><span style="color:#c0c5ce;">(); </span><span style="color:#65737e;">//~ OK
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> Foo { a, </span><span style="color:#3e999f;">.. </span><span style="color:#4d4d4c;">} </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">make_foo</span><span style="color:#4d4d4c;">(); </span><span style="color:#999999;">//~ OK
 
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = Bar::Variant { b: </span><span style="color:#d08770;">42 </span><span style="color:#c0c5ce;">}; </span><span style="color:#65737e;">//~ ERROR
-</span><span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">Bar::Variant { b } = </span><span style="color:#96b5b4;">make_bar</span><span style="color:#c0c5ce;">(); </span><span style="color:#65737e;">//~ ERROR
-</span><span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">Bar::Variant { b, .. } = </span><span style="color:#96b5b4;">make_bar</span><span style="color:#c0c5ce;">(); </span><span style="color:#65737e;">//~ OK
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">Bar::Variant { b: </span><span style="color:#f5871f;">42 </span><span style="color:#4d4d4c;">}; </span><span style="color:#999999;">//~ ERROR
+</span><span style="color:#8959a8;">let </span><span style="color:#4d4d4c;">Bar::Variant { b } </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">make_bar</span><span style="color:#4d4d4c;">(); </span><span style="color:#999999;">//~ ERROR
+</span><span style="color:#8959a8;">let </span><span style="color:#4d4d4c;">Bar::Variant { b, </span><span style="color:#3e999f;">.. </span><span style="color:#4d4d4c;">} </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">make_bar</span><span style="color:#4d4d4c;">(); </span><span style="color:#999999;">//~ OK
                    // -- `beta` will still compile...
 </span></pre>
 <p>What happens behind the scenes is that the visibility of the constructors for a <code>#[non_exhaustive]</code> <code>struct</code> or <code>enum</code> variant is lowered to <code>pub(crate)</code>, preventing access outside the crate defining it.</p>
 <p>A perhaps more important aspect of <code>#[non_exhaustive]</code> is that it can also be attached to <code>enum</code>s themselves. An example, taken from the standard library, is <a href="https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html"><code>Ordering</code></a>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">non_exhaustive</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">pub enum </span><span style="color:#c0c5ce;">Ordering { Relaxed, Release, Acquire, AcqRel, SeqCst }
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">non_exhaustive</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">pub enum </span><span style="color:#4d4d4c;">Ordering { Relaxed, Release, Acquire, AcqRel, SeqCst }
 </span></pre>
 <p>The purpose of <code>#[non_exhaustive]</code> in this context is to ensure that more variants can be added over time. This is achieved by preventing other crates from exhaustively pattern <code>match</code>-ing on <code>Ordering</code>. That is, the compiler would reject:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> ordering {
-    </span><span style="color:#65737e;">// This is an error, since if a new variant is added,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> ordering {
+    </span><span style="color:#999999;">// This is an error, since if a new variant is added,
     // this would suddenly break on an upgrade of the compiler.
-</span><span style="color:#c0c5ce;">    Relaxed | Release | Acquire | AcqRel | SeqCst =&gt; {
-        </span><span style="color:#65737e;">/* logic */
-    </span><span style="color:#c0c5ce;">}
+</span><span style="color:#4d4d4c;">    Relaxed </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;"> Release </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;"> Acquire </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;"> AcqRel </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;"> SeqCst </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#999999;">/* logic */
+    </span><span style="color:#4d4d4c;">}
 }
 </span></pre>
 <p>Instead, other crates need to account for the possibility of more variants by adding a wildcard arm using e.g. <code>_</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> ordering {
-    Relaxed | Release | Acquire | AcqRel | SeqCst =&gt; { </span><span style="color:#65737e;">/* ... */ </span><span style="color:#c0c5ce;">}
-    </span><span style="color:#65737e;">// OK; if more variants are added, nothing will break.
-    </span><span style="color:#c0c5ce;">_ =&gt; { </span><span style="color:#65737e;">/* logic */ </span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> ordering {
+    Relaxed </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;"> Release </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;"> Acquire </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;"> AcqRel </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;"> SeqCst </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{ </span><span style="color:#999999;">/* ... */ </span><span style="color:#4d4d4c;">}
+    </span><span style="color:#999999;">// OK; if more variants are added, nothing will break.
+    </span><span style="color:#3e999f;">_ =&gt; </span><span style="color:#4d4d4c;">{ </span><span style="color:#999999;">/* logic */ </span><span style="color:#4d4d4c;">}
 }
 </span></pre>
 <p>For more details on the <code>#[non_exhaustive]</code> attribute, see the <a href="https://github.com/rust-lang/rust/issues/44109#issuecomment-533356866">stabilization report</a>.</p>
@@ -150,21 +150,21 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 <li>
 <p><a href="https://github.com/rust-lang/rust/pull/63931/#issuecomment-526362396">Macros in <code>extern { ... }</code> blocks.</a></p>
 <p>This includes <code>bang!()</code> macros, for example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#96b5b4;">macro_rules! </span><span style="color:#c0c5ce;">make_item { (</span><span style="color:#bf616a;">$name</span><span style="color:#c0c5ce;">:</span><span style="color:#b48ead;">ident</span><span style="color:#c0c5ce;">) =&gt; { </span><span style="color:#b48ead;">fn </span><span style="color:#bf616a;">$name</span><span style="color:#c0c5ce;">(); } }
+<pre style="background-color:#ffffff;">
+<span style="color:#4271ae;">macro_rules! </span><span style="color:#4d4d4c;">make_item { (</span><span style="color:#f5871f;">$name</span><span style="color:#4d4d4c;">:</span><span style="color:#8959a8;">ident</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{ </span><span style="color:#8959a8;">fn </span><span style="color:#c82829;">$name</span><span style="color:#4d4d4c;">(); } }
 
-</span><span style="color:#b48ead;">extern </span><span style="color:#c0c5ce;">{
-</span><span style="color:#c0c5ce;">    make_item!(alpha);
-</span><span style="color:#c0c5ce;">    make_item!(beta);
-</span><span style="color:#c0c5ce;">}
+</span><span style="color:#8959a8;">extern </span><span style="color:#4d4d4c;">{
+</span><span style="color:#4d4d4c;">    make_item!(alpha);
+</span><span style="color:#4d4d4c;">    make_item!(beta);
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>Procedural macro attributes on items in <a href="https://doc.rust-lang.org/nightly/reference/items/external-blocks.html"><code>extern { ... }</code> blocks</a> are now also supported:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">extern </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">C</span><span style="color:#c0c5ce;">&quot; {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#65737e;">// Let&#39;s assume that this expands to `fn foo();`.
-</span><span style="color:#c0c5ce;">    #[</span><span style="color:#bf616a;">my_identity_macro</span><span style="color:#c0c5ce;">]
-</span><span style="color:#c0c5ce;">    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">();
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">extern </span><span style="color:#718c00;">&quot;C&quot; </span><span style="color:#4d4d4c;">{
+</span><span style="color:#4d4d4c;">    </span><span style="color:#999999;">// Let&#39;s assume that this expands to `fn foo();`.
+</span><span style="color:#4d4d4c;">    #[</span><span style="color:#c82829;">my_identity_macro</span><span style="color:#4d4d4c;">]
+</span><span style="color:#4d4d4c;">    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">();
+</span><span style="color:#4d4d4c;">}
 </span></pre></li>
 <li>
 <p><a href="https://github.com/rust-lang/rust/pull/64035#issuecomment-533890826">Generating <code>macro_rules!</code> items in procedural macros.</a></p>
@@ -173,13 +173,13 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 <li>
 <p><a href="https://github.com/rust-lang/rust/pull/63674">The <code>$m:meta</code> matcher</a> supports <a href="https://github.com/rust-lang/rust/pull/57367#issuecomment-457882109">arbitrary token-stream values</a>.</p>
 <p>That is, the following is now valid:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#96b5b4;">macro_rules! </span><span style="color:#c0c5ce;">accept_meta { (</span><span style="color:#bf616a;">$m</span><span style="color:#c0c5ce;">:</span><span style="color:#b48ead;">meta</span><span style="color:#c0c5ce;">) =&gt; {} }
-</span><span style="color:#c0c5ce;">accept_meta!( my::path );
-</span><span style="color:#c0c5ce;">accept_meta!( my::path = &quot;</span><span style="color:#a3be8c;">lit</span><span style="color:#c0c5ce;">&quot; );
-</span><span style="color:#c0c5ce;">accept_meta!( my::path ( a b c ) );
-</span><span style="color:#c0c5ce;">accept_meta!( my::path [ a b c ] );
-</span><span style="color:#c0c5ce;">accept_meta!( my::path { a b c } );
+<pre style="background-color:#ffffff;">
+<span style="color:#4271ae;">macro_rules! </span><span style="color:#4d4d4c;">accept_meta { (</span><span style="color:#f5871f;">$m</span><span style="color:#4d4d4c;">:</span><span style="color:#8959a8;">meta</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">{} }
+</span><span style="color:#4d4d4c;">accept_meta!( my::path );
+</span><span style="color:#4d4d4c;">accept_meta!( my::path </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;lit&quot; </span><span style="color:#4d4d4c;">);
+</span><span style="color:#4d4d4c;">accept_meta!( my::path ( a b c ) );
+</span><span style="color:#4d4d4c;">accept_meta!( my::path [ a b c ] );
+</span><span style="color:#4d4d4c;">accept_meta!( my::path { a b c } );
 </span></pre></li>
 </ul>
 <h3 id="borrow-check-migration-warnings-are-hard-errors-in-rust-2015">Borrow check migration warnings are hard errors in Rust 2015</h3>

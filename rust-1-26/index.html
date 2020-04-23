@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.26.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10">detailed release notes for
@@ -108,57 +108,57 @@ PDF. Proceeds are going to charity.</p>
 <p>At long last, <code>impl Trait</code> is here! This feature has been highly desired for
 quite a while, and provides a feature known as &quot;existential types.&quot; It's
 simpler than that sounds, however. The core of it is this idea:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() -&gt; impl Trait {
-    </span><span style="color:#65737e;">// ...
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() -&gt; impl Trait {
+    </span><span style="color:#999999;">// ...
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>This type signature says &quot;<code>foo</code> is a function that takes no arguments but
 returns a type that implements the <code>Trait</code> trait.&quot; That is, we're not
 going to tell you what the return type of <code>foo</code> actually is, only that
 it implements a particular trait. You may wonder how this differs from
 a trait object:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() -&gt; Box&lt;Trait&gt; {
-    </span><span style="color:#65737e;">// ...
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() -&gt; Box&lt;Trait&gt; {
+    </span><span style="color:#999999;">// ...
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>While it's true that you could have written this code today, it's not
 ideal in all situations. Let's say we have a trait <code>Trait</code> that
 is implemented for both <code>i32</code> and <code>f32</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">trait </span><span style="color:#c0c5ce;">Trait {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">method</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">trait </span><span style="color:#4d4d4c;">Trait {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">method</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">);
 }
 
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Trait </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">i32 {
-    </span><span style="color:#65737e;">// implementation goes here
-</span><span style="color:#c0c5ce;">}
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Trait </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">i32 {
+    </span><span style="color:#999999;">// implementation goes here
+</span><span style="color:#4d4d4c;">}
 
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Trait </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">f32 {
-    </span><span style="color:#65737e;">// implementation goes here
-</span><span style="color:#c0c5ce;">}
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Trait </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">f32 {
+    </span><span style="color:#999999;">// implementation goes here
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>Consider this function:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() -&gt; ? {
-    </span><span style="color:#d08770;">5
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() -&gt; </span><span style="color:#3e999f;">? </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#f5871f;">5
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>We want to fill in the return type with something. Previously, only the trait
 object version was possible:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() -&gt; Box&lt;Trait&gt; {
-    Box::new(</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">) as Box&lt;Trait&gt;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() -&gt; Box&lt;Trait&gt; {
+    </span><span style="color:#c99e00;">Box</span><span style="color:#4d4d4c;">::new(</span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">as </span><span style="color:#4d4d4c;">Box&lt;Trait&gt;
 }
 </span></pre>
 <p>But this introduces a <code>Box</code>, which means allocation. We're not actually
 returning some kind of dynamic data here either, so the dynamic dispatch of
 the trait object hurts too. So instead, as of Rust 1.26, you can write this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() -&gt; impl Trait {
-    </span><span style="color:#d08770;">5
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() -&gt; impl Trait {
+    </span><span style="color:#f5871f;">5
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>This doesn't create a trait object, it's like we had written <code>-&gt; i32</code>, but
 instead, we're only mentioning the part about <code>Trait</code>. We get static
@@ -166,31 +166,31 @@ dispatch, but we can hide the real type like this.</p>
 <p>Why is this useful? One good use is closures. Remember that closures in
 Rust all have a unique, un-writable type, yet implement the <code>Fn</code> trait.
 This means that if your function returns a closure, you can do this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// before
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() -&gt; Box&lt;Fn(</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt; {
-    Box::new(|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">| x + </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">)
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// before
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() -&gt; Box&lt;Fn(</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt; {
+    </span><span style="color:#c99e00;">Box</span><span style="color:#4d4d4c;">::new(|</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">| x </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">)
 }
 
-</span><span style="color:#65737e;">// after
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() -&gt; impl Fn(</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">i32 </span><span style="color:#c0c5ce;">{
-    |x| x + </span><span style="color:#d08770;">1
-</span><span style="color:#c0c5ce;">}
+</span><span style="color:#999999;">// after
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() -&gt; impl Fn(</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">i32 </span><span style="color:#4d4d4c;">{
+    </span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;">x</span><span style="color:#3e999f;">|</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">1
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>No boxing, no dynamic dispatch. A related scenario happens when returning
 iterators. Not only do iterators often include closures, but since they
 nest, you get quite deeply nested types. For example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() {
-    vec![</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">]
-        .</span><span style="color:#96b5b4;">into_iter</span><span style="color:#c0c5ce;">()
-        .</span><span style="color:#96b5b4;">map</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">| x + </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">)
-        .</span><span style="color:#96b5b4;">filter</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">| x % </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">)
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() {
+    vec![</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">]
+        .</span><span style="color:#4271ae;">into_iter</span><span style="color:#4d4d4c;">()
+        .</span><span style="color:#4271ae;">map</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">| x </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">)
+        .</span><span style="color:#4271ae;">filter</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">| x </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">== </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">)
 }
 </span></pre>
 <p>when compiled, gives this error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0308]: mismatched types
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0308]: mismatched types
  --&gt; src/main.rs:5:5
   |
 5 | /     vec![1, 2, 3]
@@ -205,12 +205,12 @@ nest, you get quite deeply nested types. For example:</p>
 <p>That's a huge 'found type'. Each adapter in the chain adds a new type.
 Additionally, we have that closure in there. Previously, we'd have had
 to use a trait object here, but now we can simply do</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">() -&gt; impl Iterator&lt;Item = </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt; {
-    vec![</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">]
-        .</span><span style="color:#96b5b4;">into_iter</span><span style="color:#c0c5ce;">()
-        .</span><span style="color:#96b5b4;">map</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">| x + </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">)
-        .</span><span style="color:#96b5b4;">filter</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">| x % </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">)
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">() -&gt; impl Iterator&lt;Item = </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt; {
+    vec![</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">]
+        .</span><span style="color:#4271ae;">into_iter</span><span style="color:#4d4d4c;">()
+        .</span><span style="color:#4271ae;">map</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">| x </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">)
+        .</span><span style="color:#4271ae;">filter</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">| x </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">== </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">)
 }
 </span></pre>
 <p>and be done with it. Working with <a href="https://crates.io/crates/futures">futures</a> is very similar.</p>
@@ -218,16 +218,16 @@ to use a trait object here, but now we can simply do</p>
 what you need. You can only use <code>impl Trait</code> if your function returns
 a single type; if you want to return multiple, you need dynamic dispatch.
 For example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">) -&gt; Box&lt;Iterator&lt;Item = </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt;&gt; {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> iter = vec![</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">]
-        .</span><span style="color:#96b5b4;">into_iter</span><span style="color:#c0c5ce;">()
-        .</span><span style="color:#96b5b4;">map</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">| x + </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">) -&gt; Box&lt;Iterator&lt;Item = </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt;&gt; {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> iter </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">vec![</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">]
+        .</span><span style="color:#4271ae;">into_iter</span><span style="color:#4d4d4c;">()
+        .</span><span style="color:#4271ae;">map</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">| x </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">);
 
-    </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> x % </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0 </span><span style="color:#c0c5ce;">{
-        Box::new(iter.</span><span style="color:#96b5b4;">filter</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">| x % </span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">))
-    } </span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{
-        Box::new(iter)
+    </span><span style="color:#8959a8;">if</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">== </span><span style="color:#f5871f;">0 </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#c99e00;">Box</span><span style="color:#4d4d4c;">::new(iter.</span><span style="color:#4271ae;">filter</span><span style="color:#4d4d4c;">(|</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">| x </span><span style="color:#3e999f;">% </span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">== </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">))
+    } </span><span style="color:#8959a8;">else </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#c99e00;">Box</span><span style="color:#4d4d4c;">::new(iter)
     }
 }
 </span></pre>
@@ -235,12 +235,12 @@ For example:</p>
 types that can be returned, and so we must use a trait object.</p>
 <p>Oh, and one last thing: to make the syntax a bit more symmetrical, you can
 use <code>impl Trait</code> in argument position too. That is:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// before
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">&lt;T: Trait&gt;(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: T) {
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// before
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">&lt;T: Trait&gt;(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: T) {
 
-</span><span style="color:#65737e;">// after
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: impl Trait) {
+</span><span style="color:#999999;">// after
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: impl Trait) {
 </span></pre>
 <p>which can look a bit nicer for short signatures.</p>
 <blockquote>
@@ -251,17 +251,17 @@ existential in an output position.</p>
 <h4 id="nicer-match-bindings">Nicer <code>match</code> bindings</h4>
 <p>Have you ever had a reference to an <code>Option</code>, and tried to use <code>match</code>? For
 example, code like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">hello</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">arg</span><span style="color:#c0c5ce;">: &amp;Option&lt;String&gt;) {
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> arg {
-        Some(name) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Hello </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">!</span><span style="color:#c0c5ce;">&quot;, name),
-        None =&gt; println!(&quot;</span><span style="color:#a3be8c;">I don&#39;t know who you are.</span><span style="color:#c0c5ce;">&quot;),
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">hello</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">arg</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Option&lt;String&gt;) {
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> arg {
+        </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(name) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;Hello </span><span style="color:#666969;">{}</span><span style="color:#718c00;">!&quot;</span><span style="color:#4d4d4c;">, name),
+        </span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;I don&#39;t know who you are.&quot;</span><span style="color:#4d4d4c;">),
     }
 }
 </span></pre>
 <p>If you tried to compile this in Rust 1.25, you'd get this error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0658]: non-reference pattern used to match a reference (see issue #42640)
  --&gt; src/main.rs:6:9
   |
 6 |         Some(name) =&gt; println!(&quot;Hello {}!&quot;, name),
@@ -274,17 +274,17 @@ error[E0658]: non-reference pattern used to match a reference (see issue #42640)
   |         ^^^^ help: consider using a reference: `&amp;None`
 </span></pre>
 <p>Okay, sure. Let's modify the code:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">hello</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">arg</span><span style="color:#c0c5ce;">: &amp;Option&lt;String&gt;) {
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> arg {
-        &amp;Some(name) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Hello </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">!</span><span style="color:#c0c5ce;">&quot;, name),
-        &amp;None =&gt; println!(&quot;</span><span style="color:#a3be8c;">I don&#39;t know who you are.</span><span style="color:#c0c5ce;">&quot;),
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">hello</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">arg</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Option&lt;String&gt;) {
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> arg {
+        </span><span style="color:#3e999f;">&amp;</span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(name) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;Hello </span><span style="color:#666969;">{}</span><span style="color:#718c00;">!&quot;</span><span style="color:#4d4d4c;">, name),
+        </span><span style="color:#3e999f;">&amp;</span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;I don&#39;t know who you are.&quot;</span><span style="color:#4d4d4c;">),
     }
 }
 </span></pre>
 <p>We added the <code>&amp;</code>s the compiler complained about. Let's try to compile again:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0507]: cannot move out of borrowed content
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0507]: cannot move out of borrowed content
  --&gt; src/main.rs:6:9
   |
 6 |         &amp;Some(name) =&gt; println!(&quot;Hello {}!&quot;, name),
@@ -294,11 +294,11 @@ error[E0658]: non-reference pattern used to match a reference (see issue #42640)
   |         cannot move out of borrowed content
 </span></pre>
 <p>Okay, sure. Let's make the compiler happy again by taking its advice:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">hello</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">arg</span><span style="color:#c0c5ce;">: &amp;Option&lt;String&gt;) {
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> arg {
-        &amp;Some(</span><span style="color:#b48ead;">ref</span><span style="color:#c0c5ce;"> name) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Hello </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">!</span><span style="color:#c0c5ce;">&quot;, name),
-        &amp;None =&gt; println!(&quot;</span><span style="color:#a3be8c;">I don&#39;t know who you are.</span><span style="color:#c0c5ce;">&quot;),
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">hello</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">arg</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Option&lt;String&gt;) {
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> arg {
+        </span><span style="color:#3e999f;">&amp;</span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(</span><span style="color:#8959a8;">ref</span><span style="color:#4d4d4c;"> name) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;Hello </span><span style="color:#666969;">{}</span><span style="color:#718c00;">!&quot;</span><span style="color:#4d4d4c;">, name),
+        </span><span style="color:#3e999f;">&amp;</span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;I don&#39;t know who you are.&quot;</span><span style="color:#4d4d4c;">),
     }
 }
 </span></pre>
@@ -310,17 +310,17 @@ get a reference, as we can't move out of a <code>&amp;T</code>.</p>
 <p>So, as of Rust 1.26, the initial code, without the <code>&amp;</code>s and <code>ref</code>, will just
 compile and do exactly what you'd expect. In short, the compiler will automatically
 reference or de-reference in <code>match</code> statements. So when we say</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> arg {
-        Some(name) =&gt; println!(&quot;</span><span style="color:#a3be8c;">Hello </span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">!</span><span style="color:#c0c5ce;">&quot;, name),
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> arg {
+        </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(name) </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">println!(</span><span style="color:#718c00;">&quot;Hello </span><span style="color:#666969;">{}</span><span style="color:#718c00;">!&quot;</span><span style="color:#4d4d4c;">, name),
 </span></pre>
 <p>the compiler automatically references the <code>Some</code>, and since we're borrowing,
 <code>name</code> is bound as <code>ref name</code> automatically as well. If we were mutating:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">hello</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">arg</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">mut </span><span style="color:#c0c5ce;">Option&lt;String&gt;) {
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> arg {
-        Some(name) =&gt; name.</span><span style="color:#96b5b4;">push_str</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">, world</span><span style="color:#c0c5ce;">&quot;),
-        None =&gt; (),
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">hello</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">arg</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut </span><span style="color:#4d4d4c;">Option&lt;String&gt;) {
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> arg {
+        </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(name) </span><span style="color:#3e999f;">=&gt;</span><span style="color:#4d4d4c;"> name.</span><span style="color:#4271ae;">push_str</span><span style="color:#4d4d4c;">(</span><span style="color:#718c00;">&quot;, world&quot;</span><span style="color:#4d4d4c;">),
+        </span><span style="color:#c99e00;">None </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">(),
     }
 }
 </span></pre>
@@ -333,28 +333,28 @@ for boilerplate.</p>
 <p>Speaking of papercuts, since Rust uses the <code>Result</code> type for returning
 errors, and <code>?</code> to make handling them easy, a common pain-point of
 new Rustaceans is to try and use <code>?</code> in <code>main</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::fs::File;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::fs::File;
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> f = File::open(&quot;</span><span style="color:#a3be8c;">bar.txt</span><span style="color:#c0c5ce;">&quot;)?;
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> f </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">File::open(</span><span style="color:#718c00;">&quot;bar.txt&quot;</span><span style="color:#4d4d4c;">)</span><span style="color:#3e999f;">?</span><span style="color:#4d4d4c;">;
 }
 </span></pre>
 <p>This will give an error like &quot;error[E0277]: the <code>?</code> operator can only be used
 in a function that returns <code>Result</code>&quot;. This leads to a pattern where many
 people write code that <a href="https://doc.rust-lang.org/book/second-edition/ch12-03-improving-error-handling-and-modularity.html#extracting-logic-from-main">looks like this</a>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">run</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">config</span><span style="color:#c0c5ce;">: Config) -&gt; Result&lt;(), Box&lt;Error&gt;&gt; {
-    </span><span style="color:#65737e;">// --snip--
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">run</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">config</span><span style="color:#4d4d4c;">: Config) -&gt; Result&lt;(), Box&lt;Error&gt;&gt; {
+    </span><span style="color:#999999;">// --snip--
+</span><span style="color:#4d4d4c;">}
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#65737e;">// --snip--
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#999999;">// --snip--
 
-    </span><span style="color:#b48ead;">if let </span><span style="color:#c0c5ce;">Err(e) = </span><span style="color:#96b5b4;">run</span><span style="color:#c0c5ce;">(config) {
-        println!(&quot;</span><span style="color:#a3be8c;">Application error: </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, e);
+    </span><span style="color:#8959a8;">if let </span><span style="color:#c99e00;">Err</span><span style="color:#4d4d4c;">(e) </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">run</span><span style="color:#4d4d4c;">(config) {
+        println!(</span><span style="color:#718c00;">&quot;Application error: </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, e);
 
-        process::exit(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">);
+        process::exit(</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">);
     }
 }
 </span></pre>
@@ -364,13 +364,13 @@ and exiting. We need to make this second function because
 <code>main</code> can't return a <code>Result</code>, but we'd like to use <code>?</code>
 in that logic.</p>
 <p>In Rust 1.26, you can now declare <code>main</code> that returns <code>Result</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::fs::File;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::fs::File;
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() -&gt; Result&lt;(), std::io::Error&gt; {
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> f = File::open(&quot;</span><span style="color:#a3be8c;">bar.txt</span><span style="color:#c0c5ce;">&quot;)?;
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() -&gt; Result&lt;(), std::io::Error&gt; {
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> f </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">File::open(</span><span style="color:#718c00;">&quot;bar.txt&quot;</span><span style="color:#4d4d4c;">)</span><span style="color:#3e999f;">?</span><span style="color:#4d4d4c;">;
 
-    Ok(())
+    </span><span style="color:#c99e00;">Ok</span><span style="color:#4d4d4c;">(())
 }
 </span></pre>
 <p>This now works just fine! If <code>main</code> returns an error, this will
@@ -379,38 +379,38 @@ of the error.</p>
 <h4 id="inclusive-ranges-with">Inclusive ranges with <code>..=</code></h4>
 <p>Since well before Rust 1.0, you've been able to create exclusive ranges with <code>..</code>
 like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> i in </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">..</span><span style="color:#d08770;">3 </span><span style="color:#c0c5ce;">{
-    println!(&quot;</span><span style="color:#a3be8c;">i: </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, i);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> i </span><span style="color:#3e999f;">in </span><span style="color:#f5871f;">1</span><span style="color:#3e999f;">..</span><span style="color:#f5871f;">3 </span><span style="color:#4d4d4c;">{
+    println!(</span><span style="color:#718c00;">&quot;i: </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, i);
 }
 </span></pre>
 <p>This will print <code>i: 1</code> and then <code>i: 2</code>. In Rust 1.26, you can now create an
 inclusive range, like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> i in </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">..=</span><span style="color:#d08770;">3 </span><span style="color:#c0c5ce;">{
-    println!(&quot;</span><span style="color:#a3be8c;">i: </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, i);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> i </span><span style="color:#3e999f;">in </span><span style="color:#f5871f;">1</span><span style="color:#3e999f;">..=</span><span style="color:#f5871f;">3 </span><span style="color:#4d4d4c;">{
+    println!(</span><span style="color:#718c00;">&quot;i: </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, i);
 }
 </span></pre>
 <p>This will print <code>i: 1</code> and then <code>i: 2</code> like before, but also <code>i: 3</code>; the
 three is included in the range. Inclusive ranges are especially useful
 if you want to iterate over every possible value in a range. For example,
 this is a surprising Rust program:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">takes_u8</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">) {
-    </span><span style="color:#65737e;">// ...
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">takes_u8</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">) {
+    </span><span style="color:#999999;">// ...
+</span><span style="color:#4d4d4c;">}
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> i in </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">..</span><span style="color:#d08770;">256 </span><span style="color:#c0c5ce;">{
-        println!(&quot;</span><span style="color:#a3be8c;">i: </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, i);
-        </span><span style="color:#96b5b4;">takes_u8</span><span style="color:#c0c5ce;">(i);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> i </span><span style="color:#3e999f;">in </span><span style="color:#f5871f;">0</span><span style="color:#3e999f;">..</span><span style="color:#f5871f;">256 </span><span style="color:#4d4d4c;">{
+        println!(</span><span style="color:#718c00;">&quot;i: </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, i);
+        </span><span style="color:#4271ae;">takes_u8</span><span style="color:#4d4d4c;">(i);
     }
 }
 </span></pre>
 <p>What does this program do? The answer: nothing. The warning we get when
 compiling has a hint:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">warning: literal out of range for u8
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">warning: literal out of range for u8
  --&gt; src/main.rs:6:17
   |
 6 |     for i in 0..256 {
@@ -421,15 +421,15 @@ compiling has a hint:</p>
 <p>That's right, since <code>i</code> is a <code>u8</code>, this overflows, and is the same as writing
 <code>for i in 0..0</code>, so the loop executes zero times.</p>
 <p>We can do this with inclusive ranges, however:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">takes_u8</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">) {
-    </span><span style="color:#65737e;">// ...
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">takes_u8</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">) {
+    </span><span style="color:#999999;">// ...
+</span><span style="color:#4d4d4c;">}
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> i in </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">..=</span><span style="color:#d08770;">255 </span><span style="color:#c0c5ce;">{
-        println!(&quot;</span><span style="color:#a3be8c;">i: </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, i);
-        </span><span style="color:#96b5b4;">takes_u8</span><span style="color:#c0c5ce;">(i);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> i </span><span style="color:#3e999f;">in </span><span style="color:#f5871f;">0</span><span style="color:#3e999f;">..=</span><span style="color:#f5871f;">255 </span><span style="color:#4d4d4c;">{
+        println!(</span><span style="color:#718c00;">&quot;i: </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, i);
+        </span><span style="color:#4271ae;">takes_u8</span><span style="color:#4d4d4c;">(i);
     }
 }
 </span></pre>
@@ -437,22 +437,22 @@ compiling has a hint:</p>
 <h4 id="basic-slice-patterns">Basic slice patterns</h4>
 <p>Another long-awaited feature is &quot;slice patterns.&quot; These let you match on
 slices similar to how you match on other data types. For example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> arr = [</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">];
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> arr </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">[</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">3</span><span style="color:#4d4d4c;">];
 
-</span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> arr {
-    [</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, _, _] =&gt; &quot;</span><span style="color:#a3be8c;">starts with one</span><span style="color:#c0c5ce;">&quot;,
-    [a, b, c] =&gt; &quot;</span><span style="color:#a3be8c;">starts with something else</span><span style="color:#c0c5ce;">&quot;,
+</span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> arr {
+    [</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">, </span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">] </span><span style="color:#3e999f;">=&gt; </span><span style="color:#718c00;">&quot;starts with one&quot;</span><span style="color:#4d4d4c;">,
+    [a, b, c] </span><span style="color:#3e999f;">=&gt; </span><span style="color:#718c00;">&quot;starts with something else&quot;</span><span style="color:#4d4d4c;">,
 }
 </span></pre>
 <p>In this case, we know <code>arr</code> has a length of three, and so we need three entries
 inside the <code>[]</code>s. We can also match when we don't know the length:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">s</span><span style="color:#c0c5ce;">: &amp;[</span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">]) {
-    </span><span style="color:#b48ead;">match</span><span style="color:#c0c5ce;"> s {
-        [a, b] =&gt; (),
-        [a, b, c] =&gt; (),
-        _ =&gt; (),
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">foo</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">s</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[</span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">]) {
+    </span><span style="color:#8959a8;">match</span><span style="color:#4d4d4c;"> s {
+        [a, b] </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">(),
+        [a, b, c] </span><span style="color:#3e999f;">=&gt; </span><span style="color:#4d4d4c;">(),
+        </span><span style="color:#3e999f;">_ =&gt; </span><span style="color:#4d4d4c;">(),
     }
 }
 </span></pre>
@@ -467,9 +467,9 @@ to a 12% reduction in compile times from this change, but many other smaller
 fixes landed as well. More to come in the future!</p>
 <h4 id="128-bit-integers">128 bit integers</h4>
 <p>Finally, a very simple feature: Rust now has 128 bit integers!</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x: i128 = </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> y: u128 = </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x: i128 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> y: u128 </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>These are twice the size of <code>u64</code>, and so can hold more values. More specifically,</p>
 <ul>
@@ -482,16 +482,16 @@ fixes landed as well. More to come in the future!</p>
 <p>We stabilized <a href="https://doc.rust-lang.org/std/fs/fn.read_to_string.html"><code>fs::read_to_string</code></a>,
 a convenience over <code>File::open</code> and <code>io::Read::read_to_string</code> for easily reading an entire
 file into memory at once:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::fs;
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::net::SocketAddr;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::fs;
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::net::SocketAddr;
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> foo: SocketAddr = fs::read_to_string(&quot;</span><span style="color:#a3be8c;">address.txt</span><span style="color:#c0c5ce;">&quot;)?.</span><span style="color:#96b5b4;">parse</span><span style="color:#c0c5ce;">()?;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> foo: SocketAddr </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">fs::read_to_string(</span><span style="color:#718c00;">&quot;address.txt&quot;</span><span style="color:#4d4d4c;">)</span><span style="color:#3e999f;">?</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">parse</span><span style="color:#4d4d4c;">()</span><span style="color:#3e999f;">?</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>You can now <a href="https://github.com/rust-lang/rust/pull/48978">format numbers as hexadecimal with <code>Debug</code>
 formatting</a>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">assert!(format!(&quot;</span><span style="color:#a3be8c;">{:02x?}</span><span style="color:#c0c5ce;">&quot;, </span><span style="color:#b48ead;">b</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Foo</span><span style="color:#96b5b4;">\0</span><span style="color:#c0c5ce;">&quot;) == &quot;</span><span style="color:#a3be8c;">[46, 6f, 6f, 00]</span><span style="color:#c0c5ce;">&quot;)
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">assert!(format!(</span><span style="color:#718c00;">&quot;{:02x?}&quot;</span><span style="color:#4d4d4c;">, </span><span style="color:#8959a8;">b</span><span style="color:#718c00;">&quot;Foo</span><span style="color:#f5871f;">\0</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">) </span><span style="color:#3e999f;">== </span><span style="color:#718c00;">&quot;[46, 6f, 6f, 00]&quot;</span><span style="color:#4d4d4c;">)
 </span></pre>
 <p>Trailing commas <a href="https://github.com/rust-lang/rust/pull/48056">are now supported by all macros in the standard
 library</a>.</p>

@@ -113,9 +113,9 @@ more general <code>extend()</code>.</p>
 <p>If you maintain a crate on <a href="https://crates.io">Crates.io</a>, you might have seen
 a warning: newly uploaded crates are no longer allowed to use a wildcard when
 describing their dependencies. In other words, this is not allowed:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[dependencies]
-</span><span style="color:#bf616a;">regex </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">*</span><span style="color:#c0c5ce;">&quot;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">dependencies</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">regex </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;*&quot;
 </span></pre>
 <p>Instead, you must actually specify <a href="http://doc.crates.io/crates-io.html#using-cratesio-based-crates">a specific version or range of
 versions</a>, using one of the <code>semver</code> crate’s various options: <code>^</code>,

@@ -92,8 +92,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;inside-rust&
     <div class="post">
       <p><a href="https://github.com/rustsec/cargo-audit">cargo-audit</a> is a command-line utility which inspects <code>Cargo.lock</code> files and compares them against the <a href="https://rustsec.org">RustSec Advisory Database</a>, a community database of security vulnerabilities maintained by the <a href="https://github.com/rust-secure-code/wg">Rust Secure Code Working Group</a>.</p>
 <p>You can install <code>cargo-audit</code> and run it against your project with the following commands:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">$ cargo install cargo-audit
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">$ cargo install cargo-audit
 $ cargo audit
 </span></pre>
 <p>The 0.9 release of <code>cargo-audit</code> includes a number of new features we hope make it more useful, including:</p>
@@ -116,12 +116,12 @@ $ cargo audit
 <p>Rust is in a similar boat with some high profile crates, <a href="https://github.com/Stebalien/term/issues/93">such as the <code>term</code> crate</a> (downloaded 8,000 times a day), are unmaintained. By <a href="https://github.com/RustSec/advisory-db/issues/173">tracking information about unmaintained crates in the RustSec Advisory Database</a>, we hope to improve visibility on these crates, either by helping people discover &quot;successor&quot; crates they should switch to, or putting potential volunteer maintainers in touch with authors interested in handing crates off. When those handoffs happen, we can mark unmaintained crate advisories as obsolete (while still giving interested security researchers a list of crates to keep an eye on for potential <a href="https://blog.npmjs.org/post/180565383195/details-about-the-event-stream-incident">software supply chain attacks</a>).</p>
 <p>If you have an unmaintained crate you'd like us to create an advisory for, or know of a third party unmaintained crate and would like to provide information about potential alternatives, please <a href="https://github.com/RustSec/advisory-db/issues/173">leave a comment in the RustSec/advisory-db#173 GitHub issue</a> and we can file an advisory for it.</p>
 <p>For now, unmaintained crates are surfaced as warnings, with some brief information available about each one and a link to click to read more. If you'd like for unmaintained crate advisories to be considered errors (so <code>cargo-audit</code> exits with a non-zero status for e.g. CI purposes), run:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">$ cargo audit -D
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">$ cargo audit -D
 </span></pre>
 <p>or if you prefer to be more explicit:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">$ cargo audit --deny-warnings
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">$ cargo audit --deny-warnings
 </span></pre><h2 id="tracking-rust-language-vulnerabilities">Tracking Rust language vulnerabilities</h2>
 <p>Previously the <a href="https://rustsec.org">RustSec Advisory Database</a> only tracked information about vulnerable crates published through <a href="https://crates.io">crates.io</a>. Starting with this release, however, we are also indexing advisories for vulnerabilities in the Rust language's core ecosystem components, including <code>std</code>, <code>cargo</code>, and <code>rustdoc</code>. We've now indexed the following vulnerabilities:</p>
 <ul>

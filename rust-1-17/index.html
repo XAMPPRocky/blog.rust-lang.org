@@ -77,8 +77,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
       <p>The Rust team is happy to announce the latest version of Rust, 1.17.0. Rust is a
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed, getting Rust 1.17 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1170-2017-04-27">detailed release notes for
@@ -86,45 +86,45 @@ appropriate page on our website, and check out the <a href="https://github.com/r
 <h3 id="what-s-in-1-17-0-stable">What's in 1.17.0 stable</h3>
 <p>The story of Rust 1.17.0 is mostly one of small, quality of life improvements. For example,
 <a href="https://github.com/rust-lang/rust/pull/39265">the <code>'static</code> lifetime is now assumed in statics and consts</a>. When writing a const or static like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const </span><span style="color:#d08770;">NAME</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">&#39;static str </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">Ferris</span><span style="color:#c0c5ce;">&quot;;
-</span><span style="color:#b48ead;">static </span><span style="color:#d08770;">NAME</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">&#39;static str </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">Ferris</span><span style="color:#c0c5ce;">&quot;;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const </span><span style="color:#666969;">NAME</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;static str </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;Ferris&quot;</span><span style="color:#4d4d4c;">;
+</span><span style="color:#8959a8;">static </span><span style="color:#666969;">NAME</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;static str </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;Ferris&quot;</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>Rust 1.17 will allow you to elide the <code>'static</code>, since that's the only lifetime that makes
 sense:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">const </span><span style="color:#d08770;">NAME</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">str </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">Ferris</span><span style="color:#c0c5ce;">&quot;;
-</span><span style="color:#b48ead;">static </span><span style="color:#d08770;">NAME</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">str </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">Ferris</span><span style="color:#c0c5ce;">&quot;;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">const </span><span style="color:#666969;">NAME</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">str </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;Ferris&quot;</span><span style="color:#4d4d4c;">;
+</span><span style="color:#8959a8;">static </span><span style="color:#666969;">NAME</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">str </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;Ferris&quot;</span><span style="color:#4d4d4c;">;
 </span></pre>
 <p>In some situations, this can remove lots of boilerplate:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// old
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">NAMES</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">&#39;static </span><span style="color:#c0c5ce;">[&amp;</span><span style="color:#b48ead;">&#39;static str</span><span style="color:#c0c5ce;">; </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">] = &amp;[&quot;</span><span style="color:#a3be8c;">Ferris</span><span style="color:#c0c5ce;">&quot;, &quot;</span><span style="color:#a3be8c;">Bors</span><span style="color:#c0c5ce;">&quot;];
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// old
+</span><span style="color:#8959a8;">const </span><span style="color:#666969;">NAMES</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;static </span><span style="color:#4d4d4c;">[</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;static str</span><span style="color:#4d4d4c;">; </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">] </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">[</span><span style="color:#718c00;">&quot;Ferris&quot;</span><span style="color:#4d4d4c;">, </span><span style="color:#718c00;">&quot;Bors&quot;</span><span style="color:#4d4d4c;">];
 
-</span><span style="color:#65737e;">// new
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">NAMES</span><span style="color:#c0c5ce;">: &amp;[&amp;</span><span style="color:#b48ead;">str</span><span style="color:#c0c5ce;">; </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">] = &amp;[&quot;</span><span style="color:#a3be8c;">Ferris</span><span style="color:#c0c5ce;">&quot;, &quot;</span><span style="color:#a3be8c;">Bors</span><span style="color:#c0c5ce;">&quot;];
+</span><span style="color:#999999;">// new
+</span><span style="color:#8959a8;">const </span><span style="color:#666969;">NAMES</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">str</span><span style="color:#4d4d4c;">; </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">] </span><span style="color:#3e999f;">= &amp;</span><span style="color:#4d4d4c;">[</span><span style="color:#718c00;">&quot;Ferris&quot;</span><span style="color:#4d4d4c;">, </span><span style="color:#718c00;">&quot;Bors&quot;</span><span style="color:#4d4d4c;">];
 </span></pre>
 <p>Another similar improvement is &quot;field init shorthand.&quot; Similar to ECMAScript 6,
 which calls this &quot;Object Literal Property Value Shorthand&quot;, duplication can be
 removed when declaring structs, like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// definitions
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Point {
-    </span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">,
-    </span><span style="color:#bf616a;">y</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">,
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// definitions
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Point {
+    </span><span style="color:#c82829;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#c82829;">y</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">,
 }
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> x = </span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> y = </span><span style="color:#d08770;">6</span><span style="color:#c0c5ce;">;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">5</span><span style="color:#4d4d4c;">;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> y </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">6</span><span style="color:#4d4d4c;">;
 
-</span><span style="color:#65737e;">// old
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> p = Point {
+</span><span style="color:#999999;">// old
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> p </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Point {
     x: x,
     y: y,
 };
 
-</span><span style="color:#65737e;">// new
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> p = Point {
+</span><span style="color:#999999;">// new
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> p </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Point {
     x,
     y,
 };
@@ -136,36 +136,36 @@ try to use <code>+</code> to add two <code>&amp;str</code>s together. This doesn
 <code>String + &amp;str</code>. As such, <a href="https://github.com/rust-lang/rust/pull/39116">a new error
 message</a> was added to help users
 who make this mistake:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// code
-</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot; + &quot;</span><span style="color:#a3be8c;">bar</span><span style="color:#c0c5ce;">&quot;
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// code
+</span><span style="color:#718c00;">&quot;foo&quot; </span><span style="color:#3e999f;">+ </span><span style="color:#718c00;">&quot;bar&quot;
 
-</span><span style="color:#65737e;">// old
-</span><span style="color:#c0c5ce;">error[</span><span style="color:#d08770;">E0369</span><span style="color:#c0c5ce;">]: binary operation `+` cannot be applied to </span><span style="color:#b48ead;">type</span><span style="color:#c0c5ce;"> `&amp;</span><span style="color:#b48ead;">&#39;static str</span><span style="color:#c0c5ce;">`
- --&gt; &lt;anon&gt;:</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">:</span><span style="color:#d08770;">5
-  </span><span style="color:#c0c5ce;">|
-</span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">|     &quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot; + &quot;</span><span style="color:#a3be8c;">bar</span><span style="color:#c0c5ce;">&quot;
-  |     ^^^^^
-  |
-note: an implementation of `std::ops::Add` might be missing </span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> `&amp;</span><span style="color:#b48ead;">&#39;static str</span><span style="color:#c0c5ce;">`
- --&gt; &lt;anon&gt;:</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">:</span><span style="color:#d08770;">5
-  </span><span style="color:#c0c5ce;">|
-</span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">|     &quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot; + &quot;</span><span style="color:#a3be8c;">bar</span><span style="color:#c0c5ce;">&quot;
-  |     ^^^^^
+</span><span style="color:#999999;">// old
+</span><span style="color:#4d4d4c;">error[</span><span style="color:#666969;">E0369</span><span style="color:#4d4d4c;">]: binary operation `</span><span style="color:#3e999f;">+</span><span style="color:#4d4d4c;">` cannot be applied to </span><span style="color:#8959a8;">type</span><span style="color:#4d4d4c;"> `</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;static str</span><span style="color:#4d4d4c;">`
+ </span><span style="color:#3e999f;">-</span><span style="color:#4d4d4c;">-&gt; &lt;anon&gt;:</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">:</span><span style="color:#f5871f;">5
+  </span><span style="color:#3e999f;">|
+</span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">|     </span><span style="color:#718c00;">&quot;foo&quot; </span><span style="color:#3e999f;">+ </span><span style="color:#718c00;">&quot;bar&quot;
+  </span><span style="color:#3e999f;">|     ^^^^^
+  |</span><span style="color:#4d4d4c;">
+note: an implementation of `std::ops::Add` might be missing </span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;"> `</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;static str</span><span style="color:#4d4d4c;">`
+ </span><span style="color:#3e999f;">-</span><span style="color:#4d4d4c;">-&gt; &lt;anon&gt;:</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">:</span><span style="color:#f5871f;">5
+  </span><span style="color:#3e999f;">|
+</span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">|     </span><span style="color:#718c00;">&quot;foo&quot; </span><span style="color:#3e999f;">+ </span><span style="color:#718c00;">&quot;bar&quot;
+  </span><span style="color:#3e999f;">|     ^^^^^
 
-</span><span style="color:#65737e;">// new
-</span><span style="color:#c0c5ce;">error[</span><span style="color:#d08770;">E0369</span><span style="color:#c0c5ce;">]: binary operation `+` cannot be applied to </span><span style="color:#b48ead;">type</span><span style="color:#c0c5ce;"> `&amp;</span><span style="color:#b48ead;">&#39;static str</span><span style="color:#c0c5ce;">`
- --&gt; &lt;anon&gt;:</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">:</span><span style="color:#d08770;">5
-  </span><span style="color:#c0c5ce;">|
-</span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">|     &quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot; + &quot;</span><span style="color:#a3be8c;">bar</span><span style="color:#c0c5ce;">&quot;
-  |     ^^^^^
+</span><span style="color:#999999;">// new
+</span><span style="color:#4d4d4c;">error[</span><span style="color:#666969;">E0369</span><span style="color:#4d4d4c;">]: binary operation `</span><span style="color:#3e999f;">+</span><span style="color:#4d4d4c;">` cannot be applied to </span><span style="color:#8959a8;">type</span><span style="color:#4d4d4c;"> `</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">&#39;static str</span><span style="color:#4d4d4c;">`
+ </span><span style="color:#3e999f;">-</span><span style="color:#4d4d4c;">-&gt; &lt;anon&gt;:</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">:</span><span style="color:#f5871f;">5
+  </span><span style="color:#3e999f;">|
+</span><span style="color:#f5871f;">2 </span><span style="color:#3e999f;">|     </span><span style="color:#718c00;">&quot;foo&quot; </span><span style="color:#3e999f;">+ </span><span style="color:#718c00;">&quot;bar&quot;
+  </span><span style="color:#3e999f;">|     ^^^^^
   |
-  = note: `+` can</span><span style="color:#b48ead;">&#39;t</span><span style="color:#c0c5ce;"> be used to concatenate two `&amp;</span><span style="color:#b48ead;">str</span><span style="color:#c0c5ce;">` strings
-help: </span><span style="color:#96b5b4;">to_owned</span><span style="color:#c0c5ce;">() can be used to create an owned `String` from a string
-reference. String concatenation appends the string on the right to the string on
+  =</span><span style="color:#4d4d4c;"> note: `</span><span style="color:#3e999f;">+</span><span style="color:#4d4d4c;">` can</span><span style="color:#8959a8;">&#39;t</span><span style="color:#4d4d4c;"> be used to concatenate two `</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">str</span><span style="color:#4d4d4c;">` strings
+help: </span><span style="color:#4271ae;">to_owned</span><span style="color:#4d4d4c;">() can be used to create an owned `</span><span style="color:#c99e00;">String</span><span style="color:#4d4d4c;">` from a string
+reference. </span><span style="color:#c99e00;">String</span><span style="color:#4d4d4c;"> concatenation appends the string on the right to the string on
 the left and may require reallocation. This requires ownership of the string on
 the left.
-  |     &quot;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&quot;.</span><span style="color:#96b5b4;">to_owned</span><span style="color:#c0c5ce;">() + &quot;</span><span style="color:#a3be8c;">bar</span><span style="color:#c0c5ce;">&quot;
+  </span><span style="color:#3e999f;">|     </span><span style="color:#718c00;">&quot;foo&quot;</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">to_owned</span><span style="color:#4d4d4c;">() </span><span style="color:#3e999f;">+ </span><span style="color:#718c00;">&quot;bar&quot;
 </span></pre>
 <p>When using Cargo's build scripts, you must set the location of the script in your
 <code>Cargo.toml</code>. However, the vast majority of people wrote <code>build = &quot;build.rs&quot;</code>, using
@@ -233,21 +233,21 @@ but <a href="https://github.com/rust-lang/rust/pull/39793">this has been relaxed
 conversions with <code>From</code>.</p>
 <p><code>SocketAddr</code> and <code>IpAddr</code> have <a href="https://github.com/rust-lang/rust/pull/39372">some new conversions</a>
 as well. Previously, you may have written code like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">127.0.0.1:3000</span><span style="color:#c0c5ce;">&quot;.</span><span style="color:#96b5b4;">parse</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">unwrap</span><span style="color:#c0c5ce;">()
+<pre style="background-color:#ffffff;">
+<span style="color:#718c00;">&quot;127.0.0.1:3000&quot;</span><span style="color:#4d4d4c;">.</span><span style="color:#4271ae;">parse</span><span style="color:#4d4d4c;">().</span><span style="color:#4271ae;">unwrap</span><span style="color:#4d4d4c;">()
 </span></pre>
 <p>Now, you can write</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">SocketAddr::from(([</span><span style="color:#d08770;">127</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">], </span><span style="color:#d08770;">3000</span><span style="color:#c0c5ce;">))
-</span><span style="color:#65737e;">// or even
-</span><span style="color:#c0c5ce;">([</span><span style="color:#d08770;">127</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">], </span><span style="color:#d08770;">3000</span><span style="color:#c0c5ce;">).</span><span style="color:#96b5b4;">into</span><span style="color:#c0c5ce;">()
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">SocketAddr::from(([</span><span style="color:#f5871f;">127</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">], </span><span style="color:#f5871f;">3000</span><span style="color:#4d4d4c;">))
+</span><span style="color:#999999;">// or even
+</span><span style="color:#4d4d4c;">([</span><span style="color:#f5871f;">127</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">], </span><span style="color:#f5871f;">3000</span><span style="color:#4d4d4c;">).</span><span style="color:#4271ae;">into</span><span style="color:#4d4d4c;">()
 </span></pre>
 <p>This removes some unnecessary run-time parsing, and is roughly as readable, depending on
 your preferences.</p>
 <p>Backtraces <a href="https://github.com/rust-lang/rust/pull/38165">now have nicer formatting</a>, eliding
 some things by default. For example, the full backtrace:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">thread &#39;main&#39; panicked at &#39;explicit panic&#39;, foo.rs:2
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">thread &#39;main&#39; panicked at &#39;explicit panic&#39;, foo.rs:2
 stack backtrace:
    1:     0x55c39a23372c - std::sys::imp::backtrace::tracing::imp::write::hf33ae72d0baa11ed
                         at /buildslave/rust-buildbot/slave/stable-dist-rustc-linux/build/src/libstd/sys/unix/backtrace/tracing/gcc_s.rs:42
@@ -271,8 +271,8 @@ stack backtrace:
   12:                0x0 - &lt;unknown&gt;
 </span></pre>
 <p>is now instead</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">thread &#39;main&#39; panicked at &#39;explicit panic&#39;, foo.rs:2
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">thread &#39;main&#39; panicked at &#39;explicit panic&#39;, foo.rs:2
 stack backtrace:
    0: std::sys::imp::backtrace::tracing::imp::unwind_backtrace
              at /checkout/src/libstd/sys/unix/backtrace/tracing/gcc_s.rs:49
@@ -310,12 +310,12 @@ flags that are now supported.</p>
 that must be set for a target to be built</a>.
 Here's an example: let's say that we are writing a crate that interacts with databases,
 and that we support multiple databases. We might have this in our <code>Cargo.toml</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[features]
-</span><span style="color:#65737e;"># ...
-</span><span style="color:#bf616a;">postgres </span><span style="color:#c0c5ce;">= []
-</span><span style="color:#bf616a;">sqlite </span><span style="color:#c0c5ce;">= []
-</span><span style="color:#bf616a;">tools </span><span style="color:#c0c5ce;">= []
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">features</span><span style="color:#4d4d4c;">]
+</span><span style="color:#999999;"># ...
+</span><span style="color:#c82829;">postgres </span><span style="color:#4d4d4c;">= []
+</span><span style="color:#c82829;">sqlite </span><span style="color:#4d4d4c;">= []
+</span><span style="color:#c82829;">tools </span><span style="color:#4d4d4c;">= []
 </span></pre>
 <p>The <code>tools</code> feature allows us to include extra tooling, and the <code>postgres</code> and <code>sqlite</code>
 features control which databses we want to support.</p>
@@ -323,26 +323,26 @@ features control which databses we want to support.</p>
 you want. But what if we had a <code>src/bin/postgres-tool.rs</code>, that would only really
 be relevant if the <code>postgres</code> and <code>tools</code> features would be enabled? Previously,
 we would have to write something like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">cfg</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">not</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">all</span><span style="color:#c0c5ce;">(feature = &quot;</span><span style="color:#a3be8c;">postgres</span><span style="color:#c0c5ce;">&quot;, feature = &quot;</span><span style="color:#a3be8c;">tools</span><span style="color:#c0c5ce;">&quot;)))]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    println!(&quot;</span><span style="color:#a3be8c;">This tool requires the `postgres` and `tools` features to be enabled.</span><span style="color:#c0c5ce;">&quot;);
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">cfg</span><span style="color:#4d4d4c;">(</span><span style="color:#c82829;">not</span><span style="color:#4271ae;">(</span><span style="color:#c82829;">all</span><span style="color:#4271ae;">(feature </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;postgres&quot;</span><span style="color:#4271ae;">, feature </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;tools&quot;</span><span style="color:#4271ae;">))</span><span style="color:#4d4d4c;">)]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    println!(</span><span style="color:#718c00;">&quot;This tool requires the `postgres` and `tools` features to be enabled.&quot;</span><span style="color:#4d4d4c;">);
 }
 
-#[</span><span style="color:#bf616a;">cfg</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">all</span><span style="color:#c0c5ce;">(feature = &quot;</span><span style="color:#a3be8c;">postgres</span><span style="color:#c0c5ce;">&quot;, feature = &quot;</span><span style="color:#a3be8c;">tools</span><span style="color:#c0c5ce;">&quot;))]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#65737e;">// real code
-</span><span style="color:#c0c5ce;">}
+#[</span><span style="color:#c82829;">cfg</span><span style="color:#4d4d4c;">(</span><span style="color:#c82829;">all</span><span style="color:#4271ae;">(feature </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;postgres&quot;</span><span style="color:#4271ae;">, feature </span><span style="color:#3e999f;">= </span><span style="color:#718c00;">&quot;tools&quot;</span><span style="color:#4271ae;">)</span><span style="color:#4d4d4c;">)]
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#999999;">// real code
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>This is a lot of boilerplate to work around <code>cargo build</code>'s behavior. It's even
 more unfortunate with <code>examples/</code>, which are supposed to show off how to use
 your library, but this shenanigans is only relevant within the package, not if
 you were to try to use the example on your own.</p>
 <p>With the new <code>required-features</code> key, we can add this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[[bin]]
-</span><span style="color:#65737e;"># ...
-</span><span style="color:#bf616a;">required-features </span><span style="color:#c0c5ce;">= [&quot;</span><span style="color:#a3be8c;">postgres</span><span style="color:#c0c5ce;">&quot;, &quot;</span><span style="color:#a3be8c;">tools</span><span style="color:#c0c5ce;">&quot;]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[[</span><span style="color:#c82829;">bin</span><span style="color:#4d4d4c;">]]
+</span><span style="color:#999999;"># ...
+</span><span style="color:#c82829;">required-features </span><span style="color:#4d4d4c;">= [</span><span style="color:#718c00;">&quot;postgres&quot;</span><span style="color:#4d4d4c;">, </span><span style="color:#718c00;">&quot;tools&quot;</span><span style="color:#4d4d4c;">]
 </span></pre>
 <p>Now, <code>cargo build</code> will only build our <code>postgres-tool</code> if we have the two features
 set, and so we can write a normal <code>fn main</code> without all the <code>cfg</code> nonsense getting

@@ -87,8 +87,8 @@ affects users on macOS High Sierra.</p>
 </blockquote>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.22.1 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1220-2017-11-22">detailed release notes for
@@ -102,16 +102,16 @@ it stay only for results? Should it be user-extensible? Should it be
 usable with <code>Option&lt;T&gt;</code>?</p>
 <p>In Rust 1.22, basic usage of <code>?</code> with <code>Option&lt;T&gt;</code> is now stable.
 This code will now compile:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">add_one_to_first</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">list</span><span style="color:#c0c5ce;">: &amp;[</span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">]) -&gt; Option&lt;</span><span style="color:#b48ead;">u8</span><span style="color:#c0c5ce;">&gt; {
-    </span><span style="color:#65737e;">// get first element, if exists
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">add_one_to_first</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">list</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[</span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">]) -&gt; Option&lt;</span><span style="color:#8959a8;">u8</span><span style="color:#4d4d4c;">&gt; {
+    </span><span style="color:#999999;">// get first element, if exists
     // return None if it doesn&#39;t
-    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> first = list.</span><span style="color:#96b5b4;">get</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">)?;
-    Some(first + </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">)
+    </span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> first </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> list.</span><span style="color:#4271ae;">get</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">0</span><span style="color:#4d4d4c;">)</span><span style="color:#3e999f;">?</span><span style="color:#4d4d4c;">;
+    </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(first </span><span style="color:#3e999f;">+ </span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">)
 }
 
-assert_eq!(</span><span style="color:#96b5b4;">add_one_to_first</span><span style="color:#c0c5ce;">(&amp;[</span><span style="color:#d08770;">10</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">20</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">30</span><span style="color:#c0c5ce;">]), Some(</span><span style="color:#d08770;">11</span><span style="color:#c0c5ce;">));
-assert_eq!(</span><span style="color:#96b5b4;">add_one_to_first</span><span style="color:#c0c5ce;">(&amp;[]), None);
+assert_eq!(</span><span style="color:#4271ae;">add_one_to_first</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[</span><span style="color:#f5871f;">10</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">20</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">30</span><span style="color:#4d4d4c;">]), </span><span style="color:#c99e00;">Some</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">11</span><span style="color:#4d4d4c;">));
+assert_eq!(</span><span style="color:#4271ae;">add_one_to_first</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">[]), </span><span style="color:#c99e00;">None</span><span style="color:#4d4d4c;">);
 </span></pre>
 <p>However, this functionality is still a bit limited; you cannot yet write
 code that mixes results and options with <code>?</code> in the same function, for
@@ -119,17 +119,17 @@ example. This will be possible in the future, and already is in nightly
 Rust; expect to hear more about this in a future release.</p>
 <p>Types that implement <code>Drop</code> are <a href="https://github.com/rust-lang/rust/pull/44456">now allowed in <code>const</code> and <code>static</code>
 items</a>. Like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Foo {
-    </span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">u32</span><span style="color:#c0c5ce;">,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Foo {
+    </span><span style="color:#c82829;">a</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">u32</span><span style="color:#4d4d4c;">,
 }
 
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Drop </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">Foo {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">drop</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">) {}
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Drop </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">Foo {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">drop</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">mut </span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">) {}
 }
 
-</span><span style="color:#b48ead;">const</span><span style="color:#c0c5ce;"> F: Foo = Foo { a: </span><span style="color:#d08770;">0 </span><span style="color:#c0c5ce;">};
-</span><span style="color:#b48ead;">static</span><span style="color:#c0c5ce;"> S: Foo = Foo { a: </span><span style="color:#d08770;">0 </span><span style="color:#c0c5ce;">};
+</span><span style="color:#8959a8;">const</span><span style="color:#4d4d4c;"> F: Foo </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Foo { a: </span><span style="color:#f5871f;">0 </span><span style="color:#4d4d4c;">};
+</span><span style="color:#8959a8;">static</span><span style="color:#4d4d4c;"> S: Foo </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Foo { a: </span><span style="color:#f5871f;">0 </span><span style="color:#4d4d4c;">};
 </span></pre>
 <p>This change doesn't bring much on its own, but as we improve our
 ability to compute things at compile-time, more and more will be
@@ -140,19 +140,19 @@ don't have any specific numbers to commit to with these changes, but as
 always, compile times are very important to us, and we're continuing to
 work on improving them.</p>
 <p><a href="https://github.com/rust-lang/rust/pull/44287"><code>T op= &amp;T</code> now works for primitive types</a>, which is a fancy way of saying:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> x = </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">;
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> y = &amp;</span><span style="color:#d08770;">8</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> x </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">;
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> y </span><span style="color:#3e999f;">= &amp;</span><span style="color:#f5871f;">8</span><span style="color:#4d4d4c;">;
 
-</span><span style="color:#65737e;">// this didn&#39;t work, but now does
-</span><span style="color:#c0c5ce;">x += y;
+</span><span style="color:#999999;">// this didn&#39;t work, but now does
+</span><span style="color:#4d4d4c;">x </span><span style="color:#3e999f;">+=</span><span style="color:#4d4d4c;"> y;
 </span></pre>
 <p>Previously, you'd have needed to write <code>x += *y</code> in order to de-reference, so
 this solves a small papercut.</p>
 <p><a href="https://github.com/rust-lang/rust/pull/44251">Backtraces are improved on MacOS</a>.</p>
 <p>You can now <a href="https://github.com/rust-lang/rust/pull/43949">create <code>compile-fail</code> tests in Rustdoc</a>, like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">/// ```compile_fail
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">/// ```compile_fail
 /// let x = 5;
 /// x += 2; // shouldn&#39;t compile!
 /// ```

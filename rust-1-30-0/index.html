@@ -78,8 +78,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.30.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#bf616a;">rustup</span><span style="color:#c0c5ce;"> update stable
+<pre style="background-color:#ffffff;">
+<span style="color:#c82829;">rustup</span><span style="color:#4271ae;"> update stable
 </span></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25">detailed release notes for
@@ -92,10 +92,10 @@ of &quot;Rust 2018.&quot; For more on that concept, please see our previous post
 <h2 id="procedural-macros">Procedural Macros</h2>
 <p>Way back in <a href="https://blog.rust-lang.org/2017/02/02/Rust-1.15.html">Rust 1.15</a>, we announced the ability to define &quot;custom derives.&quot; For example,
 with <code>serde_derive</code>, you could</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">derive</span><span style="color:#c0c5ce;">(Serialize, Deserialize, Debug)]
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Pet {
-    </span><span style="color:#bf616a;">name</span><span style="color:#c0c5ce;">: String,
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">derive</span><span style="color:#4d4d4c;">(Serialize, Deserialize, Debug)]
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Pet {
+    </span><span style="color:#c82829;">name</span><span style="color:#4d4d4c;">: String,
 }
 </span></pre>
 <p>And convert a <code>Pet</code> to and from JSON using <code>serde_json</code> because <code>serde_derive</code>
@@ -109,14 +109,14 @@ your own. They're also more flexible: derive only works for structs and enums, b
 attributes can go on other places, like functions. As an example of using an
 attribute-like macro, you might have something like this when using a web application
 framework:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[route(GET, &quot;/&quot;)]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[route(GET, &quot;/&quot;)]
 fn index() {
 </span></pre>
 <p>This <code>#[route]</code> attribute would be defined by the framework itself, as a
 procedural macro. Its signature would look like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[proc_macro_attribute]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[proc_macro_attribute]
 pub fn route(attr: TokenStream, item: TokenStream) -&gt; TokenStream {
 </span></pre>
 <p>Here, we have two input <code>TokenStreams</code>: the first is for the contents of the
@@ -126,24 +126,24 @@ of the function's body.</p>
 <p>Function-like macros define macros that look like function calls. For
 example, the <a href="https://gitlab.gnome.org/federico/gnome-class"><code>gnome-class</code> crate</a>
 has a procedural macro that defines <code>GObject</code> classes in Rust:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">gobject_gen!(
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">gobject_gen!(
     class MyClass: GObject {
-        foo: Cell&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt;,
+        foo: Cell&lt;</span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">&gt;,
         bar: RefCell&lt;String&gt;,
     }
 
-    </span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">MyClass {
-        </span><span style="background-color:#bf616a;color:#2b303b;">virtual</span><span style="color:#c0c5ce;"> </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">my_virtual_method</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">) {
-            </span><span style="color:#65737e;">// ... do something with x ...
-        </span><span style="color:#c0c5ce;">}
+    </span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">MyClass {
+        </span><span style="background-color:#c82829;color:#ffffff;">virtual</span><span style="color:#4d4d4c;"> </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">my_virtual_method</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i32</span><span style="color:#4d4d4c;">) {
+            </span><span style="color:#999999;">// ... do something with x ...
+        </span><span style="color:#4d4d4c;">}
     }
 )
 </span></pre>
 <p>This looks like a function that is taking a bunch of code as an argument.
 This macro would be defined like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[proc_macro]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[proc_macro]
 pub fn gobject_gen(input: TokenStream) -&gt; TokenStream {
 </span></pre>
 <p>This is similar to the derive macro's signature: we get the tokens that
@@ -151,32 +151,32 @@ are inside of the parentheses and return the code we want to generate.</p>
 <h3 id="use-and-macros"><code>use</code> and macros</h3>
 <p>You can now <a href="https://github.com/rust-lang/rust/pull/50911/">bring macros into scope with the <code>use</code> keyword</a>. For example,
 to use <code>serde-json</code>'s <code>json</code> macro, you used to write:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">macro_use</span><span style="color:#c0c5ce;">]
-</span><span style="color:#b48ead;">extern crate</span><span style="color:#c0c5ce;"> serde_json;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">macro_use</span><span style="color:#4d4d4c;">]
+</span><span style="color:#8959a8;">extern crate</span><span style="color:#4d4d4c;"> serde_json;
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> john = json!({
-    &quot;</span><span style="color:#a3be8c;">name</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">John Doe</span><span style="color:#c0c5ce;">&quot;,
-    &quot;</span><span style="color:#a3be8c;">age</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">43</span><span style="color:#c0c5ce;">,
-    &quot;</span><span style="color:#a3be8c;">phones</span><span style="color:#c0c5ce;">&quot;: [
-        &quot;</span><span style="color:#a3be8c;">+44 1234567</span><span style="color:#c0c5ce;">&quot;,
-        &quot;</span><span style="color:#a3be8c;">+44 2345678</span><span style="color:#c0c5ce;">&quot;
-    ]
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> john </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">json!({
+    </span><span style="color:#718c00;">&quot;name&quot;</span><span style="color:#4d4d4c;">: </span><span style="color:#718c00;">&quot;John Doe&quot;</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#718c00;">&quot;age&quot;</span><span style="color:#4d4d4c;">: </span><span style="color:#f5871f;">43</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#718c00;">&quot;phones&quot;</span><span style="color:#4d4d4c;">: [
+        </span><span style="color:#718c00;">&quot;+44 1234567&quot;</span><span style="color:#4d4d4c;">,
+        </span><span style="color:#718c00;">&quot;+44 2345678&quot;
+    </span><span style="color:#4d4d4c;">]
 });
 </span></pre>
 <p>But now, you'd write</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">extern crate</span><span style="color:#c0c5ce;"> serde_json;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">extern crate</span><span style="color:#4d4d4c;"> serde_json;
 
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">serde_json::json;
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">serde_json::json;
 
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> john = json!({
-    &quot;</span><span style="color:#a3be8c;">name</span><span style="color:#c0c5ce;">&quot;: &quot;</span><span style="color:#a3be8c;">John Doe</span><span style="color:#c0c5ce;">&quot;,
-    &quot;</span><span style="color:#a3be8c;">age</span><span style="color:#c0c5ce;">&quot;: </span><span style="color:#d08770;">43</span><span style="color:#c0c5ce;">,
-    &quot;</span><span style="color:#a3be8c;">phones</span><span style="color:#c0c5ce;">&quot;: [
-        &quot;</span><span style="color:#a3be8c;">+44 1234567</span><span style="color:#c0c5ce;">&quot;,
-        &quot;</span><span style="color:#a3be8c;">+44 2345678</span><span style="color:#c0c5ce;">&quot;
-    ]
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> john </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">json!({
+    </span><span style="color:#718c00;">&quot;name&quot;</span><span style="color:#4d4d4c;">: </span><span style="color:#718c00;">&quot;John Doe&quot;</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#718c00;">&quot;age&quot;</span><span style="color:#4d4d4c;">: </span><span style="color:#f5871f;">43</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#718c00;">&quot;phones&quot;</span><span style="color:#4d4d4c;">: [
+        </span><span style="color:#718c00;">&quot;+44 1234567&quot;</span><span style="color:#4d4d4c;">,
+        </span><span style="color:#718c00;">&quot;+44 2345678&quot;
+    </span><span style="color:#4d4d4c;">]
 });
 </span></pre>
 <p>This brings macros more in line with other items and removes the need for
@@ -185,24 +185,24 @@ to use <code>serde-json</code>'s <code>json</code> macro, you used to write:</p>
 is made stable, which gives you the needed APIs to write these sorts of macros.
 It also has significantly improved the APIs for errors, and crates like <code>syn</code> and
 <code>quote</code> are already using them. For example, before:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[derive(Serialize)]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[derive(Serialize)]
 struct Demo {
     ok: String,
     bad: std::thread::Thread,
 }
 </span></pre>
 <p>used to give this error:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0277]: the trait bound `std::thread::Thread: _IMPL_SERIALIZE_FOR_Demo::_serde::Serialize` is not satisfied
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0277]: the trait bound `std::thread::Thread: _IMPL_SERIALIZE_FOR_Demo::_serde::Serialize` is not satisfied
  --&gt; src/main.rs:3:10
   |
 3 | #[derive(Serialize)]
   |          ^^^^^^^^^ the trait `_IMPL_SERIALIZE_FOR_Demo::_serde::Serialize` is not implemented for `std::thread::Thread`
 </span></pre>
 <p>Now it will give this one:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">error[E0277]: the trait bound `std::thread::Thread: serde::Serialize` is not satisfied
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">error[E0277]: the trait bound `std::thread::Thread: serde::Serialize` is not satisfied
  --&gt; src/main.rs:7:5
   |
 7 |     bad: std::thread::Thread,
@@ -214,17 +214,17 @@ taking to make the module system feel more straightforward.</p>
 <p>There's two changes to <code>use</code> in addition to the aforementioned change for
 macros. The first is that <a href="https://github.com/rust-lang/rust/pull/54404/">external crates are now in the
 prelude</a>, that is:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// old
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> json = ::serde_json::from_str(&quot;</span><span style="color:#a3be8c;">...</span><span style="color:#c0c5ce;">&quot;);
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// old
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> json </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">::serde_json::from_str(</span><span style="color:#718c00;">&quot;...&quot;</span><span style="color:#4d4d4c;">);
 
-</span><span style="color:#65737e;">// new
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> json = serde_json::from_str(&quot;</span><span style="color:#a3be8c;">...</span><span style="color:#c0c5ce;">&quot;);
+</span><span style="color:#999999;">// new
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> json </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">serde_json::from_str(</span><span style="color:#718c00;">&quot;...&quot;</span><span style="color:#4d4d4c;">);
 </span></pre>
 <p>The trick here is that the 'old' style wasn't always needed, due to the way Rust's
 module system worked:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">extern crate serde_json;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">extern crate serde_json;
 
 fn main() {
     // this works just fine; we&#39;re in the crate root, so `serde_json` is in
@@ -254,41 +254,41 @@ mod foo {
 experience. Now, it will check the first part of the path and see if it's an <code>extern crate</code>, and if it is, use it regardless of where you're at in the module hierarchy.</p>
 <p>Finally, <a href="https://github.com/rust-lang/rust/pull/54404/"><code>use</code> also supports bringing items into scope with paths starting with
 <code>crate</code></a>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">mod </span><span style="color:#c0c5ce;">foo {
-    </span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">bar</span><span style="color:#c0c5ce;">() {
-        </span><span style="color:#65737e;">// ...
-    </span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">mod </span><span style="color:#4d4d4c;">foo {
+    </span><span style="color:#8959a8;">pub fn </span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">() {
+        </span><span style="color:#999999;">// ...
+    </span><span style="color:#4d4d4c;">}
 }
 
-</span><span style="color:#65737e;">// old
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">::foo::bar;
-</span><span style="color:#65737e;">// or
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">foo::bar;
+</span><span style="color:#999999;">// old
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">::foo::bar;
+</span><span style="color:#999999;">// or
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">foo::bar;
 
-</span><span style="color:#65737e;">// new
-</span><span style="color:#b48ead;">use crate</span><span style="color:#c0c5ce;">::foo::bar;
+</span><span style="color:#999999;">// new
+</span><span style="color:#8959a8;">use crate</span><span style="color:#4d4d4c;">::foo::bar;
 </span></pre>
 <p>The <code>crate</code> keyword at the start of the path indicates that you would like the path to
 start at your crate root. Previously, paths specified after <code>use</code> would always start at
 the crate root, but paths referring to items directly would start at the local path,
 meaning the behavior of paths was inconsistent:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">mod </span><span style="color:#c0c5ce;">foo {
-    </span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">bar</span><span style="color:#c0c5ce;">() {
-        </span><span style="color:#65737e;">// ...
-    </span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">mod </span><span style="color:#4d4d4c;">foo {
+    </span><span style="color:#8959a8;">pub fn </span><span style="color:#4271ae;">bar</span><span style="color:#4d4d4c;">() {
+        </span><span style="color:#999999;">// ...
+    </span><span style="color:#4d4d4c;">}
 }
 
-</span><span style="color:#b48ead;">mod </span><span style="color:#c0c5ce;">baz {
-    </span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">qux</span><span style="color:#c0c5ce;">() {
-        </span><span style="color:#65737e;">// old
-        </span><span style="color:#c0c5ce;">::foo::bar();
-        </span><span style="color:#65737e;">// does not work, which is different than with `use`:
+</span><span style="color:#8959a8;">mod </span><span style="color:#4d4d4c;">baz {
+    </span><span style="color:#8959a8;">pub fn </span><span style="color:#4271ae;">qux</span><span style="color:#4d4d4c;">() {
+        </span><span style="color:#999999;">// old
+        </span><span style="color:#4d4d4c;">::foo::bar();
+        </span><span style="color:#999999;">// does not work, which is different than with `use`:
         // foo::bar();
 
         // new
-        </span><span style="color:#b48ead;">crate</span><span style="color:#c0c5ce;">::foo::bar();
+        </span><span style="color:#8959a8;">crate</span><span style="color:#4d4d4c;">::foo::bar();
     }
 }
 </span></pre>
@@ -307,17 +307,17 @@ after making a one-time switch to the new style, these rules will apply uniforml
 paths everywhere, and you'll need to tweak your imports much less when moving code around.</p>
 <h2 id="raw-identifiers">Raw Identifiers</h2>
 <p><a href="https://github.com/rust-lang/rust/pull/53236/">You can now use keywords as identifiers</a> with some new syntax:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// define a local variable named `for`
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> r#</span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// define a local variable named `for`
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> r</span><span style="color:#3e999f;">#</span><span style="color:#8959a8;">for </span><span style="color:#3e999f;">= </span><span style="color:#f5871f;">true</span><span style="color:#4d4d4c;">;
 
-</span><span style="color:#65737e;">// define a function named `for`
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">r</span><span style="color:#c0c5ce;">#</span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#65737e;">// ...
-</span><span style="color:#c0c5ce;">}
+</span><span style="color:#999999;">// define a function named `for`
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">r</span><span style="color:#3e999f;">#</span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#999999;">// ...
+</span><span style="color:#4d4d4c;">}
 
-</span><span style="color:#65737e;">// call that function
-</span><span style="color:#c0c5ce;">r#</span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;">();
+</span><span style="color:#999999;">// call that function
+</span><span style="color:#4d4d4c;">r</span><span style="color:#3e999f;">#</span><span style="color:#8959a8;">for</span><span style="color:#4d4d4c;">();
 </span></pre>
 <p>This doesn't have many use cases today, but will once you are trying to use a Rust 2015
 crate with a Rust 2018 project and vice-versa because the set of keywords will be

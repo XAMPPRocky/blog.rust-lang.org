@@ -81,8 +81,8 @@ like <a href="https://github.com/servo/servo">Servo</a> out of 247 community-dri
 libraries—and counting. Servo's build system is a thin wrapper around
 Cargo, and after a fresh checkout, you're only one command away from seeing the
 whole dependency graph built:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">   Compiling num-complex v0.1.32
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">   Compiling num-complex v0.1.32
    Compiling bitflags v0.6.0
    Compiling angle v0.1.0 (https://github.com/emilio/angle?branch=servo#eefe3506)
    Compiling backtrace v0.2.1
@@ -195,8 +195,8 @@ projects highly predictable.</p>
 keep things simple, we'll create a small <code>datetime</code> crate that exposes date and
 time functionality.</p>
 <p>First, we'll use <code>cargo new</code> to start us out:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">$ cargo new datetime
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">$ cargo new datetime
 $ cd datetime
 $ ls
 Cargo.toml src
@@ -210,19 +210,19 @@ authors = [&quot;Yehuda Katz &lt;wycats@gmail.com&gt;&quot;]
 </span></pre>
 <p>We don't want to build the date or time functionality from scratch, so let's
 edit the <code>Cargo.toml</code> and add the <code>time</code> crate from <a href="https://crates.io/">crates.io</a>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">  [package]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">  [package]
   name = &quot;datetime&quot;
   version = &quot;0.1.0&quot;
   authors = [&quot;Yehuda Katz &lt;wycats@gmail.com&gt;&quot;]
 
   [dependencies]
-</span><span style="color:#a3be8c;">+ time = &quot;0.1.35&quot;
+</span><span style="background-color:#718c00;color:#ffffff;">+ time = &quot;0.1.35&quot;
 </span></pre>
 <p>Now that we've added the <code>time</code> crate, let's see what happens if we ask Cargo to
 build our package:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo build
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo build
    Compiling winapi v0.2.6
    Compiling libc v0.2.10
    Compiling winapi-build v0.1.1
@@ -234,13 +234,13 @@ build our package:</p>
 enough predictability to allow functionality like the <code>time</code> crate to be broken
 up into smaller crates that do one thing and do it well</strong>.</p>
 <p>Now that we successfully built our crate, what happens if we try to build it again?</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo build
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo build
 </span></pre>
 <p>Nothing happened at all. Why's that? We can always ask Cargo to give us more
 information through the <code>--verbose</code> flag, so let's do that:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo build --verbose
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo build --verbose
        Fresh libc v0.2.10
        Fresh winapi v0.2.6
        Fresh winapi-build v0.1.1
@@ -253,22 +253,22 @@ information through the <code>--verbose</code> flag, so let's do that:</p>
 <p>But how does Cargo know that everything is fresh? When Cargo builds a crate, it
 emits a file called <code>Cargo.lock</code> that contains the precise versions of all of
 its resolved dependencies:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">[root]
-</span><span style="color:#bf616a;">name </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">datetime</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">version </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">0.1.0</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">dependencies </span><span style="color:#c0c5ce;">= [
- &quot;</span><span style="color:#a3be8c;">libc 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)</span><span style="color:#c0c5ce;">&quot;,
- &quot;</span><span style="color:#a3be8c;">time 0.1.35 (registry+https://github.com/rust-lang/crates.io-index)</span><span style="color:#c0c5ce;">&quot;,
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">[</span><span style="color:#c82829;">root</span><span style="color:#4d4d4c;">]
+</span><span style="color:#c82829;">name </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;datetime&quot;
+</span><span style="color:#c82829;">version </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;0.1.0&quot;
+</span><span style="color:#c82829;">dependencies </span><span style="color:#4d4d4c;">= [
+ </span><span style="color:#718c00;">&quot;libc 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)&quot;</span><span style="color:#4d4d4c;">,
+ </span><span style="color:#718c00;">&quot;time 0.1.35 (registry+https://github.com/rust-lang/crates.io-index)&quot;</span><span style="color:#4d4d4c;">,
 ]
 
-[[package]]
-</span><span style="color:#bf616a;">name </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">kernel32-sys</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">version </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">0.2.2</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">source </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">registry+https://github.com/rust-lang/crates.io-index</span><span style="color:#c0c5ce;">&quot;
-</span><span style="color:#bf616a;">dependencies </span><span style="color:#c0c5ce;">= [
- &quot;</span><span style="color:#a3be8c;">winapi 0.2.6 (registry+https://github.com/rust-lang/crates.io-index)</span><span style="color:#c0c5ce;">&quot;,
- &quot;</span><span style="color:#a3be8c;">winapi-build 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)</span><span style="color:#c0c5ce;">&quot;,
+[[</span><span style="color:#c82829;">package</span><span style="color:#4d4d4c;">]]
+</span><span style="color:#c82829;">name </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;kernel32-sys&quot;
+</span><span style="color:#c82829;">version </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;0.2.2&quot;
+</span><span style="color:#c82829;">source </span><span style="color:#4d4d4c;">= </span><span style="color:#718c00;">&quot;registry+https://github.com/rust-lang/crates.io-index&quot;
+</span><span style="color:#c82829;">dependencies </span><span style="color:#4d4d4c;">= [
+ </span><span style="color:#718c00;">&quot;winapi 0.2.6 (registry+https://github.com/rust-lang/crates.io-index)&quot;</span><span style="color:#4d4d4c;">,
+ </span><span style="color:#718c00;">&quot;winapi-build 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)&quot;</span><span style="color:#4d4d4c;">,
 ]
 
 ...
@@ -289,8 +289,8 @@ different machine. Ideally, we would like to be able to pick up right where we
 left off, with the exact same source code for all of our dependencies.</p>
 <p>To do this, we check in our <code>Cargo.lock</code> and clone the repository on our new
 machine. Then, we run <code>cargo build</code> again.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo build
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo build
    Compiling libc v0.2.10
    Compiling winapi v0.2.6
    Compiling winapi-build v0.1.1
@@ -306,16 +306,16 @@ would continue to get the same level of predictability.</p>
 <p>Now that we've written our snazzy new <code>datetime</code> crate, we'd love to write an
 example to show other developers how it should be used. We create a new file
 called <code>examples/date.rs</code> that looks like this:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">extern crate datetime;
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">extern crate datetime;
 
 fn main() {
     println!(&quot;{}&quot;, datetime::DateTime::now());
 }
 </span></pre>
 <p>To run the example, we ask Cargo to build and run it:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo run --example date
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo run --example date
    Compiling datetime v0.1.0 (file:///Users/ykatz/Code/datetime)
      Running `target/debug/examples/date`
 26 Apr 2016 :: 05:03:38
@@ -343,8 +343,8 @@ change you made was unrelated to another dependency, it shouldn't change</strong
 <p>Let's say that after developing the library for a little while, we decide that
 we want to add support for time zones. First, let's add in the <code>tz</code> dependency
 to our package:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">  [package]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">  [package]
   name = &quot;datetime&quot;
   version = &quot;0.1.0&quot;
   authors = [&quot;Yehuda Katz &lt;wycats@gmail.com&gt;&quot;]
@@ -354,8 +354,8 @@ to our package:</p>
 + tz = &quot;0.2.1&quot;
 </span></pre>
 <p>After using the crate in our library, let's run <code>cargo build</code> again:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo build
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo build
     Updating registry `https://github.com/rust-lang/crates.io-index`
  Downloading tz v0.2.1
  Downloading byteorder v0.5.1
@@ -397,15 +397,15 @@ fast binary.</p>
 but all indirect dependencies with the same configuration.</p>
 <p>Cargo manages that process for you automatically. Let's add a benchmark to our
 code:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[bench]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[bench]
 fn bench_date(b: &amp;mut Bencher) {
     b.iter(|| DateTime::now());
 }
 </span></pre>
 <p>If we then run <code>cargo bench</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo bench
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo bench
    Compiling winapi v0.2.6
    Compiling libc v0.2.10
    Compiling byteorder v0.5.1
@@ -444,8 +444,8 @@ dependencies</strong>.</p>
 packages that your application depends on share a third dependency?</p>
 <p>For example, let's say that I decide to add the <code>nix</code> crate to my <code>datetime</code>
 library for Unix-specific functionality.</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">  [package]
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">  [package]
   name = &quot;datetime&quot;
   version = &quot;0.1.0&quot;
   authors = [&quot;Yehuda Katz &lt;wycats@gmail.com&gt;&quot;]
@@ -456,8 +456,8 @@ library for Unix-specific functionality.</p>
 + nix = &quot;0.5.0&quot;
 </span></pre>
 <p>As before, when I run <code>cargo build</code>, Cargo <em>conservatively</em> adds <code>nix</code> and its dependencies:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">cargo build
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">cargo build
     Updating registry `https://github.com/rust-lang/crates.io-index`
  Downloading nix v0.5.0
  Downloading bitflags v0.4.0

@@ -96,20 +96,20 @@ there can be a significant speedup so long as the loss of DOS protection is
 acceptable.</p>
 <p>To see this in action, you can check out the <a href="https://crates.io/crates/fnv">fnv crate</a> on <a href="https://crates.io">crates.io</a> and
 create a <code>HashMap</code> via:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">extern crate</span><span style="color:#c0c5ce;"> fnv;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">extern crate</span><span style="color:#4d4d4c;"> fnv;
 
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::collections::HashMap;
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">std::hash::BuildHasherDefault;
-</span><span style="color:#b48ead;">use </span><span style="color:#c0c5ce;">fnv::FnvHasher;
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::collections::HashMap;
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">std::hash::BuildHasherDefault;
+</span><span style="color:#8959a8;">use </span><span style="color:#4d4d4c;">fnv::FnvHasher;
 
-</span><span style="color:#b48ead;">type </span><span style="color:#c0c5ce;">MyHasher = BuildHasherDefault&lt;FnvHasher&gt;;
+</span><span style="color:#8959a8;">type </span><span style="color:#4d4d4c;">MyHasher </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">BuildHasherDefault&lt;FnvHasher&gt;;
 
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-    </span><span style="color:#b48ead;">let mut</span><span style="color:#c0c5ce;"> map: HashMap&lt;_, _, MyHasher&gt; = HashMap::default();
-    map.</span><span style="color:#96b5b4;">insert</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, &quot;</span><span style="color:#a3be8c;">Hello</span><span style="color:#c0c5ce;">&quot;);
-    map.</span><span style="color:#96b5b4;">insert</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, &quot;</span><span style="color:#a3be8c;">, world!</span><span style="color:#c0c5ce;">&quot;);
-    println!(&quot;</span><span style="color:#d08770;">{:?}</span><span style="color:#c0c5ce;">&quot;, map);
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">main</span><span style="color:#4d4d4c;">() {
+    </span><span style="color:#8959a8;">let mut</span><span style="color:#4d4d4c;"> map: HashMap&lt;</span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">, </span><span style="color:#3e999f;">_</span><span style="color:#4d4d4c;">, MyHasher&gt; </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">HashMap::default();
+    map.</span><span style="color:#4271ae;">insert</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">1</span><span style="color:#4d4d4c;">, </span><span style="color:#718c00;">&quot;Hello&quot;</span><span style="color:#4d4d4c;">);
+    map.</span><span style="color:#4271ae;">insert</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">2</span><span style="color:#4d4d4c;">, </span><span style="color:#718c00;">&quot;, world!&quot;</span><span style="color:#4d4d4c;">);
+    println!(</span><span style="color:#718c00;">&quot;</span><span style="color:#666969;">{:?}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, map);
 }
 </span></pre>
 <p>Note that most of the time you don’t even need to specify the hasher as type

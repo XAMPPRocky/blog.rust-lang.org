@@ -76,12 +76,12 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
     <div class="post">
       <p>The rustup working group is happy to announce the release of rustup version 1.20.0. <a href="https://rustup.rs">Rustup</a> is the recommended tool to install <a href="https://www.rust-lang.org">Rust</a>, a programming language that is empowering everyone to build reliable and efficient software.</p>
 <p>If you have a previous version of rustup installed, getting rustup 1.20.0 is as easy as:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup self update
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup self update
 </span></pre>
 <p>Rustup will also automatically update itself at the end of a normal toolchain update:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup update
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup update
 </span></pre>
 <p>If you don't have it already, you can <a href="https://rustup.rs">get rustup</a> from the appropriate page on our website.</p>
 <h2 id="what-s-new-in-rustup-1-20-0">What's new in rustup 1.20.0</h2>
@@ -95,8 +95,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 <li>The <strong>complete</strong> profile includes all the components available through rustup, including <code>miri</code> and IDE integration tools (<code>rls</code> and <code>rust-analysis</code>).</li>
 </ul>
 <p>To change the rustup profile you can use the <code>rustup set profile</code> command. For example, to select the minimal profile you can use:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup set profile minimal
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup set profile minimal
 </span></pre>
 <p>It's also possible to choose the profile when installing rustup for the first time, either interactively by choosing the &quot;Customize installation&quot; option or programmaticaly by passing the <code>--profile=&lt;name&gt;</code> flag. Profiles will only affect newly installed toolchains: as usual it will be possible to install individual components later with: <code>rustup component add</code>.</p>
 <h3 id="installing-the-latest-compatible-nightly">Installing the latest compatible nightly</h3>
@@ -105,8 +105,8 @@ https:&#x2F;&#x2F;xampprocky.github.io&#x2F;blog.rust-lang.org&#x2F;
 <p>Along with this change, rustup 1.20.0 introduces the <code>--component</code>/<code>-c</code> and <code>--target</code>/<code>-t</code> options to the <code>rustup toolchain install</code> command, allowing you to add components and targets as the toolchain is installed. These flags will also search past nightlies if the current one does not feature all the requested components. </p>
 <h3 id="improvements-to-rustup-doc">Improvements to <code>rustup doc</code></h3>
 <p>The <code>rustup doc</code> command opens the locally installed documentation on your browser, without any Internet connection required. rustup 1.20.0 enhances the command allowing you to open directly the API documentation of a specific item. For example to look at the documentation of <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html"><code>Iterator</code></a> you can use:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">rustup doc std::iter::Iterator
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">rustup doc std::iter::Iterator
 </span></pre>
 <p>This works for traits, structs/enums, macros, and modules, and can take you to the <code>std</code>, <code>alloc</code>, and <code>core</code> crates. Note, however, that this functionality will only work if you have the <code>rust-docs</code> component installed in your toolchain. We will be improving the command's UX over time, so if you have ideas, please do let us know!</p>
 <h2 id="thanks">Thanks</h2>

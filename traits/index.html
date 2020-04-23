@@ -137,20 +137,20 @@ the language: the difference between methods and functions.</p>
 </blockquote>
 <p>Rust offers both methods and free-standing functions, which are very
 closely related:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Point {
-    </span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">f64</span><span style="color:#c0c5ce;">,
-    </span><span style="color:#bf616a;">y</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">f64</span><span style="color:#c0c5ce;">,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Point {
+    </span><span style="color:#c82829;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">f64</span><span style="color:#4d4d4c;">,
+    </span><span style="color:#c82829;">y</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">f64</span><span style="color:#4d4d4c;">,
 }
 
-</span><span style="color:#65737e;">// a free-standing function that converts a (borrowed) point to a string
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">point_to_string</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">point</span><span style="color:#c0c5ce;">: &amp;Point) -&gt; String { ... }
+</span><span style="color:#999999;">// a free-standing function that converts a (borrowed) point to a string
+</span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">point_to_string</span><span style="color:#4d4d4c;">(</span><span style="color:#f5871f;">point</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">Point) -&gt; String { </span><span style="color:#3e999f;">... </span><span style="color:#4d4d4c;">}
 
-</span><span style="color:#65737e;">// an &quot;inherent impl&quot; block defines the methods available directly on a type
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Point {
-    </span><span style="color:#65737e;">// this method is available on any Point, and automatically borrows the
+</span><span style="color:#999999;">// an &quot;inherent impl&quot; block defines the methods available directly on a type
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Point {
+    </span><span style="color:#999999;">// this method is available on any Point, and automatically borrows the
     // Point value
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">to_string</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">) -&gt; String { ... }
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">to_string</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">) -&gt; String { </span><span style="color:#3e999f;">... </span><span style="color:#4d4d4c;">}
 }
 </span></pre>
 <p>Methods like <code>to_string</code> above are called &quot;inherent&quot; methods, because they:</p>
@@ -164,42 +164,42 @@ functions, inherent methods are always &quot;in scope&quot;.</li>
 <a href="http://blog.skylight.io/rust-means-never-having-to-close-a-socket/">level of ownership required</a>.  Methods are invoked using the <code>.</code>
 notation familiar from object-oriented programming, and the self parameter is
 <em>implicitly borrowed</em> as per the form of <code>self</code> used in the method:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> p = Point { x: </span><span style="color:#d08770;">1.2</span><span style="color:#c0c5ce;">, y: -</span><span style="color:#d08770;">3.7 </span><span style="color:#c0c5ce;">};
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> s1 = </span><span style="color:#96b5b4;">point_to_string</span><span style="color:#c0c5ce;">(&amp;p);  </span><span style="color:#65737e;">// calling a free function, explicit borrow
-</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> s2 = p.</span><span style="color:#96b5b4;">to_string</span><span style="color:#c0c5ce;">();        </span><span style="color:#65737e;">// calling a method, implicit borrow as &amp;p
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> p </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> Point { x: </span><span style="color:#f5871f;">1.2</span><span style="color:#4d4d4c;">, y: </span><span style="color:#3e999f;">-</span><span style="color:#f5871f;">3.7 </span><span style="color:#4d4d4c;">};
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> s1 </span><span style="color:#3e999f;">= </span><span style="color:#4271ae;">point_to_string</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">p);  </span><span style="color:#999999;">// calling a free function, explicit borrow
+</span><span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> s2 </span><span style="color:#3e999f;">=</span><span style="color:#4d4d4c;"> p.</span><span style="color:#4271ae;">to_string</span><span style="color:#4d4d4c;">();        </span><span style="color:#999999;">// calling a method, implicit borrow as &amp;p
 </span></pre>
 <p>Methods and their auto-borrowing are an important aspect of the ergonomics of
 Rust, supporting &quot;fluent&quot; APIs like the one for spawning processes:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> child = Command::new(&quot;</span><span style="color:#a3be8c;">/bin/cat</span><span style="color:#c0c5ce;">&quot;)
-    .</span><span style="color:#96b5b4;">arg</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">rusty-ideas.txt</span><span style="color:#c0c5ce;">&quot;)
-    .</span><span style="color:#96b5b4;">current_dir</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">/Users/aturon</span><span style="color:#c0c5ce;">&quot;)
-    .</span><span style="color:#96b5b4;">stdout</span><span style="color:#c0c5ce;">(Stdio::piped())
-    .</span><span style="color:#96b5b4;">spawn</span><span style="color:#c0c5ce;">();
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">let</span><span style="color:#4d4d4c;"> child </span><span style="color:#3e999f;">= </span><span style="color:#4d4d4c;">Command::new(</span><span style="color:#718c00;">&quot;/bin/cat&quot;</span><span style="color:#4d4d4c;">)
+    .</span><span style="color:#4271ae;">arg</span><span style="color:#4d4d4c;">(</span><span style="color:#718c00;">&quot;rusty-ideas.txt&quot;</span><span style="color:#4d4d4c;">)
+    .</span><span style="color:#4271ae;">current_dir</span><span style="color:#4d4d4c;">(</span><span style="color:#718c00;">&quot;/Users/aturon&quot;</span><span style="color:#4d4d4c;">)
+    .</span><span style="color:#4271ae;">stdout</span><span style="color:#4d4d4c;">(Stdio::piped())
+    .</span><span style="color:#4271ae;">spawn</span><span style="color:#4d4d4c;">();
 </span></pre><h3 id="traits-are-interfaces">Traits are interfaces</h3>
 <p>Interfaces specify the expectations that one piece of code has on another,
 allowing each to be switched out independently. For traits, this specification
 largely revolves around methods.</p>
 <p>Take, for example, the following simple trait for hashing:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">trait </span><span style="color:#c0c5ce;">Hash {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">hash</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">u64</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">trait </span><span style="color:#4d4d4c;">Hash {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">hash</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">u64</span><span style="color:#4d4d4c;">;
 }
 </span></pre>
 <p>In order to implement this trait for a given type, you must provide a <code>hash</code>
 method with matching signature:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Hash </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">bool {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">hash</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">u64 </span><span style="color:#c0c5ce;">{
-        </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">*</span><span style="color:#bf616a;">self </span><span style="color:#c0c5ce;">{ </span><span style="color:#d08770;">0 </span><span style="color:#c0c5ce;">} </span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{ </span><span style="color:#d08770;">1 </span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Hash </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">bool {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">hash</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">u64 </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#8959a8;">if </span><span style="color:#3e999f;">*</span><span style="color:#c82829;">self </span><span style="color:#4d4d4c;">{ </span><span style="color:#f5871f;">0 </span><span style="color:#4d4d4c;">} </span><span style="color:#8959a8;">else </span><span style="color:#4d4d4c;">{ </span><span style="color:#f5871f;">1 </span><span style="color:#4d4d4c;">}
     }
 }
 
-</span><span style="color:#b48ead;">impl </span><span style="color:#c0c5ce;">Hash </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">i64 {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">hash</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">u64 </span><span style="color:#c0c5ce;">{
-        *</span><span style="color:#bf616a;">self </span><span style="color:#c0c5ce;">as </span><span style="color:#b48ead;">u64
-    </span><span style="color:#c0c5ce;">}
+</span><span style="color:#8959a8;">impl </span><span style="color:#4d4d4c;">Hash </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">i64 {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">hash</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">u64 </span><span style="color:#4d4d4c;">{
+        </span><span style="color:#3e999f;">*</span><span style="color:#c82829;">self </span><span style="color:#3e999f;">as </span><span style="color:#8959a8;">u64
+    </span><span style="color:#4d4d4c;">}
 }
 </span></pre>
 <p>Unlike interfaces in languages like Java, C# or Scala, <strong>new traits can be
@@ -213,17 +213,17 @@ abstracting out a common interface satisfied by more than one type.</p>
 <h3 id="static-dispatch">Static dispatch</h3>
 <p>Things get more interesting on the other side -- consuming a trait. The most
 common way of doing so is through <em>generics</em>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">print_hash</span><span style="color:#c0c5ce;">&lt;T: Hash&gt;(</span><span style="color:#bf616a;">t</span><span style="color:#c0c5ce;">: &amp;T) {
-    println!(&quot;</span><span style="color:#a3be8c;">The hash is </span><span style="color:#d08770;">{}</span><span style="color:#c0c5ce;">&quot;, t.</span><span style="color:#96b5b4;">hash</span><span style="color:#c0c5ce;">())
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">fn </span><span style="color:#4271ae;">print_hash</span><span style="color:#4d4d4c;">&lt;T: Hash&gt;(</span><span style="color:#f5871f;">t</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#4d4d4c;">T) {
+    println!(</span><span style="color:#718c00;">&quot;The hash is </span><span style="color:#666969;">{}</span><span style="color:#718c00;">&quot;</span><span style="color:#4d4d4c;">, t.</span><span style="color:#4271ae;">hash</span><span style="color:#4d4d4c;">())
 }
 </span></pre>
 <p>The <code>print_hash</code> function is generic over an unknown type <code>T</code>, but requires that
 <code>T</code> implements the <code>Hash</code> trait. That means we can use it with <code>bool</code> and <code>i64</code>
 values:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#96b5b4;">print_hash</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">);      </span><span style="color:#65737e;">// instantiates T = bool
-</span><span style="color:#96b5b4;">print_hash</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#d08770;">12_</span><span style="color:#b48ead;">i64</span><span style="color:#c0c5ce;">);    </span><span style="color:#65737e;">// instantiates T = i64
+<pre style="background-color:#ffffff;">
+<span style="color:#4271ae;">print_hash</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">true</span><span style="color:#4d4d4c;">);      </span><span style="color:#999999;">// instantiates T = bool
+</span><span style="color:#4271ae;">print_hash</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">12_</span><span style="color:#8959a8;">i64</span><span style="color:#4d4d4c;">);    </span><span style="color:#999999;">// instantiates T = i64
 </span></pre>
 <p><strong>Generics are compiled away, resulting in static dispatch</strong>. That is, as with
 C++ templates, the compiler will generate <em>two copies</em> of the <code>print_hash</code>
@@ -231,25 +231,25 @@ method to handle the above code, one for each concrete argument type.  That in
 turn means that the internal call to <code>t.hash()</code> -- the point where the
 abstraction is actually used -- has zero cost: it will be compiled to a direct,
 static call to the relevant implementation:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#65737e;">// The compiled code:
-</span><span style="color:#96b5b4;">__print_hash_bool</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">);  </span><span style="color:#65737e;">// invoke specialized bool version directly
-</span><span style="color:#96b5b4;">__print_hash_i64</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#d08770;">12_</span><span style="color:#b48ead;">i64</span><span style="color:#c0c5ce;">);   </span><span style="color:#65737e;">// invoke specialized i64 version directly
+<pre style="background-color:#ffffff;">
+<span style="color:#999999;">// The compiled code:
+</span><span style="color:#4271ae;">__print_hash_bool</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">true</span><span style="color:#4d4d4c;">);  </span><span style="color:#999999;">// invoke specialized bool version directly
+</span><span style="color:#4271ae;">__print_hash_i64</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">12_</span><span style="color:#8959a8;">i64</span><span style="color:#4d4d4c;">);   </span><span style="color:#999999;">// invoke specialized i64 version directly
 </span></pre>
 <p>This compilation model isn't so useful for a function like <code>print_hash</code>, but
 it's <em>very</em> useful for more realistic uses of hashing. Suppose we also introduce
 a trait for equality comparison:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">trait </span><span style="color:#c0c5ce;">Eq {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">eq</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">other</span><span style="color:#c0c5ce;">: &amp;</span><span style="color:#b48ead;">Self</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">bool</span><span style="color:#c0c5ce;">;
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">trait </span><span style="color:#4d4d4c;">Eq {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">eq</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">other</span><span style="color:#4d4d4c;">: </span><span style="color:#3e999f;">&amp;</span><span style="color:#8959a8;">Self</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">bool</span><span style="color:#4d4d4c;">;
 }
 </span></pre>
 <p>(The reference to <code>Self</code> here will resolve to whatever type we implement the
 trait for; in <code>impl Eq for bool</code> it will refer to <code>bool</code>.)</p>
 <p>We can then define a hash map that is generic over a type <code>T</code> implementing both
 <code>Hash</code> and <code>Eq</code>:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">HashMap&lt;Key: Hash + Eq, Value&gt; { ... }
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">HashMap&lt;Key: Hash </span><span style="color:#3e999f;">+</span><span style="color:#4d4d4c;"> Eq, Value&gt; { ... }
 </span></pre>
 <p>The static compilation model for generics will then yield several benefits:</p>
 <ul>
@@ -283,16 +283,16 @@ away statically. But sometimes abstraction isn't just about reuse or modularity
 compiled away</strong>.</p>
 <p>For example, GUI frameworks often involve callbacks for responding to events,
 such as mouse clicks:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">trait </span><span style="color:#c0c5ce;">ClickCallback {
-    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">on_click</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i64</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">y</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">i64</span><span style="color:#c0c5ce;">);
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">trait </span><span style="color:#4d4d4c;">ClickCallback {
+    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">on_click</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">x</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i64</span><span style="color:#4d4d4c;">, </span><span style="color:#f5871f;">y</span><span style="color:#4d4d4c;">: </span><span style="color:#8959a8;">i64</span><span style="color:#4d4d4c;">);
 }
 </span></pre>
 <p>It's also common for GUI elements to allow multiple callbacks to be registered
 for a single event. With generics, you might imagine writing:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Button&lt;T: ClickCallback&gt; {
-    </span><span style="color:#bf616a;">listeners</span><span style="color:#c0c5ce;">: Vec&lt;T&gt;,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Button&lt;T: ClickCallback&gt; {
+    </span><span style="color:#c82829;">listeners</span><span style="color:#4d4d4c;">: Vec&lt;T&gt;,
     ...
 }
 </span></pre>
@@ -306,9 +306,9 @@ potentially a different concrete type, but each one implementing
 group of types, <em>each one will have a distinct size</em> -- so how can we even lay
 out the internal vector? The answer is the usual one: indirection. We'll store
 <em>pointers</em> to callbacks in the vector:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Button {
-    </span><span style="color:#bf616a;">listeners</span><span style="color:#c0c5ce;">: Vec&lt;Box&lt;ClickCallback&gt;&gt;,
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Button {
+    </span><span style="color:#c82829;">listeners</span><span style="color:#4d4d4c;">: Vec&lt;Box&lt;ClickCallback&gt;&gt;,
     ...
 }
 </span></pre>
@@ -341,22 +341,22 @@ Huon Wilson's <a href="http://huonw.github.io/blog/2015/05/finding-closure-in-ru
 <li>
 <p><strong>Conditional APIs</strong>. Generics make it possible to implement a trait
 conditionally:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Pair&lt;A, B&gt; { </span><span style="color:#bf616a;">first</span><span style="color:#c0c5ce;">: A, </span><span style="color:#bf616a;">second</span><span style="color:#c0c5ce;">: B }
-</span><span style="color:#b48ead;">impl</span><span style="color:#c0c5ce;">&lt;A: Hash, B: Hash&gt; Hash </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">Pair&lt;A, B&gt; {
-</span><span style="color:#c0c5ce;">    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">hash</span><span style="color:#c0c5ce;">(&amp;</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">) -&gt; </span><span style="color:#b48ead;">u64 </span><span style="color:#c0c5ce;">{
-</span><span style="color:#c0c5ce;">        </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.first.</span><span style="color:#96b5b4;">hash</span><span style="color:#c0c5ce;">() ^ </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.second.</span><span style="color:#96b5b4;">hash</span><span style="color:#c0c5ce;">()
-</span><span style="color:#c0c5ce;">    }
-</span><span style="color:#c0c5ce;">}
+<pre style="background-color:#ffffff;">
+<span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Pair&lt;A, B&gt; { </span><span style="color:#c82829;">first</span><span style="color:#4d4d4c;">: A, </span><span style="color:#c82829;">second</span><span style="color:#4d4d4c;">: B }
+</span><span style="color:#8959a8;">impl</span><span style="color:#4d4d4c;">&lt;A: Hash, B: Hash&gt; Hash </span><span style="color:#8959a8;">for </span><span style="color:#4d4d4c;">Pair&lt;A, B&gt; {
+</span><span style="color:#4d4d4c;">    </span><span style="color:#8959a8;">fn </span><span style="color:#4271ae;">hash</span><span style="color:#4d4d4c;">(</span><span style="color:#3e999f;">&amp;</span><span style="color:#f5871f;">self</span><span style="color:#4d4d4c;">) -&gt; </span><span style="color:#8959a8;">u64 </span><span style="color:#4d4d4c;">{
+</span><span style="color:#4d4d4c;">        </span><span style="color:#c82829;">self</span><span style="color:#4d4d4c;">.first.</span><span style="color:#4271ae;">hash</span><span style="color:#4d4d4c;">() </span><span style="color:#3e999f;">^ </span><span style="color:#c82829;">self</span><span style="color:#4d4d4c;">.second.</span><span style="color:#4271ae;">hash</span><span style="color:#4d4d4c;">()
+</span><span style="color:#4d4d4c;">    }
+</span><span style="color:#4d4d4c;">}
 </span></pre>
 <p>Here, the <code>Pair</code> type implements <code>Hash</code> if, and only if, its components do --
 allowing the single <code>Pair</code> type to be used in different contexts, while
 supporting the largest API available for each context.  It's such a common
 pattern in Rust that there is built-in support for generating certain kinds of
 &quot;mechanical&quot; implementations automatically:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">derive</span><span style="color:#c0c5ce;">(Hash)]
-</span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">Pair&lt;A, B&gt; { .. }
+<pre style="background-color:#ffffff;">
+<span style="color:#4d4d4c;">#[</span><span style="color:#c82829;">derive</span><span style="color:#4d4d4c;">(Hash)]
+</span><span style="color:#8959a8;">struct </span><span style="color:#4d4d4c;">Pair&lt;A, B&gt; { .. }
 </span></pre></li>
 <li>
 <p><strong>Extension methods</strong>. Traits can be used to extend an existing type (defined
