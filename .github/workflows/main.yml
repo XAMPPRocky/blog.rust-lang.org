@@ -19,6 +19,7 @@ jobs:
           token: "${{ secrets.GITHUB_TOKEN }}"
       - run: /tmp/zola build -u https://xampprocky.github.io/blog.rust-lang.org
       - uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: github.ref == 'refs/heads/master'
         with:
           ACCESS_TOKEN: ${{ github.SECRET_TOKEN }}
           BRANCH: gh-pages
