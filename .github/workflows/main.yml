@@ -17,7 +17,7 @@ jobs:
           owner: getzola
           repo: zola
           token: "${{ secrets.GITHUB_TOKEN }}"
-      - run: /tmp/zola build -u xampprocky.github.io/blog.rust-lang.org
+      - run: /tmp/zola build -u https://xampprocky.github.io/blog.rust-lang.org
       - uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ github.SECRET_TOKEN }}
