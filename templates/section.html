@@ -14,10 +14,10 @@
     <div class="mw6-l">
         See Also:
         <ul>
-        {% for blog in section.subsections | concat(with=section.ancestors) %}
+        {%- for blog in section.subsections | concat(with=section.ancestors) -%}
             {% set blog = get_section(path=blog, metadata_only=true) %}
             <li><a href="{{ blog.permalink }}">{{blog.title}}</a></li>
-        {% endfor %}
+        {%- endfor %}
         </ul>
     </div>
   </div>
@@ -25,21 +25,20 @@
 
 <section id="posts" class="posts">
    <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
-    <table class="post-list collapse w-100 f2-l f2-m f3-s">
-        {% for year, posts in section.pages | sort(attribute="year") | reverse | group_by(attribute="year")  %}
-        <tr>
-            <td class="bn"></td>
-            <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">Posts in {{year}}</h3></td>
-        </tr>
-        {%- for post in posts | reverse -%}
-            <tr>
-                <td class="tr o-60 pr4 pr5-l bn">{{ post.date | date(format="%b. %d") }}</td>
-                <td class="bn"><a href="{{ post.permalink }}">{{ post.title }}</a></td>
-            </tr>
-        {%- endfor -%}
-        {%- endfor %}
-    </table>
-
+       <table class="post-list collapse w-100 f2-l f2-m f3-s">
+           {%- for year, posts in section.pages | sort(attribute="year") | reverse | group_by(attribute="year")  %}
+           <tr>
+               <td class="bn"></td>
+               <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">Posts in {{year}}</h3></td>
+           </tr>
+           {%- for post in posts | reverse -%}
+           <tr>
+               <td class="tr o-60 pr4 pr5-l bn">{{ post.date | date(format="%b. %d") }}</td>
+               <td class="bn"><a href="{{ post.permalink }}">{{ post.title }}</a></td>
+           </tr>
+           {% endfor -%}
+           {%- endfor -%}
+       </table>
   </div>
 </section>
 {% endblock page %}
