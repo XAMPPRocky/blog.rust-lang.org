@@ -40,6 +40,6 @@ And if you know the compiler and want to pitch in on the rustc-dev-guide Overvie
 
 Are you interested in learning more about the `rustc` compiler and teaching others? Drop by our [Zulip stream](https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning) and say hello!
 
-+++
+---
 
 <sup>1</sup> These numbers account for lines in Rust files across all dependencies necessary to build `rustc`. Thanks to @LeSeulArtichaut for these calculations! See [the notes on Zulip](https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning/topic/The.20Rustc.20Overview.3A.20blog.20post/near/189441101) for additional details.
