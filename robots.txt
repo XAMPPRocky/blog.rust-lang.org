@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://blog.rust-lang.org/sitemap.xml
+Sitemap: xampprocky.github.io/blog.rust-lang.org/sitemap.xml
