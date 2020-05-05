@@ -21,27 +21,28 @@
 <meta property="og:locale" content="en_US" />
 
 <!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/blog.rust-lang.org/fonts/FiraSans-SemiBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
 
 <!-- styles -->
-<link rel="stylesheet" href="/blog.rust-lang.org/styles/vendor.css"/>
-<link rel="stylesheet" href="/blog.rust-lang.org/styles/fonts.css"/>
-<link rel="stylesheet" href="/blog.rust-lang.org/styles/app.css"/>
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/blog.rust-lang.org/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/blog.rust-lang.org/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/blog.rust-lang.org/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/blog.rust-lang.org/images/favicon.ico">
-<link rel="manifest" href="/blog.rust-lang.org/images/site.webmanifest">
-<link rel="mask-icon" href="/blog.rust-lang.org/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +53,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/blog.rust-lang.org/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/blog.rust-lang.org/images/rust-logo-blk.svg">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -87,14 +88,14 @@ programming language that is empowering everyone to build reliable and efficient
 </code></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website,
 and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1350-2019-05-23">detailed release notes for 1.35.0</a> on GitHub.</p>
-<h2><a href="#whats-in-1.35.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.35.0-stable"></a>What's in 1.35.0 stable</h2>
+<h2><a href="#whats-in-1350-stable" aria-hidden="true" class="anchor" id="whats-in-1350-stable"></a>What's in 1.35.0 stable</h2>
 <p>The highlight of this release is the implementation of the <code>FnOnce</code>, <code>FnMut</code>,
 and <code>Fn</code> closure traits for <code>Box&lt;dyn FnOnce&gt;</code>, <code>Box&lt;dyn FnMut&gt;</code>, and <code>Box&lt;dyn Fn&gt;</code> respectively.
 Additionally, closures may now be coerced to unsafe function pointers.
 The <code>dbg!</code> macro introduced in <a href="https://blog.rust-lang.org/2019/01/17/Rust-1.32.0.html#the-dbg-macro">Rust 1.32.0</a> can now also be called without arguments.
 Moreover, there were a number of standard library stabilizations.
 Read on for a few highlights, or see the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1350-2019-05-23">detailed release notes</a> for additional information.</p>
-<h3><a href="#fn-closure-traits-implemented-for-box<dyn-fn*>" aria-hidden="true" class="anchor" id="fn-closure-traits-implemented-for-box<dyn-fn*>"></a><code>Fn*</code> closure traits implemented for <code>Box&lt;dyn Fn*&gt;</code></h3>
+<h3><a href="#fn-closure-traits-implemented-for-boxdyn-fn" aria-hidden="true" class="anchor" id="fn-closure-traits-implemented-for-boxdyn-fn"></a><code>Fn*</code> closure traits implemented for <code>Box&lt;dyn Fn*&gt;</code></h3>
 <p>In Rust 1.35.0, the <code>FnOnce</code>, <code>FnMut</code>, and the <code>Fn</code> traits <a href="https://github.com/rust-lang/rust/pull/55431">are now implemented</a> for <code>Box&lt;dyn FnOnce&gt;</code>,
 <code>Box&lt;dyn FnMut&gt;</code>, and <code>Box&lt;dyn Fn&gt;</code> respectively.</p>
 <p>Previously, if you wanted to call the function stored in a boxed closure, you had to use <a href="https://doc.rust-lang.org/1.34.0/std/boxed/trait.FnBox.html"><code>FnBox</code></a>.
@@ -142,7 +143,7 @@ fn main() {
     }
 }
 </code></pre>
-<h3><a href="#calling-dbg()-with-no-argument" aria-hidden="true" class="anchor" id="calling-dbg()-with-no-argument"></a>Calling <code>dbg!()</code> with no argument</h3>
+<h3><a href="#calling-dbg-with-no-argument" aria-hidden="true" class="anchor" id="calling-dbg-with-no-argument"></a>Calling <code>dbg!()</code> with no argument</h3>
 <p>For the benefit of all the occasional and frequent &quot;print debuggers&quot; out there,
 <a href="https://blog.rust-lang.org/2019/01/17/Rust-1.32.0.html#the-dbg-macro">Rust 1.32.0</a> saw the release of <a href="https://doc.rust-lang.org/std/macro.dbg.html">the <code>dbg!</code> macro</a>.
 To recap, the macro allows you to quickly inspect the value of some expression with context.
@@ -178,7 +179,7 @@ For example, with:</p>
 </code></pre>
 <h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
 <p>In 1.35.0, a number of APIs have become stable.</p>
-<p>In addition, some implementations were added and other changes occured as well.
+<p>In addition, some implementations were added and other changes occurred as well.
 See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1350-2019-05-23">detailed release notes</a> for more details.</p>
 <h4><a href="#copy-the-sign-of-a-floating-point-number-onto-another" aria-hidden="true" class="anchor" id="copy-the-sign-of-a-floating-point-number-onto-another"></a>Copy the sign of a floating point number onto another</h4>
 <p>With this release, new methods <code>copysign</code> have been added to the floating point primitive types <a href="https://doc.rust-lang.org/std/primitive.f32.html"><code>f32</code></a> and <a href="https://doc.rust-lang.org/std/primitive.f64.html"><code>f64</code></a>:</p>
@@ -226,7 +227,7 @@ See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#versi
 </ul>
 <p>This function takes a raw pointer and hashes it. Using <code>ptr::hash</code>,
 you can avoid hashing the pointed-to value of a reference and instead hash the address.</p>
-<h4><a href="#copy-the-contents-of-an-option&t>" aria-hidden="true" class="anchor" id="copy-the-contents-of-an-option&t>"></a>Copy the contents of an <code>Option&lt;&amp;T&gt;</code></h4>
+<h4><a href="#copy-the-contents-of-an-optiont" aria-hidden="true" class="anchor" id="copy-the-contents-of-an-optiont"></a>Copy the contents of an <code>Option&lt;&amp;T&gt;</code></h4>
 <p>From the very beginning with Rust 1.0.0,
 the methods <code>Option::cloned</code> for <code>Option&lt;&amp;T&gt;</code> and <code>Option&lt;&amp;mut T&gt;</code> have allowed you to clone the contents in case of <code>Some(_)</code>.
 However, cloning can sometimes be an expensive operation and the methods <code>opt.cloned()</code> provided no hints to that effect.</p>
@@ -252,7 +253,7 @@ this release of Clippy <a href="https://github.com/rust-lang/rust-clippy/pull/41
 <p>See the <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-135-beta">detailed release notes for Clippy</a> for more details.</p>
 <h3><a href="#changes-in-cargo" aria-hidden="true" class="anchor" id="changes-in-cargo"></a>Changes in Cargo</h3>
 <p>See the <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-135-2019-05-23">detailed release notes for Cargo</a> for more details.</p>
-<h2><a href="#contributors-to-135.0" aria-hidden="true" class="anchor" id="contributors-to-135.0"></a>Contributors to 1.35.0</h2>
+<h2><a href="#contributors-to-1350" aria-hidden="true" class="anchor" id="contributors-to-1350"></a>Contributors to 1.35.0</h2>
 <p>Many people came together to create Rust 1.35.0.
 We couldn't have done it without all of you.
 <a href="https://thanks.rust-lang.org/rust/1.35.0/">Thanks!</a></p>
@@ -284,10 +285,10 @@ We couldn't have done it without all of you.
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/blog.rust-lang.org/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/blog.rust-lang.org/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/blog.rust-lang.org/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/blog.rust-lang.org/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
       </div>
 
     </div>
@@ -298,6 +299,8 @@ We couldn't have done it without all of you.
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
 
   </body>
 </html>
