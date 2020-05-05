@@ -84,19 +84,14 @@
       <p>With all that's going on in the world you'd be forgiven for forgetting that as
 of today, it has been five years since we released 1.0 in 2015! Rust has changed
 a lot these past five years, so we wanted reflect back on all of our
-contributors' work over these past five years. First we wanted to share some
-statistics on just how much Rust has grown.</p>
-<ul>
-<li>Rust has been voted <a href="https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-and-wanted">&quot;Most Loved Programming&quot;</a> every year in the past four
-Stack Overflow developer surveys since it went 1.0.</li>
-<li>We have served over 160TB of different versions of the compiler, tooling, and
-documentation in April alone!</li>
-<li>In the same month we served over 22TB of crates to 227 million
-requests on crates.io.</li>
-</ul>
+contributors' work over these past five years.</p>
+<p>If this is the first time you're reading about Rust; Rust is a general purpose
+programming language empowering everyone to build reliable and efficient
+software. Rust can be built to run anywhere in the stack, whether as the kernel
+for your operating system or your next interactive web app. It is built entirely
+by an open and diverse community of individuals, primarily volunteers who
+generously donate their time and expertise to help make Rust what it is.</p>
 <h2><a href="#major-changes-since-10" aria-hidden="true" class="anchor" id="major-changes-since-10"></a>Major Changes since 1.0</h2>
-<p>We've compiled a list of some of the major changes from each Rust's releases
-since 1.0.</p>
 <p><strong><a href="https://blog.rust-lang.org/2015/08/06/Rust-1.2.html">1.2</a> — Parallel Codegen</strong> Compile time improvements are large theme to every
 release of Rust, and it's hard to imagine that there was a short time where
 Rust had no parallel code generation at all.</p>
@@ -229,7 +224,7 @@ Could not compile `error-messages`.
 To learn more, run the command again with --verbose.
 </code></pre>
 </details>
-<p><img src="../../../images/2020-05-15-five-years-of-rust/trait-error-1.2.0.png" alt="A terminal screenshot of the 1.2.0 error message." /></p>
+<p><img src="/images/2020-05-15-five-years-of-rust/trait-error-1.2.0.png" alt="A terminal screenshot of the 1.2.0 error message." /></p>
 <details>
  <summary>1.43.0 Error Message</summary>
 <pre><code>   Compiling error-messages v0.1.0 (/Users/ep/src/rust/error-messages)
@@ -255,7 +250,7 @@ error: could not compile `error-messages`.
 To learn more, run the command again with --verbose.
 </code></pre>
 </details>
-<p><img src="../../../images/2020-05-15-five-years-of-rust/trait-error-1.43.0.png" alt="A terminal screenshot of the 1.43.0 error message." /></p>
+<p><img src="/images/2020-05-15-five-years-of-rust/trait-error-1.43.0.png" alt="A terminal screenshot of the 1.43.0 error message." /></p>
 <h5><a href="#second-example-help" aria-hidden="true" class="anchor" id="second-example-help"></a>Second Example (help)</h5>
 <pre><code class="language-rust">fn main() {
     let s = &quot;&quot;.to_owned();
@@ -290,7 +285,7 @@ To learn more, run the command again with --verbose.
 
 </code></pre>
 </details>
-<p><img src="../../../images/2020-05-15-five-years-of-rust/help-error-1.2.0.png" alt="A terminal screenshot of the 1.2.0 error message." /></p>
+<p><img src="/images/2020-05-15-five-years-of-rust/help-error-1.2.0.png" alt="A terminal screenshot of the 1.2.0 error message." /></p>
 <details>
  <summary>1.43.0 Error Message</summary>
 <pre><code>   Compiling error-messages v0.1.0 (/Users/ep/src/rust/error-messages)
@@ -314,7 +309,7 @@ error: could not compile `error-messages`.
 To learn more, run the command again with --verbose.
 </code></pre>
 </details>
-<p><img src="../../../images/2020-05-15-five-years-of-rust/help-error-1.43.0.png" alt="A terminal screenshot of the 1.43.0 error message." /></p>
+<p><img src="/images/2020-05-15-five-years-of-rust/help-error-1.43.0.png" alt="A terminal screenshot of the 1.43.0 error message." /></p>
 <h5><a href="#third-example-borrow-checker" aria-hidden="true" class="anchor" id="third-example-borrow-checker"></a>Third Example (Borrow checker)</h5>
 <pre><code class="language-rust">fn main() {
     let mut x = 7;
@@ -352,7 +347,7 @@ Could not compile `error-messages`.
 To learn more, run the command again with --verbose.
 </code></pre>
 </details>
-<p><img src="../../../images/2020-05-15-five-years-of-rust/borrow-error-1.2.0.png" alt="A terminal screenshot of the 1.2.0 error message." /></p>
+<p><img src="/images/2020-05-15-five-years-of-rust/borrow-error-1.2.0.png" alt="A terminal screenshot of the 1.2.0 error message." /></p>
 <details>
  <summary>1.43.0 Error Message</summary>
 <pre><code>   Compiling error-messages v0.1.0 (/Users/ep/src/rust/error-messages)
@@ -375,7 +370,7 @@ error: could not compile `error-messages`.
 To learn more, run the command again with --verbose.
 </code></pre>
 </details>
-<p><img src="../../../images/2020-05-15-five-years-of-rust/borrow-error-1.43.0.png" alt="A terminal screenshot of the 1.43.0 error message." /></p>
+<p><img src="/images/2020-05-15-five-years-of-rust/borrow-error-1.43.0.png" alt="A terminal screenshot of the 1.43.0 error message." /></p>
 <h2><a href="#quotes-from-the-teams" aria-hidden="true" class="anchor" id="quotes-from-the-teams"></a>Quotes from the teams</h2>
 <p>Of course we can't cover every change that has happened. So we reached out and
 asked some of our leads what changes their most proud of;</p>
@@ -427,19 +422,33 @@ contributors improving Miri e.g. by adding support for file system access,
 unwinding, and concurrency.</p>
 <p>— Ralf Jung (<a href="https://www.rust-lang.org/governance/teams/compiler#miri">Miri</a>)</p>
 </blockquote>
-<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<h2><a href="#the-community" aria-hidden="true" class="anchor" id="the-community"></a>The Community</h2>
 <p>As the language has changed and grown a lot in these past five years so has its
 community. There's been so many great projects written in Rust, and Rust's
-presence in production has grown exponentially.</p>
+presence in production has grown exponentially. We wanted to share some
+statistics on just how much Rust has grown.</p>
+<ul>
+<li>Rust has been voted <a href="https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-and-wanted">&quot;Most Loved Programming&quot;</a> every year in the past
+four Stack Overflow developer surveys since it went 1.0.</li>
+<li>We have served over 160TB of different versions of the compiler, tooling, and
+documentation in April alone!</li>
+<li>In the same month we served over 22TB of crates to 227 million
+requests on crates.io.</li>
+</ul>
 <p>When Rust turned turned 1.0 you could count the number of companies that were
 using it in production on one hand. Today, it is being used by hundreds of
 tech companies with some of the largest tech companies such as Apple, Dropbox,
 Facebook, Google, and Microsoft choosing to use Rust for its performance,
 reliability, and productivity in their projects.</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>Obviously we couldn't cover every change or improvement to Rust that's happened
+since 2015. What have been your favourite changes or new favourite Rust
+projects? Feel free to post your answer and discussion on <a href="TODO:%20CREATE%20FORUM%20POST%20BEFORE%20MERGE">our Discourse forum</a></p>
 <p>Lastly, we wanted to thank everyone who has to contributed to the Rust, whether
-you contributed a new feature or fixed a typo, your work has made Rust what it
-is today. We can't wait to see how Rust and its community will continue to grow
-and change, and see what you all will build with Rust in the coming decade!</p>
+you contributed a new feature or fixed a typo, your work has made Rust the
+amazing it is today. We can't wait to see how Rust and its community will
+continue to grow and change, and see what you all will build with Rust in the
+coming decade!</p>
 
     </div>
   </div>
