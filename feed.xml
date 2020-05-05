@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-05T22:38:32.769827098+00:00</updated>
+    <updated>2020-05-05T22:40:06.832064146+00:00</updated>
 
     
     <entry>
@@ -26,9 +26,9 @@ contributors' work over these past five years.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;If this is the first time you're reading about Rust;&lt;/strong&gt; Rust is a general
 purpose programming language empowering everyone to build reliable and efficient
 software. Rust can be built to run anywhere in the stack, whether as the kernel
-for your operating system or your next interactive web app. It is built entirely
-by an open and diverse community of individuals, primarily volunteers who
-generously donate their time and expertise to help make Rust what it is.&lt;/p&gt;
+for your operating system or your next web app. It is built entirely by an open
+and diverse community of individuals, primarily volunteers who generously donate
+their time and expertise to help make Rust what it is.&lt;/p&gt;
 &lt;h2&gt;&lt;a href=&quot;#major-changes-since-10&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;major-changes-since-10&quot;&gt;&lt;/a&gt;Major Changes since 1.0&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/08/06/Rust-1.2.html&quot;&gt;1.2&lt;/a&gt; — Parallel Codegen&lt;/strong&gt; Compile time improvements are large theme to every
 release of Rust, and it's hard to imagine that there was a short time where
