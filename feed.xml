@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-06T07:34:22.396170877+00:00</updated>
+    <updated>2020-05-06T07:40:08.272098981+00:00</updated>
 
     
     <entry>
@@ -117,8 +117,8 @@ allowing it to accept more verifiable safe code.&lt;/li&gt;
 use modules.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Const Functions&lt;/strong&gt; Const functions allow you to run and evaluate Rust code
 at compile time.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Rustfmt&lt;/strong&gt; A new code formatting tool built specifically for Rust.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Clippy&lt;/strong&gt; Rust's linter for catching common mistakes. Clippy makes it a lot
+&lt;li&gt;&lt;strong&gt;Rustfmt 1.0&lt;/strong&gt; A new code formatting tool built specifically for Rust.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Clippy 1.0&lt;/strong&gt; Rust's linter for catching common mistakes. Clippy makes it a lot
 easier to make sure that your code is not only safe but correct.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Rustfix&lt;/strong&gt; With all the syntax changes, we knew we wanted to provide the
 tooling to make the transition as easy as possible. Now when changes are
@@ -364,6 +364,15 @@ using Miri to &lt;a href=&quot;https://github.com/rust-lang/miri/#bugs-found-by-
 contributors improving Miri e.g. by adding support for file system access,
 unwinding, and concurrency.&lt;/p&gt;
 &lt;p&gt;— Ralf Jung (&lt;a href=&quot;https://www.rust-lang.org/governance/teams/compiler#miri&quot;&gt;Miri&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If I had to pick one thing I'm most proud of, it was the work on non-lexical
+lifetimes (NLL). It's not only because I think it made a big difference in
+the usability of Rust, but also because of the way that we implemented it by
+forming the NLL working group. This working group brought in a lot of great
+contributors, many of whom are still working on the compiler today. Open
+source at its best!&lt;/p&gt;
+&lt;p&gt;— Niko Matsakis (&lt;a href=&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;Language&lt;/a&gt;)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;&lt;a href=&quot;#the-community&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;the-community&quot;&gt;&lt;/a&gt;The Community&lt;/h2&gt;
 &lt;p&gt;As the language has changed and grown a lot in these past five years so has its
