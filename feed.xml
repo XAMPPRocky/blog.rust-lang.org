@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-05T23:59:55.421929807+00:00</updated>
+    <updated>2020-05-06T07:34:22.396170877+00:00</updated>
 
     
     <entry>
@@ -316,7 +316,7 @@ To learn more, run the command again with --verbose.
 &lt;p&gt;&lt;img src=&quot;/images/2020-05-15-five-years-of-rust/borrow-error-1.43.0.png&quot; alt=&quot;A terminal screenshot of the 1.43.0 error message.&quot; /&gt;&lt;/p&gt;
 &lt;h2&gt;&lt;a href=&quot;#quotes-from-the-teams&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;quotes-from-the-teams&quot;&gt;&lt;/a&gt;Quotes from the teams&lt;/h2&gt;
 &lt;p&gt;Of course we can't cover every change that has happened. So we reached out and
-asked some of our leads what changes their most proud of:&lt;/p&gt;
+asked some of our teams what changes they are most proud of:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;For rustdoc, the big things were:&lt;/p&gt;
 &lt;ul&gt;
