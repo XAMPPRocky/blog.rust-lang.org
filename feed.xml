@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-06T16:29:37.357057927+00:00</updated>
+    <updated>2020-05-06T17:33:54.608380059+00:00</updated>
 
     
     <entry>
@@ -325,7 +325,7 @@ asked some of our teams what changes they are most proud of:&lt;/p&gt;
 &lt;li&gt;The search itself and its optimizations (last one being to convert it into JSON)&lt;/li&gt;
 &lt;li&gt;The possibility to test more accurately doc code blocks &amp;quot;compile_fail,
 should_panic, allow_fail&amp;quot;&lt;/li&gt;
-&lt;li&gt;Doc tests can now be put into their own files.&lt;/li&gt;
+&lt;li&gt;Doc tests are now generated as their own seperate binaries.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;— Guillaume Gomez (&lt;a href=&quot;https://www.rust-lang.org/governance/teams/rustdoc&quot;&gt;rustdoc&lt;/a&gt;)&lt;/p&gt;
 &lt;/blockquote&gt;
