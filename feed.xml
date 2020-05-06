@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-06T07:40:08.272098981+00:00</updated>
+    <updated>2020-05-06T07:41:55.204348690+00:00</updated>
 
     
     <entry>
@@ -97,7 +97,7 @@ types in your API, such as common IP addresses or interesting numbers.&lt;/p&gt;
 library rustc would have to re-compile all of the code. Now rustc is a lot
 smarter about caching as much as possible and only needing to re-generate
 what's needed.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2018/05/10/Rust-1.26.html&quot;&gt;1.26&lt;/a&gt; — Existential Types&lt;/strong&gt; The addition of &lt;code&gt;impl Trait&lt;/code&gt; gives you expressive
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2018/05/10/Rust-1.26.html&quot;&gt;1.26&lt;/a&gt; — impl Trait&lt;/strong&gt; The addition of &lt;code&gt;impl Trait&lt;/code&gt; gives you expressive
 dynamic APIs with the benefits and performance of static dispatch.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2018/08/02/Rust-1.28.html&quot;&gt;1.28&lt;/a&gt; — Global Allocators&lt;/strong&gt; Previously you were restricted to using the
 allocator that rust provided. With the global allocator API you can now
