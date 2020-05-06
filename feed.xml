@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-06T08:09:27.048656156+00:00</updated>
+    <updated>2020-05-06T09:56:56.786182785+00:00</updated>
 
     
     <entry>
@@ -39,7 +39,7 @@ book that explores Unsafe Rust and its surrounding topics has become a great
 resource for anyone looking to learn and understand one of the hardest aspects
 of the language.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/10/29/Rust-1.4.html&quot;&gt;1.4&lt;/a&gt; — Windows MSVC Tier 1 Support&lt;/strong&gt; The first tier 1 platform promotion was
-bringing native support for 64-bit Windows using the Microsoft Visual Compiler
+bringing native support for 64-bit Windows using the Microsoft Visual C++ toolchain
 (MSVC). Before 1.4 you needed to also have MinGW (a third party GNU environment)
 installed in order to use and compile your Rust programs. Rust's Windows support
 is one of the biggest improvements these past five years. Just recently
