@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-06T17:33:54.608380059+00:00</updated>
+    <updated>2020-05-07T13:09:25.532266573+00:00</updated>
 
     
     <entry>
@@ -34,7 +34,7 @@ their time and expertise to help make Rust what it is.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/08/06/Rust-1.2.html&quot;&gt;1.2&lt;/a&gt; — Parallel Codegen&lt;/strong&gt; Compile time improvements are large theme to every
 release of Rust, and it's hard to imagine that there was a short time where
 Rust had no parallel code generation at all.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/09/17/Rust-1.3.html&quot;&gt;1.3&lt;/a&gt;— The Rustnomicon&lt;/strong&gt; Our first release of the fantastic &amp;quot;Rustnomicon&amp;quot;, a
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/09/17/Rust-1.3.html&quot;&gt;1.3&lt;/a&gt; — The Rustnomicon&lt;/strong&gt; Our first release of the fantastic &amp;quot;Rustnomicon&amp;quot;, a
 book that explores Unsafe Rust and its surrounding topics has become a great
 resource for anyone looking to learn and understand one of the hardest aspects
 of the language.&lt;/p&gt;
