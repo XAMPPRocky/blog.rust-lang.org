@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-07T13:09:54.431121826+00:00</updated>
+    <updated>2020-05-07T14:48:43.291160872+00:00</updated>
 
     
     <entry>
@@ -351,7 +351,7 @@ think that's really impressive (though of course the release team is not the
 sole contributor here). Overall, I've found that the release team has done an
 excellent job of managing to scale to the increasing traffic on issue
 trackers, PRs being filed, etc.&lt;/p&gt;
-&lt;p&gt;— Mark Rousskov (&lt;a href=&quot;https://www.rust-lang.org/governance/teams/release&quot;&gt;Release team&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;— Mark Rousskov (&lt;a href=&quot;https://www.rust-lang.org/governance/teams/release&quot;&gt;Release&lt;/a&gt;)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Within the last 3 years we managed to turn Miri from an experimental
