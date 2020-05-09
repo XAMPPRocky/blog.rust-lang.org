@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-09T12:45:52.833307835+00:00</updated>
+    <updated>2020-05-09T12:47:46.122143641+00:00</updated>
 
     
     <entry>
@@ -357,7 +357,7 @@ trackers, PRs being filed, etc.&lt;/p&gt;
 &lt;p&gt;— Mark Rousskov (&lt;a href=&quot;https://www.rust-lang.org/governance/teams/release&quot;&gt;Release&lt;/a&gt;)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Within the last 3 years we managed to turn Miri from an experimental
+&lt;p&gt;Within the last 3 years we managed to turn &lt;a href=&quot;https://github.com/rust-lang/miri&quot;&gt;Miri&lt;/a&gt; from an experimental
 interpreter into a practical tool for exploring language design and finding
 bugs in real code—a great combination of PL theory and practice.  On the
 theoretical side we have &lt;a href=&quot;https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md&quot;&gt;Stacked Borrows&lt;/a&gt;, the most concrete proposal for a
