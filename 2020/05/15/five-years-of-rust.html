@@ -421,9 +421,9 @@ interpreter into a practical tool for exploring language design and finding
 bugs in real code -- a great combination of PL theory and practice.  On the
 theoretical side we have <a href="https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md">Stacked Borrows</a>, the most concrete proposal for a
 Rust aliasing model so far.</p>
-<p>On the practical side, while initially we had to prompt maintainers to add
-Miri checking to a few key libraries, recently we saw a great uptake of people
-using Miri to <a href="https://github.com/rust-lang/miri/#bugs-found-by-miri">find and fix bugs</a> in various crates, and a similar uptake in
+<p>On the practical side, while initially only a few key libraries were checked in
+Miri by us, recently we saw a great uptake of people using Miri to
+<a href="https://github.com/rust-lang/miri/#bugs-found-by-miri">find and fix bugs</a> in their own crates and dependencies, and a similar uptake in
 contributors improving Miri e.g. by adding support for file system access,
 unwinding, and concurrency.</p>
 <p>— Ralf Jung (<a href="https://www.rust-lang.org/governance/teams/compiler#miri">Miri</a>)</p>
