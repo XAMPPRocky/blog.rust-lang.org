@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-09T12:06:52.190928923+00:00</updated>
+    <updated>2020-05-09T12:07:19.510272721+00:00</updated>
 
     
     <entry>
@@ -139,7 +139,7 @@ async programming has blossomed into a diverse and performant ecosystem.&lt;/p&g
 &lt;h2&gt;&lt;a href=&quot;#error-diagnostics&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;error-diagnostics&quot;&gt;&lt;/a&gt;Error Diagnostics&lt;/h2&gt;
 &lt;p&gt;One thing that we haven't mentioned much is how much Rust's error messages and
 diagnostics have improved since 1.0. But they have improved so much over these
-past five years, looking at older error messages now feels like looking a
+past five years, looking at older error messages now feels like looking at a
 different language.&lt;/p&gt;
 &lt;p&gt;We’ve highlighted a couple of examples that best showcase just how much we’ve
 improved showing users where they made mistakes and importantly help them
