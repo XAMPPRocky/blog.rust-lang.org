@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-15T07:17:13.207786712+00:00</updated>
+    <updated>2020-05-15T11:13:27.097481066+00:00</updated>
 
     
     <entry>
@@ -398,7 +398,7 @@ reliability, and productivity in their projects.&lt;/p&gt;
 &lt;h2&gt;&lt;a href=&quot;#conclusion&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Obviously we couldn't cover every change or improvement to Rust that's happened
 since 2015. What have been your favourite changes or new favourite Rust
-projects? Feel free to post your answer and discussion on &lt;a href=&quot;TODO:%20CREATE%20FORUM%20POST%20BEFORE%20MERGE&quot;&gt;our
+projects? Feel free to post your answer and discussion on &lt;a href=&quot;https://users.rust-lang.org/t/five-years-of-rust/42661&quot;&gt;our
 Discourse forum&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Lastly, we wanted to thank everyone who has to contributed to the Rust, whether
 you contributed a new feature or fixed a typo, your work has made Rust the
