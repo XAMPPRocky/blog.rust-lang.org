@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-09T13:47:25.470456085+00:00</updated>
+    <updated>2020-05-15T07:17:13.207786712+00:00</updated>
 
     
     <entry>
@@ -136,7 +136,7 @@ handling Futures was one of the major milestones to making async programming
 in Rust a first class citizen. Even just six months after its release the
 async programming has blossomed into a diverse and performant ecosystem.&lt;/p&gt;
 &lt;h4&gt;&lt;a href=&quot;#2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;2020&quot;&gt;&lt;/a&gt;2020&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;[1.42] — Subslice patterns:&lt;/strong&gt; While not the biggest change, the addition
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2020/03/12/Rust-1.42.html&quot;&gt;1.42&lt;/a&gt; — Subslice patterns:&lt;/strong&gt; While not the biggest change, the addition
 of the &lt;code&gt;..&lt;/code&gt; (rest) pattern has been a long awaited quality of life
 feature that greatly improves the expressivity of pattern matching
 with slices.&lt;/p&gt;
