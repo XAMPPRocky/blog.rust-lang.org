@@ -10,8 +10,116 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-15T11:13:27.097481066+00:00</updated>
+    <updated>2020-07-01T08:34:50+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.44.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/06/18/Rust.1.44.1.html" type="text/html" title="Announcing Rust 1.44.1" />
+        <published>2020-06-18T00:00:00+00:00</published>
+        <updated>2020-06-18T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/06/18/Rust.1.44.1.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/06/18/Rust.1.44.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.44.1.
+Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.44.1 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
+appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-rust-1441&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-rust-1441&quot;&gt;&lt;/a&gt;What's in Rust 1.44.1&lt;/h2&gt;
+&lt;p&gt;Rust 1.44.1 addresses several tool regressions in Cargo, Clippy, and Rustfmt introduced in the 1.44.0 stable
+release. You can find more detailed information on the specific regressions in the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1441-2020-06-18&quot;&gt;release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-1441&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1441&quot;&gt;&lt;/a&gt;Contributors to 1.44.1&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.44.1.
+We couldn't have done it without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.44.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>2020 Event Lineup - Update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/06/10/event-lineup-update.html" type="text/html" title="2020 Event Lineup - Update" />
+        <published>2020-06-10T00:00:00+00:00</published>
+        <updated>2020-06-10T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/06/10/event-lineup-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/06/10/event-lineup-update.html">&lt;p&gt;In 2020 the way we can do events suddenly changed.
+In the past we had in-person events all around the world, with some major conferences throughout the year.
+With everything changed due to a global pandemic this won't be possible anymore.
+Nonetheless the Rust community found ways to continue with events in some form or another.
+With more and more events moving online they are getting more accessible to people no matter where they are.&lt;/p&gt;
+&lt;p&gt;Below you find updated information about Rust events in 2020.&lt;/p&gt;
+&lt;p&gt;Do you plan to run a Rust online event?
+Send an email to the &lt;a href=&quot;mailto:community@rust-lang.org&quot;&gt;Rust Community team&lt;/a&gt; and the team will be able to get your event on the calendar and might be able to offer further help.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;&lt;a href=&quot;#rust-latam&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rust-latam&quot;&gt;&lt;/a&gt;&lt;strong&gt;Rust LATAM&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Unfortunately the Latin American event &lt;a href=&quot;https://rustlatam.org/&quot;&gt;Rust LATAM&lt;/a&gt; had to be canceled this year.
+The team hopes to be able to resume the event in the future.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;&lt;a href=&quot;#oxidizejuly-17th-20th-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;oxidizejuly-17th-20th-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;Oxidize&lt;/strong&gt;&lt;br&gt;July 17th-20th, 2020&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&quot;https://oxidizeconf.com/&quot;&gt;Oxidize conference&lt;/a&gt; was relabeled to become Oxidize Global.
+From July 17-20 you will be able to learn about embedded systems and IoT in Rust.
+Over the course of 4 days you will be able to attend online workshops (July 17th), listen to talks (July 18th) and take part in the Impl Days, where you can collaborate with other Embedded Rust contributors in active programming sessions.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://oxidizeconf.com/#Schedule&quot;&gt;Tickets are on sale&lt;/a&gt; and the speakers &amp;amp; talks will be announced soon.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;&lt;a href=&quot;#rustconfaugust-20th-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rustconfaugust-20th-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;RustConf&lt;/strong&gt;&lt;br&gt;August 20th, 2020&lt;/h2&gt;
+&lt;p&gt;The official &lt;a href=&quot;https://rustconf.com/&quot;&gt;RustConf&lt;/a&gt; will be taking place fully online.
+Listen to talks and meet other Rust enthusiasts online in digital meetups &amp;amp; breakout rooms.
+See the &lt;a href=&quot;https://rustconf.com/speakers&quot;&gt;list of speakers&lt;/a&gt;, register already and follow &lt;a href=&quot;https://twitter.com/rustconf&quot;&gt;Twitter&lt;/a&gt; for updates as the event date approaches!&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;&lt;a href=&quot;#rusty-daysjuly-27th---august-2nd-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rusty-daysjuly-27th---august-2nd-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;Rusty Days&lt;/strong&gt;&lt;br&gt;July 27th - August 2nd, 2020&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://rusty-days.org/&quot;&gt;Rusty Days&lt;/a&gt; is a new conference and was planned to happen in Wroclaw, Poland.
+It now turned into a virtual Rust conference stretched over five days.
+You'll be able to see five speakers with five talks -- and everything is free of charge, streamed online and available to watch later.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://rusty-days.org/cfp&quot;&gt;Call for Papers&lt;/a&gt; is open. Follow &lt;a href=&quot;https://twitter.com/rdconf&quot;&gt;Twitter&lt;/a&gt; for updates.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;&lt;a href=&quot;#rustlaboctober-16th-17th-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rustlaboctober-16th-17th-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;RustLab&lt;/strong&gt;&lt;br&gt;October 16th-17th, 2020&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.rustlab.it&quot;&gt;RustLab 2020&lt;/a&gt; is also turning into an online event.
+The details are not yet settled, but they are aiming for the original dates.
+Keep an eye on &lt;a href=&quot;https://twitter.com/rustlab_conf&quot;&gt;their Twitter stream&lt;/a&gt; for further details.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;&lt;a href=&quot;#rustfest-netherlands-globalnovember-7th-8th-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rustfest-netherlands-globalnovember-7th-8th-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;RustFest &lt;del&gt;Netherlands&lt;/del&gt; Global&lt;/strong&gt;&lt;br&gt;November 7th-8th, 2020&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://netherlands.rustfest.eu/&quot;&gt;RustFest Netherlands&lt;/a&gt; was supposed to happen this June.
+The team decided to postpone the event and is now happening as an online conference in Q4 of this year.
+More information will be available soon on the &lt;a href=&quot;https://blog.rustfest.eu/&quot;&gt;RustFest blog&lt;/a&gt; and also on &lt;a href=&quot;https://twitter.com/rustfest&quot;&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update 2020-06-18&lt;/strong&gt;: RustFest has announced its dates: November 7th &amp;amp; 8th, running as an online community conference.
+See &lt;a href=&quot;https://blog.rustfest.eu/announcing-rustfest-2020&quot;&gt;the announcement blog post for details&lt;/a&gt;.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;Conferences are not the only thing happening.
+More and more local meetups get turned into online events.
+We try to highlight these in the &lt;a href=&quot;https://calendar.google.com/calendar/embed?src=apd9vmbc22egenmtu5l6c5jbfc@group.calendar.google.com&quot;&gt;community calendar&lt;/a&gt; as well as in the &lt;a href=&quot;https://this-week-in-rust.org/&quot;&gt;This Week in Rust newsletter&lt;/a&gt;.
+Some Rust developers are streaming their work on the language &amp;amp; their Rust projects.
+You can get more information in a &lt;a href=&quot;https://github.com/jamesmunns/awesome-rust-streaming&quot;&gt;curated list of Rust streams&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Do you plan to run a Rust online event?
+Send an email to the &lt;a href=&quot;mailto:community@rust-lang.org&quot;&gt;Rust Community team&lt;/a&gt; and the team will be able to get your event on the calendar and might be able to offer further help.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Community Team</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Announcing Rust 1.44.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/06/04/Rust-1.44.0.html" type="text/html" title="Announcing Rust 1.44.0" />
+        <published>2020-06-04T00:00:00+00:00</published>
+        <updated>2020-06-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/06/04/Rust-1.44.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/06/04/Rust-1.44.0.html">&lt;p&gt;The Rust team has published a new version of Rust, 1.44.0. Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;This is a shorter blog post than usual: in acknowledgement that taking a stand against the police brutality currently happening in the US and the world at large is more important than sharing tech knowledge, we decided to significantly scale back the amount of promotion we're doing for this release.&lt;/p&gt;
+&lt;p&gt;The Rust Core Team believes that tech is and always will be political, and we encourage everyone take the time today to learn about racial inequality and &lt;a href=&quot;https://blacklivesmatters.carrd.co/&quot;&gt;support the Black Lives Matter movement.&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-1440-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1440-stable&quot;&gt;&lt;/a&gt;What's in 1.44.0 stable&lt;/h2&gt;
+&lt;p&gt;Rust 1.44 is a small release, with &lt;a href=&quot;https://github.com/rust-lang/cargo/pull/8062/&quot;&gt;&lt;code&gt;cargo tree&lt;/code&gt; integrated in Cargo itself&lt;/a&gt; and &lt;a href=&quot;https://github.com/rust-lang/rust/pull/69033/&quot;&gt;support for &lt;code&gt;async&lt;/code&gt;/&lt;code&gt;await&lt;/code&gt; in &lt;code&gt;no_std&lt;/code&gt; contexts&lt;/a&gt; as its highlights. You can learn more about all the changes in this release by &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1440-2020-06-04&quot;&gt;reading the release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-1440&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1440&quot;&gt;&lt;/a&gt;Contributors to 1.44.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.44.0. We couldn't have done it without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.44.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Core Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Five Years of Rust</title>
@@ -20,8 +128,8 @@
         <updated>2020-05-15T00:00:00+00:00</updated>
         <id>https://blog.rust-lang.org/2020/05/15/five-years-of-rust.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2020/05/15/five-years-of-rust.html">&lt;p&gt;With all that's going on in the world you'd be forgiven for forgetting that as
-of today, it has been five years since we released 1.0 in 2015! Rust has changed
-a lot these past five years, so we wanted reflect back on all of our
+of today, it has been five years since we released 1.0! Rust has changed
+a lot these past five years, so we wanted to reflect back on all of our
 contributors' work since the stabilization of the language.&lt;/p&gt;
 &lt;p&gt;Rust is a general purpose programming language empowering everyone to build
 reliable and efficient software. Rust can be built to run anywhere in the stack,
@@ -30,11 +138,11 @@ entirely by an open and diverse community of individuals, primarily volunteers w
 generously donate their time and expertise to help make Rust what it is.&lt;/p&gt;
 &lt;h2&gt;&lt;a href=&quot;#major-changes-since-10&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;major-changes-since-10&quot;&gt;&lt;/a&gt;Major Changes since 1.0&lt;/h2&gt;
 &lt;h4&gt;&lt;a href=&quot;#2015&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;2015&quot;&gt;&lt;/a&gt;2015&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/08/06/Rust-1.2.html&quot;&gt;1.2&lt;/a&gt; — Parallel Codegen:&lt;/strong&gt; Compile time improvements are large theme to every
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/08/06/Rust-1.2.html&quot;&gt;1.2&lt;/a&gt; — Parallel Codegen:&lt;/strong&gt; Compile time improvements are a large theme to every
 release of Rust, and it's hard to imagine that there was a short time where
 Rust had no parallel code generation at all.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/09/17/Rust-1.3.html&quot;&gt;1.3&lt;/a&gt; — The Rustonomicon:&lt;/strong&gt; Our first release of the fantastic &amp;quot;Rustonomicon&amp;quot;, a
-book that explores Unsafe Rust and its surrounding topics has become a great
+book that explores Unsafe Rust and its surrounding topics and has become a great
 resource for anyone looking to learn and understand one of the hardest aspects
 of the language.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/10/29/Rust-1.4.html&quot;&gt;1.4&lt;/a&gt; — Windows MSVC Tier 1 Support:&lt;/strong&gt; The first tier 1 platform promotion was
@@ -133,8 +241,8 @@ own registry of crates that can be used in your projects like they were
 on crates.io.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2019/11/07/Rust-1.39.0.html&quot;&gt;1.39&lt;/a&gt; — Async/Await:&lt;/strong&gt; The stabilisation of the async/await keywords for
 handling Futures was one of the major milestones to making async programming
-in Rust a first class citizen. Even just six months after its release the
-async programming has blossomed into a diverse and performant ecosystem.&lt;/p&gt;
+in Rust a first class citizen. Even just six months after its release
+async programming in Rust has blossomed into a diverse and performant ecosystem.&lt;/p&gt;
 &lt;h4&gt;&lt;a href=&quot;#2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;2020&quot;&gt;&lt;/a&gt;2020&lt;/h4&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2020/03/12/Rust-1.42.html&quot;&gt;1.42&lt;/a&gt; — Subslice patterns:&lt;/strong&gt; While not the biggest change, the addition
 of the &lt;code&gt;..&lt;/code&gt; (rest) pattern has been a long awaited quality of life
@@ -330,14 +438,14 @@ asked some of our teams what changes they are most proud of:&lt;/p&gt;
 should_panic, allow_fail&amp;quot;&lt;/li&gt;
 &lt;li&gt;Doc tests are now generated as their own seperate binaries.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;— Guillaume Gomez (&lt;a href=&quot;https://www.rust-lang.org/governance/teams/rustdoc&quot;&gt;rustdoc&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;— Guillaume Gomez (&lt;a href=&quot;https://www.rust-lang.org/governance/teams/dev-tools#rustdoc&quot;&gt;rustdoc&lt;/a&gt;)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Rust now has baseline IDE support! Between IntelliJ Rust, RLS and
 rust-analyzer, I feel that most users should be able to find &amp;quot;not horrible&amp;quot;
 experience for their editor of choice. Five years ago, &amp;quot;writing Rust&amp;quot; meant
 using old school Vim/Emacs setup.&lt;/p&gt;
-&lt;p&gt;— Aleksey Kladov (&lt;a href=&quot;https://www.rust-lang.org/governance/teams/ides&quot;&gt;IDEs and editors&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;— Aleksey Kladov (&lt;a href=&quot;https://www.rust-lang.org/governance/teams/dev-tools#ides&quot;&gt;IDEs and editors&lt;/a&gt;)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;For me that would be: Adding first class support for popular embedded
@@ -354,7 +462,7 @@ think that's really impressive (though of course the release team is not the
 sole contributor here). Overall, I've found that the release team has done an
 excellent job of managing to scale to the increasing traffic on issue
 trackers, PRs being filed, etc.&lt;/p&gt;
-&lt;p&gt;— Mark Rousskov (&lt;a href=&quot;https://www.rust-lang.org/governance/teams/release&quot;&gt;Release&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;— Mark Rousskov (&lt;a href=&quot;https://www.rust-lang.org/governance/teams/operations#release&quot;&gt;Release&lt;/a&gt;)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Within the last 3 years we managed to turn &lt;a href=&quot;https://github.com/rust-lang/miri&quot;&gt;Miri&lt;/a&gt; from an experimental
@@ -383,14 +491,14 @@ community. There's been so many great projects written in Rust, and Rust's
 presence in production has grown exponentially. We wanted to share some
 statistics on just how much Rust has grown.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Rust has been voted &lt;a href=&quot;https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-and-wanted&quot;&gt;&amp;quot;Most Loved Programming&amp;quot;&lt;/a&gt; every year in the past
+&lt;li&gt;Rust has been voted &lt;a href=&quot;https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-and-wanted&quot;&gt;&amp;quot;Most Loved Programming Language&amp;quot;&lt;/a&gt; every year in the past
 four Stack Overflow developer surveys since it went 1.0.&lt;/li&gt;
 &lt;li&gt;We have served over 2.25 Petabytes (1PB = 1,000 TB) of different versions of the
 compiler, tooling, and documentation this year alone!&lt;/li&gt;
 &lt;li&gt;In the same time we have served over 170TB of crates to roughly 1.8 billion
 requests on crates.io, doubling the monthly traffic compared to last year.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;When Rust turned turned 1.0 you could count the number of companies that were
+&lt;p&gt;When Rust turned 1.0 you could count the number of companies that were
 using it in production on one hand. Today, it is being used by hundreds of
 tech companies with some of the largest tech companies such as Apple, Amazon,
 Dropbox, Facebook, Google, and Microsoft choosing to use Rust for its performance,
@@ -402,13 +510,45 @@ projects? Feel free to post your answer and discussion on &lt;a href=&quot;https
 Discourse forum&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Lastly, we wanted to thank everyone who has to contributed to the Rust, whether
 you contributed a new feature or fixed a typo, your work has made Rust the
-amazing it is today. We can't wait to see how Rust and its community will
+amazing project it is today. We can't wait to see how Rust and its community will
 continue to grow and change, and see what you all will build with Rust in the
 coming decade!&lt;/p&gt;
 </content>
 
         <author>
             <name>The Rust Core Team</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Announcing Rust 1.43.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/05/07/Rust.1.43.1.html" type="text/html" title="Announcing Rust 1.43.1" />
+        <published>2020-05-07T00:00:00+00:00</published>
+        <updated>2020-05-07T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/05/07/Rust.1.43.1.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/05/07/Rust.1.43.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.43.1.
+Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.43.1 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
+appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1431-2020-05-07&quot;&gt;detailed release notes for
+1.43.1&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-rust-1431&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-rust-1431&quot;&gt;&lt;/a&gt;What's in Rust 1.43.1&lt;/h2&gt;
+&lt;p&gt;Rust 1.43.1 addresses two regressions introduced in the 1.43.0 stable release, and updates the OpenSSL version used by Cargo.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#fixed-undetectable-cpu-features&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;fixed-undetectable-cpu-features&quot;&gt;&lt;/a&gt;Fixed undetectable CPU features&lt;/h3&gt;
+&lt;p&gt;Rust 1.27.0 introduced support for detecting x86 CPU features in the standard library, thanks to the &lt;a href=&quot;https://doc.rust-lang.org/stable/std/macro.is_x86_feature_detected.html&quot;&gt;&lt;code&gt;is_x86_feature_detected!&lt;/code&gt;&lt;/a&gt; macro. Due to an internal refactoring, Rust 1.43.0 prevented the detection of features that can't be used on stable yet (such as AVX-512), even though detecting them was allowed in the past. Rust 1.43.1 fixes this regression. More information on the regression in available in &lt;a href=&quot;https://github.com/rust-lang/rust/issues/71473&quot;&gt;issue #71473&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#fixed-broken-cargo-package---list&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;fixed-broken-cargo-package---list&quot;&gt;&lt;/a&gt;Fixed broken &lt;code&gt;cargo package --list&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Rust 1.43.0 broke support for listing the files included in packages published with Cargo, when inside a workspace with path dependencies or unpublished versions. A fix for the issue is included in Rust 1.43.1. More information on the bug is available in &lt;a href=&quot;https://github.com/rust-lang/cargo/issues/8151&quot;&gt;Cargo issue #8151&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#openssl-updated-to-111g&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;openssl-updated-to-111g&quot;&gt;&lt;/a&gt;OpenSSL updated to 1.1.1g&lt;/h3&gt;
+&lt;p&gt;OpenSSL, one of the dependencies of Cargo, recently released a &lt;a href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967&quot;&gt;security advisory&lt;/a&gt;. Unfortunately we were not able to include the fix in time for Rust 1.43.0, so we upgraded OpenSSL in Rust 1.43.1. We have no evidence this vulnerability could compromise the security of Cargo users (if you do, &lt;a href=&quot;https://www.rust-lang.org/policies/security&quot;&gt;please follow our security policy&lt;/a&gt;).&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-1431&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1431&quot;&gt;&lt;/a&gt;Contributors to 1.43.1&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.43.1.
+We couldn't have done it without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.43.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
         </author>
     </entry>
     
@@ -874,400 +1014,6 @@ to implement &lt;code&gt;Sized&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
 
         <author>
             <name>Rust Community</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.41.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/02/27/Rust-1.41.1.html" type="text/html" title="Announcing Rust 1.41.1" />
-        <published>2020-02-27T00:00:00+00:00</published>
-        <updated>2020-02-27T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/02/27/Rust-1.41.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/02/27/Rust-1.41.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.41.1.
-Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.41.1 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/tools/install&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-1411-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1411-stable&quot;&gt;&lt;/a&gt;What's in 1.41.1 stable&lt;/h2&gt;
-&lt;p&gt;Rust 1.41.1 addresses two critical regressions introduced in Rust 1.41.0:
-a soundness hole related to static lifetimes, and a miscompilation causing segfaults.
-These regressions do not affect earlier releases of Rust,
-and we recommend users of Rust 1.41.0 to upgrade as soon as possible.
-Another issue related to interactions between &lt;code&gt;'static&lt;/code&gt; and &lt;code&gt;Copy&lt;/code&gt; implementations,
-dating back to Rust 1.0, was also addressed by this release.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#a-soundness-hole-in-checking-static-items&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;a-soundness-hole-in-checking-static-items&quot;&gt;&lt;/a&gt;A soundness hole in checking &lt;code&gt;static&lt;/code&gt; items&lt;/h3&gt;
-&lt;p&gt;In Rust 1.41.0, due to some changes in the internal representation of &lt;code&gt;static&lt;/code&gt; values,
-the borrow checker accidentally allowed some unsound programs.
-Specifically, the borrow checker would not check that &lt;code&gt;static&lt;/code&gt; items had the correct type.
-This in turn would allow the assignment of a temporary,
-with a lifetime less than &lt;code&gt;'static&lt;/code&gt;, to a &lt;code&gt;static&lt;/code&gt; variable:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;static mut MY_STATIC: &amp;amp;'static u8 = &amp;amp;0;
-
-fn main() {
-    let my_temporary = 42;
-    unsafe {
-        // Erroneously allowed in 1.41.0:
-        MY_STATIC = &amp;amp;my_temporary;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This was addressed in 1.41.1, with the program failing to compile:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;error[E0597]: `my_temporary` does not live long enough
- --&amp;gt; src/main.rs:6:21
-  |
-6 |         MY_STATIC = &amp;amp;my_temporary;
-  |         ------------^^^^^^^^^^^^^
-  |         |           |
-  |         |           borrowed value does not live long enough
-  |         assignment requires that `my_temporary` is borrowed for `'static`
-7 |     }
-8 | }
-  | - `my_temporary` dropped here while still borrowed
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can learn more about this bug in &lt;a href=&quot;https://github.com/rust-lang/rust/issues/69114&quot;&gt;issue #69114&lt;/a&gt; and the &lt;a href=&quot;https://github.com/rust-lang/rust/pull/69145&quot;&gt;PR that fixed it&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#respecting-a-static-lifetime-in-a-copy-implementation&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;respecting-a-static-lifetime-in-a-copy-implementation&quot;&gt;&lt;/a&gt;Respecting a &lt;code&gt;'static&lt;/code&gt; lifetime in a &lt;code&gt;Copy&lt;/code&gt; implementation&lt;/h3&gt;
-&lt;p&gt;Ever since Rust 1.0, the following erroneous program has been compiling:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[derive(Clone)]
-struct Foo&amp;lt;'a&amp;gt;(&amp;amp;'a u32);
-impl Copy for Foo&amp;lt;'static&amp;gt; {}
-
-fn main() {
-    let temporary = 2;
-    let foo = (Foo(&amp;amp;temporary),);
-    drop(foo.0); // Accessing a part of `foo` is necessary.
-    drop(foo.0); // Indexing an array would also work.
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In Rust 1.41.1, this issue was fixed &lt;a href=&quot;https://github.com/rust-lang/rust/pull/69145&quot;&gt;by the same PR as the one above&lt;/a&gt;.
-Compiling the program now produces the following error:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;error[E0597]: `temporary` does not live long enough
-  --&amp;gt; src/main.rs:7:20
-   |
-7  |     let foo = (Foo(&amp;amp;temporary),);
-   |                    ^^^^^^^^^^ borrowed value does not live long enough
-8  |     drop(foo.0);
-   |          ----- copying this value requires that
-   |                `temporary` is borrowed for `'static`
-9  |     drop(foo.0);
-10 | }
-   | - `temporary` dropped here while still borrowed
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This error occurs because &lt;code&gt;Foo&amp;lt;'a&amp;gt;&lt;/code&gt;, for some &lt;code&gt;'a&lt;/code&gt;, only implements &lt;code&gt;Copy&lt;/code&gt; when &lt;code&gt;'a: 'static&lt;/code&gt;.
-However, the &lt;code&gt;temporary&lt;/code&gt; variable,
-with some lifetime &lt;code&gt;'0&lt;/code&gt; does not outlive &lt;code&gt;'static&lt;/code&gt; and hence &lt;code&gt;Foo&amp;lt;'0&amp;gt;&lt;/code&gt; is not &lt;code&gt;Copy&lt;/code&gt;,
-so using &lt;code&gt;drop&lt;/code&gt; the second time around should be an error.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#miscompiled-bound-checks-leading-to-segfaults&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;miscompiled-bound-checks-leading-to-segfaults&quot;&gt;&lt;/a&gt;Miscompiled bound checks leading to segfaults&lt;/h3&gt;
-&lt;p&gt;In a few cases, programs compiled with Rust 1.41.0 were omitting bound checks in the memory allocation code.
-This caused segfaults if out of bound values were provided.
-The root cause of the miscompilation was a change in a LLVM optimization pass,
-introduced in LLVM 9 and reverted in LLVM 10.&lt;/p&gt;
-&lt;p&gt;Rust 1.41.0 uses a snapshot of LLVM 9, so we cherry-picked the revert into Rust 1.41.1,
-addressing the miscompilation. &lt;a href=&quot;https://github.com/rust-lang/rust/issues/69225&quot;&gt;You can learn more about this bug in issue #69225&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#contributors-to-1411&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1411&quot;&gt;&lt;/a&gt;Contributors to 1.41.1&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.41.1.
-We couldn't have done it without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.41.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>The 2020 Rust Event Lineup</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/01/31/conf-lineup.html" type="text/html" title="The 2020 Rust Event Lineup" />
-        <published>2020-01-31T00:00:00+00:00</published>
-        <updated>2020-01-31T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/01/31/conf-lineup.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/01/31/conf-lineup.html">&lt;p&gt;A new decade has started, and we are excited about the Rust conferences coming up. Each conference is an opportunity to learn about Rust, share your knowledge, and to have a good time with your fellow Rustaceans. Read on to learn more about the events we know about so far.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href=&quot;#fosdemfebruary-2nd-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;fosdemfebruary-2nd-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;FOSDEM&lt;/strong&gt;&lt;br&gt;February 2nd, 2020&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://fosdem.org/2020/&quot;&gt;FOSDEM&lt;/a&gt; stands for the Free and Open Source Developers European Meeting. At this event software developers around the world will meet up, share ideas and collaborate. FOSDEM will be hosting a &lt;a href=&quot;https://fosdem.org/2020/schedule/track/rust/&quot;&gt;Rust devroom&lt;/a&gt; workshop that aims to present the features and possibilities offered by Rust, as well as some of the many exciting tools and projects in its ecosystem.&lt;/p&gt;
-&lt;h6&gt;&lt;a href=&quot;#located-in-brussels-belgium&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;located-in-brussels-belgium&quot;&gt;&lt;/a&gt;Located in &lt;em&gt;Brussels, Belgium&lt;/em&gt;&lt;/h6&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href=&quot;#rustfest-netherlandsq2-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rustfest-netherlandsq2-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;RustFest Netherlands&lt;/strong&gt;&lt;br&gt;Q2, 2020&lt;/h2&gt;
-&lt;p&gt;The &lt;a href=&quot;https://netherlands.rustfest.eu/&quot;&gt;RustFest Netherlands&lt;/a&gt; team are working hard behind the scenes on getting everything ready. We hope to tell you more soon so keep an eye on the &lt;a href=&quot;https://blog.rustfest.eu/&quot;&gt;RustFest blog&lt;/a&gt; and follow us on &lt;a href=&quot;https://twitter.com/rustfest&quot;&gt;Twitter&lt;/a&gt;!&lt;/p&gt;
-&lt;h6&gt;&lt;a href=&quot;#located-in-netherlands&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;located-in-netherlands&quot;&gt;&lt;/a&gt;Located in &lt;em&gt;Netherlands&lt;/em&gt;&lt;/h6&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href=&quot;#rustgnome-hackfestapril-29th-to-may-3rd-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rustgnome-hackfestapril-29th-to-may-3rd-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;Rust+GNOME Hackfest&lt;/strong&gt;&lt;br&gt;April 29th to May 3rd, 2020&lt;/h2&gt;
-&lt;p&gt;The goal of the &lt;a href=&quot;https://wiki.gnome.org/Hackfests/Rust2020&quot;&gt;Rust+GNOME hackfest&lt;/a&gt; is to improve the interactions between Rust and the GNOME libraries. During this hackfest, we will be improving the interoperability between Rust and GNOME, improving the support of &lt;a href=&quot;https://developer.gnome.org/&quot;&gt;GNOME libraries&lt;/a&gt; in Rust, and exploring solutions to create &lt;a href=&quot;https://developer.gnome.org/gobject/stable/&quot;&gt;GObject&lt;/a&gt; APIs from Rust.&lt;/p&gt;
-&lt;h6&gt;&lt;a href=&quot;#located-in-montréal-quebec&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;located-in-montréal-quebec&quot;&gt;&lt;/a&gt;Located in &lt;em&gt;Montréal, Quebec&lt;/em&gt;&lt;/h6&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href=&quot;#rust-latammay-22nd-23rd-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rust-latammay-22nd-23rd-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;Rust LATAM&lt;/strong&gt;&lt;br&gt;May 22nd-23rd, 2020&lt;/h2&gt;
-&lt;p&gt;Where Rust meets Latin America! &lt;a href=&quot;https://rustlatam.org/&quot;&gt;Rust Latam&lt;/a&gt; is Latin America's leading event for and by the Rust community. Two days of interactive sessions, hands-on activities and engaging talks to bring the community together. Schedule to be announced &lt;a href=&quot;https://rustlatam.org/#schedule&quot;&gt;at this link&lt;/a&gt;.&lt;/p&gt;
-&lt;h6&gt;&lt;a href=&quot;#located-in-mexico-city-mexico&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;located-in-mexico-city-mexico&quot;&gt;&lt;/a&gt;Located in &lt;em&gt;Mexico City, Mexico&lt;/em&gt;&lt;/h6&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href=&quot;#oxidizejuly-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;oxidizejuly-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;Oxidize&lt;/strong&gt;&lt;br&gt;July, 2020&lt;/h2&gt;
-&lt;p&gt;The &lt;a href=&quot;https://oxidizeconf.com/&quot;&gt;Oxidize conference&lt;/a&gt; is about learning, and improving your programming skills with embedded systems and IoT in Rust. The conference plans on having one day of guided workshops for developers looking to start or improve their Embedded Rust skills, one day of talks by community members, and a two day development session focused on Hardware and Embedded subjects in Rust. The starting date is to be announced at a later date.&lt;/p&gt;
-&lt;h6&gt;&lt;a href=&quot;#located-in-berlin-germany&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;located-in-berlin-germany&quot;&gt;&lt;/a&gt;Located in &lt;em&gt;Berlin, Germany&lt;/em&gt;&lt;/h6&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href=&quot;#rustconfaugust-20th-21st-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rustconfaugust-20th-21st-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;RustConf&lt;/strong&gt;&lt;br&gt;August 20th-21st, 2020&lt;/h2&gt;
-&lt;p&gt;The official &lt;a href=&quot;https://rustconf.com/&quot;&gt;RustConf&lt;/a&gt; will be taking place in Portland, Oregon, USA. Last years' conference was amazing, and we are excited to see what happens next. See the &lt;a href=&quot;https://rustconf.com/&quot;&gt;website&lt;/a&gt;, and &lt;a href=&quot;https://twitter.com/rustconf&quot;&gt;Twitter&lt;/a&gt; for updates as the event date approaches!&lt;/p&gt;
-&lt;h6&gt;&lt;a href=&quot;#located-in-oregon-usa&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;located-in-oregon-usa&quot;&gt;&lt;/a&gt;Located in &lt;em&gt;Oregon, USA&lt;/em&gt;&lt;/h6&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href=&quot;#rusty-daysfall-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rusty-daysfall-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;Rusty Days&lt;/strong&gt;&lt;br&gt;Fall, 2020&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://rusty-days.org/&quot;&gt;Rusty Days&lt;/a&gt; is a new conference located in Wroclaw, Poland. Rustaceans of all skill levels are welcome. The conference is still being planned. Check out the information on their &lt;a href=&quot;https://rusty-days.org/&quot;&gt;site&lt;/a&gt;, and &lt;a href=&quot;https://twitter.com/rdconf&quot;&gt;twitter&lt;/a&gt; as we get closer to fall.&lt;/p&gt;
-&lt;h6&gt;&lt;a href=&quot;#located-in-wroclaw-poland&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;located-in-wroclaw-poland&quot;&gt;&lt;/a&gt;Located in &lt;em&gt;Wroclaw, Poland&lt;/em&gt;&lt;/h6&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href=&quot;#rustlaboctober-16th-17th-2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rustlaboctober-16th-17th-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;RustLab&lt;/strong&gt;&lt;br&gt;October 16th-17th, 2020&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.rustlab.it&quot;&gt;RustLab 2020&lt;/a&gt; is a 2 days conference with talks and workshops. The date is set, but the talks are still being planned. We expect to learn more details as we get closer to the date of the conference.&lt;/p&gt;
-&lt;h6&gt;&lt;a href=&quot;#located-in-florence-italy&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;located-in-florence-italy&quot;&gt;&lt;/a&gt;Located in &lt;em&gt;Florence, Italy&lt;/em&gt;&lt;/h6&gt;
-&lt;hr /&gt;
-&lt;p&gt;For the most up-to-date information on events, visit &lt;a href=&quot;https://timetill.rs/&quot;&gt;timetill.rs&lt;/a&gt;. For meetups, and other events see the &lt;a href=&quot;https://calendar.google.com/calendar/embed?src=apd9vmbc22egenmtu5l6c5jbfc@group.calendar.google.com&quot;&gt;calendar&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Rust Community</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.41.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/01/30/Rust-1.41.0.html" type="text/html" title="Announcing Rust 1.41.0" />
-        <published>2020-01-30T00:00:00+00:00</published>
-        <updated>2020-01-30T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/01/30/Rust-1.41.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/01/30/Rust-1.41.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.41.0. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.41.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1410-2020-01-30&quot;&gt;detailed release notes for
-1.41.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-1410-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1410-stable&quot;&gt;&lt;/a&gt;What's in 1.41.0 stable&lt;/h2&gt;
-&lt;p&gt;The highlights of Rust 1.41.0 include relaxed restrictions for trait
-implementations, improvements to &lt;code&gt;cargo install&lt;/code&gt;, a more &lt;code&gt;git&lt;/code&gt;-friendly
-&lt;code&gt;Cargo.lock&lt;/code&gt;, and new FFI-related guarantees for &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt;. See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1410-2020-01-30&quot;&gt;detailed
-release notes&lt;/a&gt; to learn about other changes not covered by this post.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#relaxed-restrictions-when-implementing-traits&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;relaxed-restrictions-when-implementing-traits&quot;&gt;&lt;/a&gt;Relaxed restrictions when implementing traits&lt;/h3&gt;
-&lt;p&gt;To prevent breakages in the ecosystem when a dependency adds a new trait
-&lt;code&gt;impl&lt;/code&gt;, Rust enforces the &lt;a href=&quot;https://doc.rust-lang.org/book/ch10-02-traits.html#implementing-a-trait-on-a-type&quot;&gt;&lt;em&gt;orphan rule&lt;/em&gt;&lt;/a&gt;. The gist of it is that
-a trait &lt;code&gt;impl&lt;/code&gt; is only allowed if either the trait or the type being
-implemented is &lt;em&gt;local&lt;/em&gt; to (defined in) the current crate as opposed to a
-&lt;em&gt;foreign&lt;/em&gt; crate. &lt;a href=&quot;https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence&quot;&gt;What this means exactly&lt;/a&gt; is complicated, however,
-when generics are involved.&lt;/p&gt;
-&lt;p&gt;Before Rust 1.41.0, the orphan rule was unnecessarily strict, getting in the
-way of composition. As an example, suppose your crate defines the
-&lt;code&gt;BetterVec&amp;lt;T&amp;gt;&lt;/code&gt; struct, and you want a way to convert your struct to the
-standard library's &lt;code&gt;Vec&amp;lt;T&amp;gt;&lt;/code&gt;. The code you would write is:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;impl&amp;lt;T&amp;gt; From&amp;lt;BetterVec&amp;lt;T&amp;gt;&amp;gt; for Vec&amp;lt;T&amp;gt; {
-    // ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;...which is an instance of the pattern:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;impl&amp;lt;T&amp;gt; ForeignTrait&amp;lt;LocalType&amp;gt; for ForeignType&amp;lt;T&amp;gt; {
-    // ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In Rust 1.40.0 this &lt;code&gt;impl&lt;/code&gt; was forbidden by the orphan rule, as both &lt;code&gt;From&lt;/code&gt; and
-&lt;code&gt;Vec&lt;/code&gt; are defined in the standard library, which is foreign to the current
-crate. There were ways to work around the limitation, such as &lt;a href=&quot;https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types&quot;&gt;the &lt;em&gt;newtype&lt;/em&gt;
-pattern&lt;/a&gt;, but they were often cumbersome or even impossible in
-some cases.&lt;/p&gt;
-&lt;p&gt;While it's still true that both &lt;code&gt;From&lt;/code&gt; and &lt;code&gt;Vec&lt;/code&gt; were foreign, the trait (in
-this case &lt;code&gt;From&lt;/code&gt;) was parameterized by a local type. Therefore, Rust 1.41.0
-allows this &lt;code&gt;impl&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;For more details, read the &lt;a href=&quot;https://github.com/rust-lang/rust/issues/63599&quot;&gt;the stabilization report&lt;/a&gt; and &lt;a href=&quot;https://rust-lang.github.io/rfcs/2451-re-rebalancing-coherence.html&quot;&gt;the
-RFC proposing the change&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#cargo-install-updates-packages-when-outdated&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;cargo-install-updates-packages-when-outdated&quot;&gt;&lt;/a&gt;&lt;code&gt;cargo install&lt;/code&gt; updates packages when outdated&lt;/h3&gt;
-&lt;p&gt;With &lt;code&gt;cargo install&lt;/code&gt;, you can install binary crates in your system. The command
-is often used by the community to install popular CLI tools written in Rust.&lt;/p&gt;
-&lt;p&gt;Starting from Rust 1.41.0, &lt;code&gt;cargo install&lt;/code&gt; will also update existing
-installations of the crate if a new release came out since you installed it.
-Before this release the only option was to pass the &lt;code&gt;--force&lt;/code&gt; flag, which
-reinstalls the binary crate even if it's up to date.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#less-conflict-prone-cargolock-format&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;less-conflict-prone-cargolock-format&quot;&gt;&lt;/a&gt;Less conflict-prone &lt;code&gt;Cargo.lock&lt;/code&gt; format&lt;/h3&gt;
-&lt;p&gt;To ensure consistent builds, Cargo uses a file named &lt;code&gt;Cargo.lock&lt;/code&gt;, containing
-dependency versions and checksums. Unfortunately, the way the data was arranged
-in it caused unnecessary merge conflicts when changing dependencies in separate
-branches.&lt;/p&gt;
-&lt;p&gt;Rust 1.41.0 introduces a new format for the file, explicitly designed to avoid
-those conflicts. This new format will be used for all new lockfiles, while
-existing lockfiles will still rely on the previous format. You can learn about
-the choices leading to the new format &lt;a href=&quot;https://github.com/rust-lang/cargo/pull/7070&quot;&gt;in the PR adding it&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#more-guarantees-when-using-boxt-in-ffi&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;more-guarantees-when-using-boxt-in-ffi&quot;&gt;&lt;/a&gt;More guarantees when using &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; in FFI&lt;/h3&gt;
-&lt;p&gt;Starting with Rust 1.41.0, we have declared that a &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt;, where &lt;code&gt;T: Sized&lt;/code&gt;
-is now ABI compatible with the C language's pointer (&lt;code&gt;T*&lt;/code&gt;) types. So if you
-have an &lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt; Rust function, called from C, your Rust function can now
-use &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt;, for some specific &lt;code&gt;T&lt;/code&gt;, while using &lt;code&gt;T*&lt;/code&gt; in C for the
-corresponding function. As an example, on the C side you may have:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// C header
-
-// Returns ownership to the caller.
-struct Foo* foo_new(void);
-
-// Takes ownership from the caller; no-op when invoked with NULL.
-void foo_delete(struct Foo*);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;...while on the Rust side, you would have:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[repr(C)]
-pub struct Foo;
-
-#[no_mangle]
-pub extern &amp;quot;C&amp;quot; fn foo_new() -&amp;gt; Box&amp;lt;Foo&amp;gt; {
-    Box::new(Foo)
-}
-
-// The possibility of NULL is represented with the `Option&amp;lt;_&amp;gt;`.
-#[no_mangle]
-pub extern &amp;quot;C&amp;quot; fn foo_delete(_: Option&amp;lt;Box&amp;lt;Foo&amp;gt;&amp;gt;) {}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note however that while &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; and &lt;code&gt;T*&lt;/code&gt; have the same representation and ABI,
-a &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; must still be non-null, aligned, and ready for deallocation by the
-global allocator. To ensure this, it is best to only use &lt;code&gt;Box&lt;/code&gt;es originating
-from the global allocator.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt; At least at present, you should avoid using &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; types for
-functions that are defined in C but invoked from Rust. In those cases, you
-should directly mirror the C types as closely as possible. Using types like
-&lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; where the C definition is just using &lt;code&gt;T*&lt;/code&gt; can lead to undefined
-behavior.&lt;/p&gt;
-&lt;p&gt;To read more, &lt;a href=&quot;https://doc.rust-lang.org/std/boxed/index.html&quot;&gt;consult the documentation for &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#library-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
-&lt;p&gt;In Rust 1.41.0, we've made the following additions to the standard library:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;a href=&quot;https://doc.rust-lang.org/std/result/enum.Result.html#method.map_or&quot;&gt;&lt;code&gt;Result::map_or&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/result/enum.Result.html#method.map_or_else&quot;&gt;&lt;code&gt;Result::map_or_else&lt;/code&gt;&lt;/a&gt; methods were stabilized.&lt;/p&gt;
-&lt;p&gt;Similar to &lt;a href=&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.map_or&quot;&gt;&lt;code&gt;Option::map_or&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.map_or_else&quot;&gt;&lt;code&gt;Option::map_or_else&lt;/code&gt;&lt;/a&gt;, these methods are
-shorthands for the &lt;code&gt;.map(|val| process(val)).unwrap_or(default)&lt;/code&gt; pattern.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/66277&quot;&gt;&lt;code&gt;NonZero*&lt;/code&gt; numerics now implement &lt;code&gt;From&amp;lt;NonZero*&amp;gt;&lt;/code&gt; if it's a smaller integer
-width.&lt;/a&gt; For example, &lt;code&gt;NonZeroU16&lt;/code&gt; now implements &lt;code&gt;From&amp;lt;NonZeroU8&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;code&gt;weak_count&lt;/code&gt; and &lt;code&gt;strong_count&lt;/code&gt; methods on &lt;code&gt;Weak&lt;/code&gt; pointers were stabilized.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/rc/struct.Weak.html#method.weak_count&quot;&gt;&lt;code&gt;std::rc::Weak::weak_count&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/rc/struct.Weak.html#method.strong_count&quot;&gt;&lt;code&gt;std::rc::Weak::strong_count&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/sync/struct.Weak.html#method.weak_count&quot;&gt;&lt;code&gt;std::sync::Weak::weak_count&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/sync/struct.Weak.html#method.strong_count&quot;&gt;&lt;code&gt;std::sync::Weak::strong_count&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These methods return the number of weak (&lt;code&gt;rc::Weak&amp;lt;T&amp;gt;&lt;/code&gt; and &lt;code&gt;sync::Weak&amp;lt;T&amp;gt;&lt;/code&gt;)
-or strong (&lt;code&gt;Rc&amp;lt;T&amp;gt;&lt;/code&gt; and &lt;code&gt;Arc&amp;lt;T&amp;gt;&lt;/code&gt;) pointers to the allocation respectively.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/65013&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt; now implements &lt;code&gt;fmt::Debug&lt;/code&gt;.&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;#reducing-support-for-32-bit-apple-targets-soon&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;reducing-support-for-32-bit-apple-targets-soon&quot;&gt;&lt;/a&gt;Reducing support for 32-bit Apple targets soon&lt;/h3&gt;
-&lt;p&gt;Rust 1.41.0 is the last release with the current level of compiler support for
-32-bit Apple targets, including the &lt;code&gt;i686-apple-darwin&lt;/code&gt; target. Starting from
-Rust 1.42.0, these targets will be demoted to the lowest support tier.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.rust-lang.org/2020/01/03/reducing-support-for-32-bit-apple-targets.html&quot;&gt;You can learn more about this change in this blog post.&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#other-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.41.0 release: check out what changed in
-&lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1410-2020-01-30&quot;&gt;Rust&lt;/a&gt;, &lt;a href=&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-141-2020-01-30&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-141&quot;&gt;Clippy&lt;/a&gt;. We also
-have started landing MIR optimizations, which should improve compile time: you
-can learn more about them in the &lt;a href=&quot;https://blog.rust-lang.org/inside-rust/2019/12/02/const-prop-on-by-default.html&quot;&gt;&amp;quot;Inside Rust&amp;quot; blog post&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#contributors-to-1410&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1410&quot;&gt;&lt;/a&gt;Contributors to 1.41.0&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.41.0. We couldn't have done it
-without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.41.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Reducing support for 32-bit Apple targets</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/01/03/reducing-support-for-32-bit-apple-targets.html" type="text/html" title="Reducing support for 32-bit Apple targets" />
-        <published>2020-01-03T00:00:00+00:00</published>
-        <updated>2020-01-03T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/01/03/reducing-support-for-32-bit-apple-targets.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/01/03/reducing-support-for-32-bit-apple-targets.html">&lt;p&gt;The Rust team regrets to announce that Rust 1.41.0 (to be released on January
-30th, 2020) will be the last release with the current level of support for
-32-bit Apple targets. Starting from Rust 1.42.0, those targets will be demoted
-to Tier 3.&lt;/p&gt;
-&lt;p&gt;The decision was made on &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2837&quot;&gt;RFC 2837&lt;/a&gt;, and was accepted by the compiler and
-release teams. This post explains what the change means, why we did it, and how
-your project is affected.&lt;/p&gt;
-&lt;h1&gt;&lt;a href=&quot;#whats-a-support-tier&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-a-support-tier&quot;&gt;&lt;/a&gt;What’s a support tier?&lt;/h1&gt;
-&lt;p&gt;The Rust compiler can build code targeting &lt;a href=&quot;https://forge.rust-lang.org/release/platform-support.html&quot;&gt;a lot of
-platforms&lt;/a&gt; (also called “targets”), but the team doesn't have
-the resources or manpower to provide the same level of support and testing for
-each of them.
-To make our commitments clear, we follow a tiered support policy (currently
-being formalized and revised in &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2803&quot;&gt;RFC 2803&lt;/a&gt;), explaining what we guarantee:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Tier 1 targets can be downloaded through rustup and are fully tested
-during the project’s automated builds. A bug or a regression affecting one of
-these targets is usually prioritized more than bugs only affecting platforms
-in other tiers.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Tier 2 targets can also be downloaded through rustup, but our
-automated builds don’t execute the test suite for them. While we guarantee a
-standard library build (and for some of them a full compiler build) will be
-available, we don’t ensure it will actually work without bugs (or even work
-at all).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Tier 3 targets are not available for download through rustup, and are
-ignored during our automated builds. You can still build their standard
-library for cross-compiling (or the full compiler in some cases) from source
-on your own, but you might encounter build errors, bugs, or missing features.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;&lt;a href=&quot;#which-targets-are-affected&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;which-targets-are-affected&quot;&gt;&lt;/a&gt;Which targets are affected?&lt;/h1&gt;
-&lt;p&gt;The main target affected by this change is 32-bit macOS (&lt;code&gt;i686-apple-darwin&lt;/code&gt;),
-which will be demoted from Tier 1 to Tier 3. This will affect both using the
-compiler on 32-bit Mac hardware, and cross-compiling 32-bit macOS binaries from
-any other platform.&lt;/p&gt;
-&lt;p&gt;Additionally, the following 32-bit iOS targets will be demoted from Tier 2 to
-Tier 3:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;armv7-apple-ios&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;armv7s-apple-ios&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;i386-apple-ios&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We will continue to provide the current level of support for all Apple 64bit
-targets.&lt;/p&gt;
-&lt;h1&gt;&lt;a href=&quot;#why-are-those-targets-being-demoted&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;why-are-those-targets-being-demoted&quot;&gt;&lt;/a&gt;Why are those targets being demoted?&lt;/h1&gt;
-&lt;p&gt;Apple dropped support for running 32-bit binaries starting from &lt;a href=&quot;https://support.apple.com/en-us/HT208436&quot;&gt;macOS
-10.15&lt;/a&gt; and &lt;a href=&quot;https://developer.apple.com/documentation/uikit/app_and_environment/updating_your_app_from_32-bit_to_64-bit_architecture&quot;&gt;iOS 11&lt;/a&gt;. They also prevented all
-developers from cross-compiling 32-bit programs and apps starting from Xcode 10
-(the platform’s IDE, containing the SDKs).&lt;/p&gt;
-&lt;p&gt;Due to those decisions from Apple, the targets are no longer useful to our users,
-and their choice to prevent cross-compiling makes it hard for the
-project to continue supporting the 32-bit platform in the long term.&lt;/p&gt;
-&lt;h1&gt;&lt;a href=&quot;#how-will-this-affect-my-project&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-will-this-affect-my-project&quot;&gt;&lt;/a&gt;How will this affect my project?&lt;/h1&gt;
-&lt;p&gt;If you don’t build 32-bit Apple binaries this change won’t affect you at all.&lt;/p&gt;
-&lt;p&gt;If you still need to build them, you’ll be able to continue using Rust 1.41.0
-without issues. As usual the Rust project will provide critical bugfixes and
-security patches until the next stable version is released (on March 12th,
-2020), and we plan to keep the release available for download for the
-foreseeable future (as we do with all the releases shipped so far).&lt;/p&gt;
-&lt;p&gt;The code implementing the targets won’t be removed from the compiler codebase,
-so you’ll also be able to build future releases from source on your own
-(keeping in mind they might have bugs or be broken, as that code will be
-completly untested).&lt;/p&gt;
-&lt;h1&gt;&lt;a href=&quot;#what-about-the-nightly-channel&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;what-about-the-nightly-channel&quot;&gt;&lt;/a&gt;What about the nightly channel?&lt;/h1&gt;
-&lt;p&gt;We will demote the targets on the nightly channel soon, but we don't have an
-exact date for when that will happen. We recommend pinning a nightly version
-beforehand though, to prevent &lt;code&gt;rustup toolchain install&lt;/code&gt; from failing once we
-apply the demotion.&lt;/p&gt;
-&lt;p&gt;To pin a nightly version you need to use &amp;quot;nightly&amp;quot; followed by the day the
-nightly was released, as the toolchain name. For example, to install the nightly
-released on December 1st, 2019 and to use it you can run:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-plain&quot;&gt;rustup toolchain install nightly-2019-12-01
-
-# Default to this nightly system-wide...
-rustup default nightly-2019-12-01
-
-# ...or use this nightly for a single build
-cargo +nightly-2019-12-01 build
-&lt;/code&gt;&lt;/pre&gt;
-</content>
-
-        <author>
-            <name>Pietro Albini</name>
         </author>
     </entry>
     

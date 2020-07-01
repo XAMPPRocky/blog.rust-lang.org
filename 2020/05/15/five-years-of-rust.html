@@ -20,16 +20,6 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
 <link rel="stylesheet" href="/styles/vendor.css"/>
 <link rel="stylesheet" href="/styles/fonts.css"/>
@@ -82,8 +72,8 @@
 
     <div class="post">
       <p>With all that's going on in the world you'd be forgiven for forgetting that as
-of today, it has been five years since we released 1.0 in 2015! Rust has changed
-a lot these past five years, so we wanted reflect back on all of our
+of today, it has been five years since we released 1.0! Rust has changed
+a lot these past five years, so we wanted to reflect back on all of our
 contributors' work since the stabilization of the language.</p>
 <p>Rust is a general purpose programming language empowering everyone to build
 reliable and efficient software. Rust can be built to run anywhere in the stack,
@@ -92,11 +82,11 @@ entirely by an open and diverse community of individuals, primarily volunteers w
 generously donate their time and expertise to help make Rust what it is.</p>
 <h2><a href="#major-changes-since-10" aria-hidden="true" class="anchor" id="major-changes-since-10"></a>Major Changes since 1.0</h2>
 <h4><a href="#2015" aria-hidden="true" class="anchor" id="2015"></a>2015</h4>
-<p><strong><a href="https://blog.rust-lang.org/2015/08/06/Rust-1.2.html">1.2</a> — Parallel Codegen:</strong> Compile time improvements are large theme to every
+<p><strong><a href="https://blog.rust-lang.org/2015/08/06/Rust-1.2.html">1.2</a> — Parallel Codegen:</strong> Compile time improvements are a large theme to every
 release of Rust, and it's hard to imagine that there was a short time where
 Rust had no parallel code generation at all.</p>
 <p><strong><a href="https://blog.rust-lang.org/2015/09/17/Rust-1.3.html">1.3</a> — The Rustonomicon:</strong> Our first release of the fantastic &quot;Rustonomicon&quot;, a
-book that explores Unsafe Rust and its surrounding topics has become a great
+book that explores Unsafe Rust and its surrounding topics and has become a great
 resource for anyone looking to learn and understand one of the hardest aspects
 of the language.</p>
 <p><strong><a href="https://blog.rust-lang.org/2015/10/29/Rust-1.4.html">1.4</a> — Windows MSVC Tier 1 Support:</strong> The first tier 1 platform promotion was
@@ -195,8 +185,8 @@ own registry of crates that can be used in your projects like they were
 on crates.io.</p>
 <p><strong><a href="https://blog.rust-lang.org/2019/11/07/Rust-1.39.0.html">1.39</a> — Async/Await:</strong> The stabilisation of the async/await keywords for
 handling Futures was one of the major milestones to making async programming
-in Rust a first class citizen. Even just six months after its release the
-async programming has blossomed into a diverse and performant ecosystem.</p>
+in Rust a first class citizen. Even just six months after its release
+async programming in Rust has blossomed into a diverse and performant ecosystem.</p>
 <h4><a href="#2020" aria-hidden="true" class="anchor" id="2020"></a>2020</h4>
 <p><strong><a href="https://blog.rust-lang.org/2020/03/12/Rust-1.42.html">1.42</a> — Subslice patterns:</strong> While not the biggest change, the addition
 of the <code>..</code> (rest) pattern has been a long awaited quality of life
@@ -392,14 +382,14 @@ asked some of our teams what changes they are most proud of:</p>
 should_panic, allow_fail&quot;</li>
 <li>Doc tests are now generated as their own seperate binaries.</li>
 </ul>
-<p>— Guillaume Gomez (<a href="https://www.rust-lang.org/governance/teams/rustdoc">rustdoc</a>)</p>
+<p>— Guillaume Gomez (<a href="https://www.rust-lang.org/governance/teams/dev-tools#rustdoc">rustdoc</a>)</p>
 </blockquote>
 <blockquote>
 <p>Rust now has baseline IDE support! Between IntelliJ Rust, RLS and
 rust-analyzer, I feel that most users should be able to find &quot;not horrible&quot;
 experience for their editor of choice. Five years ago, &quot;writing Rust&quot; meant
 using old school Vim/Emacs setup.</p>
-<p>— Aleksey Kladov (<a href="https://www.rust-lang.org/governance/teams/ides">IDEs and editors</a>)</p>
+<p>— Aleksey Kladov (<a href="https://www.rust-lang.org/governance/teams/dev-tools#ides">IDEs and editors</a>)</p>
 </blockquote>
 <blockquote>
 <p>For me that would be: Adding first class support for popular embedded
@@ -416,7 +406,7 @@ think that's really impressive (though of course the release team is not the
 sole contributor here). Overall, I've found that the release team has done an
 excellent job of managing to scale to the increasing traffic on issue
 trackers, PRs being filed, etc.</p>
-<p>— Mark Rousskov (<a href="https://www.rust-lang.org/governance/teams/release">Release</a>)</p>
+<p>— Mark Rousskov (<a href="https://www.rust-lang.org/governance/teams/operations#release">Release</a>)</p>
 </blockquote>
 <blockquote>
 <p>Within the last 3 years we managed to turn <a href="https://github.com/rust-lang/miri">Miri</a> from an experimental
@@ -445,14 +435,14 @@ community. There's been so many great projects written in Rust, and Rust's
 presence in production has grown exponentially. We wanted to share some
 statistics on just how much Rust has grown.</p>
 <ul>
-<li>Rust has been voted <a href="https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-and-wanted">&quot;Most Loved Programming&quot;</a> every year in the past
+<li>Rust has been voted <a href="https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-and-wanted">&quot;Most Loved Programming Language&quot;</a> every year in the past
 four Stack Overflow developer surveys since it went 1.0.</li>
 <li>We have served over 2.25 Petabytes (1PB = 1,000 TB) of different versions of the
 compiler, tooling, and documentation this year alone!</li>
 <li>In the same time we have served over 170TB of crates to roughly 1.8 billion
 requests on crates.io, doubling the monthly traffic compared to last year.</li>
 </ul>
-<p>When Rust turned turned 1.0 you could count the number of companies that were
+<p>When Rust turned 1.0 you could count the number of companies that were
 using it in production on one hand. Today, it is being used by hundreds of
 tech companies with some of the largest tech companies such as Apple, Amazon,
 Dropbox, Facebook, Google, and Microsoft choosing to use Rust for its performance,
@@ -464,7 +454,7 @@ projects? Feel free to post your answer and discussion on <a href="https://users
 Discourse forum</a>.</p>
 <p>Lastly, we wanted to thank everyone who has to contributed to the Rust, whether
 you contributed a new feature or fixed a typo, your work has made Rust the
-amazing it is today. We can't wait to see how Rust and its community will
+amazing project it is today. We can't wait to see how Rust and its community will
 continue to grow and change, and see what you all will build with Rust in the
 coming decade!</p>
 
